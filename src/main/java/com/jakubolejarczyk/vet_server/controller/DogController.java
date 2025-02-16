@@ -1,12 +1,12 @@
-package com.jakubolejarczyk.vet_server;
+package com.jakubolejarczyk.vet_server.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
-public class HelloController {
-    @GetMapping("/hello")
-    String getHello() {
-        return "Hello";
+public class DogController {
+    @GetMapping("/dog")
+    String getDog() {
+        return "Dog";
     }
 }
