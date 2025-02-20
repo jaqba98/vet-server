@@ -88,206 +88,6 @@ CREATE TABLE Clinic (
     FOREIGN KEY (opening_hours_id) REFERENCES OpeningHours(id)
 );
 
--- todo: I am here
-CREATE TABLE Medication (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    description TEXT NOT NULL,
-    manufacturer VARCHAR(255) NOT NULL,
-    dose TEXT NOT NULL,
-    quantity_in_stock INTEGER NOT NULL,
-    expiration_date DATE NOT NULL,
-    price DECIMAL(10, 2) NOT NULL,
-    is_available BOOLEAN NOT NULL,
-    clinic_id INTEGER NOT NULL,
-    FOREIGN KEY (clinic_id) REFERENCES Clinic(id)
-);
----- Clinic id = 1
----- id = 1
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Pain Relief Tablets', 'Pain reliever for mild to moderate pain', 'HealthCo', '500mg', 100, '2026-12-31', 20.00, TRUE, 1);
----- id = 2
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Antibiotic Ointment', 'Topical ointment for skin infections', 'MedCorp', '5g', 50, '2025-11-15', 10.50, TRUE, 1);
----- id = 3
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Flea Prevention Drops', 'Monthly flea prevention for dogs and cats', 'VetPharma', '2ml', 200, '2025-09-20', 30.00, TRUE, 1);
----- id = 4
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Heartworm Medication', 'Prevention for heartworm in dogs', 'PetCare Inc.', '10mg', 150, '2025-10-05', 25.00, TRUE, 1);
----- id = 5
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Vaccination Booster', 'Annual vaccination booster for dogs', 'BioVax', '1 dose', 80, '2026-05-12', 50.00, TRUE, 1);
----- id = 6
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Dental Gel', 'Gel for improving oral health and reducing plaque', 'PetMed', '100ml', 60, '2026-02-01', 15.00, TRUE, 1);
----- id = 7
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Eye Drops', 'Lubricating eye drops for dry eyes', 'OcularMed', '10ml', 120, '2025-08-15', 12.00, TRUE, 1);
----- id = 8
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('De-wormer', 'Medication for de-worming pets', 'WormFree', '200mg', 200, '2025-07-30', 18.00, TRUE, 1);
----- id = 9
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Joint Support Supplement', 'Supplement to support joint health in older pets', 'JointCare', '500mg', 50, '2026-01-01', 22.50, TRUE, 1);
----- id = 10
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Antihistamine Tablets', 'Antihistamine for allergy relief in pets', 'AllerPet', '25mg', 100, '2025-12-12', 16.00, TRUE, 1);
----- id = 11
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Calming Chews', 'Natural chews to reduce anxiety in pets', 'CalmPet', '30 chews', 75, '2026-03-10', 27.00, TRUE, 1);
----- id = 12
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Vitamin Supplement', 'Daily vitamin supplement for dogs', 'NutriPets', '1 tablet', 200, '2025-10-18', 10.00, TRUE, 1);
----- Clinic id = 2
----- id = 13
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Pain Relief Tablets', 'Pain reliever for mild to moderate pain', 'HealthCo', '500mg', 90, '2025-12-31', 20.00, TRUE, 2);
----- id = 14
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Antibiotic Ointment', 'Topical ointment for skin infections', 'MedCorp', '5g', 55, '2025-10-15', 11.50, TRUE, 2);
----- id = 15
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Flea Prevention Drops', 'Monthly flea prevention for dogs and cats', 'VetPharma', '2ml', 250, '2025-09-10', 32.00, TRUE, 2);
----- id = 16
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Heartworm Medication', 'Prevention for heartworm in dogs', 'PetCare Inc.', '10mg', 160, '2025-11-05', 26.00, TRUE, 2);
----- id = 17
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Vaccination Booster', 'Annual vaccination booster for dogs', 'BioVax', '1 dose', 85, '2026-06-12', 52.00, TRUE, 2);
----- id = 18
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Dental Gel', 'Gel for improving oral health and reducing plaque', 'PetMed', '100ml', 65, '2026-02-10', 16.00, TRUE, 2);
----- id = 19
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Eye Drops', 'Lubricating eye drops for dry eyes', 'OcularMed', '10ml', 115, '2025-08-20', 12.50, TRUE, 2);
----- id = 20
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('De-wormer', 'Medication for de-worming pets', 'WormFree', '200mg', 190, '2025-07-10', 19.00, TRUE, 2);
----- id = 21
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Joint Support Supplement', 'Supplement to support joint health in older pets', 'JointCare', '500mg', 60, '2026-02-01', 23.00, TRUE, 2);
----- id = 22
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Antihistamine Tablets', 'Antihistamine for allergy relief in pets', 'AllerPet', '25mg', 105, '2025-11-18', 16.50, TRUE, 2);
----- id = 23
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Calming Chews', 'Natural chews to reduce anxiety in pets', 'CalmPet', '30 chews', 80, '2026-04-15', 28.00, TRUE, 2);
----- id = 24
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Vitamin Supplement', 'Daily vitamin supplement for dogs', 'NutriPets', '1 tablet', 210, '2025-09-20', 11.00, TRUE, 2);
----- Clinic id = 3
----- id = 25
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Arthritis Relief Gel', 'Topical gel for arthritis pain relief in dogs and cats', 'PetPharma', '50g', 120, '2026-02-28', 23.00, TRUE, 3);
----- id = 26
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Allergy Relief Chews', 'Natural chews for seasonal allergy relief', 'NaturePets', '30 chews', 150, '2025-11-25', 18.50, TRUE, 3);
----- id = 27
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Probiotic Supplement', 'Probiotic for improving digestion and gut health', 'PetHealth', '1 capsule', 200, '2025-12-15', 14.00, TRUE, 3);
----- id = 28
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Tick Prevention Collar', 'Tick prevention collar for dogs and cats', 'TickGuard', '1 collar', 50, '2026-03-10', 35.00, TRUE, 3);
----- id = 29
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Puppy Vaccination Set', 'Vaccination set for puppies, first round', 'VaxPet', '1 dose', 90, '2026-06-30', 55.00, TRUE, 3);
----- id = 30
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Ear Cleanser', 'Solution for cleaning pet ears and preventing infections', 'CleanPet', '100ml', 80, '2025-10-05', 12.00, TRUE, 3);
----- id = 31
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Wound Healing Ointment', 'Ointment to promote faster wound healing in pets', 'HealMed', '10g', 60, '2026-01-10', 22.00, TRUE, 3);
----- id = 32
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Weight Management Food', 'Special diet food for weight management in pets', 'PetNutra', '2kg bag', 120, '2025-08-15', 28.00, TRUE, 3);
----- id = 33
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Hairball Remedy', 'Chews for preventing hairballs in cats', 'FelineCare', '30 chews', 95, '2026-04-20', 16.50, TRUE, 3);
----- id = 34
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Calcium Supplement', 'Supplement for bone health in pets', 'BoneCare', '250mg', 110, '2025-11-10', 11.00, TRUE, 3);
----- id = 35
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Liver Support Supplement', 'Liver support for older pets', 'LiverPet', '500mg', 130, '2026-02-01', 19.50, TRUE, 3);
----- id = 36
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Vitamin Supplement', 'Daily vitamin supplement for dogs', 'NutriPets', '1 tablet', 210, '2025-09-20', 11.00, TRUE, 3);
----- Clinic id = 4
----- id = 37
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Joint Care Chews', 'Chews for joint health and mobility in older pets', 'FlexiPets', '30 chews', 130, '2026-01-10', 21.00, TRUE, 4);
----- id = 38
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Calming Drops', 'Natural drops for reducing anxiety and stress in pets', 'CalmPet', '15ml', 200, '2025-12-10', 18.00, TRUE, 4);
----- id = 39
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Digestive Aid Powder', 'Powdered supplement to aid digestion in pets', 'PetNutra', '50g', 100, '2025-11-25', 12.50, TRUE, 4);
----- id = 40
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Allergy Relief Tablets', 'Tablets for seasonal allergy relief in pets', 'AllerPet', '25mg', 150, '2025-10-15', 16.00, TRUE, 4);
----- id = 41
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Diabetes Care Supplement', 'Support for managing diabetes in pets', 'DiabetoCare', '200mg', 80, '2026-03-05', 23.00, TRUE, 4);
----- id = 42
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Skin Care Oil', 'Oil for treating dry skin and coat in pets', 'SoftSkin', '50ml', 130, '2025-12-01', 17.50, TRUE, 4);
----- id = 43
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Cough Syrup', 'Syrup to relieve coughing and respiratory issues in pets', 'PetCure', '100ml', 90, '2025-09-30', 14.00, TRUE, 4);
----- id = 44
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Heart Health Supplement', 'Supplement to support cardiovascular health in pets', 'CardioPet', '300mg', 120, '2026-02-10', 25.00, TRUE, 4);
----- id = 45
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Ear Infection Medicine', 'Medicine for treating ear infections in pets', 'EarPet', '15ml', 110, '2025-11-15', 19.00, TRUE, 4);
----- id = 46
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Multivitamin Chews', 'Chews with a blend of essential vitamins for pets', 'VitaPet', '30 chews', 200, '2025-12-05', 13.50, TRUE, 4);
----- id = 47
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Worming Paste', 'Oral paste for deworming pets', 'WormCare', '20g', 150, '2025-10-20', 22.00, TRUE, 4);
----- id = 48
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Senior Dog Food', 'Specialized dog food for older dogs', 'PetNutra', '3kg bag', 100, '2025-09-25', 28.50, TRUE, 4);
----- Clinic id = 5
----- id = 49
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Flea and Tick Shampoo', 'Shampoo for removing fleas and ticks from pets', 'PetClean', '200ml', 150, '2025-08-30', 18.00, TRUE, 5);
----- id = 50
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Pain Relief Tablets', 'Pain relief for pets suffering from arthritis or injury', 'PainAway', '50mg', 200, '2026-02-01', 21.00, TRUE, 5);
----- id = 51
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Teeth Cleaning Gel', 'Gel for cleaning and maintaining pet teeth', 'CleanTeeth', '100g', 100, '2025-11-15', 13.50, TRUE, 5);
----- id = 52
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Pet Vitamin Paste', 'Daily vitamin paste for enhancing general health', 'VitaPaste', '50g', 80, '2025-12-25', 15.00, TRUE, 5);
----- id = 53
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Cataract Treatment Drops', 'Eye drops for cataract prevention in pets', 'VisionPets', '10ml', 60, '2026-01-20', 28.00, TRUE, 5);
----- id = 54
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Lung Health Supplement', 'Supplement to support lung health in pets with respiratory issues', 'AirCare', '200mg', 150, '2025-10-30', 20.00, TRUE, 5);
----- id = 55
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Hair Growth Shampoo', 'Shampoo designed to promote hair growth in pets with thinning coats', 'HairBoost', '250ml', 90, '2025-11-05', 25.00, TRUE, 5);
----- id = 56
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Antibiotic Ointment', 'Topical antibiotic ointment for wound care', 'PetMed', '20g', 130, '2026-03-01', 17.50, TRUE, 5);
----- id = 57
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Cough Suppressant Syrup', 'Syrup for reducing coughing in pets with respiratory infections', 'CoughFree', '100ml', 110, '2025-10-10', 14.00, TRUE, 5);
----- id = 58
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Joint Mobility Oil', 'Oil for improving joint mobility in older pets', 'FlexOil', '50ml', 150, '2025-12-10', 22.00, TRUE, 5);
----- id = 59
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Anti-Diarrheal Tablets', 'Tablets for controlling diarrhea in pets', 'PetCare', '25mg', 180, '2025-11-05', 19.00, TRUE, 5);
----- id = 60
---INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id)
---VALUES ('Pet Immune Booster', 'Immune booster supplement for pets', 'ImmunoPet', '1 capsule', 140, '2026-01-15', 21.50, TRUE, 5);
-
 CREATE TABLE Vet (
     id SERIAL PRIMARY KEY,
     salary DECIMAL(10, 2) NOT NULL,
@@ -306,6 +106,21 @@ CREATE TABLE Client (
     id SERIAL PRIMARY KEY,
     account_id INTEGER NOT NULL,
     FOREIGN KEY (account_id) REFERENCES Account(id)
+);
+
+-- todo: I am here
+CREATE TABLE Medication (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    manufacturer VARCHAR(255) NOT NULL,
+    dose TEXT NOT NULL,
+    quantity_in_stock INTEGER NOT NULL,
+    expiration_date DATE NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    is_available BOOLEAN NOT NULL,
+    clinic_id INTEGER NOT NULL,
+    FOREIGN KEY (clinic_id) REFERENCES Clinic(id)
 );
 
 CREATE TABLE Appointment (
@@ -839,6 +654,49 @@ INSERT INTO Clinic (name, address, opening_hours_id) VALUES
     ('Caring Hands Vet', '321 Maple St', 4),
     -- id = 5
     ('Animal Wellness Center', '654 Birch St', 5);
+
+INSERT INTO Vet (
+    salary,
+    license_number,
+    license_issue_date,
+    license_expiry_date,
+    specializations,
+    years_of_experience,
+    account_id,
+    opening_hours_id
+) VALUES
+    (60000.00, 'VET123456', '2015-06-15', '2025-06-15', 'Small Animals', 10, 1, 6),
+    (75000.00, 'VET654321', '2012-09-20', '2027-09-20', 'Exotic Animals', 15, 2, 7),
+    (58000.00, 'VET987654', '2018-03-10', '2026-03-10', 'Equine Medicine', 8, 3, 8),
+    (72000.00, 'VET111222', '2010-12-05', '2025-12-05', 'Surgery', 18, 7, 9),
+    (64000.00, 'VET333444', '2016-07-22', '2026-07-22', 'Dermatology', 9, 8, 10),
+    (68000.00, 'VET555666', '2014-05-30', '2024-05-30', 'Ophthalmology', 12, 9, 11),
+    (70000.00, 'VET777888', '2011-10-14', '2026-10-14', 'Neurology', 14, 13, 12),
+    (62000.00, 'VET999000', '2017-08-18', '2027-08-18', 'Cardiology', 7, 14, 13),
+    (59000.00, 'VET121314', '2019-02-25', '2029-02-25', 'Oncology', 5, 15, 14),
+    (76000.00, 'VET151617', '2009-11-11', '2024-11-11', 'Internal Medicine', 20, 19, 15),
+    (63000.00, 'VET181920', '2013-04-07', '2028-04-07', 'Anesthesiology', 11, 20, 16),
+    (67000.00, 'VET212223', '2015-01-29', '2025-01-29', 'Radiology', 13, 21, 17),
+    (61000.00, 'VET242526', '2018-06-12', '2028-06-12', 'Emergency Medicine', 6, 25, 18),
+    (75000.00, 'VET272829', '2010-09-19', '2025-09-19', 'Orthopedics', 17, 26, 19),
+    (73000.00, 'VET303132', '2012-12-31', '2027-12-31', 'Rehabilitation', 16, 27, 20);
+
+INSERT INTO Client (account_id) VALUES
+    (4),
+    (5),
+    (6),
+    (10),
+    (11),
+    (12),
+    (16),
+    (17),
+    (18),
+    (22),
+    (23),
+    (24),
+    (28),
+    (29),
+    (30);
 
 -- ## Insert data to tables with relations between them. ##
 INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES
