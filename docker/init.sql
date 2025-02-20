@@ -21,6 +21,17 @@ CREATE TABLE Contact (
     is_primary BOOLEAN NOT NULL
 );
 
+CREATE TABLE Account (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    role VARCHAR(255) NOT NULL,
+    picture_url VARCHAR(255) NOT NULL,
+    is_verified BOOLEAN NOT NULL
+);
+
 -- todo: I am here
 CREATE TABLE Pet (
     id SERIAL PRIMARY KEY,
@@ -34,18 +45,6 @@ CREATE TABLE Pet (
     picture_url VARCHAR(255) NOT NULL,
     microchip_number VARCHAR(255) NULL,
     medical_notes VARCHAR(255) NULL
-);
-
-CREATE TABLE Account (
-    id SERIAL PRIMARY KEY,
-    email VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    first_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NOT NULL,
-    address VARCHAR(255) NOT NULL,
-    role VARCHAR(6) NOT NULL, -- vet, client
-    picture_url VARCHAR(255) NOT NULL,
-    is_verified BOOLEAN NOT NULL
 );
 
 CREATE TABLE Invoice (
@@ -464,35 +463,127 @@ INSERT INTO OpeningHours (
 
 INSERT INTO Contact (type, value, is_primary) VALUES
     -- id = 1, Clinic id = 1
-    ('email', 'contact@happypaws.com', TRUE),
+    ('email', 'contact@happypawsvet.com', TRUE),
     -- id = 2, Clinic id = 1
     ('phone', '555-123-456', TRUE),
     -- id = 3, Clinic id = 1
     ('emergency_phone', '555-999-000', TRUE),
     -- id = 4, Clinic id = 2
-    ('email', 'info@healthypets.com', TRUE),
+    ('email', 'contact@healthypetsclinic.com', TRUE),
     -- id = 5, Clinic id = 2
     ('phone', '555-567-890', TRUE),
     -- id = 6, Clinic id = 2
     ('emergency_phone', '555-888-112', TRUE),
     -- id = 7, Clinic id = 3
-    ('email', 'contact@fourpawsvet.com', TRUE),
+    ('email', 'contact@fourpawsveterinary.com', TRUE),
     -- id = 8, Clinic id = 3
     ('phone', '555-234-567', TRUE),
     -- id = 9, Clinic id = 3
     ('emergency_phone', '555-111-223', TRUE),
     -- id = 10, Clinic id = 4
-    ('email', 'info@caringhandsvet.com', TRUE),
+    ('email', 'contact@caringhandsvet.com', TRUE),
     -- id = 11, Clinic id = 4
     ('phone', '555-678-901', TRUE),
     -- id = 12, Clinic id = 4
     ('emergency_phone', '555-222-334', TRUE),
     -- id = 13, Clinic id = 5
-    ('email', 'contact@animalwellnesscenter.com', TRUE),
+    ('email', 'contact@animalwellness.com', TRUE),
     -- id = 14, Clinic id = 5
     ('phone', '555-345-678', TRUE),
     -- id = 15, Clinic id = 5
     ('emergency_phone', '555-333-445', TRUE);
+
+INSERT INTO Account (email, password, first_name, last_name, role, picture_url, is_verified) VALUES
+    -- id = 1, vet
+    ('adam.smith@gmail.com', 'VetPass1!', 'Adam', 'Smith', 'vet', 'https://example.com/pic1.jpg', TRUE),
+    -- id = 2, vet
+    ('barbara.johnson@yahoo.com', 'VetPass2!', 'Barbara', 'Johnson', 'vet', 'https://example.com/pic2.jpg', TRUE),
+    -- id = 3, vet
+    ('charles.brown@outlook.com', 'VetPass3!', 'Charles', 'Brown', 'vet', 'https://example.com/pic3.jpg', TRUE),
+    -- id = 4, client
+    ('diana.miller@gmail.com', 'ClientPass1!', 'Diana', 'Miller', 'client', 'https://example.com/pic4.jpg', TRUE),
+    -- id = 5, client
+    ('eric.wilson@aol.com', 'ClientPass2!', 'Eric', 'Wilson', 'client', 'https://example.com/pic5.jpg', TRUE),
+    -- id = 6, client
+    ('frank.thomas@mail.com', 'ClientPass3!', 'Frank', 'Thomas', 'client', 'https://example.com/pic6.jpg', TRUE),
+    -- id = 7, vet
+    ('grace.moore@gmail.com', 'VetPass4!', 'Grace', 'Moore', 'vet', 'https://example.com/pic7.jpg', TRUE),
+    -- id = 8, vet
+    ('henry.taylor@live.com', 'VetPass5!', 'Henry', 'Taylor', 'vet', 'https://example.com/pic8.jpg', TRUE),
+    -- id = 9, vet
+    ('isabella.anderson@icloud.com', 'VetPass6!', 'Isabella', 'Anderson', 'vet', 'https://example.com/pic9.jpg', TRUE),
+    -- id = 10, client
+    ('jackson.white@gmail.com', 'ClientPass4!', 'Jackson', 'White', 'client', 'https://example.com/pic10.jpg', TRUE),
+    -- id = 11, client
+    ('kate.harris@yahoo.com', 'ClientPass5!', 'Kate', 'Harris', 'client', 'https://example.com/pic11.jpg', TRUE),
+    -- id = 12, client
+    ('leo.martin@outlook.com', 'ClientPass6!', 'Leo', 'Martin', 'client', 'https://example.com/pic12.jpg', TRUE),
+    -- id = 13, vet
+    ('mia.thompson@gmail.com', 'VetPass7!', 'Mia', 'Thompson', 'vet', 'https://example.com/pic13.jpg', TRUE),
+    -- id = 14, vet
+    ('nathan.garcia@mail.com', 'VetPass8!', 'Nathan', 'Garcia', 'vet', 'https://example.com/pic14.jpg', TRUE),
+    -- id = 15, vet
+    ('olivia.clark@aol.com', 'VetPass9!', 'Olivia', 'Clark', 'vet', 'https://example.com/pic15.jpg', TRUE),
+    -- id = 16, client
+    ('peter.rodriguez@gmail.com', 'ClientPass7!', 'Peter', 'Rodriguez', 'client', 'https://example.com/pic16.jpg', TRUE),
+    -- id = 17, client
+    ('quinn.lewis@yahoo.com', 'ClientPass8!', 'Quinn', 'Lewis', 'client', 'https://example.com/pic17.jpg', TRUE),
+    -- id = 18, client
+    ('rachel.walker@outlook.com', 'ClientPass9!', 'Rachel', 'Walker', 'client', 'https://example.com/pic18.jpg', TRUE),
+    -- id = 20, vet
+    ('samuel.hall@gmail.com', 'VetPass10!', 'Samuel', 'Hall', 'vet', 'https://example.com/pic19.jpg', TRUE),
+    -- id = 20, vet
+    ('tina.allen@mail.com', 'VetPass11!', 'Tina', 'Allen', 'vet', 'https://example.com/pic20.jpg', TRUE),
+    -- id = 21, vet
+    ('ulysses.young@gmail.com', 'VetPass12!', 'Ulysses', 'Young', 'vet', 'https://example.com/pic21.jpg', TRUE),
+    -- id = 22, client
+    ('victoria.king@yahoo.com', 'ClientPass10!', 'Victoria', 'King', 'client', 'https://example.com/pic22.jpg', TRUE),
+    -- id = 23, client
+    ('william.scott@outlook.com', 'ClientPass11!', 'William', 'Scott', 'client', 'https://example.com/pic23.jpg', TRUE),
+    -- id = 24, client
+    ('xavier.green@gmail.com', 'ClientPass12!', 'Xavier', 'Green', 'client', 'https://example.com/pic24.jpg', TRUE),
+    -- id = 25, vet
+    ('yasmine.adams@icloud.com', 'VetPass13!', 'Yasmine', 'Adams', 'vet', 'https://example.com/pic25.jpg', TRUE),
+    -- id = 26, vet
+    ('zachary.baker@yahoo.com', 'VetPass14!', 'Zachary', 'Baker', 'vet', 'https://example.com/pic26.jpg', TRUE),
+    -- id = 27, vet
+    ('amelia.bell@gmail.com', 'VetPass15!', 'Amelia', 'Bell', 'vet', 'https://example.com/pic27.jpg', TRUE),
+    -- id = 28, client
+    ('benjamin.brooks@outlook.com', 'ClientPass13!', 'Benjamin', 'Brooks', 'client', 'https://example.com/pic28.jpg', TRUE),
+    -- id = 29, client
+    ('catherine.carter@gmail.com', 'ClientPass14!', 'Catherine', 'Carter', 'client', 'https://example.com/pic29.jpg', TRUE),
+    -- id = 30, client
+    ('daniel.davis@mail.com', 'ClientPass15!', 'Daniel', 'Davis', 'client', 'https://example.com/pic30.jpg', TRUE),
+    -- id = 31, vet
+    ('elizabeth.evans@yahoo.com', 'VetPass16!', 'Elizabeth', 'Evans', 'vet', 'https://example.com/pic31.jpg', TRUE),
+    -- id = 32, vet
+    ('frederick.fernandez@gmail.com', 'VetPass17!', 'Frederick', 'Fernandez', 'vet', 'https://example.com/pic32.jpg', TRUE),
+    -- id = 33, vet
+    ('georgia.gonzalez@outlook.com', 'VetPass18!', 'Georgia', 'Gonzalez', 'vet', 'https://example.com/pic33.jpg', TRUE),
+    -- id = 34, client
+    ('harry.hall@gmail.com', 'ClientPass16!', 'Harry', 'Hall', 'client', 'https://example.com/pic34.jpg', TRUE),
+    -- id = 35, client
+    ('isla.hernandez@yahoo.com', 'ClientPass17!', 'Isla', 'Hernandez', 'client', 'https://example.com/pic35.jpg', TRUE),
+    -- id = 36, client
+    ('jacob.johnson@outlook.com', 'ClientPass18!', 'Jacob', 'Johnson', 'client', 'https://example.com/pic36.jpg', TRUE),
+    -- id = 37, vet
+    ('kelly.kim@gmail.com', 'VetPass19!', 'Kelly', 'Kim', 'vet', 'https://example.com/pic37.jpg', TRUE),
+    -- id = 38, vet
+    ('liam.lee@yahoo.com', 'VetPass20!', 'Liam', 'Lee', 'vet', 'https://example.com/pic38.jpg', TRUE),
+    -- id = 39, vet
+    ('madeline.martin@outlook.com', 'VetPass21!', 'Madeline', 'Martin', 'vet', 'https://example.com/pic39.jpg', TRUE),
+    -- id = 40, client
+    ('nathan.nelson@gmail.com', 'ClientPass19!', 'Nathan', 'Nelson', 'client', 'https://example.com/pic40.jpg', TRUE),
+    -- id = 41, client
+    ('olivia.owens@yahoo.com', 'ClientPass20!', 'Olivia', 'Owens', 'client', 'https://example.com/pic41.jpg', TRUE),
+    -- id = 42, client
+    ('paul.parker@outlook.com', 'ClientPass21!', 'Paul', 'Parker', 'client', 'https://example.com/pic42.jpg', TRUE),
+    -- id = 43, vet
+    ('quincy.quinn@gmail.com', 'VetPass22!', 'Quincy', 'Quinn', 'vet', 'https://example.com/pic43.jpg', TRUE),
+    -- id = 44, vet
+    ('rachel.ramirez@yahoo.com', 'ClientPass22!', 'Rachel', 'Ramirez', 'client', 'https://example.com/pic44.jpg', TRUE),
+    -- id = 45, vet
+    ('steven.smith@outlook.com', 'ClientPass23!', 'Steven', 'Smith', 'client', 'https://example.com/pic45.jpg', TRUE);
 
 -- ## Insert data to tables with foreign keys. ##
 INSERT INTO Clinic (name, address, opening_hours_id) VALUES
