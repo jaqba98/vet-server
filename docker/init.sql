@@ -491,7 +491,128 @@ INSERT INTO Contact (type, value, is_primary) VALUES
     -- id = 14, Clinic id = 5
     ('phone', '555-345-678', TRUE),
     -- id = 15, Clinic id = 5
-    ('emergency_phone', '555-333-445', TRUE);
+    ('emergency_phone', '555-333-445', TRUE),
+    -- id = 16, Account id = 1
+    ('email', 'adam.smith@gmail.com', TRUE),
+    -- id = 17, Account id = 1
+    ('phone', '555-100-001', TRUE),
+    -- id = 18, Account id = 2
+    ('email', 'barbara.johnson@yahoo.com', TRUE),
+    -- id = 19, Account id = 2
+    ('phone', '555-100-002', TRUE),
+    -- id = 20, Account id = 3
+    ('email', 'charles.brown@outlook.com', TRUE),
+    -- id = 21, Account id = 3
+    ('phone', '555-100-003', TRUE),
+    -- id = 22, Account id = 4
+    ('email', 'diana.miller@gmail.com', TRUE),
+    -- id = 23, Account id = 4
+    ('phone', '555-100-004', TRUE),
+    -- id = 24, Account id = 5
+    ('email', 'eric.wilson@aol.com', TRUE),
+    -- id = 25, Account id = 5
+    ('phone', '555-100-005', TRUE),
+    -- id = 26, Account id = 6
+    ('email', 'frank.thomas@mail.com', TRUE),
+    -- id = 27, Account id = 6
+    ('phone', '555-100-006', TRUE),
+    -- id = 28, Account id = 7
+    ('email', 'grace.moore@gmail.com', TRUE),
+    -- id = 29, Account id = 7
+    ('phone', '555-100-007', TRUE),
+    -- id = 30, Account id = 8
+    ('email', 'henry.taylor@live.com', TRUE),
+    -- id = 31, Account id = 8
+    ('phone', '555-100-008', TRUE),
+    -- id = 32, Account id = 9
+    ('email', 'isabella.anderson@icloud.com', TRUE),
+    -- id = 33, Account id = 9
+    ('phone', '555-100-009', TRUE),
+    -- id = 34, Account id = 10
+    ('email', 'jackson.white@gmail.com', TRUE),
+    -- id = 35, Account id = 10
+    ('phone', '555-100-010', TRUE),
+    -- id = 36, Account id = 11
+    ('email', 'kate.harris@yahoo.com', TRUE),
+    -- id = 37, Account id = 11
+    ('phone', '555-100-011', TRUE),
+    -- id = 38, Account id = 12
+    ('email', 'leo.martin@outlook.com', TRUE),
+    -- id = 39, Account id = 12
+    ('phone', '555-100-012', TRUE),
+    -- id = 40, Account id = 13
+    ('email', 'mia.thompson@gmail.com', TRUE),
+    -- id = 41, Account id = 13
+    ('phone', '555-100-013', TRUE),
+    -- id = 42, Account id = 14
+    ('email', 'nathan.garcia@mail.com', TRUE),
+    -- id = 43, Account id = 14
+    ('phone', '555-100-014', TRUE),
+    -- id = 44, Account id = 15
+    ('email', 'olivia.clark@aol.com', TRUE),
+    -- id = 45, Account id = 15
+    ('phone', '555-100-015', TRUE),
+    -- id = 46, Account id = 16
+    ('email', 'peter.rodriguez@gmail.com', TRUE),
+    -- id = 47, Account id = 16
+    ('phone', '555-100-016', TRUE),
+    -- id = 48, Account id = 17
+    ('email', 'quinn.lewis@yahoo.com', TRUE),
+    -- id = 49, Account id = 17
+    ('phone', '555-100-017', TRUE),
+    -- id = 50, Account id = 18
+    ('email', 'rachel.walker@outlook.com', TRUE),
+    -- id = 51, Account id = 18
+    ('phone', '555-100-018', TRUE),
+    -- id = 52, Account id = 19
+    ('email', 'samuel.hall@gmail.com', TRUE),
+    -- id = 53, Account id = 19
+    ('phone', '555-100-019', TRUE),
+    -- id = 54, Account id = 20
+    ('email', 'tina.allen@mail.com', TRUE),
+    -- id = 55, Account id = 20
+    ('phone', '555-100-020', TRUE),
+    -- id = 56, Account id = 21
+    ('email', 'ulysses.young@gmail.com', TRUE),
+    -- id = 57, Account id = 21
+    ('phone', '555-100-021', TRUE),
+    -- id = 58, Account id = 22
+    ('email', 'victoria.king@yahoo.com', TRUE),
+    -- id = 59, Account id = 22
+    ('phone', '555-100-022', TRUE),
+    -- id = 60, Account id = 23
+    ('email', 'william.scott@outlook.com', TRUE),
+    -- id = 61, Account id = 23
+    ('phone', '555-100-023', TRUE),
+    -- id = 62, Account id = 24
+    ('email', 'xavier.green@gmail.com', TRUE),
+    -- id = 63, Account id = 24
+    ('phone', '555-100-024', TRUE),
+    -- id = 64, Account id = 25
+    ('email', 'yasmine.adams@icloud.com', TRUE),
+    -- id = 65, Account id = 25
+    ('phone', '555-100-025', TRUE),
+    -- id = 66, Account id = 26
+    ('email', 'zachary.baker@yahoo.com', TRUE),
+    -- id = 67, Account id = 26
+    ('phone', '555-100-026', TRUE),
+    -- id = 68, Account id = 27
+    ('email', 'amelia.bell@gmail.com', TRUE),
+    -- id = 69, Account id = 27
+    ('phone', '555-100-027', TRUE),
+    -- id = 70, Account id = 28
+    ('email', 'benjamin.brooks@outlook.com', TRUE),
+    -- id = 71, Account id = 28
+    ('phone', '555-100-028', TRUE),
+    -- id = 72, Account id = 29
+    ('email', 'catherine.carter@gmail.com', TRUE),
+    -- id = 73, Account id = 29
+    ('phone', '555-100-029', TRUE),
+    -- id = 74, Account id = 30
+    ('email', 'daniel.davis@mail.com', TRUE),
+    -- id = 75, Account id = 30
+    ('phone', '555-100-030', TRUE);
+
 
 INSERT INTO Account (email, password, first_name, last_name, role, picture_url, is_verified) VALUES
     -- id = 1, vet, Clinic id = 1
