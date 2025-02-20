@@ -338,6 +338,14 @@ CREATE TABLE Clinic_Contact (
     FOREIGN KEY (contact_id) REFERENCES Contact(id)
 );
 
+CREATE TABLE Clinic_Account (
+    id SERIAL PRIMARY KEY,
+    clinic_id INTEGER NOT NULL,
+    account_id INTEGER NOT NULL,
+    FOREIGN KEY (clinic_id) REFERENCES Clinic(id),
+    FOREIGN KEY (account_id) REFERENCES Account(id)
+);
+
 -- todo: I am here
 CREATE TABLE Owner (
     id SERIAL PRIMARY KEY,
@@ -353,14 +361,6 @@ CREATE TABLE Account_Contact (
     contact_id INTEGER NOT NULL,
     FOREIGN KEY (account_id) REFERENCES Account(id),
     FOREIGN KEY (contact_id) REFERENCES Contact(id)
-);
-
-CREATE TABLE Clinic_Account (
-    id SERIAL PRIMARY KEY,
-    clinic_id INTEGER NOT NULL,
-    account_id INTEGER NOT NULL,
-    FOREIGN KEY (clinic_id) REFERENCES Clinic(id),
-    FOREIGN KEY (account_id) REFERENCES Account(id)
 );
 
 CREATE TABLE Client_Pet (
@@ -494,96 +494,66 @@ INSERT INTO Contact (type, value, is_primary) VALUES
     ('emergency_phone', '555-333-445', TRUE);
 
 INSERT INTO Account (email, password, first_name, last_name, role, picture_url, is_verified) VALUES
-    -- id = 1, vet
+    -- id = 1, vet, Clinic id = 1
     ('adam.smith@gmail.com', 'VetPass1!', 'Adam', 'Smith', 'vet', 'https://example.com/pic1.jpg', TRUE),
-    -- id = 2, vet
+    -- id = 2, vet, Clinic id = 1
     ('barbara.johnson@yahoo.com', 'VetPass2!', 'Barbara', 'Johnson', 'vet', 'https://example.com/pic2.jpg', TRUE),
-    -- id = 3, vet
+    -- id = 3, vet, Clinic id = 1
     ('charles.brown@outlook.com', 'VetPass3!', 'Charles', 'Brown', 'vet', 'https://example.com/pic3.jpg', TRUE),
-    -- id = 4, client
+    -- id = 4, client, Clinic id = 1
     ('diana.miller@gmail.com', 'ClientPass1!', 'Diana', 'Miller', 'client', 'https://example.com/pic4.jpg', TRUE),
-    -- id = 5, client
+    -- id = 5, client, Clinic id = 1
     ('eric.wilson@aol.com', 'ClientPass2!', 'Eric', 'Wilson', 'client', 'https://example.com/pic5.jpg', TRUE),
-    -- id = 6, client
+    -- id = 6, client, Clinic id = 1
     ('frank.thomas@mail.com', 'ClientPass3!', 'Frank', 'Thomas', 'client', 'https://example.com/pic6.jpg', TRUE),
-    -- id = 7, vet
+    -- id = 7, vet, Clinic id = 2
     ('grace.moore@gmail.com', 'VetPass4!', 'Grace', 'Moore', 'vet', 'https://example.com/pic7.jpg', TRUE),
-    -- id = 8, vet
+    -- id = 8, vet, Clinic id = 2
     ('henry.taylor@live.com', 'VetPass5!', 'Henry', 'Taylor', 'vet', 'https://example.com/pic8.jpg', TRUE),
-    -- id = 9, vet
+    -- id = 9, vet, Clinic id = 2
     ('isabella.anderson@icloud.com', 'VetPass6!', 'Isabella', 'Anderson', 'vet', 'https://example.com/pic9.jpg', TRUE),
-    -- id = 10, client
+    -- id = 10, client, Clinic id = 2
     ('jackson.white@gmail.com', 'ClientPass4!', 'Jackson', 'White', 'client', 'https://example.com/pic10.jpg', TRUE),
-    -- id = 11, client
+    -- id = 11, client, Clinic id = 2
     ('kate.harris@yahoo.com', 'ClientPass5!', 'Kate', 'Harris', 'client', 'https://example.com/pic11.jpg', TRUE),
-    -- id = 12, client
+    -- id = 12, client, Clinic id = 2
     ('leo.martin@outlook.com', 'ClientPass6!', 'Leo', 'Martin', 'client', 'https://example.com/pic12.jpg', TRUE),
-    -- id = 13, vet
+    -- id = 13, vet, Clinic id = 3
     ('mia.thompson@gmail.com', 'VetPass7!', 'Mia', 'Thompson', 'vet', 'https://example.com/pic13.jpg', TRUE),
-    -- id = 14, vet
+    -- id = 14, vet, Clinic id = 3
     ('nathan.garcia@mail.com', 'VetPass8!', 'Nathan', 'Garcia', 'vet', 'https://example.com/pic14.jpg', TRUE),
-    -- id = 15, vet
+    -- id = 15, vet, Clinic id = 3
     ('olivia.clark@aol.com', 'VetPass9!', 'Olivia', 'Clark', 'vet', 'https://example.com/pic15.jpg', TRUE),
-    -- id = 16, client
+    -- id = 16, client, Clinic id = 3
     ('peter.rodriguez@gmail.com', 'ClientPass7!', 'Peter', 'Rodriguez', 'client', 'https://example.com/pic16.jpg', TRUE),
-    -- id = 17, client
+    -- id = 17, client, Clinic id = 3
     ('quinn.lewis@yahoo.com', 'ClientPass8!', 'Quinn', 'Lewis', 'client', 'https://example.com/pic17.jpg', TRUE),
-    -- id = 18, client
+    -- id = 18, client, Clinic id = 3
     ('rachel.walker@outlook.com', 'ClientPass9!', 'Rachel', 'Walker', 'client', 'https://example.com/pic18.jpg', TRUE),
-    -- id = 20, vet
+    -- id = 19, vet, Clinic id = 4
     ('samuel.hall@gmail.com', 'VetPass10!', 'Samuel', 'Hall', 'vet', 'https://example.com/pic19.jpg', TRUE),
-    -- id = 20, vet
+    -- id = 20, vet, Clinic id = 4
     ('tina.allen@mail.com', 'VetPass11!', 'Tina', 'Allen', 'vet', 'https://example.com/pic20.jpg', TRUE),
-    -- id = 21, vet
+    -- id = 21, vet, Clinic id = 4
     ('ulysses.young@gmail.com', 'VetPass12!', 'Ulysses', 'Young', 'vet', 'https://example.com/pic21.jpg', TRUE),
-    -- id = 22, client
+    -- id = 22, client, Clinic id = 4
     ('victoria.king@yahoo.com', 'ClientPass10!', 'Victoria', 'King', 'client', 'https://example.com/pic22.jpg', TRUE),
-    -- id = 23, client
+    -- id = 23, client, Clinic id = 4
     ('william.scott@outlook.com', 'ClientPass11!', 'William', 'Scott', 'client', 'https://example.com/pic23.jpg', TRUE),
-    -- id = 24, client
+    -- id = 24, client, Clinic id = 4
     ('xavier.green@gmail.com', 'ClientPass12!', 'Xavier', 'Green', 'client', 'https://example.com/pic24.jpg', TRUE),
-    -- id = 25, vet
+    -- id = 25, vet, Clinic id = 5
     ('yasmine.adams@icloud.com', 'VetPass13!', 'Yasmine', 'Adams', 'vet', 'https://example.com/pic25.jpg', TRUE),
-    -- id = 26, vet
+    -- id = 26, vet, Clinic id = 5
     ('zachary.baker@yahoo.com', 'VetPass14!', 'Zachary', 'Baker', 'vet', 'https://example.com/pic26.jpg', TRUE),
-    -- id = 27, vet
+    -- id = 27, vet, Clinic id = 5
     ('amelia.bell@gmail.com', 'VetPass15!', 'Amelia', 'Bell', 'vet', 'https://example.com/pic27.jpg', TRUE),
-    -- id = 28, client
+    -- id = 28, client, Clinic id = 5
     ('benjamin.brooks@outlook.com', 'ClientPass13!', 'Benjamin', 'Brooks', 'client', 'https://example.com/pic28.jpg', TRUE),
-    -- id = 29, client
+    -- id = 29, client, Clinic id = 5
     ('catherine.carter@gmail.com', 'ClientPass14!', 'Catherine', 'Carter', 'client', 'https://example.com/pic29.jpg', TRUE),
-    -- id = 30, client
+    -- id = 30, client, Clinic id = 5
     ('daniel.davis@mail.com', 'ClientPass15!', 'Daniel', 'Davis', 'client', 'https://example.com/pic30.jpg', TRUE),
-    -- id = 31, vet
-    ('elizabeth.evans@yahoo.com', 'VetPass16!', 'Elizabeth', 'Evans', 'vet', 'https://example.com/pic31.jpg', TRUE),
-    -- id = 32, vet
-    ('frederick.fernandez@gmail.com', 'VetPass17!', 'Frederick', 'Fernandez', 'vet', 'https://example.com/pic32.jpg', TRUE),
-    -- id = 33, vet
-    ('georgia.gonzalez@outlook.com', 'VetPass18!', 'Georgia', 'Gonzalez', 'vet', 'https://example.com/pic33.jpg', TRUE),
-    -- id = 34, client
-    ('harry.hall@gmail.com', 'ClientPass16!', 'Harry', 'Hall', 'client', 'https://example.com/pic34.jpg', TRUE),
-    -- id = 35, client
-    ('isla.hernandez@yahoo.com', 'ClientPass17!', 'Isla', 'Hernandez', 'client', 'https://example.com/pic35.jpg', TRUE),
-    -- id = 36, client
-    ('jacob.johnson@outlook.com', 'ClientPass18!', 'Jacob', 'Johnson', 'client', 'https://example.com/pic36.jpg', TRUE),
-    -- id = 37, vet
-    ('kelly.kim@gmail.com', 'VetPass19!', 'Kelly', 'Kim', 'vet', 'https://example.com/pic37.jpg', TRUE),
-    -- id = 38, vet
-    ('liam.lee@yahoo.com', 'VetPass20!', 'Liam', 'Lee', 'vet', 'https://example.com/pic38.jpg', TRUE),
-    -- id = 39, vet
-    ('madeline.martin@outlook.com', 'VetPass21!', 'Madeline', 'Martin', 'vet', 'https://example.com/pic39.jpg', TRUE),
-    -- id = 40, client
-    ('nathan.nelson@gmail.com', 'ClientPass19!', 'Nathan', 'Nelson', 'client', 'https://example.com/pic40.jpg', TRUE),
-    -- id = 41, client
-    ('olivia.owens@yahoo.com', 'ClientPass20!', 'Olivia', 'Owens', 'client', 'https://example.com/pic41.jpg', TRUE),
-    -- id = 42, client
-    ('paul.parker@outlook.com', 'ClientPass21!', 'Paul', 'Parker', 'client', 'https://example.com/pic42.jpg', TRUE),
-    -- id = 43, vet
-    ('quincy.quinn@gmail.com', 'VetPass22!', 'Quincy', 'Quinn', 'vet', 'https://example.com/pic43.jpg', TRUE),
-    -- id = 44, vet
-    ('rachel.ramirez@yahoo.com', 'ClientPass22!', 'Rachel', 'Ramirez', 'client', 'https://example.com/pic44.jpg', TRUE),
-    -- id = 45, vet
-    ('steven.smith@outlook.com', 'ClientPass23!', 'Steven', 'Smith', 'client', 'https://example.com/pic45.jpg', TRUE);
 
 -- ## Insert data to tables with foreign keys. ##
 INSERT INTO Clinic (name, address, opening_hours_id) VALUES
@@ -630,3 +600,65 @@ INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES
     (5, 14),
     -- id = 15, Clinic id = 5, Contact id = 15
     (5, 15);
+
+INSERT INTO Clinic_Account (clinic_id, account_id) VALUES
+    -- id = 1, Clinic id = 1, Account id = 1
+    (1, 1),
+    -- id = 1, Clinic id = 1, Account id = 2
+    (1, 2),
+    -- id = 1, Clinic id = 1, Account id = 3
+    (1, 3),
+    -- id = 1, Clinic id = 1, Account id = 4
+    (1, 4),
+    -- id = 1, Clinic id = 1, Account id = 5
+    (1, 5),
+    -- id = 1, Clinic id = 1, Account id = 6
+    (1, 6),
+    -- id = 2, Clinic id = 2, Account id = 7
+    (2, 7),
+    -- id = 2, Clinic id = 2, Account id = 8
+    (2, 8),
+    -- id = 2, Clinic id = 2, Account id = 9
+    (2, 9),
+    -- id = 2, Clinic id = 2, Account id = 10
+    (2, 10),
+    -- id = 2, Clinic id = 2, Account id = 11
+    (2, 11),
+    -- id = 2, Clinic id = 2, Account id = 12
+    (2, 12),
+    -- id = 3, Clinic id = 3, Account id = 13
+    (3, 13),
+    -- id = 3, Clinic id = 3, Account id = 14
+    (3, 14),
+    -- id = 3, Clinic id = 3, Account id = 15
+    (3, 15),
+    -- id = 3, Clinic id = 3, Account id = 16
+    (3, 16),
+    -- id = 3, Clinic id = 3, Account id = 17
+    (3, 17),
+    -- id = 3, Clinic id = 3, Account id = 18
+    (3, 18),
+    -- id = 4, Clinic id = 4, Account id = 19
+    (4, 19),
+    -- id = 4, Clinic id = 4, Account id = 20
+    (4, 20),
+    -- id = 4, Clinic id = 4, Account id = 21
+    (4, 21),
+    -- id = 4, Clinic id = 4, Account id = 22
+    (4, 22),
+    -- id = 4, Clinic id = 4, Account id = 23
+    (4, 23),
+    -- id = 4, Clinic id = 4, Account id = 24
+    (4, 24),
+    -- id = 5, Clinic id = 5, Account id = 25
+    (5, 25),
+    -- id = 5, Clinic id = 5, Account id = 26
+    (5, 26),
+    -- id = 5, Clinic id = 5, Account id = 27
+    (5, 27),
+    -- id = 5, Clinic id = 5, Account id = 28
+    (5, 28),
+    -- id = 5, Clinic id = 5, Account id = 29
+    (5, 29),
+    -- id = 5, Clinic id = 5, Account id = 30
+    (5, 30);
