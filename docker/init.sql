@@ -346,6 +346,14 @@ CREATE TABLE Clinic_Account (
     FOREIGN KEY (account_id) REFERENCES Account(id)
 );
 
+CREATE TABLE Account_Contact (
+    id SERIAL PRIMARY KEY,
+    account_id INTEGER NOT NULL,
+    contact_id INTEGER NOT NULL,
+    FOREIGN KEY (account_id) REFERENCES Account(id),
+    FOREIGN KEY (contact_id) REFERENCES Contact(id)
+);
+
 -- todo: I am here
 CREATE TABLE Owner (
     id SERIAL PRIMARY KEY,
@@ -353,14 +361,6 @@ CREATE TABLE Owner (
     account_id INTEGER NOT NULL,
     FOREIGN KEY (clinic_id) REFERENCES Clinic(id),
     FOREIGN KEY (account_id) REFERENCES Account(id)
-);
-
-CREATE TABLE Account_Contact (
-    id SERIAL PRIMARY KEY,
-    account_id INTEGER NOT NULL,
-    contact_id INTEGER NOT NULL,
-    FOREIGN KEY (account_id) REFERENCES Account(id),
-    FOREIGN KEY (contact_id) REFERENCES Contact(id)
 );
 
 CREATE TABLE Client_Pet (
@@ -725,61 +725,183 @@ INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES
 INSERT INTO Clinic_Account (clinic_id, account_id) VALUES
     -- id = 1, Clinic id = 1, Account id = 1
     (1, 1),
-    -- id = 1, Clinic id = 1, Account id = 2
+    -- id = 2, Clinic id = 1, Account id = 2
     (1, 2),
-    -- id = 1, Clinic id = 1, Account id = 3
+    -- id = 3, Clinic id = 1, Account id = 3
     (1, 3),
-    -- id = 1, Clinic id = 1, Account id = 4
+    -- id = 4, Clinic id = 1, Account id = 4
     (1, 4),
-    -- id = 1, Clinic id = 1, Account id = 5
+    -- id = 5, Clinic id = 1, Account id = 5
     (1, 5),
-    -- id = 1, Clinic id = 1, Account id = 6
+    -- id = 6, Clinic id = 1, Account id = 6
     (1, 6),
-    -- id = 2, Clinic id = 2, Account id = 7
+    -- id = 7, Clinic id = 2, Account id = 7
     (2, 7),
-    -- id = 2, Clinic id = 2, Account id = 8
+    -- id = 8, Clinic id = 2, Account id = 8
     (2, 8),
-    -- id = 2, Clinic id = 2, Account id = 9
+    -- id = 9, Clinic id = 2, Account id = 9
     (2, 9),
-    -- id = 2, Clinic id = 2, Account id = 10
+    -- id = 10, Clinic id = 2, Account id = 10
     (2, 10),
-    -- id = 2, Clinic id = 2, Account id = 11
+    -- id = 11, Clinic id = 2, Account id = 11
     (2, 11),
-    -- id = 2, Clinic id = 2, Account id = 12
+    -- id = 12, Clinic id = 2, Account id = 12
     (2, 12),
-    -- id = 3, Clinic id = 3, Account id = 13
+    -- id = 13, Clinic id = 3, Account id = 13
     (3, 13),
-    -- id = 3, Clinic id = 3, Account id = 14
+    -- id = 14, Clinic id = 3, Account id = 14
     (3, 14),
-    -- id = 3, Clinic id = 3, Account id = 15
+    -- id = 15, Clinic id = 3, Account id = 15
     (3, 15),
-    -- id = 3, Clinic id = 3, Account id = 16
+    -- id = 16, Clinic id = 3, Account id = 16
     (3, 16),
-    -- id = 3, Clinic id = 3, Account id = 17
+    -- id = 17, Clinic id = 3, Account id = 17
     (3, 17),
-    -- id = 3, Clinic id = 3, Account id = 18
+    -- id = 18, Clinic id = 3, Account id = 18
     (3, 18),
-    -- id = 4, Clinic id = 4, Account id = 19
+    -- id = 19, Clinic id = 4, Account id = 19
     (4, 19),
-    -- id = 4, Clinic id = 4, Account id = 20
+    -- id = 20, Clinic id = 4, Account id = 20
     (4, 20),
-    -- id = 4, Clinic id = 4, Account id = 21
+    -- id = 21, Clinic id = 4, Account id = 21
     (4, 21),
-    -- id = 4, Clinic id = 4, Account id = 22
+    -- id = 22, Clinic id = 4, Account id = 22
     (4, 22),
-    -- id = 4, Clinic id = 4, Account id = 23
+    -- id = 23, Clinic id = 4, Account id = 23
     (4, 23),
-    -- id = 4, Clinic id = 4, Account id = 24
+    -- id = 24, Clinic id = 4, Account id = 24
     (4, 24),
-    -- id = 5, Clinic id = 5, Account id = 25
+    -- id = 25, Clinic id = 5, Account id = 25
     (5, 25),
-    -- id = 5, Clinic id = 5, Account id = 26
+    -- id = 26, Clinic id = 5, Account id = 26
     (5, 26),
-    -- id = 5, Clinic id = 5, Account id = 27
+    -- id = 27, Clinic id = 5, Account id = 27
     (5, 27),
-    -- id = 5, Clinic id = 5, Account id = 28
+    -- id = 28, Clinic id = 5, Account id = 28
     (5, 28),
-    -- id = 5, Clinic id = 5, Account id = 29
+    -- id = 29, Clinic id = 5, Account id = 29
     (5, 29),
-    -- id = 5, Clinic id = 5, Account id = 30
+    -- id = 30, Clinic id = 5, Account id = 30
     (5, 30);
+
+INSERT INTO Account_Contact (account_id, contact_id) VALUES
+    -- id = 1, Account id = 1, Contact id = 16
+    (1, 16),
+    -- id = 2, Account id = 1, Contact id = 17
+    (1, 17),
+    -- id = 3, Account id = 2, Contact id = 18
+    (2, 18),
+    -- id = 4, Account id = 2, Contact id = 19
+    (2, 19),
+    -- id = 5, Account id = 3, Contact id = 20
+    (3, 20),
+    -- id = 6, Account id = 3, Contact id = 21
+    (3, 21),
+    -- id = 7, Account id = 4, Contact id = 22
+    (4, 22),
+    -- id = 8, Account id = 4, Contact id = 23
+    (4, 23),
+    -- id = 9, Account id = 5, Contact id = 24
+    (5, 24),
+    -- id = 10, Account id = 5, Contact id = 25
+    (5, 25),
+    -- id = 11, Account id = 6, Contact id = 26
+    (6, 26),
+    -- id = 12, Account id = 6, Contact id = 27
+    (6, 27),
+    -- id = 13, Account id = 7, Contact id = 28
+    (7, 28),
+    -- id = 14, Account id = 7, Contact id = 29
+    (7, 29),
+    -- id = 15, Account id = 8, Contact id = 30
+    (8, 30),
+    -- id = 16, Account id = 8, Contact id = 31
+    (8, 31),
+    -- id = 17, Account id = 9, Contact id = 32
+    (9, 32),
+    -- id = 18, Account id = 9, Contact id = 33
+    (9, 33),
+    -- id = 19, Account id = 10, Contact id = 34
+    (10, 34),
+    -- id = 20, Account id = 10, Contact id = 35
+    (10, 35),
+    -- id = 21, Account id = 11, Contact id = 36
+    (11, 36),
+    -- id = 22, Account id = 11, Contact id = 37
+    (11, 37),
+    -- id = 23, Account id = 12, Contact id = 38
+    (12, 38),
+    -- id = 24, Account id = 12, Contact id = 39
+    (12, 39),
+    -- id = 25, Account id = 13, Contact id = 40
+    (13, 40),
+    -- id = 26, Account id = 13, Contact id = 41
+    (13, 41),
+    -- id = 27, Account id = 14, Contact id = 42
+    (14, 42),
+    -- id = 28, Account id = 14, Contact id = 43
+    (14, 43),
+    -- id = 29, Account id = 15, Contact id = 44
+    (15, 44),
+    -- id = 30, Account id = 15, Contact id = 45
+    (15, 45),
+    -- id = 31, Account id = 16, Contact id = 46
+    (16, 46),
+    -- id = 32, Account id = 16, Contact id = 47
+    (16, 47),
+    -- id = 33, Account id = 17, Contact id = 48
+    (17, 48),
+    -- id = 34, Account id = 17, Contact id = 49
+    (17, 49),
+    -- id = 35, Account id = 18, Contact id = 50
+    (18, 50),
+    -- id = 36, Account id = 18, Contact id = 51
+    (18, 51),
+    -- id = 37, Account id = 19, Contact id = 52
+    (19, 52),
+    -- id = 38, Account id = 19, Contact id = 53
+    (19, 53),
+    -- id = 39, Account id = 20, Contact id = 54
+    (20, 54),
+    -- id = 40, Account id = 20, Contact id = 55
+    (20, 55),
+    -- id = 41, Account id = 21, Contact id = 56
+    (21, 56),
+    -- id = 42, Account id = 21, Contact id = 57
+    (21, 57),
+    -- id = 43, Account id = 22, Contact id = 58
+    (22, 58),
+    -- id = 44, Account id = 22, Contact id = 59
+    (22, 59),
+    -- id = 45, Account id = 23, Contact id = 60
+    (23, 60),
+    -- id = 46, Account id = 23, Contact id = 61
+    (23, 61),
+    -- id = 47, Account id = 24, Contact id = 62
+    (24, 62),
+    -- id = 48, Account id = 24, Contact id = 63
+    (24, 63),
+    -- id = 49, Account id = 25, Contact id = 64
+    (25, 64),
+    -- id = 50, Account id = 25, Contact id = 65
+    (25, 65),
+    -- id = 51, Account id = 26, Contact id = 66
+    (26, 66),
+    -- id = 52, Account id = 26, Contact id = 67
+    (26, 67),
+    -- id = 53, Account id = 27, Contact id = 68
+    (27, 68),
+    -- id = 54, Account id = 27, Contact id = 69
+    (27, 69),
+    -- id = 55, Account id = 28, Contact id = 70
+    (28, 70),
+    -- id = 56, Account id = 28, Contact id = 71
+    (28, 71),
+    -- id = 57, Account id = 29, Contact id = 72
+    (29, 72),
+    -- id = 58, Account id = 29, Contact id = 73
+    (29, 73),
+    -- id = 59, Account id = 30, Contact id = 74
+    (30, 74),
+    -- id = 60, Account id = 30, Contact id = 75
+    (30, 75);
