@@ -14,44 +14,14 @@ CREATE TABLE OpeningHours (
     sunday_from TIME NULL, sunday_to TIME NULL
 );
 
--- todo: I am here
 CREATE TABLE Contact (
     id SERIAL PRIMARY KEY,
-    type VARCHAR(15) NOT NULL, -- email, phone, emergency_phone
-    contact_value VARCHAR(255) NOT NULL,
+    type VARCHAR(255) NOT NULL,
+    value VARCHAR(255) NOT NULL,
     is_primary BOOLEAN NOT NULL
 );
----- id = 1
---INSERT INTO Contact (type, contact_value, is_primary) VALUES ('email', 'contact@happypaws.com', TRUE);
----- id = 2
---INSERT INTO Contact (type, contact_value, is_primary) VALUES ('phone', '555-123-456', TRUE);
----- id = 3
---INSERT INTO Contact (type, contact_value, is_primary) VALUES ('emergency_phone', '555-999-000', TRUE);
----- id = 4
---INSERT INTO Contact (type, contact_value, is_primary) VALUES ('email', 'info@healthypets.com', TRUE);
----- id = 5
---INSERT INTO Contact (type, contact_value, is_primary) VALUES ('phone', '555-567-890', TRUE);
----- id = 6
---INSERT INTO Contact (type, contact_value, is_primary) VALUES ('emergency_phone', '555-888-112', TRUE);
----- id = 7
---INSERT INTO Contact (type, contact_value, is_primary) VALUES ('email', 'contact@fourpawsvet.com', TRUE);
----- id = 8
---INSERT INTO Contact (type, contact_value, is_primary) VALUES ('phone', '555-234-567', TRUE);
----- id = 9
---INSERT INTO Contact (type, contact_value, is_primary) VALUES ('emergency_phone', '555-111-223', TRUE);
----- id = 10
---INSERT INTO Contact (type, contact_value, is_primary) VALUES ('email', 'info@caringhandsvet.com', TRUE);
----- id = 11
---INSERT INTO Contact (type, contact_value, is_primary) VALUES ('phone', '555-678-901', TRUE);
----- id = 12
---INSERT INTO Contact (type, contact_value, is_primary) VALUES ('emergency_phone', '555-222-334', TRUE);
----- id = 13
---INSERT INTO Contact (type, contact_value, is_primary) VALUES ('email', 'contact@animalwellnesscenter.com', TRUE);
----- id = 14
---INSERT INTO Contact (type, contact_value, is_primary) VALUES ('phone', '555-345-678', TRUE);
----- id = 15
---INSERT INTO Contact (type, contact_value, is_primary) VALUES ('emergency_phone', '555-333-445', TRUE);
 
+-- todo: I am here
 CREATE TABLE Pet (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -361,8 +331,6 @@ CREATE TABLE Appointment (
 );
 
 -- ## Create tables with relations between them. ##
--- todo: I am here
-
 CREATE TABLE Clinic_Contact (
     id SERIAL PRIMARY KEY,
     clinic_id INTEGER NOT NULL,
@@ -370,37 +338,8 @@ CREATE TABLE Clinic_Contact (
     FOREIGN KEY (clinic_id) REFERENCES Clinic(id),
     FOREIGN KEY (contact_id) REFERENCES Contact(id)
 );
----- id = 1
---INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (1, 1);
----- id = 2
---INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (1, 2);
----- id = 3
---INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (1, 3);
----- id = 4
---INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (2, 4);
----- id = 5
---INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (2, 5);
----- id = 6
---INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (2, 6);
----- id = 7
---INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (3, 7);
----- id = 8
---INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (3, 8);
----- id = 9
---INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (3, 9);
----- id = 10
---INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (4, 10);
----- id = 11
---INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (4, 11);
----- id = 12
---INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (4, 12);
----- id = 13
---INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (5, 13);
----- id = 14
---INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (5, 14);
----- id = 15
---INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (5, 15);
 
+-- todo: I am here
 CREATE TABLE Owner (
     id SERIAL PRIMARY KEY,
     clinic_id INTEGER NOT NULL,
@@ -523,6 +462,38 @@ INSERT INTO OpeningHours (
         '09:00:00', '12:00:00'
     );
 
+INSERT INTO Contact (type, value, is_primary) VALUES
+    -- id = 1, Clinic id = 1
+    ('email', 'contact@happypaws.com', TRUE),
+    -- id = 2, Clinic id = 1
+    ('phone', '555-123-456', TRUE),
+    -- id = 3, Clinic id = 1
+    ('emergency_phone', '555-999-000', TRUE),
+    -- id = 4, Clinic id = 2
+    ('email', 'info@healthypets.com', TRUE),
+    -- id = 5, Clinic id = 2
+    ('phone', '555-567-890', TRUE),
+    -- id = 6, Clinic id = 2
+    ('emergency_phone', '555-888-112', TRUE),
+    -- id = 7, Clinic id = 3
+    ('email', 'contact@fourpawsvet.com', TRUE),
+    -- id = 8, Clinic id = 3
+    ('phone', '555-234-567', TRUE),
+    -- id = 9, Clinic id = 3
+    ('emergency_phone', '555-111-223', TRUE),
+    -- id = 10, Clinic id = 4
+    ('email', 'info@caringhandsvet.com', TRUE),
+    -- id = 11, Clinic id = 4
+    ('phone', '555-678-901', TRUE),
+    -- id = 12, Clinic id = 4
+    ('emergency_phone', '555-222-334', TRUE),
+    -- id = 13, Clinic id = 5
+    ('email', 'contact@animalwellnesscenter.com', TRUE),
+    -- id = 14, Clinic id = 5
+    ('phone', '555-345-678', TRUE),
+    -- id = 15, Clinic id = 5
+    ('emergency_phone', '555-333-445', TRUE);
+
 -- ## Insert data to tables with foreign keys. ##
 INSERT INTO Clinic (name, address, opening_hours_id) VALUES
     -- id = 1
@@ -537,4 +508,34 @@ INSERT INTO Clinic (name, address, opening_hours_id) VALUES
     ('Animal Wellness Center', '654 Birch St', 5);
 
 -- ## Insert data to tables with relations between them. ##
--- todo: I am here
+INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES
+    -- id = 1, Clinic id = 1, Contact id = 1
+    (1, 1),
+    -- id = 2, Clinic id = 1, Contact id = 2
+    (1, 2),
+    -- id = 3, Clinic id = 1, Contact id = 3
+    (1, 3),
+    -- id = 4, Clinic id = 2, Contact id = 4
+    (2, 4),
+    -- id = 5, Clinic id = 2, Contact id = 5
+    (2, 5),
+    -- id = 6, Clinic id = 2, Contact id = 6
+    (2, 6),
+    -- id = 7, Clinic id = 3, Contact id = 7
+    (3, 7),
+    -- id = 8, Clinic id = 3, Contact id = 8
+    (3, 8),
+    -- id = 9, Clinic id = 3, Contact id = 9
+    (3, 9),
+    -- id = 10, Clinic id = 4, Contact id = 10
+    (4, 10),
+    -- id = 11, Clinic id = 4, Contact id = 11
+    (4, 11),
+    -- id = 12, Clinic id = 4, Contact id = 12
+    (4, 12),
+    -- id = 13, Clinic id = 5, Contact id = 13
+    (5, 13),
+    -- id = 14, Clinic id = 5, Contact id = 14
+    (5, 14),
+    -- id = 15, Clinic id = 5, Contact id = 15
+    (5, 15);
