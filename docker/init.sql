@@ -481,21 +481,36 @@ CREATE TABLE Clinic_Contact (
     FOREIGN KEY (clinic_id) REFERENCES Clinic(id),
     FOREIGN KEY (contact_id) REFERENCES Contact(id)
 );
-INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (1, 1);  -- id = 1
-INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (1, 2);  -- id = 2
-INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (1, 3);  -- id = 3
-INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (2, 4);  -- id = 4
-INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (2, 5);  -- id = 5
-INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (2, 6);  -- id = 6
-INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (3, 7);  -- id = 7
-INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (3, 8);  -- id = 8
-INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (3, 9);  -- id = 9
-INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (4, 10); -- id = 10
-INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (4, 11); -- id = 11
-INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (4, 12); -- id = 12
-INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (5, 13); -- id = 13
-INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (5, 14); -- id = 14
-INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (5, 15); -- id = 15
+-- id = 1
+INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (1, 1);
+-- id = 2
+INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (1, 2);
+-- id = 3
+INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (1, 3);
+-- id = 4
+INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (2, 4);
+-- id = 5
+INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (2, 5);
+-- id = 6
+INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (2, 6);
+-- id = 7
+INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (3, 7);
+-- id = 8
+INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (3, 8);
+-- id = 9
+INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (3, 9);
+-- id = 10
+INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (4, 10);
+-- id = 11
+INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (4, 11);
+-- id = 12
+INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (4, 12);
+-- id = 13
+INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (5, 13);
+-- id = 14
+INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (5, 14);
+-- id = 15
+INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES (5, 15);
 -- #####################################################################################################################
 
 CREATE TABLE Owner (
