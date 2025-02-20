@@ -354,14 +354,15 @@ CREATE TABLE Account_Contact (
     FOREIGN KEY (contact_id) REFERENCES Contact(id)
 );
 
--- todo: I am here
 CREATE TABLE Owner (
     id SERIAL PRIMARY KEY,
-    clinic_id INTEGER NOT NULL,
     account_id INTEGER NOT NULL,
-    FOREIGN KEY (clinic_id) REFERENCES Clinic(id),
-    FOREIGN KEY (account_id) REFERENCES Account(id)
+    clinic_id INTEGER NOT NULL,
+    FOREIGN KEY (account_id) REFERENCES Account(id),
+    FOREIGN KEY (clinic_id) REFERENCES Clinic(id)
 );
+
+-- todo: I am here
 
 CREATE TABLE Client_Pet (
     id SERIAL PRIMARY KEY,
@@ -905,3 +906,15 @@ INSERT INTO Account_Contact (account_id, contact_id) VALUES
     (30, 74),
     -- id = 60, Account id = 30, Contact id = 75
     (30, 75);
+
+INSERT INTO Owner (account_id, clinic_id) VALUES
+    -- id = 1, Account id = 1, Clinic id = 1
+    (1, 1),
+    -- id = 2, Account id = 7, Clinic id = 2
+    (7, 2),
+    -- id = 3, Account id = 13, Clinic id = 3
+    (13, 3),
+    -- id = 4, Account id = 19, Clinic id = 4
+    (19, 4),
+    -- id = 5, Account id = 25, Clinic id = 5
+    (25, 5);
