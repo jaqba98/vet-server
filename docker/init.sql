@@ -553,7 +553,7 @@ INSERT INTO Account (email, password, first_name, last_name, role, picture_url, 
     -- id = 29, client, Clinic id = 5
     ('catherine.carter@gmail.com', 'ClientPass14!', 'Catherine', 'Carter', 'client', 'https://example.com/pic29.jpg', TRUE),
     -- id = 30, client, Clinic id = 5
-    ('daniel.davis@mail.com', 'ClientPass15!', 'Daniel', 'Davis', 'client', 'https://example.com/pic30.jpg', TRUE),
+    ('daniel.davis@mail.com', 'ClientPass15!', 'Daniel', 'Davis', 'client', 'https://example.com/pic30.jpg', TRUE);
 
 -- ## Insert data to tables with foreign keys. ##
 INSERT INTO Clinic (name, address, opening_hours_id) VALUES
