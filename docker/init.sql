@@ -56,6 +56,16 @@ CREATE TABLE MedicalRecord (
     notes TEXT NOT NULL
 );
 
+CREATE TABLE Service (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    category VARCHAR(255) NOT NULL,
+    duration_minutes INTEGER NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    is_available BOOLEAN NOT NULL
+);
+
 -- todo: I am here
 CREATE TABLE Invoice (
     id SERIAL PRIMARY KEY,
@@ -67,16 +77,6 @@ CREATE TABLE Invoice (
     payment_status VARCHAR(9) NOT NULL, -- pending, completed, failed, cancelled, refunded
     payment_method VARCHAR(14) NOT NULL, -- card_payment, bank_transfer, mobile_payment, cash_payment
     notes VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE Service (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    description TEXT NOT NULL,
-    category VARCHAR(255) NOT NULL,
-    duration_minutes INTEGER NOT NULL,
-    price DECIMAL(10, 2) NOT NULL,
-    is_available BOOLEAN NOT NULL
 );
 
 -- ## Create tables with foreign keys. ##
@@ -194,8 +194,6 @@ CREATE TABLE MedicalRecord_Medication (
     FOREIGN KEY (medication_id) REFERENCES Medication(id)
 );
 
--- todo: I am here
-
 CREATE TABLE Service_Clinic (
     id SERIAL PRIMARY KEY,
     service_id INTEGER NOT NULL,
@@ -204,6 +202,7 @@ CREATE TABLE Service_Clinic (
     FOREIGN KEY (clinic_id) REFERENCES Clinic(id)
 );
 
+-- todo: I am here
 CREATE TABLE Appointment_Service (
     id SERIAL PRIMARY KEY,
     appointment_id INTEGER NOT NULL,
@@ -706,6 +705,28 @@ INSERT INTO MedicalRecord (diagnosis, treatment, procedures, next_appointment, s
     -- id = 15
     ('Ear Mites', 'Topical medication', 'Ear swab', '2025-02-10', 'no_show', 'Client did not show up, needs rescheduling.');
 
+INSERT INTO Service (name, description, category, duration_minutes, price, is_available) VALUES
+    -- id = 1
+    ('Rabies Vaccination', 'Mandatory protective vaccination for dogs and cats.', 'Vaccinations', 15, 80.00, TRUE),
+    -- id = 2
+    ('General Examination', 'Comprehensive health check-up for the animal.', 'Diagnostics', 30, 150.00, TRUE),
+    -- id = 3
+    ('Microchipping', 'Implantation of a microchip for animal identification.', 'Preventive Care', 20, 100.00, TRUE),
+    -- id = 4
+    ('Spaying/Neutering', 'Sterilization or castration procedure for dogs or cats.', 'Surgery', 90, 500.00, TRUE),
+    -- id = 5
+    ('Dental Scaling', 'Ultrasonic teeth cleaning for the animal.', 'Dentistry', 45, 200.00, TRUE),
+    -- id = 6
+    ('Ultrasound Examination', 'Ultrasound scanning of the abdominal area.', 'Diagnostics', 40, 180.00, TRUE),
+    -- id = 7
+    ('Emergency Veterinary Care', 'Immediate medical assistance for animals.', 'Emergency', 60, 300.00, TRUE),
+    -- id = 8
+    ('Deworming', 'Treatment to remove internal parasites such as worms.', 'Preventive Care', 15, 50.00, TRUE),
+    -- id = 9
+    ('X-ray Examination', 'Radiographic imaging for diagnosing bone and organ conditions.', 'Diagnostics', 40, 220.00, TRUE),
+    -- id = 10
+    ('Euthanasia', 'Painless and humane euthanasia for animals in severe conditions.', 'End-of-life Care', 30, 250.00, TRUE);
+
 -- ## Insert data to tables with foreign keys. ##
 INSERT INTO Clinic (name, address, opening_hours_id) VALUES
     -- id = 1
@@ -1196,7 +1217,7 @@ INSERT INTO Client_Pet (client_id, pet_id) VALUES
     -- id = 15, Client id = 15, Pet id = 15
     (15, 15);
 
-INSERT INTO MedicalRecord (quantity, medical_record_id, medication_id) VALUES
+INSERT INTO MedicalRecord_Medication (quantity, medical_record_id, medication_id) VALUES
     -- id = 1
     (1, 1, 10),
     -- id = 2
@@ -1228,3 +1249,105 @@ INSERT INTO MedicalRecord (quantity, medical_record_id, medication_id) VALUES
     (3, 14, 38),
     -- id = 15
     (1, 15, 48);
+
+INSERT INTO Service_Clinic (service_id, clinic_id) VALUES
+    -- id = 1
+    (1, 1),
+    -- id = 2
+    (1, 2),
+    -- id = 3
+    (1, 3),
+    -- id = 4
+    (1, 4),
+    -- id = 5
+    (1, 5),
+    -- id = 6
+    (2, 1),
+    -- id = 7
+    (2, 2),
+    -- id = 8
+    (2, 3),
+    -- id = 9
+    (2, 4),
+    -- id = 10
+    (2, 5),
+    -- id = 11
+    (3, 1),
+    -- id = 12
+    (3, 2),
+    -- id = 13
+    (3, 3),
+    -- id = 14
+    (3, 4),
+    -- id = 15
+    (3, 5),
+    -- id = 16
+    (4, 1),
+    -- id = 17
+    (4, 2),
+    -- id = 18
+    (4, 3),
+    -- id = 19
+    (4, 4),
+    -- id = 20
+    (4, 5),
+    -- id = 21
+    (5, 1),
+    -- id = 22
+    (5, 2),
+    -- id = 23
+    (5, 3),
+    -- id = 24
+    (5, 4),
+    -- id = 25
+    (5, 5),
+    -- id = 26
+    (6, 1),
+    -- id = 27
+    (6, 2),
+    -- id = 28
+    (6, 3),
+    -- id = 29
+    (6, 4),
+    -- id = 30
+    (6, 5),
+    -- id = 31
+    (7, 1),
+    -- id = 32
+    (7, 2),
+    -- id = 33
+    (7, 3),
+    -- id = 34
+    (7, 4),
+    -- id = 35
+    (7, 5),
+    -- id = 36
+    (8, 1),
+    -- id = 37
+    (8, 2),
+    -- id = 38
+    (8, 3),
+    -- id = 39
+    (8, 4),
+    -- id = 40
+    (8, 5),
+    -- id = 41
+    (9, 1),
+    -- id = 42
+    (9, 2),
+    -- id = 43
+    (9, 3),
+    -- id = 44
+    (9, 4),
+    -- id = 45
+    (9, 5),
+    -- id = 46
+    (10, 1),
+    -- id = 47
+    (10, 2),
+    -- id = 48
+    (10, 3),
+    -- id = 49
+    (10, 4),
+    -- id = 50
+    (10, 5);
