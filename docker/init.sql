@@ -108,7 +108,6 @@ CREATE TABLE Client (
     FOREIGN KEY (account_id) REFERENCES Account(id)
 );
 
--- todo: I am here
 CREATE TABLE Medication (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -123,6 +122,7 @@ CREATE TABLE Medication (
     FOREIGN KEY (clinic_id) REFERENCES Clinic(id)
 );
 
+-- todo: I am here
 CREATE TABLE Appointment (
     id SERIAL PRIMARY KEY,
     date_and_hour TIMESTAMP NOT NULL,
@@ -750,6 +750,158 @@ INSERT INTO Client (account_id) VALUES
     (29),
     -- id = 15
     (30);
+
+INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock, expiration_date, price, is_available, clinic_id) VALUES
+    -- id = 1
+    ('Carprofen', 'NSAID for pain relief in dogs.', 'Zoetis', '25 mg per 10 kg, once daily', 50, '2026-05-12', 12.50, TRUE, 1),
+    -- id = 2
+    ('Amoxicillin', 'Broad-spectrum antibiotic.', 'Boehringer Ingelheim', '10 mg per kg, twice daily', 100, '2025-11-30', 8.99, TRUE, 1),
+    -- id = 3
+    ('Furosemide', 'Diuretic for fluid retention.', 'Elanco', '2 mg per kg, twice daily', 75, '2026-08-20', 6.75, TRUE, 1),
+    -- id = 4
+    ('Prednisolone', 'Corticosteroid for inflammation.', 'Dechra', '0.5 mg per kg, once daily', 60, '2025-07-15', 9.50, TRUE, 1),
+    -- id = 5
+    ('Metronidazole', 'Antibiotic for GI infections.', 'Virbac', '15 mg per kg, twice daily', 80, '2026-04-05', 7.25, TRUE, 1),
+    -- id = 6
+    ('Meloxicam', 'NSAID for pain relief.', 'Boehringer Ingelheim', '0.1 mg per kg, once daily', 40, '2025-12-10', 14.99, TRUE, 1),
+    -- id = 7
+    ('Marbofloxacin', 'Antibiotic for bacterial infections.', 'Vetoquinol', '2 mg per kg, once daily', 30, '2026-03-25', 18.50, TRUE, 1),
+    -- id = 8
+    ('Ivermectin', 'Antiparasitic treatment.', 'Merial', '0.2 mg per kg, single dose', 90, '2025-09-30', 5.99, TRUE, 1),
+    -- id = 9
+    ('Cefalexin', 'Antibiotic for skin infections.', 'Norbrook', '25 mg per kg, twice daily', 70, '2026-01-20', 10.25, TRUE, 1),
+    -- id = 10
+    ('Gabapentin', 'Pain reliever and anticonvulsant.', 'Aurora Pharmaceuticals', '10 mg per kg, twice daily', 45, '2025-10-15', 11.75, TRUE, 1),
+    -- id = 11
+    ('Tramadol', 'Opioid analgesic.', 'Greenstone', '5 mg per kg, twice daily', 35, '2025-06-10', 13.99, TRUE, 1),
+    -- id = 12
+    ('Doxycycline', 'Antibiotic for respiratory infections.', 'Pfizer', '5 mg per kg, once daily', 65, '2026-02-18', 9.99, TRUE, 1),
+    -- id = 13
+    ('Clindamycin', 'Antibiotic for dental infections.', 'Sandoz', '11 mg per kg, twice daily', 55, '2026-06-30', 8.49, TRUE, 1),
+    -- id = 14
+    ('Tylosin', 'Antibiotic for chronic diarrhea.', 'Huvepharma', '10 mg per kg, twice daily', 25, '2025-08-22', 15.25, TRUE, 1),
+    -- id = 15
+    ('Levothyroxine', 'Treatment for hypothyroidism.', 'Merck Animal Health', '0.02 mg per kg, twice daily', 50, '2026-07-05', 16.99, TRUE, 1),
+    -- id = 16
+    ('Enrofloxacin', 'Fluoroquinolone antibiotic.', 'Bayer', '5 mg per kg, once daily', 40, '2025-09-01', 19.99, TRUE, 2),
+    -- id = 17
+    ('Ketoconazole', 'Antifungal treatment.', 'Hikma', '10 mg per kg, once daily', 30, '2026-03-10', 21.50, TRUE, 2),
+    -- id = 18
+    ('Apoquel', 'Anti-itch medication.', 'Zoetis', '0.4 mg per kg, once daily', 60, '2026-05-20', 35.99, TRUE, 2),
+    -- id = 19
+    ('Methimazole', 'Treatment for hyperthyroidism.', 'Lloyd Inc.', '2.5 mg per kg, twice daily', 45, '2025-11-02', 22.75, TRUE, 2),
+    -- id = 20
+    ('Omeprazole', 'Proton pump inhibitor.', 'Sandoz', '0.5 mg per kg, once daily', 50, '2026-06-14', 12.99, TRUE, 2),
+    -- id = 21
+    ('Pimobendan', 'Heart failure treatment.', 'Vetmedin', '0.25 mg per kg, twice daily', 35, '2026-07-30', 29.99, TRUE, 2),
+    -- id = 22
+    ('Hydroxyzine', 'Antihistamine for allergies.', 'Dr. Reddy’s', '2 mg per kg, twice daily', 50, '2025-12-05', 8.50, TRUE, 2),
+    -- id = 23
+    ('Famotidine', 'Acid reducer.', 'Mylan', '0.5 mg per kg, once daily', 75, '2026-04-25', 5.50, TRUE, 2),
+    -- id = 24
+    ('Sucralfate', 'Gastroprotective agent.', 'Hikma', '0.25 g per kg, twice daily', 40, '2026-01-10', 14.75, TRUE, 2),
+    -- id = 25
+    ('Diazepam', 'Anxiety and seizure control.', 'Teva', '0.5 mg per kg, as needed', 20, '2025-10-30', 18.99, TRUE, 2),
+    -- id = 26
+    ('Buprenorphine', 'Opioid pain reliever.', 'Reckitt Benckiser', '0.02 mg per kg, as needed', 15, '2025-09-15', 39.99, TRUE, 2),
+    -- id = 27
+    ('Atenolol', 'Beta-blocker for heart conditions.', 'Aurobindo', '0.2 mg per kg, once daily', 55, '2026-03-20', 9.99, TRUE, 2),
+    -- id = 28
+    ('Spironolactone', 'Diuretic for heart failure.', 'Amneal', '1 mg per kg, once daily', 50, '2026-06-05', 11.50, TRUE, 2),
+    -- id = 29
+    ('Chlorpheniramine', 'Antihistamine for allergies.', 'Perrigo', '0.5 mg per kg, twice daily', 65, '2025-12-15', 6.99, TRUE, 2),
+    -- id = 30
+    ('Cisapride', 'Motility agent for GI issues.', 'Compounded', '0.1 mg per kg, twice daily', 30, '2026-05-22', 24.99, TRUE, 2),
+    -- id = 31
+    ('Phenobarbital', 'Seizure control medication.', 'West-Ward', '2 mg per kg, twice daily', 70, '2025-10-05', 16.75, TRUE, 3),
+    -- id = 32
+    ('Pentoxifylline', 'Improves blood flow.', 'Teva', '10 mg per kg, twice daily', 50, '2026-07-01', 14.99, TRUE, 3),
+    -- id = 33
+    ('Selegiline', 'Cognitive dysfunction treatment.', 'Dechra', '0.5 mg per kg, once daily', 40, '2026-02-10', 29.50, TRUE, 3),
+    -- id = 34
+    ('Toltrazuril', 'Coccidiosis treatment.', 'Bayer', '20 mg per kg, once daily', 35, '2026-08-01', 19.99, TRUE, 3),
+    -- id = 35
+    ('Alprazolam', 'Anxiety relief.', 'Greenstone', '0.01 mg per kg, as needed', 20, '2025-11-20', 12.75, TRUE, 3),
+    -- id = 36
+    ('Cefpodoxime', 'Cephalosporin antibiotic.', 'Zydus', '5 mg per kg, once daily', 45, '2026-03-18', 22.99, TRUE, 3),
+    -- id = 37
+    ('Ranitidine', 'Acid reducer.', 'Sandoz', '2 mg per kg, twice daily', 50, '2026-05-10', 9.50, TRUE, 3),
+    -- id = 38
+    ('Tulathromycin', 'Macrolide antibiotic for respiratory infections.', 'Zoetis', '2.5 mg per kg, single dose', 45, '2026-06-15', 39.99, TRUE, 3),
+    -- id = 39
+    ('Tolfenamic Acid', 'NSAID for pain relief and inflammation.', 'Vetoquinol', '4 mg per kg, once daily', 30, '2026-08-10', 25.99, TRUE, 3),
+    -- id = 40
+    ('Cefovecin', 'Long-acting antibiotic for skin infections.', 'Zoetis', '8 mg per kg, single dose', 50, '2026-05-20', 74.99, TRUE, 3),
+    -- id = 41
+    ('Robenacoxib', 'NSAID for post-operative pain relief.', 'Elanco', '1 mg per kg, once daily', 40, '2026-09-05', 29.99, TRUE, 3),
+    -- id = 42
+    ('Selamectin', 'Antiparasitic treatment for fleas and mites.', 'Zoetis', '6 mg per kg, monthly', 60, '2026-07-22', 44.99, TRUE, 3),
+    -- id = 43
+    ('Chloramphenicol', 'Broad-spectrum antibiotic.', 'Bimeda', '50 mg per kg, twice daily', 30, '2026-06-10', 19.99, TRUE, 3),
+    -- id = 44
+    ('Ciclosporin', 'Immunosuppressant for atopic dermatitis.', 'Novartis', '5 mg per kg, once daily', 45, '2026-05-30', 89.99, TRUE, 3),
+    -- id = 45
+    ('Spinosad', 'Oral flea treatment.', 'Elanco', '30 mg per kg, monthly', 55, '2026-08-15', 59.99, TRUE, 3),
+    -- id = 46
+    ('Lufenuron', 'Insect growth regulator for flea control.', 'Novartis', '10 mg per kg, monthly', 65, '2026-07-01', 34.99, TRUE, 4),
+    -- id = 47
+    ('Methocarbamol', 'Muscle relaxant for muscle spasms.', 'Teva', '20 mg per kg, three times daily', 35, '2026-06-18', 22.99, TRUE, 4),
+    -- id = 48
+    ('Prazosin', 'Alpha-blocker for urinary tract issues.', 'Pfizer', '0.5 mg per kg, twice daily', 50, '2026-05-10', 17.99, TRUE, 4),
+    -- id = 49
+    ('Acepromazine', 'Sedative for anxiety and motion sickness.', 'Boehringer Ingelheim', '0.02 mg per kg, as needed', 40, '2026-07-14', 14.99, TRUE, 4),
+    -- id = 50
+    ('Hydralazine', 'Vasodilator for heart conditions.', 'Mylan', '2 mg per kg, twice daily', 30, '2026-06-28', 12.99, TRUE, 4),
+    -- id = 51
+    ('Moxidectin', 'Antiparasitic treatment.', 'Bayer', '0.4 mg per kg, monthly', 60, '2026-09-25', 37.99, TRUE, 4),
+    -- id = 52
+    ('Chlorpheniramine', 'Antihistamine for allergies.', 'Sandoz', '0.2 mg per kg, twice daily', 70, '2026-05-05', 9.99, TRUE, 4),
+    -- id = 53
+    ('Ketoprofen', 'NSAID for inflammation and pain.', 'Hikma', '1 mg per kg, once daily', 45, '2026-06-20', 23.99, TRUE, 4),
+    -- id = 54
+    ('Ranitidine', 'Acid reducer for stomach ulcers.', 'Dr. Reddy’s', '2 mg per kg, twice daily', 55, '2026-07-30', 8.99, TRUE, 4),
+    -- id = 55
+    ('Misoprostol', 'Gastroprotectant for ulcer prevention.', 'Pfizer', '3 mcg per kg, twice daily', 25, '2026-09-12', 29.99, TRUE, 4),
+    -- id = 56
+    ('Omeprazole Paste', 'Equine gastric ulcer treatment.', 'Merial', '4 mg per kg, once daily', 35, '2026-06-07', 49.99, TRUE, 4),
+    -- id = 57
+    ('Neomycin', 'Antibiotic for bacterial infections.', 'Norbrook', '10 mg per kg, twice daily', 50, '2026-08-03', 18.99, TRUE, 4),
+    -- id = 58
+    ('Methimazole Gel', 'Topical treatment for hyperthyroidism.', 'Lloyd Inc.', '5 mg per ear, once daily', 40, '2026-07-09', 42.99, TRUE, 4),
+    -- id = 59
+    ('Sotalol', 'Beta-blocker for cardiac arrhythmias.', 'Aurobindo', '1 mg per kg, twice daily', 30, '2026-05-27', 24.99, TRUE, 4),
+    -- id = 60
+    ('Valacyclovir', 'Antiviral for feline herpesvirus.', 'Teva', '20 mg per kg, twice daily', 35, '2026-06-22', 31.99, TRUE, 4),
+    -- id = 61
+    ('Pentoxifylline', 'Anti-inflammatory for vascular conditions.', 'Mylan', '15 mg per kg, twice daily', 40, '2026-07-21', 26.99, TRUE, 5),
+    -- id = 62
+    ('Cromolyn Sodium', 'Mast cell stabilizer for allergic conditions.', 'Sandoz', '1 mg per kg, twice daily', 30, '2026-08-08', 19.99, TRUE, 5),
+    -- id = 63
+    ('Fipronil', 'Topical flea and tick treatment.', 'Bayer', '0.67 ml per application, monthly', 80, '2026-09-30', 22.99, TRUE, 5),
+    -- id = 64
+    ('Trilostane', 'Adrenal suppressant for Cushing’s disease.', 'Dechra', '2 mg per kg, once daily', 50, '2026-06-12', 49.99, TRUE, 5),
+    -- id = 65
+    ('Azathioprine', 'Immunosuppressive therapy.', 'Sandoz', '2 mg per kg, once daily', 30, '2026-07-18', 39.99, TRUE, 5),
+    -- id = 66
+    ('Levothyroxine', 'Thyroid hormone replacement.', 'Merck', '0.02 mg per kg, once daily', 60, '2026-05-08', 15.99, TRUE, 5),
+    -- id = 67
+    ('Trazodone', 'Sedative for anxiety and stress.', 'Teva', '5 mg per kg, as needed', 40, '2026-06-25', 18.99, TRUE, 5),
+    -- id = 68
+    ('Clindamycin', 'Antibiotic for dental and bone infections.', 'Pfizer', '11 mg per kg, twice daily', 70, '2026-08-17', 27.99, TRUE, 5),
+    -- id = 69
+    ('Amitriptyline', 'Tricyclic antidepressant for behavioral issues.', 'Elanco', '1 mg per kg, once daily', 30, '2026-07-12', 21.99, TRUE, 5),
+    -- id = 70
+    ('Gabapentin', 'Neuropathic pain reliever and anticonvulsant.', 'Pfizer', '5 mg per kg, twice daily', 50, '2026-09-05', 19.99, TRUE, 5),
+    -- id = 71
+    ('Maropitant', 'Anti-nausea and vomiting medication.', 'Zoetis', '1 mg per kg, once daily', 40, '2026-06-30', 29.99, TRUE, 5),
+    -- id = 72
+    ('Pimobendan', 'Heart failure treatment.', 'Boehringer Ingelheim', '0.25 mg per kg, twice daily', 45, '2026-08-01', 55.99, TRUE, 5),
+    -- id = 73
+    ('Doxycycline', 'Broad-spectrum antibiotic.', 'Pfizer', '10 mg per kg, once daily', 75, '2026-05-20', 23.99, TRUE, 5),
+    -- id = 74
+    ('Meloxicam', 'NSAID for inflammation and pain.', 'Boehringer Ingelheim', '0.1 mg per kg, once daily', 60, '2026-07-28', 31.99, TRUE, 5),
+    -- id = 75
+    ('Selegiline', 'Treatment for cognitive dysfunction and Cushing’s disease.', 'Zoetis', '0.5 mg per kg, once daily', 35, '2026-06-15', 42.99, TRUE, 5);
 
 -- ## Insert data to tables with relations between them. ##
 INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES
