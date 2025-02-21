@@ -66,7 +66,6 @@ CREATE TABLE Service (
     is_available BOOLEAN NOT NULL
 );
 
--- todo: I am here
 CREATE TABLE Invoice (
     id SERIAL PRIMARY KEY,
     invoice_date DATE NOT NULL,
@@ -122,7 +121,6 @@ CREATE TABLE Medication (
     FOREIGN KEY (clinic_id) REFERENCES Clinic(id)
 );
 
--- todo: I am here
 CREATE TABLE Appointment (
     id SERIAL PRIMARY KEY,
     date_and_hour TIMESTAMP NOT NULL,
@@ -132,13 +130,11 @@ CREATE TABLE Appointment (
     notes TEXT NOT NULL,
     clinic_id INTEGER NOT NULL,
     vet_id INTEGER NOT NULL,
-    client_id INTEGER NOT NULL,
     pet_id INTEGER NOT NULL,
     invoice_id INTEGER NOT NULL,
     medical_record_id INTEGER NOT NULL,
     FOREIGN KEY (clinic_id) REFERENCES Clinic(id),
     FOREIGN KEY (vet_id) REFERENCES Vet(id),
-    FOREIGN KEY (client_id) REFERENCES Client(id),
     FOREIGN KEY (pet_id) REFERENCES Pet(id),
     FOREIGN KEY (invoice_id) REFERENCES Invoice(id),
     FOREIGN KEY (medical_record_id) REFERENCES MedicalRecord(id)
@@ -202,7 +198,6 @@ CREATE TABLE Service_Clinic (
     FOREIGN KEY (clinic_id) REFERENCES Clinic(id)
 );
 
--- todo: I am here
 CREATE TABLE Appointment_Service (
     id SERIAL PRIMARY KEY,
     appointment_id INTEGER NOT NULL,
@@ -727,6 +722,38 @@ INSERT INTO Service (name, description, category, duration_minutes, price, is_av
     -- id = 10
     ('Euthanasia', 'Painless and humane euthanasia for animals in severe conditions.', 'End-of-life Care', 30, 250.00, TRUE);
 
+INSERT INTO Invoice (invoice_date, due_date, total_amount, amount_paid, outstanding_amount, payment_status, payment_method, notes) VALUES
+    -- id = 1
+    ('2024-02-01', '2024-02-15', 150.00, 150.00, 0.00, 'completed', 'card_payment', 'Routine check-up for a dog'),
+    -- id = 2
+    ('2024-02-02', '2024-02-16', 200.50, 100.50, 100.00, 'pending', 'bank_transfer', 'Vaccination and deworming for a cat'),
+    -- id = 3
+    ('2024-02-03', '2024-02-17', 300.00, 300.00, 0.00, 'completed', 'cash_payment', 'Emergency surgery for a parrot'),
+    -- id = 4
+    ('2024-02-04', '2024-02-18', 120.75, 0.00, 120.75, 'failed', 'mobile_payment', 'Dental cleaning for a small dog'),
+    -- id = 5
+    ('2024-02-05', '2024-02-19', 80.00, 80.00, 0.00, 'completed', 'cash_payment', 'Routine check-up for a rabbit'),
+    -- id = 6
+    ('2024-02-06', '2024-02-20', 500.00, 250.00, 250.00, 'pending', 'bank_transfer', 'Orthopedic surgery for a large dog'),
+    -- id = 7
+    ('2024-02-07', '2024-02-21', 75.25, 75.25, 0.00, 'completed', 'card_payment', 'Flea treatment for a cat'),
+    -- id = 8
+    ('2024-02-08', '2024-02-22', 220.00, 220.00, 0.00, 'completed', 'card_payment', 'Ultrasound and diagnostics for a dog'),
+    -- id = 9
+    ('2024-02-09', '2024-02-23', 400.00, 400.00, 0.00, 'completed', 'bank_transfer', 'X-ray and consultation for a horse'),
+    -- id = 10
+    ('2024-02-10', '2024-02-24', 95.50, 95.50, 0.00, 'completed', 'mobile_payment', 'Skin allergy treatment for a cat'),
+    -- id = 11
+    ('2024-02-11', '2024-02-25', 130.00, 0.00, 130.00, 'failed', 'bank_transfer', 'Blood test for a sick dog'),
+    -- id = 12
+    ('2024-02-12', '2024-02-26', 175.75, 175.75, 0.00, 'completed', 'cash_payment', 'Eye infection treatment for a rabbit'),
+    -- id = 13
+    ('2024-02-13', '2024-02-27', 600.00, 600.00, 0.00, 'completed', 'bank_transfer', 'Major surgery for a large breed dog'),
+    -- id = 14
+    ('2024-02-14', '2024-02-28', 50.00, 50.00, 0.00, 'completed', 'mobile_payment', 'Nail trimming for a guinea pig'),
+    -- id = 15
+    ('2024-02-15', '2024-02-29', 90.00, 90.00, 0.00, 'completed', 'card_payment', 'Ear infection treatment for a dog');
+
 -- ## Insert data to tables with foreign keys. ##
 INSERT INTO Clinic (name, address, opening_hours_id) VALUES
     -- id = 1
@@ -955,6 +982,38 @@ INSERT INTO Medication (name, description, manufacturer, dose, quantity_in_stock
     ('Meloxicam', 'NSAID for inflammation and pain.', 'Boehringer Ingelheim', '0.1 mg per kg, once daily', 60, '2026-07-28', 31.99, TRUE, 5),
     -- id = 75
     ('Selegiline', 'Treatment for cognitive dysfunction and Cushing’s disease.', 'Zoetis', '0.5 mg per kg, once daily', 35, '2026-06-15', 42.99, TRUE, 5);
+
+INSERT INTO Appointment (date_and_hour, type, status, reason, notes, clinic_id, vet_id, pet_id, invoice_id, medical_record_id) VALUES
+    -- id = 1
+    ('2024-02-01 10:00:00', 'Routine Check-up', 'completed', 'Annual health check for a dog', 'All tests normal.', 1, 1, 1, 1, 1),
+    -- id = 2
+    ('2024-02-02 14:30:00', 'Vaccination', 'completed', 'Rabies and distemper vaccine for a cat', 'No side effects observed.', 1, 2, 2, 2, 2),
+    -- id = 3
+    ('2024-02-03 09:00:00', 'Emergency Surgery', 'completed', 'Parrot with a broken wing', 'Successful surgery. Needs follow-up.', 1, 3, 3, 3, 3),
+    -- id = 4
+    ('2024-02-04 12:15:00', 'Dental Cleaning', 'cancelled', 'Dog experiencing bad breath', 'Appointment cancelled by client.', 2, 4, 4, 4, 4),
+    -- id = 5
+    ('2024-02-05 16:00:00', 'General Consultation', 'completed', 'Rabbit has reduced appetite', 'Mild infection, prescribed antibiotics.', 2, 5, 5, 5, 5),
+    -- id = 6
+    ('2024-02-06 11:00:00', 'Orthopedic Surgery', 'scheduled', 'Dog with leg injury', 'Surgery planned for next visit.', 2, 6, 6, 6, 6),
+    -- id = 7
+    ('2024-02-07 13:45:00', 'Flea Treatment', 'completed', 'Cat scratching excessively', 'Flea infestation treated successfully.', 3, 7, 7, 7, 7),
+    -- id = 8
+    ('2024-02-08 15:30:00', 'Ultrasound', 'completed', 'Pregnancy check for a dog', 'Confirmed pregnancy, healthy condition.', 3, 8, 8, 8, 8),
+    -- id = 9
+    ('2024-02-09 10:30:00', 'X-ray', 'completed', 'Horse limping after exercise', 'Fracture detected, prescribed rest.', 3, 9, 9, 9, 9),
+    -- id = 10
+    ('2024-02-10 09:15:00', 'Skin Allergy Treatment', 'rescheduled', 'Cat with skin irritation', 'Rescheduled due to vet unavailability.', 4, 10, 10, 10, 10),
+    -- id = 11
+    ('2024-02-11 17:00:00', 'Blood Test', 'completed', 'Dog with unusual fatigue', 'Low iron levels detected.', 4, 11, 11, 11, 11),
+    -- id = 12
+    ('2024-02-12 08:00:00', 'Eye Infection Treatment', 'completed', 'Rabbit with red eyes', 'Eye drops prescribed, improvement seen.', 4, 12, 12, 12, 12),
+    -- id = 13
+    ('2024-02-13 14:00:00', 'Surgery', 'scheduled', 'Large breed dog with tumor', 'Pre-surgical consultation completed.', 5, 13, 13, 13, 13),
+    -- id = 14
+    ('2024-02-14 16:45:00', 'Nail Trimming', 'no_show', 'Guinea pig needs nail trimming', 'Client did not arrive for appointment.', 5, 14, 14, 14, 14),
+    -- id = 15
+    ('2024-02-15 11:30:00', 'Ear Infection Treatment', 'completed', 'Dog shaking head frequently', 'Ear infection diagnosed and treated.', 5, 15, 15, 15, 15);
 
 -- ## Insert data to tables with relations between them. ##
 INSERT INTO Clinic_Contact (clinic_id, contact_id) VALUES
@@ -1351,4 +1410,35 @@ INSERT INTO Service_Clinic (service_id, clinic_id) VALUES
     (10, 4),
     -- id = 50
     (10, 5);
-MedicalRecord_Medication
+
+INSERT INTO Appointment_Service (appointment_id, service_id) VALUES
+    -- id = 1
+    (1, 3),
+    -- id = 2
+    (2, 7),
+    -- id = 3
+    (3, 2),
+    -- id = 4
+    (4, 9),
+    -- id = 5
+    (5, 5),
+    -- id = 6
+    (6, 1),
+    -- id = 7
+    (7, 8),
+    -- id = 8
+    (8, 4),
+    -- id = 9
+    (9, 10),
+    -- id = 10
+    (10, 6),
+    -- id = 11
+    (11, 3),
+    -- id = 12
+    (12, 7),
+    -- id = 13
+    (13, 5),
+    -- id = 14
+    (14, 1),
+    -- id = 15
+    (15, 9);
