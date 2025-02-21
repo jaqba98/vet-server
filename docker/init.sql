@@ -46,6 +46,16 @@ CREATE TABLE Pet (
     medical_notes VARCHAR(255) NULL
 );
 
+CREATE TABLE MedicalRecord (
+    id SERIAL PRIMARY KEY,
+    diagnosis TEXT NOT NULL,
+    treatment TEXT NOT NULL,
+    procedures TEXT NOT NULL,
+    next_appointment DATE NOT NULL,
+    status VARCHAR(11) NOT NULL, --scheduled, in_progress, completed, cancelled, no_show, rescheduled
+    notes TEXT NOT NULL
+);
+
 -- todo: I am here
 CREATE TABLE Invoice (
     id SERIAL PRIMARY KEY,
@@ -67,16 +77,6 @@ CREATE TABLE Service (
     duration_minutes INTEGER NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
     is_available BOOLEAN NOT NULL
-);
-
-CREATE TABLE MedicalRecord (
-    id SERIAL PRIMARY KEY,
-    diagnosis TEXT NOT NULL,
-    treatment TEXT NOT NULL,
-    procedures TEXT NOT NULL,
-    next_appointment DATE NOT NULL,
-    status VARCHAR(11) NOT NULL, --scheduled, in_progress, completed, cancelled, no_show, rescheduled
-    notes TEXT NOT NULL
 );
 
 -- ## Create tables with foreign keys. ##
@@ -673,6 +673,38 @@ INSERT INTO Pet (name, species, breed, date_of_birth, weight_kg, color, steriliz
     ('Tiger', 'Cat', 'Domestic Shorthair', NULL, NULL, 'Orange', NULL, 'https://example.com/tiger.jpg', NULL, 'No known owner, may have been abandoned'),
     -- id = 15
     ('Benny', 'Dog', 'Beagle', NULL, 12.00, 'Brown and White', NULL, 'https://example.com/benny.jpg', NULL, 'Found as a puppy, history unknown');
+
+INSERT INTO MedicalRecord (diagnosis, treatment, procedures, next_appointment, status, notes) VALUES
+    -- id = 1
+    ('Ear Infection', 'Antibiotic drops', 'Ear cleaning', '2025-02-15', 'completed', 'Mild infection, prescribed drops for 7 days.'),
+    -- id = 2
+    ('Fractured Leg', 'Splint and painkillers', 'X-ray, cast placement', '2025-02-10', 'in_progress', 'Follow-up needed in 2 weeks for cast check.'),
+    -- id = 3
+    ('Obesity', 'Dietary adjustments', 'Weight check', '2025-04-01', 'scheduled', 'Recommended special diet and exercise.'),
+    -- id = 4
+    ('Dental Disease', 'Tooth extraction', 'Dental cleaning, extraction', '2025-02-05', 'completed', 'One tooth removed, antibiotics prescribed.'),
+    -- id = 5
+    ('Skin Allergy', 'Antihistamines', 'Skin test', '2025-02-18', 'scheduled', 'Allergy suspected, testing in progress.'),
+    -- id = 6
+    ('Arthritis', 'Pain management', 'Joint mobility test', '2025-02-21', 'in_progress', 'Started joint supplements, monitoring mobility.'),
+    -- id = 7
+    ('Parvovirus', 'IV Fluids and antiviral', 'Blood test, isolation', '2025-02-21', 'in_progress', 'Critical condition, under intensive care.'),
+    -- id = 8
+    ('Eye Infection', 'Antibiotic ointment', 'Eye exam', '2025-01-28', 'completed', 'Mild conjunctivitis, treatment successful.'),
+    -- id = 9
+    ('Broken Tail', 'Bandaging and rest', 'X-ray, splinting', '2025-03-20', 'scheduled', 'Minor fracture, should heal in 4 weeks.'),
+    -- id = 10
+    ('Heart Murmur', 'Medication and monitoring', 'Cardiac ultrasound', '2025-03-25', 'scheduled', 'Monitoring required, mild heart murmur.'),
+    -- id = 11
+    ('Kennel Cough', 'Cough suppressant', 'Lung auscultation', '2025-03-01', 'rescheduled', 'Mild symptoms, postponed follow-up visit.'),
+    -- id = 12
+    ('Tick Infestation', 'Tick removal and prevention', 'Tick check', '2025-02-10', 'completed', 'All ticks removed, prescribed preventive treatment.'),
+    -- id = 13
+    ('Gastroenteritis', 'IV Fluids and antibiotics', 'Stool test', '2025-02-25', 'in_progress', 'Dehydration improving, monitoring stool.'),
+    -- id = 14
+    ('Hip Dysplasia', 'Physiotherapy and supplements', 'X-ray', '2025-03-28', 'scheduled', 'Mild case, advised weight control and therapy.'),
+    -- id = 15
+    ('Ear Mites', 'Topical medication', 'Ear swab', '2025-02-10', 'no_show', 'Client did not show up, needs rescheduling.');
 
 -- ## Insert data to tables with foreign keys. ##
 INSERT INTO Clinic (name, address, opening_hours_id) VALUES
