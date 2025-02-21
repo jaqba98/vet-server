@@ -1196,7 +1196,7 @@ INSERT INTO Client_Pet (client_id, pet_id) VALUES
     -- id = 15, Client id = 15, Pet id = 15
     (15, 15);
 
-INSERT INTO MedicalRecord_Medication (quantity, medical_record_id, medication_id) VALUES
+INSERT INTO MedicalRecord (quantity, medical_record_id, medication_id) VALUES
     -- id = 1
     (1, 1, 10),
     -- id = 2
