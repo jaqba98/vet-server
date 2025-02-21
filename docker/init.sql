@@ -32,7 +32,6 @@ CREATE TABLE Account (
     is_verified BOOLEAN NOT NULL
 );
 
--- todo: I am here
 CREATE TABLE Pet (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -47,6 +46,7 @@ CREATE TABLE Pet (
     medical_notes VARCHAR(255) NULL
 );
 
+-- todo: I am here
 CREATE TABLE Invoice (
     id SERIAL PRIMARY KEY,
     invoice_date DATE NOT NULL,
@@ -177,8 +177,6 @@ CREATE TABLE Owner (
     FOREIGN KEY (clinic_id) REFERENCES Clinic(id)
 );
 
--- todo: I am here
-
 CREATE TABLE Client_Pet (
     id SERIAL PRIMARY KEY,
     client_id INTEGER NOT NULL,
@@ -186,6 +184,8 @@ CREATE TABLE Client_Pet (
     FOREIGN KEY (client_id) REFERENCES Client(id),
     FOREIGN KEY (pet_id) REFERENCES Pet(id)
 );
+
+-- todo: I am here
 
 CREATE TABLE Service_Clinic (
     id SERIAL PRIMARY KEY,
@@ -642,6 +642,38 @@ INSERT INTO Account (email, password, first_name, last_name, role, picture_url, 
     -- id = 30, client, Clinic id = 5
     ('daniel.davis@mail.com', 'ClientPass15!', 'Daniel', 'Davis', 'client', 'https://example.com/pic30.jpg', TRUE);
 
+INSERT INTO Pet (name, species, breed, date_of_birth, weight_kg, color, sterilized, picture_url, microchip_number, medical_notes) VALUES
+    -- id = 1
+    ('Bella', 'Dog', 'Labrador Retriever', '2019-04-15', 30.50, 'Yellow', TRUE, 'https://example.com/bella.jpg', '1234567890', 'No known medical issues'),
+    -- id = 2
+    ('Max', 'Dog', 'German Shepherd', '2020-02-25', 40.00, 'Black and Tan', FALSE, 'https://example.com/max.jpg', '9876543210', 'Has mild hip dysplasia'),
+    -- id = 3
+    ('Luna', 'Cat', 'Siamese', '2022-06-10', 4.20, 'Cream with Blue Eyes', TRUE, 'https://example.com/luna.jpg', '5647382910', 'No medical concerns'),
+    -- id = 4
+    ('Charlie', 'Dog', 'Golden Retriever', '2021-08-14', 28.00, 'Golden', TRUE, 'https://example.com/charlie.jpg', '6789054321', 'Vaccinated, healthy'),
+    -- id = 5
+    ('Whiskers', 'Cat', 'Persian', '2018-09-20', 5.50, 'White', FALSE, 'https://example.com/whiskers.jpg', NULL, 'Regular grooming required'),
+    -- id = 6
+    ('Rocky', 'Dog', 'Bulldog', '2017-11-02', 15.00, 'Brindle', TRUE, 'https://example.com/rocky.jpg', NULL, 'Chronic skin allergies'),
+    -- id = 7
+    ('Zoe', 'Rabbit', 'Holland Lop', '2023-01-18', 1.80, 'Brown and White', FALSE, 'https://example.com/zoe.jpg', NULL, 'Healthy and active'),
+    -- id = 8
+    ('Simba', 'Cat', 'Maine Coon', '2016-04-30', 8.00, 'Tabby', TRUE, 'https://example.com/simba.jpg', NULL, 'No special medical notes'),
+    -- id = 9
+    ('Daisy', 'Dog', 'Beagle', '2018-10-05', 9.00, 'Tri-color', TRUE, 'https://example.com/daisy.jpg', '3344556677', 'Occasional ear infections'),
+    -- id = 10
+    ('Buddy', 'Dog', 'Poodle', '2015-12-22', 12.50, 'White', TRUE, 'https://example.com/buddy.jpg', '2233667788', 'Needs regular teeth cleaning'),
+    -- id = 11
+    ('Chester', 'Hamster', 'Syrian', '2023-05-06', 0.20, 'Golden', FALSE, 'https://example.com/chester.jpg', NULL, 'No medical concerns'),
+    -- id = 12
+    ('Milo', 'Cat', 'Ragdoll', '2020-11-17', 6.80, 'Blue Bicolor', TRUE, 'https://example.com/milo.jpg', NULL, 'Occasional hairballs'),
+    -- id = 13
+    ('Misty', 'Dog', 'Pit Bull', NULL, 22.00, 'Gray', NULL, 'https://example.com/misty.jpg', NULL, 'Found stray, no known medical history'),
+    -- id = 14
+    ('Tiger', 'Cat', 'Domestic Shorthair', NULL, NULL, 'Orange', NULL, 'https://example.com/tiger.jpg', NULL, 'No known owner, may have been abandoned'),
+    -- id = 15
+    ('Benny', 'Dog', 'Beagle', NULL, 12.00, 'Brown and White', NULL, 'https://example.com/benny.jpg', NULL, 'Found as a puppy, history unknown');
+
 -- ## Insert data to tables with foreign keys. ##
 INSERT INTO Clinic (name, address, opening_hours_id) VALUES
     -- id = 1
@@ -655,47 +687,68 @@ INSERT INTO Clinic (name, address, opening_hours_id) VALUES
     -- id = 5
     ('Animal Wellness Center', '654 Birch St', 5);
 
-INSERT INTO Vet (
-    salary,
-    license_number,
-    license_issue_date,
-    license_expiry_date,
-    specializations,
-    years_of_experience,
-    account_id,
-    opening_hours_id
-) VALUES
+INSERT INTO Vet (salary, license_number, license_issue_date, license_expiry_date, specializations, years_of_experience, account_id, opening_hours_id) VALUES
+    -- id = 1
     (60000.00, 'VET123456', '2015-06-15', '2025-06-15', 'Small Animals', 10, 1, 6),
+    -- id = 2
     (75000.00, 'VET654321', '2012-09-20', '2027-09-20', 'Exotic Animals', 15, 2, 7),
+    -- id = 3
     (58000.00, 'VET987654', '2018-03-10', '2026-03-10', 'Equine Medicine', 8, 3, 8),
+    -- id = 4
     (72000.00, 'VET111222', '2010-12-05', '2025-12-05', 'Surgery', 18, 7, 9),
+    -- id = 5
     (64000.00, 'VET333444', '2016-07-22', '2026-07-22', 'Dermatology', 9, 8, 10),
+    -- id = 6
     (68000.00, 'VET555666', '2014-05-30', '2024-05-30', 'Ophthalmology', 12, 9, 11),
+    -- id = 7
     (70000.00, 'VET777888', '2011-10-14', '2026-10-14', 'Neurology', 14, 13, 12),
+    -- id = 8
     (62000.00, 'VET999000', '2017-08-18', '2027-08-18', 'Cardiology', 7, 14, 13),
+    -- id = 9
     (59000.00, 'VET121314', '2019-02-25', '2029-02-25', 'Oncology', 5, 15, 14),
+    -- id = 10
     (76000.00, 'VET151617', '2009-11-11', '2024-11-11', 'Internal Medicine', 20, 19, 15),
+    -- id = 11
     (63000.00, 'VET181920', '2013-04-07', '2028-04-07', 'Anesthesiology', 11, 20, 16),
+    -- id = 12
     (67000.00, 'VET212223', '2015-01-29', '2025-01-29', 'Radiology', 13, 21, 17),
+    -- id = 13
     (61000.00, 'VET242526', '2018-06-12', '2028-06-12', 'Emergency Medicine', 6, 25, 18),
+    -- id = 14
     (75000.00, 'VET272829', '2010-09-19', '2025-09-19', 'Orthopedics', 17, 26, 19),
+    -- id = 15
     (73000.00, 'VET303132', '2012-12-31', '2027-12-31', 'Rehabilitation', 16, 27, 20);
 
 INSERT INTO Client (account_id) VALUES
+    -- id = 1
     (4),
+    -- id = 2
     (5),
+    -- id = 3
     (6),
+    -- id = 4
     (10),
+    -- id = 5
     (11),
+    -- id = 6
     (12),
+    -- id = 7
     (16),
+    -- id = 8
     (17),
+    -- id = 9
     (18),
+    -- id = 10
     (22),
+    -- id = 11
     (23),
+    -- id = 12
     (24),
+    -- id = 13
     (28),
+    -- id = 14
     (29),
+    -- id = 15
     (30);
 
 -- ## Insert data to tables with relations between them. ##
@@ -926,3 +979,35 @@ INSERT INTO Owner (account_id, clinic_id) VALUES
     (19, 4),
     -- id = 5, Account id = 25, Clinic id = 5
     (25, 5);
+
+INSERT INTO Client_Pet (client_id, pet_id) VALUES
+    -- id = 1, Client id = 1, Pet id = 1
+    (1, 1),
+    -- id = 2, Client id = 2, Pet id = 2
+    (2, 2),
+    -- id = 3, Client id = 3, Pet id = 3
+    (3, 3),
+    -- id = 4, Client id = 4, Pet id = 4
+    (4, 4),
+    -- id = 5, Client id = 5, Pet id = 5
+    (5, 5),
+    -- id = 6, Client id = 6, Pet id = 6
+    (6, 6),
+    -- id = 7, Client id = 7, Pet id = 7
+    (7, 7),
+    -- id = 8, Client id = 8, Pet id = 8
+    (8, 8),
+    -- id = 9, Client id = 9, Pet id = 9
+    (9, 9),
+    -- id = 10, Client id = 10, Pet id = 10
+    (10, 10),
+    -- id = 11, Client id = 11, Pet id = 11
+    (11, 11),
+    -- id = 12, Client id = 12, Pet id = 12
+    (12, 12),
+    -- id = 13, Client id = 13, Pet id = 13
+    (13, 13),
+    -- id = 14, Client id = 14, Pet id = 14
+    (14, 14),
+    -- id = 15, Client id = 15, Pet id = 15
+    (15, 15);
