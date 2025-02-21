@@ -185,6 +185,15 @@ CREATE TABLE Client_Pet (
     FOREIGN KEY (pet_id) REFERENCES Pet(id)
 );
 
+CREATE TABLE MedicalRecord_Medication (
+    id SERIAL PRIMARY KEY,
+    quantity INTEGER NOT NULL,
+    medical_record_id INTEGER NOT NULL,
+    medication_id INTEGER NOT NULL,
+    FOREIGN KEY (medical_record_id) REFERENCES MedicalRecord(id),
+    FOREIGN KEY (medication_id) REFERENCES Medication(id)
+);
+
 -- todo: I am here
 
 CREATE TABLE Service_Clinic (
@@ -201,15 +210,6 @@ CREATE TABLE Appointment_Service (
     service_id INTEGER NOT NULL,
     FOREIGN KEY (appointment_id) REFERENCES Appointment(id),
     FOREIGN KEY (service_id) REFERENCES Service(id)
-);
-
-CREATE TABLE MedicalRecord_Medication (
-    id SERIAL PRIMARY KEY,
-    medication_quantity INTEGER NOT NULL,
-    medical_record_id INTEGER NOT NULL,
-    medication_id INTEGER NOT NULL,
-    FOREIGN KEY (medical_record_id) REFERENCES MedicalRecord(id),
-    FOREIGN KEY (medication_id) REFERENCES Medication(id)
 );
 
 -- ########################
@@ -1195,3 +1195,36 @@ INSERT INTO Client_Pet (client_id, pet_id) VALUES
     (14, 14),
     -- id = 15, Client id = 15, Pet id = 15
     (15, 15);
+
+INSERT INTO MedicalRecord_Medication (quantity, medical_record_id, medication_id) VALUES
+    -- id = 1
+    (1, 1, 10),
+    -- id = 2
+    (1, 2, 60),
+    -- id = 3
+    (2, 3, 41),
+    -- id = 4
+    (3, 4, 49),
+    -- id = 5
+    (2, 5, 35),
+    -- id = 6
+    (3, 6, 13),
+    -- id = 7
+    -- id = 7
+    (2, 7, 2),
+    -- id = 8
+    (2, 8, 60),
+    -- id = 9
+    (2, 9, 47),
+    -- id = 10
+    (3, 10, 12),
+    -- id = 11
+    (1, 11, 45),
+    -- id = 12
+    (1, 12, 34),
+    -- id = 13
+    (1, 13, 45),
+    -- id = 14
+    (3, 14, 38),
+    -- id = 15
+    (1, 15, 48);
