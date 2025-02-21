@@ -7,19 +7,8 @@ import jakarta.persistence.*;
 public class Contact {
 
     @Id
-    @SequenceGenerator(
-            name = "contact_sequence",
-            sequenceName = "contact_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "contact_sequence"
-    )
-    @Column(
-            name = "id",
-            updatable = false
-    )
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(
