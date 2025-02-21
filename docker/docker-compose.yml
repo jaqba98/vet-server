@@ -11,9 +11,11 @@ services:
     volumes:
       - ./volumes/postgresql:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-  adminer:
-    image: adminer:standalone
-    container_name: adminer
-    restart: always
     ports:
-      - "8080:8080"
+      - "5431:5432"
+#  adminer:
+#    image: adminer:standalone
+#    container_name: adminer
+#    restart: always
+#    ports:
+#      - "8080:8080"
