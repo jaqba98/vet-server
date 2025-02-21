@@ -1351,3 +1351,4 @@ INSERT INTO Service_Clinic (service_id, clinic_id) VALUES
     (10, 4),
     -- id = 50
     (10, 5);
+MedicalRecord_Medication
