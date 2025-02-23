@@ -1,12 +1,7 @@
 package com.jakubolejarczyk.vet_server.dto.request;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class LoginRequestDto {
-    @JsonProperty("email")
     private String email;
-
-    @JsonProperty("password")
     private String password;
 
     public String getEmail() {

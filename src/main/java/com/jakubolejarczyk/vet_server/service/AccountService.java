@@ -1,5 +1,6 @@
 package com.jakubolejarczyk.vet_server.service;
 
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,9 @@ public class AccountService {
         this.repository = repository;
     }
 
-    public void createAccount(Account account) {
-        this.repository.save(account);
+    public void createAccount(Account account) {}
+
+    public Optional<Account> getAccountByEmail(String email) {
+        return repository.getByEmail(email);
     }
 }
