@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,8 +23,8 @@ import com.jakubolejarczyk.vet_server.dto.response.RegistrationResponseDto;
 @AllArgsConstructor
 public class RegistrationController {
     private final ErrorHandlerUtil errorHandlerUtil;
-
     private final AccountService accountService;
+    private final PasswordEncoder passwordEncoder;
 
     @PostMapping("registration")
     public ResponseEntity<RegistrationResponseDto> registration(
@@ -40,7 +41,8 @@ public class RegistrationController {
         String firstName = request.getFirstName();
         String lastName = request.getLastName();
         String role = request.getRole();
-        accountService.createAccount(email, password, firstName, lastName, role);
+        String hashPassword = passwordEncoder.encode(password);
+        accountService.createAccount(email, hashPassword, firstName, lastName, role);
         RegistrationResponseDto response = new RegistrationResponseDto(true, errors);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }

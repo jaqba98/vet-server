@@ -1,5 +1,6 @@
 package com.jakubolejarczyk.vet_server.service;
 
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +13,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class AccountService {
     private final AccountRepository accountRepository;
 
-    private final PasswordEncoder passwordEncoder;
+    public Optional<Account> getAccountByEmail(String email) {
+        return accountRepository.getAccountByEmail(email);
+    }
 
     public Boolean isAccountByEmail(String email) {
-        return accountRepository.getAccountByEmail(email).isPresent();
+        return getAccountByEmail(email).isPresent();
     }
 
     public Boolean isNotAccountByEmail(String email) {
@@ -23,10 +26,9 @@ public class AccountService {
     }
 
     public void createAccount(String email, String password, String firstName, String lastName, String role) {
-        String hashPassword = passwordEncoder.encode(password);
         Account account = new Account();
         account.setEmail(email);
-        account.setPassword(hashPassword);
+        account.setPassword(password);
         account.setFirstName(firstName);
         account.setLastName(lastName);
         account.setRole(role);
