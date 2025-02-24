@@ -28,11 +28,14 @@ public class LoginController {
         String email = request.getEmail();
         String password = request.getPassword();
         Optional<Account> account = accountService.getAccountByEmail(email);
-        LoginResponseDto response = new LoginResponseDto(true);
-        if (account.isPresent() && passwordEncoder.matches(password, account.get().getPassword())) {
-            return ResponseEntity.status(HttpStatus.OK).body(response);
+        if (account.isPresent()) {
+            String hashPassword = account.get().getPassword();
+            if (passwordEncoder.matches(password, hashPassword)) {
+                LoginResponseDto response = new LoginResponseDto(true);
+                return ResponseEntity.status(HttpStatus.OK).body(response);
+            }
         }
-        response.setSuccess(false);
+        LoginResponseDto response = new LoginResponseDto(false);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
