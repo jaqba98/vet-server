@@ -1,5 +1,6 @@
 package com.jakubolejarczyk.vet_server.controller;
 
+import java.util.ArrayList;
 import java.util.Map;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -29,7 +30,7 @@ public class RegistrationController {
             @Valid @RequestBody RegistrationRequestDto request,
             BindingResult result
     ) {
-        Map<String, String> errors = errorHandlerUtil.getErrors(result);
+        Map<String, ArrayList<String>> errors = errorHandlerUtil.getErrors(result);
         if (!errors.isEmpty()) {
             RegistrationResponseDto response = new RegistrationResponseDto(false, errors);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);

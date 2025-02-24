@@ -18,6 +18,10 @@ public class AccountService {
         return accountRepository.getAccountByEmail(email).isPresent();
     }
 
+    public Boolean isNotAccountByEmail(String email) {
+        return !isAccountByEmail(email);
+    }
+
     public void createAccount(String email, String password, String firstName, String lastName, String role) {
         String hashPassword = passwordEncoder.encode(password);
         Account account = new Account();

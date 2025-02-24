@@ -1,6 +1,7 @@
 package com.jakubolejarczyk.vet_server.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +14,7 @@ import com.jakubolejarczyk.vet_server.validator.fields_match.FieldsMatch;
 @FieldsMatch(first = "password", second = "confirmPassword", message = "Passwords must match!")
 public class RegistrationRequestDto {
     @JsonProperty("email")
-    @Email
+    @Email(message = "Incorrect email format!")
     @NotNull(message = "Email is required!")
     @NotBlank(message = "Email cannot be empty!")
     @Size(max = 255, message = "Email cannot be longer than 255 characters!")

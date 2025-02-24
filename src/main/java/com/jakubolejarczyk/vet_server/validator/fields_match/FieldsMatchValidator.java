@@ -3,9 +3,7 @@ package com.jakubolejarczyk.vet_server.validator.fields_match;
 import java.lang.reflect.Field;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
 public class FieldsMatchValidator implements ConstraintValidator<FieldsMatch, Object> {
     private String firstField;
     private String secondField;

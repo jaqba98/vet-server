@@ -15,6 +15,7 @@ public class EmailNotExistValidator implements ConstraintValidator<EmailNotExist
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        return accountService.isAccountByEmail(value);
+        System.out.println(context.getClass());
+        return accountService.isNotAccountByEmail(value);
     }
 }
