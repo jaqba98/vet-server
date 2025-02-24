@@ -33,7 +33,7 @@ public class RegistrationController {
         Map<String, ArrayList<String>> errors = errorHandlerUtil.getErrors(result);
         if (!errors.isEmpty()) {
             RegistrationResponseDto response = new RegistrationResponseDto(false, errors);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
         }
         String email = request.getEmail();
         String password = request.getPassword();
@@ -42,6 +42,6 @@ public class RegistrationController {
         String role = request.getRole();
         accountService.createAccount(email, password, firstName, lastName, role);
         RegistrationResponseDto response = new RegistrationResponseDto(true, errors);
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

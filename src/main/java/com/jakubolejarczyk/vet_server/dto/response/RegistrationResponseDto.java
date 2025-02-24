@@ -2,7 +2,6 @@ package com.jakubolejarczyk.vet_server.dto.response;
 
 import java.util.ArrayList;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,9 +10,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class RegistrationResponseDto {
-    @JsonProperty("success")
     private Boolean success;
 
-    @JsonProperty("errors")
     private Map<String, ArrayList<String>> errors;
 }
