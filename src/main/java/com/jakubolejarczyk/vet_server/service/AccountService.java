@@ -16,7 +16,9 @@ public class AccountService {
         this.repository = repository;
     }
 
-    public void createAccount(Account account) {}
+    public void createAccount(Account account) {
+        repository.save(account);
+    }
 
     public Optional<Account> getAccountByEmail(String email) {
         return repository.getByEmail(email);

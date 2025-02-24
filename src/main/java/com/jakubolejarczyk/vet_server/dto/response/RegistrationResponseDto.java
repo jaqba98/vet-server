@@ -1,71 +1,27 @@
 package com.jakubolejarczyk.vet_server.dto.response;
 
+import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class RegistrationResponseDto {
-    @JsonProperty("email")
-    private String email;
+    @JsonProperty("success")
+    private Boolean success;
 
-    @JsonProperty("password")
-    private String password;
+    private Map<String, String> errors;
 
-    @JsonProperty("repeat_password")
-    private String repeatPassword;
-
-    @JsonProperty("first_name")
-    private String firstName;
-
-    @JsonProperty("last_name")
-    private String lastName;
-
-    @JsonProperty("role")
-    private String role;
-
-    public String getEmail() {
-        return email;
+    public Boolean getSuccess() {
+        return this.success;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setSuccess(Boolean success) {
+        this.success = success;
     }
 
-    public String getPassword() {
-        return password;
+    public Map<String, String> getErrors() {
+        return errors;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getRepeatPassword() {
-        return repeatPassword;
-    }
-
-    public void setRepeatPassword(String repeatPassword) {
-        this.repeatPassword = repeatPassword;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
+    public void setErrors(Map<String, String> errors) {
+        this.errors = errors;
     }
 }

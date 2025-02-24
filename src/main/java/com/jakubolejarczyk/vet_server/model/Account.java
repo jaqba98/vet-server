@@ -43,67 +43,67 @@ public class Account {
     @JsonProperty("is_verified")
     private Boolean isVerified;
 
-    Long getId() {
+    public Long getId() {
         return id;
     }
 
-    void setId(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    String getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    void setEmail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    String getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    String getFirstName() {
+    public String getFirstName() {
         return firstName;
     }
 
-    void setFirstName(String firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    String getLastName() {
+    public String getLastName() {
         return lastName;
     }
 
-    void setLastName(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    String getRole() {
+    public String getRole() {
         return role;
     }
 
-    void setRole(String role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
-    String getPictureUrl() {
+    public String getPictureUrl() {
         return pictureUrl;
     }
 
-    void setPictureUrl(String pictureUrl) {
+    public void setPictureUrl(String pictureUrl) {
         this.pictureUrl = pictureUrl;
     }
 
-    Boolean getIsVerified() {
+    public Boolean getIsVerified() {
         return isVerified;
     }
 
-    void setIsVerified(Boolean isVerified) {
+    public void setIsVerified(Boolean isVerified) {
         this.isVerified = isVerified;
     }
 }
