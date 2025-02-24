@@ -7,6 +7,7 @@ public class RegistrationResponseDto {
     @JsonProperty("success")
     private Boolean success;
 
+    @JsonProperty("errors")
     private Map<String, String> errors;
 
     public Boolean getSuccess() {

@@ -2,6 +2,7 @@ package com.jakubolejarczyk.vet_server.controller;
 
 import java.util.Optional;
 
+import com.jakubolejarczyk.vet_server.model.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jakubolejarczyk.vet_server.dto.response.LoginResponseDto;
 import com.jakubolejarczyk.vet_server.dto.request.LoginRequestDto;
-import com.jakubolejarczyk.vet_server.model.Account;
 import com.jakubolejarczyk.vet_server.service.AccountService;
 
 @RestController

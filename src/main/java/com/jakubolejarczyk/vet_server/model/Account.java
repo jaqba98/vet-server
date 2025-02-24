@@ -1,12 +1,6 @@
 package com.jakubolejarczyk.vet_server.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Account")
@@ -15,32 +9,50 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "email", nullable = false, unique = true)
-    @JsonProperty("email")
+    @Column(
+            name = "email",
+            nullable = false,
+            unique = true
+    )
     private String email;
 
-    @Column(name = "password", nullable = false)
-    @JsonProperty("password")
+    @Column(
+            name = "password",
+            nullable = false
+    )
     private String password;
 
-    @Column(name = "first_name", nullable = false)
-    @JsonProperty("first_name")
+    @Column(
+            name = "first_name",
+            nullable = false,
+            length = 50
+    )
     private String firstName;
 
-    @Column(name = "last_name", nullable = false)
-    @JsonProperty("last_name")
+    @Column(
+            name = "last_name",
+            nullable = false,
+            length = 100
+    )
     private String lastName;
 
-    @Column(name = "role", nullable = false)
-    @JsonProperty("role")
+    @Column(
+            name = "role",
+            nullable = false,
+            length = 6
+    )
     private String role;
 
-    @Column(name ="picture_url", nullable = false)
-    @JsonProperty("picture_url")
+    @Column(
+            name ="picture_url",
+            nullable = false
+    )
     private String pictureUrl;
 
-    @Column(name = "is_verified", nullable = false)
-    @JsonProperty("is_verified")
+    @Column(
+            name = "is_verified",
+            nullable = false
+    )
     private Boolean isVerified;
 
     public Long getId() {
