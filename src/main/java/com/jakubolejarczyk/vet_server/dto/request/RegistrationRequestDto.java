@@ -5,14 +5,19 @@ import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import com.jakubolejarczyk.vet_server.validator.email_not_exist.EmailNotExist;
+import com.jakubolejarczyk.vet_server.validator.fields_match.FieldsMatch;
+
 @Getter
 @Setter
+@FieldsMatch(first = "password", second = "confirmPassword", message = "Passwords must match!")
 public class RegistrationRequestDto {
     @JsonProperty("email")
     @Email
     @NotNull(message = "Email is required!")
     @NotBlank(message = "Email cannot be empty!")
     @Size(max = 255, message = "Email cannot be longer than 255 characters!")
+    @EmailNotExist
     private String email;
 
     @JsonProperty("password")
