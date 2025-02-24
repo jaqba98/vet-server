@@ -37,7 +37,7 @@ public class RegistrationController {
     public ResponseEntity<?> registration(@Valid @RequestBody RegistrationRequestDto request, BindingResult result) {
         Map<String, String> errors = errorHandlerUtil.getErrors(result);
         if (!errors.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(request);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
         }
         String email = request.getEmail();
         String password = request.getPassword();
