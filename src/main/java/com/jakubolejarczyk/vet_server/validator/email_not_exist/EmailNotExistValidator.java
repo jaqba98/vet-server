@@ -4,7 +4,7 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import lombok.AllArgsConstructor;
 
-import com.jakubolejarczyk.vet_server.service.AccountService;
+import com.jakubolejarczyk.vet_server.service.database.AccountService;
 
 @AllArgsConstructor
 public class EmailNotExistValidator implements ConstraintValidator<EmailNotExist, String> {

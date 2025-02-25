@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.service;
+package com.jakubolejarczyk.vet_server.service.database;
 
 import java.util.Optional;
 import lombok.AllArgsConstructor;
@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.jakubolejarczyk.vet_server.model.Account;
 import com.jakubolejarczyk.vet_server.repository.AccountRepository;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Service
 @AllArgsConstructor

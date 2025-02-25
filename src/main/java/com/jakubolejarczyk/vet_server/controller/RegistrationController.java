@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jakubolejarczyk.vet_server.service.AccountService;
+import com.jakubolejarczyk.vet_server.service.database.AccountService;
 import com.jakubolejarczyk.vet_server.util.ErrorHandlerUtil;
 import com.jakubolejarczyk.vet_server.dto.request.RegistrationRequestDto;
 import com.jakubolejarczyk.vet_server.dto.response.RegistrationResponseDto;
