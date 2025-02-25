@@ -1,11 +1,11 @@
 package com.jakubolejarczyk.vet_server.service.security;
 
+import java.util.Date;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import org.springframework.stereotype.Service;
-import java.util.Date;
 
 @Service
 public class JWTService {
@@ -26,10 +26,12 @@ public class JWTService {
             return true;
         } catch (JWTVerificationException e) {
             return false;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
     private Algorithm getAlgorithm() {
-        return Algorithm.HMAC512("aaaaaa");
+        return Algorithm.HMAC512("secret");
     }
 }

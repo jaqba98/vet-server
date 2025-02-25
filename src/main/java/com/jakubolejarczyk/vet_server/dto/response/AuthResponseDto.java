@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AuthorizeResponseDto {
-    private Boolean isAuthorized;
+public class AuthResponseDto {
+    private Boolean isAuth;
 }

@@ -1,7 +1,10 @@
 package com.jakubolejarczyk.vet_server.controller;
 
+// todo: I am here
 import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
+
+import com.jakubolejarczyk.vet_server.service.security.JWTService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +18,6 @@ import com.jakubolejarczyk.vet_server.model.Account;
 import com.jakubolejarczyk.vet_server.service.database.AccountService;
 import com.jakubolejarczyk.vet_server.dto.request.LoginRequestDto;
 import com.jakubolejarczyk.vet_server.dto.response.LoginResponseDto;
-import com.jakubolejarczyk.vet_server.service.security.JWTService;
 
 @RestController
 @RequestMapping("/api/v1")
