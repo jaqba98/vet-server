@@ -11,9 +11,9 @@ import com.jakubolejarczyk.vet_server.validator.fields_match.FieldsMatch;
 @Setter
 @FieldsMatch(first = "password", second = "confirmPassword", message = "Passwords must match!")
 public class RegistrationRequestDto {
-    @Email(message = "Incorrect email format!")
     @NotNull(message = "Email is required!")
     @NotBlank(message = "Email cannot be empty!")
+    @Email(message = "Incorrect email format!")
     @Size(max = 255, message = "Email cannot be longer than 255 characters!")
     @EmailNotExist
     private String email;
