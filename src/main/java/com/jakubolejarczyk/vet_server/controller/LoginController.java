@@ -39,7 +39,7 @@ public class LoginController {
                 return ResponseEntity.status(HttpStatus.OK).body(responseDto);
             }
         }
-        LoginResponseDto responseDto = new LoginResponseDto(true, "");
+        LoginResponseDto responseDto = new LoginResponseDto(false, "");
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 }
