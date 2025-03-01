@@ -18,6 +18,10 @@ public class JWTService {
                 .sign(algorithm);
     }
 
+    public String decodeToken(String token) {
+        return JWT.decode(token).getSubject();
+    }
+
     public Boolean verifyToken(String token) {
         try {
             Algorithm algorithm = getAlgorithm();

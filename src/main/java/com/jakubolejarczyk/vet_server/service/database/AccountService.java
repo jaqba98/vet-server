@@ -24,6 +24,10 @@ public class AccountService {
         return !isAccountByEmail(email);
     }
 
+    public void updateRole(String email, String role) {
+        accountRepository.updateRole(email, role);
+    }
+
     public void createAccount(String email, String password, String firstName, String lastName) {
         Account account = new Account();
         account.setEmail(email);
