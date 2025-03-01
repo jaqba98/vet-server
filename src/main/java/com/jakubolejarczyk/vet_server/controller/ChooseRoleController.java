@@ -26,7 +26,7 @@ public class ChooseRoleController {
         String role = requestDto.getRole();
         String email = jwt.decodeToken(token);
         accountService.updateRole(email, role);
-        ChooseRoleResponseDto responseDto = new ChooseRoleResponseDto(true);
+        ChooseRoleResponseDto responseDto = new ChooseRoleResponseDto(true, role);
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 }

@@ -7,8 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ChooseRoleResponseDto {
-    private Boolean success;
-
-    private String role;
+public class IsVetResponseDto {
+    private Boolean isVet;
 }
