@@ -8,5 +8,5 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class LogoutResponseDto {
-    private Boolean logout;
+    private Boolean success;
 }

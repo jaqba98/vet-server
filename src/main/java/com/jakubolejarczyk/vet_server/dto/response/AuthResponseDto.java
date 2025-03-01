@@ -8,5 +8,5 @@ import lombok.AllArgsConstructor;
 @Setter
 @AllArgsConstructor
 public class AuthResponseDto {
-    private Boolean isAuth;
+    private Boolean success;
 }

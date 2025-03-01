@@ -8,5 +8,5 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class HasRoleResponseDto {
-    private Boolean hasRole;
+    private Boolean success;
 }

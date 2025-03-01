@@ -8,5 +8,5 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class IsVetResponseDto {
-    private Boolean isVet;
+    private Boolean success;
 }

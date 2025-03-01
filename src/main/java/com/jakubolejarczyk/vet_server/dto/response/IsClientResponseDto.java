@@ -8,5 +8,5 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class IsClientResponseDto {
-    private Boolean isClient;
+    private Boolean success;
 }
