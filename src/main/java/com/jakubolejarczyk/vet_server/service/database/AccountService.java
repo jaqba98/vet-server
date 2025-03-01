@@ -24,13 +24,13 @@ public class AccountService {
         return !isAccountByEmail(email);
     }
 
-    public void createAccount(String email, String password, String firstName, String lastName, String role) {
+    public void createAccount(String email, String password, String firstName, String lastName) {
         Account account = new Account();
         account.setEmail(email);
         account.setPassword(password);
         account.setFirstName(firstName);
         account.setLastName(lastName);
-        account.setRole(role);
+        account.setRole(null);
         // todo: Set the default avatar url. At the moment it is an empty string!
         account.setPictureUrl("");
         // todo: Change to false when the email confirmation will be done!

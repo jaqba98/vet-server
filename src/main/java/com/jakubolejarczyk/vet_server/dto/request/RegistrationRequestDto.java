@@ -37,10 +37,4 @@ public class RegistrationRequestDto {
     @NotBlank(message = "Last name cannot be empty!")
     @Size(max = 100, message = "Last name cannot be longer than 100 characters!")
     private String lastName;
-
-    @NotNull(message = "Role is required!")
-    @NotBlank(message = "Role cannot be empty!")
-    @Size(max = 6, message = "Role cannot be longer than 6 characters!")
-    @Pattern(regexp = "vet|client", message = "The role must be either a vet or a client!")
-    private String role;
 }

@@ -42,9 +42,8 @@ public class RegistrationController {
         String password = requestDto.getPassword();
         String firstName = requestDto.getFirstName();
         String lastName = requestDto.getLastName();
-        String role = requestDto.getRole();
         String hashPassword = passwordEncoder.encode(password);
-        accountService.createAccount(email, hashPassword, firstName, lastName, role);
+        accountService.createAccount(email, hashPassword, firstName, lastName);
         RegistrationResponseDto responseDto = new RegistrationResponseDto(true, errors);
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
