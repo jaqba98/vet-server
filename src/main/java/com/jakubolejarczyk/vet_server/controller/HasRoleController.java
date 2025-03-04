@@ -12,28 +12,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.jakubolejarczyk.vet_server.dto.request.HasRoleRequestDto;
 import com.jakubolejarczyk.vet_server.dto.response.HasRoleResponseDto;
-import com.jakubolejarczyk.vet_server.service.security.JWTService;
+import com.jakubolejarczyk.vet_server.service.security.TokenService;
 
 @RestController
 @RequestMapping("/api/v1")
 @AllArgsConstructor
 public class HasRoleController {
-    private final JWTService jwt;
+    private final TokenService jwt;
 
     private final AccountService accountService;
 
     @PostMapping("has-role")
     public ResponseEntity<HasRoleResponseDto> auth(@RequestBody HasRoleRequestDto requestDto) {
         String token = requestDto.getToken();
-        String email = jwt.decodeToken(token);
+        String email = jwt.decode(token);
         Optional<Account> account = accountService.getAccountByEmail(email);
         if (account.isPresent()) {
             String role = account.get().getRole();
             Boolean hasRole = role != null;
-            HasRoleResponseDto responseDto = new HasRoleResponseDto(hasRole);
+            HasRoleResponseDto responseDto = HasRoleResponseDto.builder().success(hasRole).build();
             return ResponseEntity.status(HttpStatus.OK).body(responseDto);
         }
-        HasRoleResponseDto responseDto = new HasRoleResponseDto(false);
+        HasRoleResponseDto responseDto = HasRoleResponseDto.builder().success(false).build();
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 }

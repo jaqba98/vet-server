@@ -1,28 +1,24 @@
 package com.jakubolejarczyk.vet_server.service.security;
 
-import java.util.Date;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
-public class JWTService {
-    public String generateToken(String email) {
+public class TokenService {
+    public String generate(String email) {
         Algorithm algorithm = getAlgorithm();
-        return JWT
-                .create()
+        return JWT.create()
                 .withSubject(email)
                 .withExpiresAt(new Date(System.currentTimeMillis() + 3600 * 1000))
                 .sign(algorithm);
     }
 
-    public String decodeToken(String token) {
-        return JWT.decode(token).getSubject();
-    }
-
-    public Boolean verifyToken(String token) {
+    public Boolean verify(String token) {
         try {
             Algorithm algorithm = getAlgorithm();
             JWTVerifier jwtVerifier = JWT.require(algorithm).build();
@@ -35,7 +31,11 @@ public class JWTService {
         }
     }
 
+    public String decode(String token) {
+        return JWT.decode(token).getSubject();
+    }
+
     private Algorithm getAlgorithm() {
-        return Algorithm.HMAC512("secret");
+        return Algorithm.HMAC512("vet-server-secret-key");
     }
 }

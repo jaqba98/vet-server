@@ -1,10 +1,6 @@
 package com.jakubolejarczyk.vet_server.dto.request;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.jakubolejarczyk.vet_server.dto.base.BaseRequestDto;
 
-@Getter
-@Setter
-public class IsVetRequestDto {
-    private String token;
+public class IsVetRequestDto extends BaseRequestDto {
 }

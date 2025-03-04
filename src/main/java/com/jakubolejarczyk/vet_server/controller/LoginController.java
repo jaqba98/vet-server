@@ -1,6 +1,7 @@
 package com.jakubolejarczyk.vet_server.controller;
 
 import java.util.Optional;
+
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,7 @@ import com.jakubolejarczyk.vet_server.dto.request.LoginRequestDto;
 import com.jakubolejarczyk.vet_server.dto.response.LoginResponseDto;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.jakubolejarczyk.vet_server.service.database.AccountService;
-import com.jakubolejarczyk.vet_server.service.security.JWTService;
+import com.jakubolejarczyk.vet_server.service.security.TokenService;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -24,7 +25,7 @@ public class LoginController {
 
     private final PasswordEncoder passwordEncoder;
 
-    private final JWTService jwtService;
+    private final TokenService jwtService;
 
     @PostMapping("login")
     public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto requestDto) {
@@ -34,12 +35,12 @@ public class LoginController {
         if (account.isPresent()) {
             String hashPassword = account.get().getPassword();
             if (passwordEncoder.matches(password, hashPassword)) {
-                String token = jwtService.generateToken(email);
-                LoginResponseDto responseDto = new LoginResponseDto(true, token);
+                String token = jwtService.generate(email);
+                LoginResponseDto responseDto = LoginResponseDto.builder().success(true).token(token).build();
                 return ResponseEntity.status(HttpStatus.OK).body(responseDto);
             }
         }
-        LoginResponseDto responseDto = new LoginResponseDto(false, "");
+        LoginResponseDto responseDto = LoginResponseDto.builder().success(false).token("").build();
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 }

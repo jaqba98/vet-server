@@ -35,7 +35,7 @@ public class RegistrationController {
     ) {
         ArrayList<String> errors = errorHandlerUtil.getErrors(result);
         if (!errors.isEmpty()) {
-            RegistrationResponseDto response = new RegistrationResponseDto(false, errors);
+            RegistrationResponseDto response = RegistrationResponseDto.builder().success(false).errors(errors).build();
             return ResponseEntity.status(HttpStatus.OK).body(response);
         }
         String email = requestDto.getEmail();
@@ -44,7 +44,7 @@ public class RegistrationController {
         String lastName = requestDto.getLastName();
         String hashPassword = passwordEncoder.encode(password);
         accountService.createAccount(email, hashPassword, firstName, lastName);
-        RegistrationResponseDto responseDto = new RegistrationResponseDto(true, errors);
+        RegistrationResponseDto responseDto = RegistrationResponseDto.builder().success(true).errors(errors).build();
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 }

@@ -17,7 +17,7 @@ import com.jakubolejarczyk.vet_server.dto.response.LogoutResponseDto;
 public class LogoutController {
     @PostMapping("logout")
     public ResponseEntity<LogoutResponseDto> auth(@RequestBody LogoutRequestDto requestDto) {
-        LogoutResponseDto response = new LogoutResponseDto(true);
+        LogoutResponseDto response = LogoutResponseDto.builder().success(true).build();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

@@ -1,12 +1,8 @@
 package com.jakubolejarczyk.vet_server.dto.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import com.jakubolejarczyk.vet_server.dto.base.BaseResponseDto;
+import lombok.experimental.SuperBuilder;
 
-@Getter
-@Setter
-@AllArgsConstructor
-public class LogoutResponseDto {
-    private Boolean success;
+@SuperBuilder
+public class LogoutResponseDto extends BaseResponseDto {
 }

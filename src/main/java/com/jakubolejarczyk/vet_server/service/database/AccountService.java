@@ -1,11 +1,11 @@
 package com.jakubolejarczyk.vet_server.service.database;
 
-import java.util.Optional;
+import com.jakubolejarczyk.vet_server.model.Account;
+import com.jakubolejarczyk.vet_server.repository.AccountRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import com.jakubolejarczyk.vet_server.model.Account;
-import com.jakubolejarczyk.vet_server.repository.AccountRepository;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -35,9 +35,7 @@ public class AccountService {
         account.setFirstName(firstName);
         account.setLastName(lastName);
         account.setRole(null);
-        // todo: Set the default avatar url. At the moment it is an empty string!
         account.setPictureUrl("");
-        // todo: Change to false when the email confirmation will be done!
         account.setIsVerified(true);
         accountRepository.save(account);
     }
