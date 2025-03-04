@@ -8,6 +8,8 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder
-public class LoginResponseDto extends BaseResponseDto {
-    private String token;
+public class GetAccountResponseDto extends BaseResponseDto {
+    private String firstName;
+
+    private String lastName;
 }

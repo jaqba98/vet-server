@@ -39,6 +39,8 @@ public class LoginController {
                         .success(true)
                         .token(token)
                         .build();
+                System.out.println(responseDto.getSuccess());
+                System.out.println(responseDto.getToken());
                 return ResponseEntity.status(HttpStatus.OK).body(responseDto);
             }
         }
