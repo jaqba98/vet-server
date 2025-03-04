@@ -1,10 +1,9 @@
 package com.jakubolejarczyk.vet_server.validator.email_not_exist;
 
+import com.jakubolejarczyk.vet_server.service.database.AccountService;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import lombok.AllArgsConstructor;
-
-import com.jakubolejarczyk.vet_server.service.database.AccountService;
 
 @AllArgsConstructor
 public class EmailNotExistValidator implements ConstraintValidator<EmailNotExist, String> {

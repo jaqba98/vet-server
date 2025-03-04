@@ -1,8 +1,9 @@
 package com.jakubolejarczyk.vet_server.validator.fields_match;
 
-import java.lang.reflect.Field;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+
+import java.lang.reflect.Field;
 
 public class FieldsMatchValidator implements ConstraintValidator<FieldsMatch, Object> {
     private String firstField;
