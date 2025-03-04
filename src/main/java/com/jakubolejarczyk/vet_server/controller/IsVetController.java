@@ -1,6 +1,8 @@
 package com.jakubolejarczyk.vet_server.controller;
 
+import com.jakubolejarczyk.vet_server.dto.request.IsClientRequestDto;
 import com.jakubolejarczyk.vet_server.dto.request.IsVetRequestDto;
+import com.jakubolejarczyk.vet_server.dto.response.IsClientResponseDto;
 import com.jakubolejarczyk.vet_server.dto.response.IsVetResponseDto;
 import com.jakubolejarczyk.vet_server.model.Account;
 import com.jakubolejarczyk.vet_server.service.database.AccountService;
@@ -19,22 +21,26 @@ import java.util.Optional;
 @RequestMapping("/api/v1")
 @AllArgsConstructor
 public class IsVetController {
-    private final TokenService jwt;
+    private final TokenService tokenService;
 
     private final AccountService accountService;
 
     @PostMapping("is-vet")
-    public ResponseEntity<IsVetResponseDto> auth(@RequestBody IsVetRequestDto requestDto) {
+    public ResponseEntity<IsVetResponseDto> isVet(@RequestBody IsVetRequestDto requestDto) {
         String token = requestDto.getToken();
-        String email = jwt.decode(token);
+        String email = tokenService.decode(token);
         Optional<Account> account = accountService.getAccountByEmail(email);
         if (account.isPresent()) {
             String role = account.get().getRole();
-            Boolean isVet = role.equals("vet");
-            IsVetResponseDto responseDto = IsVetResponseDto.builder().success(isVet).build();
+            Boolean isVet = role.contains("vet");
+            IsVetResponseDto responseDto = IsVetResponseDto.builder()
+                    .success(isVet)
+                    .build();
             return ResponseEntity.status(HttpStatus.OK).body(responseDto);
         }
-        IsVetResponseDto responseDto = IsVetResponseDto.builder().success(false).build();
+        IsVetResponseDto responseDto = IsVetResponseDto.builder()
+                .success(false)
+                .build();
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 }

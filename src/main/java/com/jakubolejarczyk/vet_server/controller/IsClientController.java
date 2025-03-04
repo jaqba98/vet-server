@@ -19,22 +19,26 @@ import java.util.Optional;
 @RequestMapping("/api/v1")
 @AllArgsConstructor
 public class IsClientController {
-    private final TokenService jwt;
+    private final TokenService tokenService;
 
     private final AccountService accountService;
 
     @PostMapping("is-client")
-    public ResponseEntity<IsClientResponseDto> auth(@RequestBody IsClientRequestDto requestDto) {
+    public ResponseEntity<IsClientResponseDto> isClient(@RequestBody IsClientRequestDto requestDto) {
         String token = requestDto.getToken();
-        String email = jwt.decode(token);
+        String email = tokenService.decode(token);
         Optional<Account> account = accountService.getAccountByEmail(email);
         if (account.isPresent()) {
             String role = account.get().getRole();
-            Boolean isVet = role.equals("client");
-            IsClientResponseDto responseDto = IsClientResponseDto.builder().success(isVet).build();
+            Boolean isClient = role.contains("client");
+            IsClientResponseDto responseDto = IsClientResponseDto.builder()
+                    .success(isClient)
+                    .build();
             return ResponseEntity.status(HttpStatus.OK).body(responseDto);
         }
-        IsClientResponseDto responseDto = IsClientResponseDto.builder().success(false).build();
+        IsClientResponseDto responseDto = IsClientResponseDto.builder()
+                .success(false)
+                .build();
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 }
