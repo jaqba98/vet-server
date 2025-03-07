@@ -56,7 +56,7 @@ CREATE TABLE MedicalRecord (
     notes TEXT NOT NULL
 );
 
-CREATE TABLE Service (
+CREATE TABLE Services (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
@@ -190,18 +190,18 @@ CREATE TABLE MedicalRecord_Medication (
     FOREIGN KEY (medication_id) REFERENCES Medication(id)
 );
 
-CREATE TABLE Service_Clinic (
+CREATE TABLE Services_Clinic (
     id SERIAL PRIMARY KEY,
-    service_id INTEGER NOT NULL,
+    services_id INTEGER NOT NULL,
     clinic_id INTEGER NOT NULL,
-    FOREIGN KEY (service_id) REFERENCES Service(id),
+    FOREIGN KEY (services_id) REFERENCES Services(id),
     FOREIGN KEY (clinic_id) REFERENCES Clinic(id)
 );
 
-CREATE TABLE Appointment_Service (
+CREATE TABLE Appointment_Services (
     id SERIAL PRIMARY KEY,
     appointment_id INTEGER NOT NULL,
-    service_id INTEGER NOT NULL,
+    services_id INTEGER NOT NULL,
     FOREIGN KEY (appointment_id) REFERENCES Appointment(id),
-    FOREIGN KEY (service_id) REFERENCES Service(id)
+    FOREIGN KEY (services_id) REFERENCES Services(id)
 );
