@@ -59,10 +59,10 @@ CREATE TABLE MedicalRecord (
 CREATE TABLE Services (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    description TEXT NOT NULL,
+    description VARCHAR(255) NOT NULL,
     category VARCHAR(255) NOT NULL,
     duration_minutes INTEGER NOT NULL,
-    price DECIMAL(10, 2) NOT NULL,
+    price VARCHAR(255) NOT NULL,
     is_available BOOLEAN NOT NULL
 );
 
