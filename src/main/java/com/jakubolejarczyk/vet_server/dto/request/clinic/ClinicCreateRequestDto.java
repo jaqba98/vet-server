@@ -15,5 +15,6 @@ import lombok.experimental.SuperBuilder;
 public class ClinicCreateRequestDto extends BaseRequestDto {
     @NotNull(message = "Name is requires!")
     @NotBlank(message = "Name cannot be empty!")
+    // todo: Add verification whether name is busy!
     private String name;
 }
