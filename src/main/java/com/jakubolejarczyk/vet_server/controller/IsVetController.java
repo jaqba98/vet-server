@@ -1,8 +1,6 @@
 package com.jakubolejarczyk.vet_server.controller;
 
-import com.jakubolejarczyk.vet_server.dto.request.IsClientRequestDto;
 import com.jakubolejarczyk.vet_server.dto.request.IsVetRequestDto;
-import com.jakubolejarczyk.vet_server.dto.response.IsClientResponseDto;
 import com.jakubolejarczyk.vet_server.dto.response.IsVetResponseDto;
 import com.jakubolejarczyk.vet_server.model.Account;
 import com.jakubolejarczyk.vet_server.service.database.AccountService;
