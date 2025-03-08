@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/clinic")
+@RequestMapping("/api/v1")
 public class ClinicController {
-    @PostMapping("create")
+    @PostMapping("clinic")
     public ResponseEntity<ClinicCreateResponseDto> create(@RequestBody ClinicCreateRequestDto requestDto) {
         String token = requestDto.getToken();
         String name = requestDto.getData().getName();
