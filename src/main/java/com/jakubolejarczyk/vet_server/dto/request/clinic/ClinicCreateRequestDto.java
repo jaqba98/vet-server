@@ -1,16 +1,19 @@
 package com.jakubolejarczyk.vet_server.dto.request.clinic;
 
-import com.jakubolejarczyk.vet_server.domain.ClinicDomain;
 import com.jakubolejarczyk.vet_server.dto.base.BaseRequestDto;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Getter
-@NoArgsConstructor
 @Setter
 @SuperBuilder
+@NoArgsConstructor
 public class ClinicCreateRequestDto extends BaseRequestDto {
-    private ClinicDomain data;
+    @NotNull(message = "Name is requires!")
+    @NotBlank(message = "Name cannot be empty!")
+    private String name;
 }

@@ -6,9 +6,9 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Getter
-@NoArgsConstructor
 @Setter
 @SuperBuilder
+@NoArgsConstructor
 public class BaseResponseDto {
     private Boolean success;
 }

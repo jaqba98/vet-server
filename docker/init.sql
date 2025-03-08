@@ -81,7 +81,7 @@ CREATE TABLE Invoice (
 -- ## Create tables with foreign keys. ##
 CREATE TABLE Clinic (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
+    name VARCHAR(255) NOT NULL UNIQUE
 --    address VARCHAR(255) NOT NULL,
 --    opening_hours_id INTEGER NOT NULL,
 --    FOREIGN KEY (opening_hours_id) REFERENCES OpeningHours(id)
