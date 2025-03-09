@@ -30,7 +30,7 @@ public class RegistrationController {
         accountService.create(email, hashPassword, firstName, lastName);
         RegistrationResponseDto responseDto = RegistrationResponseDto
                 .builder()
-                .success(false)
+                .success(true)
                 .build();
         return ResponseEntity.ok().body(responseDto);
     }

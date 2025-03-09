@@ -28,16 +28,14 @@ public class AccountService {
     }
 
     public void create(String email, String password, String firstName, String lastName) {
-        Account account = Account
-                .builder()
-                .email(email)
-                .password(password)
-                .firstName(firstName)
-                .lastName(lastName)
-                .role(null)
-                .pictureUrl(null)
-                .isVerified(false)
-                .build();
+        Account account = new Account();
+        account.setEmail(email);
+        account.setPassword(password);
+        account.setFirstName(firstName);
+        account.setLastName(lastName);
+        account.setRole(null);
+        account.setPictureUrl(null);
+        account.setIsVerified(false);
         accountRepository.save(account);
     }
 }
