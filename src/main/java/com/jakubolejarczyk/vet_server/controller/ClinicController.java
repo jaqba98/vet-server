@@ -21,7 +21,7 @@ public class ClinicController {
     public ResponseEntity<ClinicCreateResponseDto> create(@Valid @RequestBody ClinicCreateRequestDto requestDto) {
         String name = requestDto.getName();
         clinicService.create(name);
-        ClinicCreateResponseDto responseDto = new ClinicCreateResponseDto(false, new ArrayList<>());
+        ClinicCreateResponseDto responseDto = new ClinicCreateResponseDto(true, new ArrayList<>());
         return ResponseEntity.ok().body(responseDto);
     }
 
