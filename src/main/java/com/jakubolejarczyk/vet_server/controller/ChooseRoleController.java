@@ -5,6 +5,7 @@ import com.jakubolejarczyk.vet_server.dto.response.controller.ChooseRoleResponse
 import com.jakubolejarczyk.vet_server.model.Account;
 import com.jakubolejarczyk.vet_server.model.OpeningHours;
 import com.jakubolejarczyk.vet_server.service.database.AccountService;
+import com.jakubolejarczyk.vet_server.service.database.ClientService;
 import com.jakubolejarczyk.vet_server.service.database.OpeningHoursService;
 import com.jakubolejarczyk.vet_server.service.database.VetService;
 import com.jakubolejarczyk.vet_server.service.security.TokenService;
@@ -29,6 +30,8 @@ public class ChooseRoleController {
 
     private final OpeningHoursService openingHoursService;
 
+    private final ClientService clientService;
+
     @PostMapping("choose-role")
     public ResponseEntity<ChooseRoleResponseDto> chooseRolePost(@Valid @RequestBody ChooseRoleRequestDto requestDto) {
         String token = requestDto.getToken();
@@ -43,6 +46,9 @@ public class ChooseRoleController {
         if (role.equals("vet")) {
             OpeningHours openingHours = openingHoursService.create();
             vetService.create(account.get(), openingHours);
+        }
+        else if (role.equals("client")) {
+            clientService.create(account.get());
         }
         ChooseRoleResponseDto responseDto = new ChooseRoleResponseDto(true, new ArrayList<>(), role);
         return ResponseEntity.ok().body(responseDto);
