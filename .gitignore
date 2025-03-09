@@ -38,3 +38,4 @@ build/
 
 ### Docker ###
 ./docker/volumes/
+./docker/servers.json/
