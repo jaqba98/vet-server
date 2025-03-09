@@ -13,14 +13,3 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5431:5432"
-  pgadmin4:
-    image: elestio/pgadmin:REL-9_0
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: "jakubolejarczyk98@gmail.com"
-      PGADMIN_DEFAULT_PASSWORD: "admin"
-      PGADMIN_LISTEN_PORT: 8080
-    ports:
-      - "172.17.0.1:8080:8080"
-    volumes:
-      - ./servers.json:/pgadmin4/servers.json
