@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface ClinicRepository extends JpaRepository<Clinic, Long> {
-    @Query("SELECT c FROM Clinic c WHERE :field = :value")
-    List<Clinic> findByField(@Param("column") String column, @Param("value") String value);
+    @Query("SELECT c FROM Clinic c WHERE c.name = :value")
+    List<Clinic> findByName(@Param("value") String value);
 }
