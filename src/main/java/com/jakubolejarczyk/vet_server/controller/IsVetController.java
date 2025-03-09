@@ -32,7 +32,7 @@ public class IsVetController {
             return ResponseEntity.ok().body(responseDto);
         }
         String role = account.get().getRole();
-        Boolean isVet = role.contains("vet");
+        Boolean isVet = role != null && role.contains("vet");
         IsVetResponseDto responseDto = new IsVetResponseDto(isVet, new ArrayList<>());
         return ResponseEntity.ok().body(responseDto);
     }

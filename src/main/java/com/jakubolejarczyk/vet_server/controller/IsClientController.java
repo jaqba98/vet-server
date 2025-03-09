@@ -32,7 +32,7 @@ public class IsClientController {
             return ResponseEntity.ok().body(responseDto);
         }
         String role = account.get().getRole();
-        Boolean isClient = role.contains("client");
+        Boolean isClient = role != null && role.contains("client");
         IsClientResponseDto responseDto = new IsClientResponseDto(isClient, new ArrayList<>());
         return ResponseEntity.ok().body(responseDto);
     }
