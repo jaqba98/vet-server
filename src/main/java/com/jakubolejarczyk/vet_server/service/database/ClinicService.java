@@ -15,4 +15,8 @@ public class ClinicService {
         clinic.setName(name);
         clinicRepository.save(clinic);
     }
+
+    public Boolean unique(String column, String value) {
+        return clinicRepository.findByField(column, value).isEmpty();
+    }
 }
