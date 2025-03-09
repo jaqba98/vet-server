@@ -1,6 +1,5 @@
 package com.jakubolejarczyk.vet_server.dto.response.handler;
 
-import com.jakubolejarczyk.vet_server.dto.base.BaseResponseDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +11,8 @@ import java.util.ArrayList;
 @Setter
 @SuperBuilder
 @NoArgsConstructor
-public class ValidationHandlerResponseDto extends BaseResponseDto {
+public class ValidationHandlerResponseDto {
+    private Boolean success;
+
     private ArrayList<String> errors;
 }

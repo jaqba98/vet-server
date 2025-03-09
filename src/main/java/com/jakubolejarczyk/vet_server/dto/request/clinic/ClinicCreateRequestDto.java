@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.dto.request.clinic;
 
-import com.jakubolejarczyk.vet_server.dto.base.BaseRequestDto;
+import com.jakubolejarczyk.vet_server.validator.token.Token;
 import com.jakubolejarczyk.vet_server.validator.unique.Unique;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -13,7 +13,12 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @SuperBuilder
 @NoArgsConstructor
-public class ClinicCreateRequestDto extends BaseRequestDto {
+public class ClinicCreateRequestDto {
+    @NotNull(message = "Token is requires!")
+    @NotBlank(message = "Token cannot be empty!")
+    @Token
+    private String token;
+
     @NotNull(message = "Name is requires!")
     @NotBlank(message = "Name cannot be empty!")
     @Unique(message = "There is a clinic with the given name!", table = "clinic", column = "name")

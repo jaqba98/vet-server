@@ -1,6 +1,5 @@
 package com.jakubolejarczyk.vet_server.dto.response.clinic;
 
-import com.jakubolejarczyk.vet_server.dto.base.BaseResponseDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,5 +9,6 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @SuperBuilder
 @NoArgsConstructor
-public class ClinicCreateResponseDto extends BaseResponseDto {
+public class ClinicCreateResponseDto {
+    private Boolean success;
 }
