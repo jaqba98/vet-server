@@ -27,7 +27,7 @@ public class HasRoleController {
     public ResponseEntity<HasRoleResponseDto> hasRole(@RequestBody HasRoleRequestDto requestDto) {
         String token = requestDto.getToken();
         String email = tokenService.decode(token);
-        Optional<Account> account = accountService.getAccountByEmail(email);
+        Optional<Account> account = accountService.findByEmail(email);
         if (account.isPresent()) {
             String role = account.get().getRole();
             Boolean hasRole = role != null;

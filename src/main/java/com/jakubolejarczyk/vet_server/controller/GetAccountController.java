@@ -27,7 +27,7 @@ public class GetAccountController {
     public ResponseEntity<GetAccountResponseDto> getAccountPost(@RequestBody GetAccountRequestDto requestDto) {
         String token = requestDto.getToken();
         String email = tokenService.decode(token);
-        Optional<Account> account = accountService.getAccountByEmail(email);
+        Optional<Account> account = accountService.findByEmail(email);
         if (account.isPresent()) {
             String firstName = account.get().getFirstName();
             String lastName = account.get().getLastName();

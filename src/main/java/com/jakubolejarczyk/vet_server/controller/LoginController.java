@@ -30,7 +30,7 @@ public class LoginController {
     public ResponseEntity<LoginResponseDto> loginPost(@RequestBody LoginRequestDto requestDto) {
         String email = requestDto.getEmail();
         String password = requestDto.getPassword();
-        Optional<Account> account = accountService.getAccountByEmail(email);
+        Optional<Account> account = accountService.findByEmail(email);
         if (account.isPresent()) {
             String encodedPassword = account.get().getPassword();
             if (passwordService.match(password, encodedPassword)) {

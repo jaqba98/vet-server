@@ -27,7 +27,7 @@ public class IsVetController {
     public ResponseEntity<IsVetResponseDto> isVet(@RequestBody IsVetRequestDto requestDto) {
         String token = requestDto.getToken();
         String email = tokenService.decode(token);
-        Optional<Account> account = accountService.getAccountByEmail(email);
+        Optional<Account> account = accountService.findByEmail(email);
         if (account.isPresent()) {
             String role = account.get().getRole();
             Boolean isVet = role.contains("vet");

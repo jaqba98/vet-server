@@ -27,7 +27,7 @@ public class IsClientController {
     public ResponseEntity<IsClientResponseDto> isClient(@RequestBody IsClientRequestDto requestDto) {
         String token = requestDto.getToken();
         String email = tokenService.decode(token);
-        Optional<Account> account = accountService.getAccountByEmail(email);
+        Optional<Account> account = accountService.findByEmail(email);
         if (account.isPresent()) {
             String role = account.get().getRole();
             Boolean isClient = role.contains("client");

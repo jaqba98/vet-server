@@ -25,7 +25,6 @@ public class AccountService {
     }
 
     public void updateRole(String email, String password) {
-        accountRepository.updateRole(email, password);
     }
 
     public void create(String email, String password, String firstName, String lastName) {
