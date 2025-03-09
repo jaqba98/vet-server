@@ -1,24 +1,33 @@
 package com.jakubolejarczyk.vet_server.controller;
 
-import com.jakubolejarczyk.vet_server.dto.request.LogoutRequestDto;
-import com.jakubolejarczyk.vet_server.dto.response.LogoutResponseDto;
+import com.jakubolejarczyk.vet_server.dto.request.logout.LogoutRequestDto;
+import com.jakubolejarczyk.vet_server.dto.response.logout.LogoutResponseDto;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
 @AllArgsConstructor
 public class LogoutController {
     @PostMapping("logout")
-    public ResponseEntity<LogoutResponseDto> logoutPost(@RequestBody LogoutRequestDto requestDto) {
-        LogoutResponseDto responseDto = LogoutResponseDto.builder()
-                .success(true)
-                .build();
-        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
+    public ResponseEntity<LogoutResponseDto> logout(@Valid @RequestBody LogoutRequestDto requestDto) {
+        LogoutResponseDto responseDto = new LogoutResponseDto(true, new ArrayList<>());
+        return ResponseEntity.ok().body(responseDto);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<LogoutResponseDto> handleValidation(MethodArgumentNotValidException ex) {
+        ArrayList<String> errors = new ArrayList<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String message = error.getDefaultMessage();
+            errors.add(message);
+        });
+        LogoutResponseDto responseDto = new LogoutResponseDto(false, errors);
+        return ResponseEntity.ok().body(responseDto);
     }
 }
