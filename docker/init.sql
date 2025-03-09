@@ -89,12 +89,11 @@ CREATE TABLE Clinic (
 
 CREATE TABLE Vet (
     id SERIAL PRIMARY KEY,
-    salary DECIMAL(10, 2) NOT NULL,
-    license_number VARCHAR(255) NOT NULL,
-    license_issue_date DATE NOT NULL,
-    license_expiry_date DATE NOT NULL,
-    specializations VARCHAR(255) NOT NULL,
-    years_of_experience INTEGER NOT NULL,
+    license_number VARCHAR(255) NULL,
+    license_issue_date DATE NULL,
+    license_expiry_date DATE NULL,
+    specializations VARCHAR(255) NULL,
+    years_of_experience INTEGER NULL,
     account_id INTEGER NOT NULL,
     opening_hours_id INTEGER NOT NULL,
     FOREIGN KEY (account_id) REFERENCES Account(id),
