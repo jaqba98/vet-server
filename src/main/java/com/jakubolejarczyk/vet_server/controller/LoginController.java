@@ -31,20 +31,21 @@ public class LoginController {
         String email = requestDto.getEmail();
         String password = requestDto.getPassword();
         Optional<Account> account = accountService.findByEmail(email);
-        ArrayList<String> errors = new ArrayList<>();
         if (account.isEmpty()) {
+            ArrayList<String> errors = new ArrayList<>();
             errors.add("Incorrect email address or password!");
             LoginResponseDto responseDto = new LoginResponseDto(false, errors, "");
             return ResponseEntity.ok().body(responseDto);
         }
         String encodedPassword = account.get().getPassword();
         if (!passwordService.match(password, encodedPassword)) {
+            ArrayList<String> errors = new ArrayList<>();
             errors.add("Incorrect email address or password!");
             LoginResponseDto responseDto = new LoginResponseDto(false, errors, "");
             return ResponseEntity.ok().body(responseDto);
         }
         String token = tokenService.generate(email);
-        LoginResponseDto responseDto = new LoginResponseDto(true, errors, token);
+        LoginResponseDto responseDto = new LoginResponseDto(true, new ArrayList<>(), token);
         return ResponseEntity.ok().body(responseDto);
     }
 }

@@ -28,10 +28,7 @@ public class RegistrationController {
         String lastName = requestDto.getLastName();
         String hashPassword = passwordService.encode(password);
         accountService.create(email, hashPassword, firstName, lastName);
-        RegistrationResponseDto responseDto = RegistrationResponseDto
-                .builder()
-                .success(true)
-                .build();
+        RegistrationResponseDto responseDto = new RegistrationResponseDto(true, new ArrayList<>());
         return ResponseEntity.ok().body(responseDto);
     }
 
@@ -42,11 +39,7 @@ public class RegistrationController {
             String message = error.getDefaultMessage();
             errors.add(message);
         });
-        RegistrationResponseDto responseDto = RegistrationResponseDto
-                .builder()
-                .success(false)
-                .errors(errors)
-                .build();
+        RegistrationResponseDto responseDto = new RegistrationResponseDto(false, errors);
         return ResponseEntity.ok().body(responseDto);
     }
 }

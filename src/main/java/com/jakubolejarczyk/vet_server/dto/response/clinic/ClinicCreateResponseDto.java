@@ -1,16 +1,14 @@
 package com.jakubolejarczyk.vet_server.dto.response.clinic;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
 
 @Getter
 @Setter
-@SuperBuilder
-@NoArgsConstructor
+@AllArgsConstructor
 public class ClinicCreateResponseDto {
     private Boolean success;
 

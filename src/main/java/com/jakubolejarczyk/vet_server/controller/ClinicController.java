@@ -21,7 +21,7 @@ public class ClinicController {
     public ResponseEntity<ClinicCreateResponseDto> create(@Valid @RequestBody ClinicCreateRequestDto requestDto) {
         String name = requestDto.getName();
         clinicService.create(name);
-        ClinicCreateResponseDto responseDto = ClinicCreateResponseDto.builder().success(true).build();
+        ClinicCreateResponseDto responseDto = new ClinicCreateResponseDto(false, new ArrayList<>());
         return ResponseEntity.ok().body(responseDto);
     }
 
@@ -32,11 +32,7 @@ public class ClinicController {
             String message = error.getDefaultMessage();
             errors.add(message);
         });
-        ClinicCreateResponseDto responseDto = ClinicCreateResponseDto
-                .builder()
-                .success(false)
-                .errors(errors)
-                .build();
+        ClinicCreateResponseDto responseDto = new ClinicCreateResponseDto(false, errors);
         return ResponseEntity.ok().body(responseDto);
     }
 }
