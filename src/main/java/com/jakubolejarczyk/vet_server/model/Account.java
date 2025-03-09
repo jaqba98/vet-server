@@ -1,6 +1,7 @@
 package com.jakubolejarczyk.vet_server.model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,27 +9,28 @@ import lombok.Setter;
 @Table
 @Getter
 @Setter
+@Builder
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password", nullable = false)
+    @Column(nullable = false)
     private String password;
 
-    @Column(name = "first_name", nullable = false, length = 50)
+    @Column(name = "first_name", length = 50, nullable = false)
     private String firstName;
 
-    @Column(name = "last_name", nullable = false, length = 100)
+    @Column(name = "last_name", length = 100, nullable = false)
     private String lastName;
 
-    @Column(name = "role", nullable = false, length = 6)
+    @Column(length = 6)
     private String role;
 
-    @Column(name ="picture_url", nullable = false)
+    @Column(name ="picture_url")
     private String pictureUrl;
 
     @Column(name = "is_verified", nullable = false)

@@ -28,7 +28,7 @@ CREATE TABLE Account (
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
     role VARCHAR(6) NULL,
-    picture_url VARCHAR(255) NOT NULL,
+    picture_url VARCHAR(255) NULL,
     is_verified BOOLEAN NOT NULL
 );
 

@@ -12,31 +12,33 @@ import java.util.Optional;
 public class AccountService {
     private final AccountRepository accountRepository;
 
-    public Optional<Account> getAccountByEmail(String email) {
-        return accountRepository.getAccountByEmail(email);
+    public Optional<Account> findByEmail(String email) {
+        return accountRepository.findByEmail(email);
     }
 
-    public Boolean isAccountByEmail(String email) {
-        return getAccountByEmail(email).isPresent();
+    public Boolean existByEmail(String email) {
+        return findByEmail(email).isPresent();
     }
 
-    public Boolean isNotAccountByEmail(String email) {
-        return !isAccountByEmail(email);
+    public Boolean notExistByEmail(String email) {
+        return !existByEmail(email);
     }
 
-    public void updateRole(String email, String role) {
-        accountRepository.updateRole(email, role);
+    public void updateRole(String email, String password) {
+        accountRepository.updateRole(email, password);
     }
 
-    public void createAccount(String email, String password, String firstName, String lastName) {
-        Account account = new Account();
-        account.setEmail(email);
-        account.setPassword(password);
-        account.setFirstName(firstName);
-        account.setLastName(lastName);
-        account.setRole(null);
-        account.setPictureUrl("");
-        account.setIsVerified(true);
+    public void create(String email, String password, String firstName, String lastName) {
+        Account account = Account
+                .builder()
+                .email(email)
+                .password(password)
+                .firstName(firstName)
+                .lastName(lastName)
+                .role(null)
+                .pictureUrl(null)
+                .isVerified(false)
+                .build();
         accountRepository.save(account);
     }
 }
