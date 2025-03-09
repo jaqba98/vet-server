@@ -24,7 +24,8 @@ public class AccountService {
         return !existByEmail(email);
     }
 
-    public void updateRole(String email, String password) {
+    public void updateRole(String email, String role) {
+        accountRepository.updateRole(email, role);
     }
 
     public void create(String email, String password, String firstName, String lastName) {
