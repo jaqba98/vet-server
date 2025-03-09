@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.dto.response.logout;
+package com.jakubolejarczyk.vet_server.dto.response.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 @Getter
 @Setter
 @AllArgsConstructor
-public class LogoutResponseDto {
+public class ClinicCreateResponseDto {
     private Boolean success;
 
     private ArrayList<String> errors;

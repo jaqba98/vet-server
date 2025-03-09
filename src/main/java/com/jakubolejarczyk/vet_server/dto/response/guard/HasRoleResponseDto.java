@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.dto.response.login;
+package com.jakubolejarczyk.vet_server.dto.response.guard;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,10 +9,8 @@ import java.util.ArrayList;
 @Getter
 @Setter
 @AllArgsConstructor
-public class LoginResponseDto {
+public class HasRoleResponseDto {
     private Boolean success;
 
     private ArrayList<String> errors;
-
-    private String token;
 }

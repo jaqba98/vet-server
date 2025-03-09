@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.dto.request.registration;
+package com.jakubolejarczyk.vet_server.dto.request.controller;
 
 import com.jakubolejarczyk.vet_server.validator.email_not_exist.EmailNotExist;
 import com.jakubolejarczyk.vet_server.validator.fields_match.FieldsMatch;

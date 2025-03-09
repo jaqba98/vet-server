@@ -1,7 +1,7 @@
 package com.jakubolejarczyk.vet_server.controller;
 
-import com.jakubolejarczyk.vet_server.dto.request.clinic.ClinicCreateRequestDto;
-import com.jakubolejarczyk.vet_server.dto.response.clinic.ClinicCreateResponseDto;
+import com.jakubolejarczyk.vet_server.dto.request.controller.ClinicCreateRequestDto;
+import com.jakubolejarczyk.vet_server.dto.response.controller.ClinicCreateResponseDto;
 import com.jakubolejarczyk.vet_server.service.database.ClinicService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

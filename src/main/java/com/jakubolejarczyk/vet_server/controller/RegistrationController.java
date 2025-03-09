@@ -1,7 +1,7 @@
 package com.jakubolejarczyk.vet_server.controller;
 
-import com.jakubolejarczyk.vet_server.dto.request.registration.RegistrationRequestDto;
-import com.jakubolejarczyk.vet_server.dto.response.registration.RegistrationResponseDto;
+import com.jakubolejarczyk.vet_server.dto.request.controller.RegistrationRequestDto;
+import com.jakubolejarczyk.vet_server.dto.response.controller.RegistrationResponseDto;
 import com.jakubolejarczyk.vet_server.service.database.AccountService;
 import com.jakubolejarczyk.vet_server.service.security.PasswordService;
 import jakarta.validation.Valid;

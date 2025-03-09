@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.dto.response.clinic;
+package com.jakubolejarczyk.vet_server.dto.response.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,10 @@ import java.util.ArrayList;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ClinicCreateResponseDto {
+public class LoginResponseDto {
     private Boolean success;
 
     private ArrayList<String> errors;
+
+    private String token;
 }

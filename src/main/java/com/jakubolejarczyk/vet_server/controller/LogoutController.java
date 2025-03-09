@@ -1,7 +1,7 @@
 package com.jakubolejarczyk.vet_server.controller;
 
-import com.jakubolejarczyk.vet_server.dto.request.logout.LogoutRequestDto;
-import com.jakubolejarczyk.vet_server.dto.response.logout.LogoutResponseDto;
+import com.jakubolejarczyk.vet_server.dto.request.controller.LogoutRequestDto;
+import com.jakubolejarczyk.vet_server.dto.response.controller.LogoutResponseDto;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

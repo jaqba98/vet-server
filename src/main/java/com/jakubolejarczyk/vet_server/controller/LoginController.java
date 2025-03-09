@@ -1,7 +1,7 @@
 package com.jakubolejarczyk.vet_server.controller;
 
-import com.jakubolejarczyk.vet_server.dto.request.login.LoginRequestDto;
-import com.jakubolejarczyk.vet_server.dto.response.login.LoginResponseDto;
+import com.jakubolejarczyk.vet_server.dto.request.controller.LoginRequestDto;
+import com.jakubolejarczyk.vet_server.dto.response.controller.LoginResponseDto;
 import com.jakubolejarczyk.vet_server.model.Account;
 import com.jakubolejarczyk.vet_server.service.database.AccountService;
 import com.jakubolejarczyk.vet_server.service.security.PasswordService;
