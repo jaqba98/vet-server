@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.dto.request;
+package com.jakubolejarczyk.vet_server.dto.request.registration;
 
 import com.jakubolejarczyk.vet_server.validator.email_not_exist.EmailNotExist;
 import com.jakubolejarczyk.vet_server.validator.fields_match.FieldsMatch;
@@ -12,9 +12,9 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Getter
-@NoArgsConstructor
 @Setter
 @SuperBuilder
+@NoArgsConstructor
 @FieldsMatch(first = "password", second = "confirmPassword", message = "Passwords must match!")
 public class RegistrationRequestDto {
     @NotNull(message = "Email is required!")

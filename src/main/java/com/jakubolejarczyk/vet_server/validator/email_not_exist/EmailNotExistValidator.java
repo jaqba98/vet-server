@@ -10,10 +10,7 @@ public class EmailNotExistValidator implements ConstraintValidator<EmailNotExist
     private final AccountService accountService;
 
     @Override
-    public void initialize(EmailNotExist annotation) {}
-
-    @Override
-    public boolean isValid(String value, ConstraintValidatorContext context) {
-        return accountService.isNotAccountByEmail(value);
+    public boolean isValid(String email, ConstraintValidatorContext context) {
+        return accountService.notExistByEmail(email);
     }
 }
