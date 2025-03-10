@@ -22,6 +22,10 @@ public class ClinicService {
         return new ArrayList<>(clinicRepository.findAll());
     }
 
+    public void delete(Long id) {
+        clinicRepository.deleteById(id);
+    }
+
     public Boolean uniqueName(String value) {
         return clinicRepository.findByName(value).isEmpty();
     }
