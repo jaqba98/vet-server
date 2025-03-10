@@ -1,0 +1,19 @@
+package com.jakubolejarczyk.vet_server.dto.response.controller.clinic;
+
+import com.jakubolejarczyk.vet_server.model.Clinic;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.ArrayList;
+
+@Getter
+@Setter
+@AllArgsConstructor
+public class ClinicReadResponseDto {
+    private Boolean success;
+
+    private ArrayList<String> errors;
+
+    private ArrayList<Clinic> clinics;
+}

@@ -5,6 +5,8 @@ import com.jakubolejarczyk.vet_server.repository.ClinicRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 @AllArgsConstructor
 public class ClinicService {
@@ -14,6 +16,10 @@ public class ClinicService {
         Clinic clinic = new Clinic();
         clinic.setName(name);
         clinicRepository.save(clinic);
+    }
+
+    public ArrayList<Clinic> read() {
+        return new ArrayList<>(clinicRepository.findAll());
     }
 
     public Boolean uniqueName(String value) {

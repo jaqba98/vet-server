@@ -1,7 +1,7 @@
-package com.jakubolejarczyk.vet_server.controller;
+package com.jakubolejarczyk.vet_server.controller.clinic;
 
-import com.jakubolejarczyk.vet_server.dto.request.controller.ClinicCreateRequestDto;
-import com.jakubolejarczyk.vet_server.dto.response.controller.ClinicCreateResponseDto;
+import com.jakubolejarczyk.vet_server.dto.request.controller.clinic.ClinicCreateRequestDto;
+import com.jakubolejarczyk.vet_server.dto.response.controller.clinic.ClinicCreateResponseDto;
 import com.jakubolejarczyk.vet_server.service.database.ClinicService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -14,10 +14,10 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("/api/v1")
 @AllArgsConstructor
-public class ClinicController {
+public class ClinicCreateController {
     private final ClinicService clinicService;
 
-    @PostMapping("clinic")
+    @PostMapping("clinic-create")
     public ResponseEntity<ClinicCreateResponseDto> create(@Valid @RequestBody ClinicCreateRequestDto requestDto) {
         String name = requestDto.getName();
         clinicService.create(name);

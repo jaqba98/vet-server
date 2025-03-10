@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.dto.request.controller;
+package com.jakubolejarczyk.vet_server.dto.request.controller.clinic;
 
 import com.jakubolejarczyk.vet_server.validator.token.Token;
 import com.jakubolejarczyk.vet_server.validator.unique.Unique;

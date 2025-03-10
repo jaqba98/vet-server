@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.dto.response.controller;
+package com.jakubolejarczyk.vet_server.dto.response.controller.clinic;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
