@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -16,6 +17,10 @@ public class ClinicService {
         Clinic clinic = new Clinic();
         clinic.setName(name);
         clinicRepository.save(clinic);
+    }
+
+    public void deleteByIds(List<Long> ids) {
+        clinicRepository.deleteAllByIdInBatch(ids);
     }
 
     public ArrayList<Clinic> read() {

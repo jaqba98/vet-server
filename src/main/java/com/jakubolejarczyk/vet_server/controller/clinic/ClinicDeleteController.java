@@ -10,6 +10,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -19,7 +20,8 @@ public class ClinicDeleteController {
 
     @PostMapping("clinic-delete")
     public ResponseEntity<ClinicDeleteResponseDto> read(@Valid @RequestBody ClinicDeleteRequestDto requestDto) {
-        requestDto.getIds().forEach(clinicService::delete);
+        List<Long> ids = requestDto.getIds();
+        clinicService.deleteByIds(ids);
         ClinicDeleteResponseDto responseDto = new ClinicDeleteResponseDto(true, new ArrayList<>());
         return ResponseEntity.ok().body(responseDto);
     }
