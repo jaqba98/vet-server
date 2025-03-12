@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -19,8 +20,16 @@ public class ClinicService {
         clinicRepository.save(clinic);
     }
 
+    public void update(Clinic clinic) {
+        clinicRepository.save(clinic);
+    }
+
     public void deleteByIds(List<Long> ids) {
         clinicRepository.deleteAllByIdInBatch(ids);
+    }
+
+    public Optional<Clinic> get(Long id) {
+        return clinicRepository.findById(id);
     }
 
     public ArrayList<Clinic> read() {
