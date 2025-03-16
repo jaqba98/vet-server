@@ -15,9 +15,9 @@ public class ClinicService {
     private final ClinicRepository clinicRepository;
 
     public void create(String name) {
-        Clinic clinic = new Clinic();
-        clinic.setName(name);
-        clinicRepository.save(clinic);
+//        Clinic clinic = new Clinic();
+//        clinic.setName(name);
+//        clinicRepository.save(clinic);
     }
 
     public void update(Clinic clinic) {

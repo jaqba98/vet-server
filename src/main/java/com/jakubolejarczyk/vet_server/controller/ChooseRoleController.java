@@ -44,8 +44,8 @@ public class ChooseRoleController {
         }
         accountService.updateRole(email, role);
         if (role.equals("vet")) {
-            OpeningHours openingHours = openingHoursService.create();
-            vetService.create(account.get(), openingHours);
+//            OpeningHours openingHours = openingHoursService.create();
+//            vetService.create(account.get(), openingHours);
         }
         else if (role.equals("client")) {
             clientService.create(account.get());

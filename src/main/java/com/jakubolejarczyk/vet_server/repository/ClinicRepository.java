@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ClinicRepository extends BaseRepository<Clinic> {
+public interface ClinicRepository extends org.springframework.data.jpa.repository.JpaRepository<Clinic, Long> {
     @Query("SELECT c FROM Clinic c WHERE c.name = :name")
     List<Clinic> findByName(@Param("name") String name);
 }

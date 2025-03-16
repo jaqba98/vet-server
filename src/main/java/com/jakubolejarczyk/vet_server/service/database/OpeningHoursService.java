@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 public class OpeningHoursService {
     private final OpeningHoursRepository openingHoursRepository;
 
-    public OpeningHours create() {
-        OpeningHours openingHours = new OpeningHours();
-        openingHoursRepository.save(openingHours);
-        return openingHours;
+    public void create() {
+//        OpeningHours openingHours = new OpeningHours();
+//        openingHoursRepository.save(openingHours);
+//        return openingHours;
     }
 }
