@@ -5,13 +5,20 @@
 -- ## Create tables without foreign keys. ##
 CREATE TABLE OpeningHours (
     id SERIAL PRIMARY KEY,
-    monday_from TIME NULL, monday_to TIME NULL,
-    tuesday_from TIME NULL, tuesday_to TIME NULL,
-    wednesday_from TIME NULL, wednesday_to TIME NULL,
-    thursday_from TIME NULL, thursday_to TIME NULL,
-    friday_from TIME NULL, friday_to TIME NULL,
-    saturday_from TIME NULL, saturday_to TIME NULL,
-    sunday_from TIME NULL, sunday_to TIME NULL
+    monday_from TIME NULL,
+    monday_to TIME NULL,
+    tuesday_from TIME NULL,
+    tuesday_to TIME NULL,
+    wednesday_from TIME NULL,
+    wednesday_to TIME NULL,
+    thursday_from TIME NULL,
+    thursday_to TIME NULL,
+    friday_from TIME NULL,
+    friday_to TIME NULL,
+    saturday_from TIME NULL,
+    saturday_to TIME NULL,
+    sunday_from TIME NULL,
+    sunday_to TIME NULL
 );
 
 CREATE TABLE Contact (
@@ -81,10 +88,18 @@ CREATE TABLE Invoice (
 -- ## Create tables with foreign keys. ##
 CREATE TABLE Clinic (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL UNIQUE
---    address VARCHAR(255) NOT NULL,
---    opening_hours_id INTEGER NOT NULL,
---    FOREIGN KEY (opening_hours_id) REFERENCES OpeningHours(id)
+    name VARCHAR(150) NOT NULL UNIQUE,
+    street VARCHAR(100) NOT NULL,
+    building_number VARCHAR(10) NOT NULL,
+    apartment_number VARCHAR(10) NOT NULL,
+    postal_code VARCHAR(10) NOT NULL,
+    city VARCHAR(80) NOT NULL,
+    province VARCHAR(80) NOT NULL,
+    country VARCHAR(56) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone_number VARCHAR(10) NOT NULL,
+    opening_hours_id INTEGER NOT NULL,
+    FOREIGN KEY (opening_hours_id) REFERENCES OpeningHours(id)
 );
 
 CREATE TABLE Vet (
@@ -140,20 +155,12 @@ CREATE TABLE Appointment (
 );
 
 -- ## Create tables with relations between them. ##
-CREATE TABLE Clinic_Contact (
-    id SERIAL PRIMARY KEY,
-    clinic_id INTEGER NOT NULL,
-    contact_id INTEGER NOT NULL,
-    FOREIGN KEY (clinic_id) REFERENCES Clinic(id),
-    FOREIGN KEY (contact_id) REFERENCES Contact(id)
-);
-
 CREATE TABLE Clinic_Account (
     id SERIAL PRIMARY KEY,
-    clinic_id INTEGER NOT NULL,
     account_id INTEGER NOT NULL,
-    FOREIGN KEY (clinic_id) REFERENCES Clinic(id),
-    FOREIGN KEY (account_id) REFERENCES Account(id)
+    clinic_id INTEGER NOT NULL,
+    FOREIGN KEY (account_id) REFERENCES Account(id),
+    FOREIGN KEY (clinic_id) REFERENCES Clinic(id)
 );
 
 CREATE TABLE Account_Contact (
@@ -166,10 +173,10 @@ CREATE TABLE Account_Contact (
 
 CREATE TABLE Owner (
     id SERIAL PRIMARY KEY,
-    account_id INTEGER NOT NULL,
     clinic_id INTEGER NOT NULL,
-    FOREIGN KEY (account_id) REFERENCES Account(id),
-    FOREIGN KEY (clinic_id) REFERENCES Clinic(id)
+    account_id INTEGER NOT NULL,
+    FOREIGN KEY (clinic_id) REFERENCES Clinic(id),
+    FOREIGN KEY (account_id) REFERENCES Account(id)
 );
 
 CREATE TABLE Client_Pet (
