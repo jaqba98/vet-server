@@ -6,3 +6,4 @@
 - update the init.sql script to make it sync with the diagram
 - refresh the docker database to apply changes (remove the old volumes)
 - add domain models (interface) for each entity
+- add model entity for each entity

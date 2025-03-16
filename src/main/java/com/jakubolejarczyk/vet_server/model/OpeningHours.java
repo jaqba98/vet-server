@@ -1,59 +1,43 @@
 package com.jakubolejarczyk.vet_server.model;
 
-import jakarta.persistence.*;
+import com.jakubolejarczyk.vet_server.domain.OpeningHoursDomain;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalTime;
+import java.sql.Time;
 
-@Entity
-@Table(name = "openinghours")
 @Getter
 @Setter
-public class OpeningHours {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@AllArgsConstructor
+public class OpeningHours extends OpeningHoursDomain {
     private Long id;
 
-    @Column(name = "monday_from")
-    private LocalTime mondayFrom;
+    private Time mondayFrom;
 
-    @Column(name = "monday_to")
-    private LocalTime mondayTo;
+    private Time mondayTo;
 
-    @Column(name = "tuesday_from")
-    private LocalTime tuesdayFrom;
+    private Time tuesdayFrom;
 
-    @Column(name = "tuesday_to")
-    private LocalTime tuesdayTo;
+    private Time tuesdayTo;
 
-    @Column(name = "wednesday_from")
-    private LocalTime wednesdayFrom;
+    private Time wednesdayFrom;
 
-    @Column(name = "wednesday_to")
-    private LocalTime wednesdayTo;
+    private Time wednesdayTo;
 
-    @Column(name = "thursday_from")
-    private LocalTime thursdayFrom;
+    private Time thursdayFrom;
 
-    @Column(name = "thursday_to")
-    private LocalTime thursdayTo;
+    private Time thursdayTo;
 
-    @Column(name = "friday_from")
-    private LocalTime fridayFrom;
+    private Time fridayFrom;
 
-    @Column(name = "friday_to")
-    private LocalTime fridayTo;
+    private Time fridayTo;
 
-    @Column(name = "saturday_from")
-    private LocalTime saturdayFrom;
+    private Time saturdayFrom;
 
-    @Column(name = "saturday_to")
-    private LocalTime saturdayTo;
+    private Time saturdayTo;
 
-    @Column(name = "sunday_from")
-    private LocalTime sundayFrom;
+    private Time sundayFrom;
 
-    @Column(name = "sunday_to")
-    private LocalTime sundayTo;
+    private Time sundayTo;
 }

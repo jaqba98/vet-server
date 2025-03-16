@@ -3,33 +3,33 @@ package com.jakubolejarczyk.vet_server.domain;
 import java.sql.Time;
 
 public abstract class OpeningHoursDomain {
-    abstract Long getId();
+    protected abstract Long getId();
 
-    abstract Time getMondayFrom();
+    protected abstract Time getMondayFrom();
 
-    abstract Time getMondayTo();
+    protected abstract Time getMondayTo();
 
-    abstract Time getTuesdayFrom();
+    protected abstract Time getTuesdayFrom();
 
-    abstract Time getTuesdayTo();
+    protected abstract Time getTuesdayTo();
 
-    abstract Time getWednesdayFrom();
+    protected abstract Time getWednesdayFrom();
 
-    abstract Time getWednesdayTo();
+    protected abstract Time getWednesdayTo();
 
-    abstract Time getThursdayFrom();
+    protected abstract Time getThursdayFrom();
 
-    abstract Time getThursdayTo();
+    protected abstract Time getThursdayTo();
 
-    abstract Time getFridayFrom();
+    protected abstract Time getFridayFrom();
 
-    abstract Time getFridayTo();
+    protected abstract Time getFridayTo();
 
-    abstract Time getSaturdayFrom();
+    protected abstract Time getSaturdayFrom();
 
-    abstract Time getSaturdayTo();
+    protected abstract Time getSaturdayTo();
 
-    abstract Time getSundayFrom();
+    protected abstract Time getSundayFrom();
 
-    abstract Time getSundayTo();
+    protected abstract Time getSundayTo();
 }

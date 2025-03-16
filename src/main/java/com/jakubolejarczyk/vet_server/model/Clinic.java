@@ -1,18 +1,35 @@
 package com.jakubolejarczyk.vet_server.model;
 
-import jakarta.persistence.*;
+import com.jakubolejarczyk.vet_server.domain.ClinicDomain;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
-@Table
 @Getter
 @Setter
-public class Clinic {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@AllArgsConstructor
+public class Clinic extends ClinicDomain {
     private Long id;
 
-    @Column(nullable = false, unique = true)
     private String name;
+
+    private String street;
+
+    private String buildingNumber;
+
+    private String apartmentNumber;
+
+    private String postalCode;
+
+    private String city;
+
+    private String province;
+
+    private String country;
+
+    private String email;
+
+    private String phoneNumber;
+
+    private Long openingHoursId;
 }
