@@ -1,5 +1,6 @@
 package com.jakubolejarczyk.vet_server.dto.request.controller;
 
+import com.jakubolejarczyk.vet_server.domain.AccountDomain;
 import com.jakubolejarczyk.vet_server.validator.email_not_exist.EmailNotExist;
 import com.jakubolejarczyk.vet_server.validator.fields_match.FieldsMatch;
 import jakarta.validation.constraints.Email;
@@ -12,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @FieldsMatch(first = "password", second = "confirmPassword", message = "Passwords must match!")
-public class RegistrationRequestDto {
+public class RegistrationRequestDto extends AccountDomain {
     @NotNull(message = "Email is required!")
     @NotBlank(message = "Email cannot be empty!")
     @Email(message = "Incorrect email format!")

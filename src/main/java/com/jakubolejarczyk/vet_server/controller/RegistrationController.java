@@ -1,7 +1,7 @@
 package com.jakubolejarczyk.vet_server.controller;
 
 import com.jakubolejarczyk.vet_server.dto.request.controller.RegistrationRequestDto;
-import com.jakubolejarczyk.vet_server.dto.response.controller.RegistrationResponseDto;
+import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
 import com.jakubolejarczyk.vet_server.service.database.AccountService;
 import com.jakubolejarczyk.vet_server.service.security.PasswordService;
 import jakarta.validation.Valid;
@@ -21,25 +21,27 @@ public class RegistrationController {
     private final PasswordService passwordService;
 
     @PostMapping("registration")
-    public ResponseEntity<RegistrationResponseDto> registration(@Valid @RequestBody RegistrationRequestDto requestDto) {
+    public ResponseEntity<ResponseDto<String>> registration(@Valid @RequestBody RegistrationRequestDto requestDto) {
         String email = requestDto.getEmail();
         String password = requestDto.getPassword();
         String firstName = requestDto.getFirstName();
         String lastName = requestDto.getLastName();
         String hashPassword = passwordService.encode(password);
         accountService.create(email, hashPassword, firstName, lastName);
-        RegistrationResponseDto responseDto = new RegistrationResponseDto(true, new ArrayList<>());
+        ResponseDto<String> responseDto = new ResponseDto<>(
+                true, new ArrayList<>(), "The account has been created successfully!"
+        );
         return ResponseEntity.ok().body(responseDto);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<RegistrationResponseDto> handleValidation(MethodArgumentNotValidException ex) {
+    public ResponseEntity<ResponseDto<String>> handleValidation(MethodArgumentNotValidException ex) {
         ArrayList<String> errors = new ArrayList<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
             String message = error.getDefaultMessage();
             errors.add(message);
         });
-        RegistrationResponseDto responseDto = new RegistrationResponseDto(false, errors);
+        ResponseDto<String> responseDto = new ResponseDto<>(false, errors, "");
         return ResponseEntity.ok().body(responseDto);
     }
 }
