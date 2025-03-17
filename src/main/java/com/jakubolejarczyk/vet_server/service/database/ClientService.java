@@ -1,19 +1,33 @@
 package com.jakubolejarczyk.vet_server.service.database;
 
-import com.jakubolejarczyk.vet_server.model.Account;
 import com.jakubolejarczyk.vet_server.model.Client;
 import com.jakubolejarczyk.vet_server.repository.ClientRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class ClientService {
-    private final ClientRepository clientRepository;
+    private final ClientRepository repository;
 
-    public void create(Account account) {
+    public void create(Long accountId) {
         Client client = new Client();
-        client.setAccountId(account);
-        clientRepository.save(client);
+        client.setAccountId(accountId);
+        repository.save(client);
+    }
+
+    public List<Client> read() {
+        return repository.findAll();
+    }
+
+    public void update(Client client) {
+        repository.save(client);
+    }
+
+    public void delete(Client client) {
+        Long id = client.getId();
+        repository.deleteById(id);
     }
 }

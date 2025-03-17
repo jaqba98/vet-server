@@ -5,15 +5,39 @@ import com.jakubolejarczyk.vet_server.repository.AccountRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class AccountService {
-    private final AccountRepository accountRepository;
+    private final AccountRepository repository;
+
+    public void create(String email, String password, String firstName, String lastName) {
+        Account account = new Account();
+        account.setEmail(email);
+        account.setPassword(password);
+        account.setFirstName(firstName);
+        account.setLastName(lastName);
+        account.setIsVerified(false);
+        repository.save(account);
+    }
+
+    public List<Account> read() {
+        return repository.findAll();
+    }
+
+    public void update(Account account) {
+        repository.save(account);
+    }
+
+    public void delete(Account account) {
+        Long id = account.getId();
+        repository.deleteById(id);
+    }
 
     public Optional<Account> findByEmail(String email) {
-        return accountRepository.findByEmail(email);
+        return repository.findByEmail(email);
     }
 
     public Boolean existByEmail(String email) {
@@ -25,18 +49,6 @@ public class AccountService {
     }
 
     public void updateRole(String email, String role) {
-        accountRepository.updateRole(email, role);
-    }
-
-    public void create(String email, String password, String firstName, String lastName) {
-        Account account = new Account();
-        account.setEmail(email);
-        account.setPassword(password);
-        account.setFirstName(firstName);
-        account.setLastName(lastName);
-        account.setRole(null);
-        account.setPictureUrl(null);
-        account.setIsVerified(false);
-        accountRepository.save(account);
+        repository.updateRole(email, role);
     }
 }
