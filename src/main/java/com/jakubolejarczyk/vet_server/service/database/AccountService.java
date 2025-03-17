@@ -3,6 +3,7 @@ package com.jakubolejarczyk.vet_server.service.database;
 import com.jakubolejarczyk.vet_server.model.Account;
 import com.jakubolejarczyk.vet_server.repository.AccountRepository;
 import lombok.AllArgsConstructor;
+import lombok.val;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public class AccountService {
     private final AccountRepository repository;
 
     public Account create(String email, String password, String firstName, String lastName) {
-        Account account = new Account();
+        val account = new Account();
         account.setEmail(email);
         account.setPassword(password);
         account.setFirstName(firstName);
@@ -33,7 +34,7 @@ public class AccountService {
     }
 
     public void delete(Account account) {
-        Long id = account.getId();
+        val id = account.getId();
         repository.deleteById(id);
     }
 

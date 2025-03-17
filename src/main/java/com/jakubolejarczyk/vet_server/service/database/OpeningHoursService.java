@@ -3,6 +3,7 @@ package com.jakubolejarczyk.vet_server.service.database;
 import com.jakubolejarczyk.vet_server.model.OpeningHours;
 import com.jakubolejarczyk.vet_server.repository.OpeningHoursRepository;
 import lombok.AllArgsConstructor;
+import lombok.val;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public class OpeningHoursService {
     private final OpeningHoursRepository repository;
 
     public OpeningHours create() {
-        OpeningHours openingHours = new OpeningHours();
+        val openingHours = new OpeningHours();
         repository.save(openingHours);
         return openingHours;
     }
@@ -27,7 +28,7 @@ public class OpeningHoursService {
     }
 
     public void delete(OpeningHours openingHours) {
-        Long id = openingHours.getId();
+        val id = openingHours.getId();
         repository.deleteById(id);
     }
 }

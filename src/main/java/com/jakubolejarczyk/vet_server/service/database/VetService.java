@@ -3,6 +3,7 @@ package com.jakubolejarczyk.vet_server.service.database;
 import com.jakubolejarczyk.vet_server.model.Vet;
 import com.jakubolejarczyk.vet_server.repository.VetRepository;
 import lombok.AllArgsConstructor;
+import lombok.val;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public class VetService {
     private final VetRepository repository;
 
     public Vet create(Long accountId, Long openingHoursId) {
-        Vet vet = new Vet();
+        val vet = new Vet();
         vet.setAccountId(accountId);
         vet.setOpeningHoursId(openingHoursId);
         repository.save(vet);
@@ -29,7 +30,7 @@ public class VetService {
     }
 
     public void delete(Vet vet) {
-        Long id = vet.getId();
+        val id = vet.getId();
         repository.deleteById(id);
     }
 }

@@ -3,6 +3,7 @@ package com.jakubolejarczyk.vet_server.service.database;
 import com.jakubolejarczyk.vet_server.model.ClinicAccount;
 import com.jakubolejarczyk.vet_server.repository.ClinicAccountRepository;
 import lombok.AllArgsConstructor;
+import lombok.val;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public class ClinicAccountService {
     private final ClinicAccountRepository repository;
 
     public ClinicAccount create(Long accountId, Long clinicId) {
-        ClinicAccount clinicAccount = new ClinicAccount();
+        val clinicAccount = new ClinicAccount();
         clinicAccount.setAccountId(accountId);
         clinicAccount.setClinicId(clinicId);
         repository.save(clinicAccount);
@@ -29,7 +30,7 @@ public class ClinicAccountService {
     }
 
     public void delete(ClinicAccount clinicAccount) {
-        Long id = clinicAccount.getId();
+        val id = clinicAccount.getId();
         repository.deleteById(id);
     }
 }

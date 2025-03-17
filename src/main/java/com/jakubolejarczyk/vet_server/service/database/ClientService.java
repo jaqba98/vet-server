@@ -3,6 +3,7 @@ package com.jakubolejarczyk.vet_server.service.database;
 import com.jakubolejarczyk.vet_server.model.Client;
 import com.jakubolejarczyk.vet_server.repository.ClientRepository;
 import lombok.AllArgsConstructor;
+import lombok.val;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public class ClientService {
     private final ClientRepository repository;
 
     public Client create(Long accountId) {
-        Client client = new Client();
+        val client = new Client();
         client.setAccountId(accountId);
         repository.save(client);
         return client;
@@ -28,7 +29,7 @@ public class ClientService {
     }
 
     public void delete(Client client) {
-        Long id = client.getId();
+        val id = client.getId();
         repository.deleteById(id);
     }
 }
