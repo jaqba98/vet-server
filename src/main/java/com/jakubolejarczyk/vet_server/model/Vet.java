@@ -1,16 +1,12 @@
 package com.jakubolejarczyk.vet_server.model;
 
+import com.jakubolejarczyk.vet_server.domain.VetDomain;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDate;
 
 @Entity
-@Table
-@Getter
-@Setter
-public class Vet {
+public class Vet extends VetDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,17 +20,15 @@ public class Vet {
     @Column(name = "license_expiry_date")
     private LocalDate licenseExpiryDate;
 
-    @Column()
+    @Column(name = "specializations")
     private String specializations;
 
     @Column(name = "years_of_experience")
     private Integer yearsOfExperience;
 
-    @OneToOne
-    @JoinColumn(name = "account_id", nullable = false)
-    private Account accountId;
+    @Column(name = "account_id", nullable = false)
+    private Long accountId;
 
-    @OneToOne
-    @JoinColumn(name = "opening_hours_id", nullable = false)
-    private OpeningHours openingHoursId;
+    @Column(name = "opening_hours_id", nullable = false)
+    private Long openingHoursId;
 }

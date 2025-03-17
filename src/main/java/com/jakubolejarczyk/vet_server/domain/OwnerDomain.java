@@ -1,9 +1,13 @@
 package com.jakubolejarczyk.vet_server.domain;
 
-public interface OwnerDomain {
-    Long getId();
+import lombok.Getter;
+import lombok.Setter;
 
-    Long getAccountId();
-
-    Long getClinicId();
+@Getter
+@Setter
+public class OwnerDomain {
+    private Long id;
+    private Long accountId;
+    private Long clinicId;
+    private Long dupa;
 }

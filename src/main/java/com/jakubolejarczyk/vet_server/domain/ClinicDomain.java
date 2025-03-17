@@ -1,27 +1,21 @@
 package com.jakubolejarczyk.vet_server.domain;
 
-public interface ClinicDomain {
-    Long getId();
+import lombok.Getter;
+import lombok.Setter;
 
-    String getName();
-
-    String getStreet();
-
-    String getBuildingNumber();
-
-    String getApartmentNumber();
-
-    String getPostalCode();
-
-    String getCity();
-
-    String getProvince();
-
-    String getCountry();
-
-    String getEmail();
-
-    String getPhoneNumber();
-
-    Long getOpeningHoursId();
+@Getter
+@Setter
+public class ClinicDomain {
+    private Long id;
+    private String name;
+    private String street;
+    private String buildingNumber;
+    private String apartmentNumber;
+    private String postalCode;
+    private String city;
+    private String province;
+    private String country;
+    private String email;
+    private String phoneNumber;
+    private Long openingHoursId;
 }

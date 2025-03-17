@@ -1,19 +1,14 @@
 package com.jakubolejarczyk.vet_server.model;
 
+import com.jakubolejarczyk.vet_server.domain.ClientDomain;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
-@Table
-@Getter
-@Setter
-public class Client {
+public class Client extends ClientDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "account_id", nullable = false)
-    private Account accountId;
+    @Column(name = "account_id", nullable = false)
+    private Long accountId;
 }

@@ -1,8 +1,6 @@
 package com.jakubolejarczyk.vet_server.controller.clinic;
 
-import com.jakubolejarczyk.vet_server.dto.request.controller.clinic.ClinicCreateRequestDto;
 import com.jakubolejarczyk.vet_server.dto.request.controller.clinic.ClinicUpdateRequestDto;
-import com.jakubolejarczyk.vet_server.dto.response.controller.clinic.ClinicCreateResponseDto;
 import com.jakubolejarczyk.vet_server.dto.response.controller.clinic.ClinicUpdateResponseDto;
 import com.jakubolejarczyk.vet_server.model.Clinic;
 import com.jakubolejarczyk.vet_server.service.database.ClinicService;

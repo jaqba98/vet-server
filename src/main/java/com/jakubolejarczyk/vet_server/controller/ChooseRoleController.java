@@ -3,7 +3,6 @@ package com.jakubolejarczyk.vet_server.controller;
 import com.jakubolejarczyk.vet_server.dto.request.controller.ChooseRoleRequestDto;
 import com.jakubolejarczyk.vet_server.dto.response.controller.ChooseRoleResponseDto;
 import com.jakubolejarczyk.vet_server.model.Account;
-import com.jakubolejarczyk.vet_server.model.OpeningHours;
 import com.jakubolejarczyk.vet_server.service.database.AccountService;
 import com.jakubolejarczyk.vet_server.service.database.ClientService;
 import com.jakubolejarczyk.vet_server.service.database.OpeningHoursService;
