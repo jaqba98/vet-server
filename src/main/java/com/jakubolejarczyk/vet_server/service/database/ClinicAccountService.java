@@ -12,11 +12,12 @@ import java.util.List;
 public class ClinicAccountService {
     private final ClinicAccountRepository repository;
 
-    public void create(Long accountId, Long clinicId) {
+    public ClinicAccount create(Long accountId, Long clinicId) {
         ClinicAccount clinicAccount = new ClinicAccount();
         clinicAccount.setAccountId(accountId);
         clinicAccount.setClinicId(clinicId);
         repository.save(clinicAccount);
+        return clinicAccount;
     }
 
     public List<ClinicAccount> read() {

@@ -13,7 +13,7 @@ import java.util.Optional;
 public class AccountService {
     private final AccountRepository repository;
 
-    public void create(String email, String password, String firstName, String lastName) {
+    public Account create(String email, String password, String firstName, String lastName) {
         Account account = new Account();
         account.setEmail(email);
         account.setPassword(password);
@@ -21,6 +21,7 @@ public class AccountService {
         account.setLastName(lastName);
         account.setIsVerified(false);
         repository.save(account);
+        return account;
     }
 
     public List<Account> read() {

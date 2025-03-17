@@ -3,6 +3,7 @@ package com.jakubolejarczyk.vet_server.controller;
 import com.jakubolejarczyk.vet_server.dto.request.controller.ChooseRoleRequestDto;
 import com.jakubolejarczyk.vet_server.dto.response.controller.ChooseRoleResponseDto;
 import com.jakubolejarczyk.vet_server.model.Account;
+import com.jakubolejarczyk.vet_server.model.OpeningHours;
 import com.jakubolejarczyk.vet_server.service.database.AccountService;
 import com.jakubolejarczyk.vet_server.service.database.ClientService;
 import com.jakubolejarczyk.vet_server.service.database.OpeningHoursService;
@@ -43,11 +44,11 @@ public class ChooseRoleController {
         }
         accountService.updateRole(email, role);
         if (role.equals("vet")) {
-//            OpeningHours openingHours = openingHoursService.create();
-//            vetService.create(account.get(), openingHours);
+            OpeningHours openingHours = openingHoursService.create();
+            vetService.create(account.get().getId(), openingHours.getId());
         }
         else if (role.equals("client")) {
-            clientService.create(account.get());
+            clientService.create(account.get().getId());
         }
         ChooseRoleResponseDto responseDto = new ChooseRoleResponseDto(true, new ArrayList<>(), role);
         return ResponseEntity.ok().body(responseDto);

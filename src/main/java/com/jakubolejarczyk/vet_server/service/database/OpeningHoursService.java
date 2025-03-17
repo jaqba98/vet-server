@@ -12,9 +12,10 @@ import java.util.List;
 public class OpeningHoursService {
     private final OpeningHoursRepository repository;
 
-    public void create() {
+    public OpeningHours create() {
         OpeningHours openingHours = new OpeningHours();
         repository.save(openingHours);
+        return openingHours;
     }
 
     public List<OpeningHours> read() {

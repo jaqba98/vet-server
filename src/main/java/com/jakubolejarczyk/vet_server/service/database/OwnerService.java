@@ -12,11 +12,12 @@ import java.util.List;
 public class OwnerService {
     private final OwnerRepository repository;
 
-    public void create(Long accountId, Long clinicId) {
+    public Owner create(Long accountId, Long clinicId) {
         Owner owner = new Owner();
         owner.setAccountId(accountId);
         owner.setClinicId(clinicId);
         repository.save(owner);
+        return owner;
     }
 
     public List<Owner> read() {

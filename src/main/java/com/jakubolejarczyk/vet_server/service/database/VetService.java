@@ -12,11 +12,12 @@ import java.util.List;
 public class VetService {
     private final VetRepository repository;
 
-    public void create(Long accountId, Long openingHoursId) {
+    public Vet create(Long accountId, Long openingHoursId) {
         Vet vet = new Vet();
         vet.setAccountId(accountId);
         vet.setOpeningHoursId(openingHoursId);
         repository.save(vet);
+        return vet;
     }
 
     public List<Vet> read() {

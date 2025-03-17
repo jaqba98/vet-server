@@ -5,7 +5,7 @@ import com.jakubolejarczyk.vet_server.repository.ClinicRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -13,24 +13,24 @@ import java.util.Optional;
 public class ClinicService {
     private final ClinicRepository repository;
 
-    public void create(Clinic clinic) {
+    public Clinic create(Clinic clinic) {
         repository.save(clinic);
+        return clinic;
     }
 
-    public List<Clinic> read() {
-        return repository.findAll();
+    public ArrayList<Clinic> read() {
+        return new ArrayList<>(repository.findAll());
     }
 
     public void update(Clinic clinic) {
         repository.save(clinic);
     }
 
-    public void delete(Clinic clinic) {
-        Long id = clinic.getId();
+    public void delete(Long id) {
         repository.deleteById(id);
     }
 
-    public void deleteByIds(List<Long> ids) {
+    public void deleteByIds(ArrayList<Long> ids) {
         repository.deleteAllByIdInBatch(ids);
     }
 

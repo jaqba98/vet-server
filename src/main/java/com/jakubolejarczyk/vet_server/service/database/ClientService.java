@@ -12,10 +12,11 @@ import java.util.List;
 public class ClientService {
     private final ClientRepository repository;
 
-    public void create(Long accountId) {
+    public Client create(Long accountId) {
         Client client = new Client();
         client.setAccountId(accountId);
         repository.save(client);
+        return client;
     }
 
     public List<Client> read() {
