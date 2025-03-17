@@ -1,9 +1,7 @@
 package com.jakubolejarczyk.vet_server.domain;
 
-public interface ClinicAccountDomain {
+public interface ClientDomain {
     Long getId();
 
     Long getAccountId();
-
-    Long getClinicId();
 }

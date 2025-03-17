@@ -1,27 +1,27 @@
 package com.jakubolejarczyk.vet_server.domain;
 
-public abstract class ClinicDomain {
-    protected abstract Long getId();
+public interface ClinicDomain {
+    Long getId();
 
-    protected abstract String getName();
+    String getName();
 
-    protected abstract String getStreet();
+    String getStreet();
 
-    protected abstract String getBuildingNumber();
+    String getBuildingNumber();
 
-    protected abstract String getApartmentNumber();
+    String getApartmentNumber();
 
-    protected abstract String getPostalCode();
+    String getPostalCode();
 
-    protected abstract String getCity();
+    String getCity();
 
-    protected abstract String getProvince();
+    String getProvince();
 
-    protected abstract String getCountry();
+    String getCountry();
 
-    protected abstract String getEmail();
+    String getEmail();
 
-    protected abstract String getPhoneNumber();
+    String getPhoneNumber();
 
-    protected abstract Long getOpeningHoursId();
+    Long getOpeningHoursId();
 }

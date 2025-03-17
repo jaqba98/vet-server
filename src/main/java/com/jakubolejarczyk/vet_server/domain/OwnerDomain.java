@@ -1,9 +1,9 @@
 package com.jakubolejarczyk.vet_server.domain;
 
-public abstract class OwnerDomain {
-    protected abstract Long getId();
+public interface OwnerDomain {
+    Long getId();
 
-    protected abstract Long getAccountId();
+    Long getAccountId();
 
-    protected abstract Long getClinicId();
+    Long getClinicId();
 }
