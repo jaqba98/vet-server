@@ -6,6 +6,7 @@ import com.jakubolejarczyk.vet_server.service.database.AccountService;
 import com.jakubolejarczyk.vet_server.service.security.PasswordService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +32,7 @@ public class RegistrationController {
         ResponseDto<String> responseDto = new ResponseDto<>(
                 true, new ArrayList<>(), "The account has been created successfully!"
         );
-        return ResponseEntity.ok().body(responseDto);
+        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -42,6 +43,6 @@ public class RegistrationController {
             errors.add(message);
         });
         ResponseDto<String> responseDto = new ResponseDto<>(false, errors, "");
-        return ResponseEntity.ok().body(responseDto);
+        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 }
