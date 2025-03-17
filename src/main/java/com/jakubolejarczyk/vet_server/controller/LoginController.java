@@ -1,12 +1,13 @@
 package com.jakubolejarczyk.vet_server.controller;
 
 import com.jakubolejarczyk.vet_server.dto.request.controller.LoginRequestDto;
-import com.jakubolejarczyk.vet_server.dto.response.controller.LoginResponseDto;
-import com.jakubolejarczyk.vet_server.model.Account;
+import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
 import com.jakubolejarczyk.vet_server.service.database.AccountService;
 import com.jakubolejarczyk.vet_server.service.security.PasswordService;
 import com.jakubolejarczyk.vet_server.service.security.TokenService;
 import lombok.AllArgsConstructor;
+import lombok.val;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -27,25 +27,24 @@ public class LoginController {
     private final TokenService tokenService;
 
     @PostMapping("login")
-    public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto requestDto) {
-        String email = requestDto.getEmail();
-        String password = requestDto.getPassword();
-        Optional<Account> account = accountService.findByEmail(email);
+    public ResponseEntity<ResponseDto<String>> login(@RequestBody LoginRequestDto requestDto) {
+        val email = requestDto.getEmail();
+        val password = requestDto.getPassword();
+        val account = accountService.findByEmail(email);
+        val errors = new ArrayList<String>();
         if (account.isEmpty()) {
-            ArrayList<String> errors = new ArrayList<>();
-            errors.add("Incorrect email address or password!");
-            LoginResponseDto responseDto = new LoginResponseDto(false, errors, "");
-            return ResponseEntity.ok().body(responseDto);
+            errors.add("Incorrect email or password!");
+            val responseDto = new ResponseDto<>(false, errors, "");
+            return ResponseEntity.status(HttpStatus.OK).body(responseDto);
         }
-        String encodedPassword = account.get().getPassword();
+        val encodedPassword = account.get().getPassword();
         if (!passwordService.match(password, encodedPassword)) {
-            ArrayList<String> errors = new ArrayList<>();
-            errors.add("Incorrect email address or password!");
-            LoginResponseDto responseDto = new LoginResponseDto(false, errors, "");
-            return ResponseEntity.ok().body(responseDto);
+            errors.add("Incorrect email or password!");
+            val responseDto = new ResponseDto<>(false, errors, "");
+            return ResponseEntity.status(HttpStatus.OK).body(responseDto);
         }
         String token = tokenService.generate(email);
-        LoginResponseDto responseDto = new LoginResponseDto(true, new ArrayList<>(), token);
-        return ResponseEntity.ok().body(responseDto);
+        val responseDto = new ResponseDto<>(true, errors, token);
+        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 }

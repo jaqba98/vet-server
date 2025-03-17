@@ -6,6 +6,7 @@ import com.jakubolejarczyk.vet_server.service.database.AccountService;
 import com.jakubolejarczyk.vet_server.service.security.PasswordService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import lombok.val;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -23,26 +24,25 @@ public class RegistrationController {
 
     @PostMapping("registration")
     public ResponseEntity<ResponseDto<String>> registration(@Valid @RequestBody RegistrationRequestDto requestDto) {
-        String email = requestDto.getEmail();
-        String password = requestDto.getPassword();
-        String firstName = requestDto.getFirstName();
-        String lastName = requestDto.getLastName();
-        String hashPassword = passwordService.encode(password);
+        val email = requestDto.getEmail();
+        val password = requestDto.getPassword();
+        val firstName = requestDto.getFirstName();
+        val lastName = requestDto.getLastName();
+        val hashPassword = passwordService.encode(password);
+        val errors = new ArrayList<String>();
         accountService.create(email, hashPassword, firstName, lastName);
-        ResponseDto<String> responseDto = new ResponseDto<>(
-                true, new ArrayList<>(), "The account has been created successfully!"
-        );
+        val responseDto = new ResponseDto<>(true, errors, "The account has been created successfully!");
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ResponseDto<String>> handleValidation(MethodArgumentNotValidException ex) {
-        ArrayList<String> errors = new ArrayList<>();
+        val errors = new ArrayList<String>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
             String message = error.getDefaultMessage();
             errors.add(message);
         });
-        ResponseDto<String> responseDto = new ResponseDto<>(false, errors, "");
+        val responseDto = new ResponseDto<>(false, errors, "");
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 }
