@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.controller;
 
-import com.jakubolejarczyk.vet_server.dto.request.AuthRequestDto;
+import com.jakubolejarczyk.vet_server.dto.request.guard.GuardRequestDto;
 import com.jakubolejarczyk.vet_server.service.security.TokenService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ public class AuthController {
     private final TokenService tokenService;
 
     @PostMapping("auth")
-    public ResponseEntity<AuthResponseDto> authPost(@RequestBody AuthRequestDto requestDto) {
+    public ResponseEntity<AuthResponseDto> authPost(@RequestBody GuardRequestDto requestDto) {
         String token = requestDto.getToken();
         Boolean isAuth = tokenService.verify(token);
         AuthResponseDto responseDto = AuthResponseDto.builder().success(isAuth).build();

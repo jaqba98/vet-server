@@ -13,7 +13,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @FieldsMatch(first = "password", second = "confirmPassword", message = "Passwords must match!")
-public class RegistrationRequestDto extends AccountDomain {
+public class RegistrationRequestDto implements AccountDomain {
+    private Long id;
+
     @NotNull(message = "Email is required!")
     @NotBlank(message = "Email cannot be empty!")
     @Email(message = "Incorrect email format!")
@@ -40,4 +42,8 @@ public class RegistrationRequestDto extends AccountDomain {
     @NotBlank(message = "Last name cannot be empty!")
     @Size(max = 100, message = "Last name cannot be longer than 100 characters!")
     private String lastName;
+
+    private String role;
+
+    private String pictureUrl;
 }

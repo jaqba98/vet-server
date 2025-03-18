@@ -1,7 +1,7 @@
 package com.jakubolejarczyk.vet_server.dto.request.controller;
 
 import com.jakubolejarczyk.vet_server.domain.dependent.ClinicDomain;
-import com.jakubolejarczyk.vet_server.dto.base.BaseRequestDto;
+import com.jakubolejarczyk.vet_server.dto.base.TokenRequestDto;
 import com.jakubolejarczyk.vet_server.validator.unique.Unique;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -11,7 +11,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ClinicRequestDto extends BaseRequestDto implements ClinicDomain {
+public class ClinicRequestDto extends TokenRequestDto implements ClinicDomain {
     private Long id;
 
     @NotNull(message = "Name is required!")

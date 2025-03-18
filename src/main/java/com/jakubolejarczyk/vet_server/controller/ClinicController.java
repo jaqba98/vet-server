@@ -1,8 +1,8 @@
 package com.jakubolejarczyk.vet_server.controller;
 
-import com.jakubolejarczyk.vet_server.dto.base.BaseRequestDto;
-import com.jakubolejarczyk.vet_server.dto.request.DeleteRequestDto;
+import com.jakubolejarczyk.vet_server.dto.base.TokenRequestDto;
 import com.jakubolejarczyk.vet_server.dto.request.controller.ClinicRequestDto;
+import com.jakubolejarczyk.vet_server.dto.request.crud.DeleteRequestDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
 import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
 import com.jakubolejarczyk.vet_server.model.relation.ClinicAccount;
@@ -75,7 +75,7 @@ public class ClinicController {
     }
 
     @PostMapping("read")
-    public ResponseEntity<ResponseDto<ArrayList<Clinic>>> read(@Valid @RequestBody BaseRequestDto requestDto) {
+    public ResponseEntity<ResponseDto<ArrayList<Clinic>>> read(@Valid @RequestBody TokenRequestDto requestDto) {
         val messages = new ArrayList<String>();
         val clinics = new ArrayList<Clinic>();
         val token = requestDto.getToken();
