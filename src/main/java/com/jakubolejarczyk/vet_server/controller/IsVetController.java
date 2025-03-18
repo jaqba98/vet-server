@@ -2,8 +2,8 @@ package com.jakubolejarczyk.vet_server.controller;
 
 import com.jakubolejarczyk.vet_server.dto.request.guard.IsVetRequestDto;
 import com.jakubolejarczyk.vet_server.dto.response.guard.IsVetResponseDto;
-import com.jakubolejarczyk.vet_server.model.Account;
-import com.jakubolejarczyk.vet_server.service.database.AccountService;
+import com.jakubolejarczyk.vet_server.model.independent.Account;
+import com.jakubolejarczyk.vet_server.service.crud.independent.AccountService;
 import com.jakubolejarczyk.vet_server.service.security.TokenService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

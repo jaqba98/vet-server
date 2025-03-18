@@ -2,7 +2,7 @@ package com.jakubolejarczyk.vet_server.controller;
 
 import com.jakubolejarczyk.vet_server.dto.request.controller.LoginRequestDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
-import com.jakubolejarczyk.vet_server.service.database.AccountService;
+import com.jakubolejarczyk.vet_server.service.crud.independent.AccountService;
 import com.jakubolejarczyk.vet_server.service.security.PasswordService;
 import com.jakubolejarczyk.vet_server.service.security.TokenService;
 import lombok.AllArgsConstructor;

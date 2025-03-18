@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.validator.unique;
 
-import com.jakubolejarczyk.vet_server.service.database.ClinicService;
+import com.jakubolejarczyk.vet_server.service.crud.dependent.ClinicService;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;

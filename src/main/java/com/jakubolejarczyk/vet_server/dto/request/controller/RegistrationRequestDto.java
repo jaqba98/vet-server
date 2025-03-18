@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.dto.request.controller;
 
-import com.jakubolejarczyk.vet_server.domain.AccountDomain;
+import com.jakubolejarczyk.vet_server.domain.independent.AccountDomain;
 import com.jakubolejarczyk.vet_server.validator.email_not_exist.EmailNotExist;
 import com.jakubolejarczyk.vet_server.validator.fields_match.FieldsMatch;
 import jakarta.validation.constraints.Email;

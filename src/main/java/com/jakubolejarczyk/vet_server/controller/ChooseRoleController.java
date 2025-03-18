@@ -2,10 +2,10 @@ package com.jakubolejarczyk.vet_server.controller;
 
 import com.jakubolejarczyk.vet_server.dto.request.controller.ChooseRoleRequestDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
-import com.jakubolejarczyk.vet_server.service.database.AccountService;
-import com.jakubolejarczyk.vet_server.service.database.ClientService;
-import com.jakubolejarczyk.vet_server.service.database.OpeningHoursService;
-import com.jakubolejarczyk.vet_server.service.database.VetService;
+import com.jakubolejarczyk.vet_server.service.crud.independent.AccountService;
+import com.jakubolejarczyk.vet_server.service.crud.relation.ClientService;
+import com.jakubolejarczyk.vet_server.service.crud.independent.OpeningHoursService;
+import com.jakubolejarczyk.vet_server.service.crud.dependent.VetService;
 import com.jakubolejarczyk.vet_server.service.security.TokenService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.dto.request.controller;
 
-import com.jakubolejarczyk.vet_server.domain.ClinicDomain;
+import com.jakubolejarczyk.vet_server.domain.dependent.ClinicDomain;
 import com.jakubolejarczyk.vet_server.dto.base.BaseRequestDto;
 import com.jakubolejarczyk.vet_server.validator.unique.Unique;
 import jakarta.validation.constraints.NotBlank;
