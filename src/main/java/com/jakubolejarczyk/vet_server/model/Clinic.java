@@ -2,9 +2,15 @@ package com.jakubolejarczyk.vet_server.model;
 
 import com.jakubolejarczyk.vet_server.domain.ClinicDomain;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Entity
-public class Clinic extends ClinicDomain {
+@Getter
+@Setter
+@SuperBuilder
+public class Clinic implements ClinicDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

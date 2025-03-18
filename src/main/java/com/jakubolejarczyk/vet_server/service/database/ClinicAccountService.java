@@ -7,6 +7,7 @@ import lombok.val;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -14,9 +15,10 @@ public class ClinicAccountService {
     private final ClinicAccountRepository repository;
 
     public ClinicAccount create(Long accountId, Long clinicId) {
-        val clinicAccount = new ClinicAccount();
-        clinicAccount.setAccountId(accountId);
-        clinicAccount.setClinicId(clinicId);
+        val clinicAccount = ClinicAccount.builder()
+                .accountId(accountId)
+                .clinicId(clinicId)
+                .build();
         repository.save(clinicAccount);
         return clinicAccount;
     }
@@ -32,5 +34,21 @@ public class ClinicAccountService {
     public void delete(ClinicAccount clinicAccount) {
         val id = clinicAccount.getId();
         repository.deleteById(id);
+    }
+
+    public List<ClinicAccount> findByAccountId(Long accountId) {
+        return repository.findByAccountId(accountId);
+    }
+
+    public Optional<ClinicAccount> findByAccountIdAndClinicId(Long accountId, Long clinicId) {
+        return repository.findByAccountIdAndClinicId(accountId, clinicId);
+    }
+
+    public List<ClinicAccount> findByAccountIdAndClinicIdIn(Long accountId, List<Long> clinicId) {
+        return repository.findByAccountIdAndClinicIdIn(accountId, clinicId);
+    }
+
+    public void deleteAllInBatch(List<ClinicAccount> clinicAccounts) {
+        repository.deleteAllInBatch(clinicAccounts);
     }
 }

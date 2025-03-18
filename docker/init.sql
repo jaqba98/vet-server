@@ -91,7 +91,7 @@ CREATE TABLE Clinic (
     name VARCHAR(150) NOT NULL UNIQUE,
     street VARCHAR(100) NOT NULL,
     building_number VARCHAR(10) NOT NULL,
-    apartment_number VARCHAR(10) NOT NULL,
+    apartment_number VARCHAR(10) NULL,
     postal_code VARCHAR(10) NOT NULL,
     city VARCHAR(80) NOT NULL,
     province VARCHAR(80) NOT NULL,

@@ -1,75 +1,171 @@
 package com.jakubolejarczyk.vet_server.controller;
 
+import com.jakubolejarczyk.vet_server.dto.base.BaseRequestDto;
+import com.jakubolejarczyk.vet_server.dto.request.DeleteRequestDto;
 import com.jakubolejarczyk.vet_server.dto.request.controller.ClinicRequestDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
 import com.jakubolejarczyk.vet_server.model.Clinic;
-import com.jakubolejarczyk.vet_server.service.database.ClinicService;
+import com.jakubolejarczyk.vet_server.model.ClinicAccount;
+import com.jakubolejarczyk.vet_server.service.database.*;
+import com.jakubolejarczyk.vet_server.service.security.TokenService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import lombok.val;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/clinic")
 @AllArgsConstructor
 public class ClinicController {
-    private final ClinicService service;
+    private final OpeningHoursService openingHoursService;
+    private final ClinicService clinicService;
+    private final TokenService tokenService;
+    private final AccountService accountService;
+    private final OwnerService ownerService;
+    private final ClinicAccountService clinicAccountService;
 
     @PostMapping("create")
-    public ResponseEntity<ResponseDto<String>> create(@Valid @RequestBody ClinicRequestDto requestDto) {
-        Clinic clinic = new Clinic();
-        clinic.setName(requestDto.getName());
-        clinic.setStreet(requestDto.getStreet());
-        clinic.setBuildingNumber(requestDto.getBuildingNumber());
-        clinic.setApartmentNumber(requestDto.getApartmentNumber());
-        clinic.setPostalCode(requestDto.getPostalCode());
-        clinic.setCity(requestDto.getCity());
-        clinic.setProvince(requestDto.getProvince());
-        clinic.setCountry(requestDto.getCountry());
-        clinic.setEmail(requestDto.getEmail());
-        clinic.setPhoneNumber(requestDto.getPhoneNumber());
-        clinic.setOpeningHoursId(requestDto.getOpeningHoursId());
-        service.create(clinic);
-        ResponseDto<String> responseDto = new ResponseDto<>(true, new ArrayList<>(), "A new clinic was established!");
-        return ResponseEntity.ok().body(responseDto);
+    public ResponseEntity<ResponseDto<Clinic>> create(@Valid @RequestBody ClinicRequestDto requestDto) {
+        val messages = new ArrayList<String>();
+        // Create an OpeningHours object
+        val openingHours = openingHoursService.create();
+        // Create a Clinic object
+        val clinic = Clinic.builder()
+                .name(requestDto.getName())
+                .street(requestDto.getStreet())
+                .buildingNumber(requestDto.getBuildingNumber())
+                .apartmentNumber(requestDto.getApartmentNumber())
+                .postalCode(requestDto.getPostalCode())
+                .city(requestDto.getCity())
+                .province(requestDto.getProvince())
+                .country(requestDto.getCountry())
+                .email(requestDto.getEmail())
+                .phoneNumber(requestDto.getPhoneNumber())
+                .openingHoursId(openingHours.getId())
+                .build();
+        val newClinic = clinicService.create(clinic);
+        // Determine account id
+        val token = requestDto.getToken();
+        val email = tokenService.decode(token);
+        val account = accountService.findByEmail(email);
+        if (account.isEmpty()) {
+            messages.add("Account by given email does not exist!");
+            val responseDto = new ResponseDto<>(false, messages, clinic);
+            return ResponseEntity.status(HttpStatus.OK).body(responseDto);
+        }
+        val accountId = account.get().getId();
+        // Create an Owner object
+        ownerService.create(accountId, newClinic.getId());
+        // Create a Clinic_Account object
+        clinicAccountService.create(accountId, newClinic.getId());
+        // Return the response dto
+        messages.add("The clinic has been established successfully!");
+        val responseDto = new ResponseDto<>(true, messages, clinic);
+        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 
     @PostMapping("read")
-    public ResponseEntity<ResponseDto<ArrayList<Clinic>>> read(@Valid @RequestBody ClinicRequestDto requestDto) {
-        ArrayList<Clinic> clinics = service.read();
-        ResponseDto<ArrayList<Clinic>> responseDto = new ResponseDto<>(true, new ArrayList<>(), clinics);
+    public ResponseEntity<ResponseDto<ArrayList<Clinic>>> read(@Valid @RequestBody BaseRequestDto requestDto) {
+        val messages = new ArrayList<String>();
+        val clinics = new ArrayList<Clinic>();
+        val token = requestDto.getToken();
+        val email = tokenService.decode(token);
+        val account = accountService.findByEmail(email);
+        if (account.isEmpty()) {
+            messages.add("Account by given email does not exist!");
+            val responseDto = new ResponseDto<>(false, messages, clinics);
+            return ResponseEntity.status(HttpStatus.OK).body(responseDto);
+        }
+        val accountId = account.get().getId();
+        val clinicIds = clinicAccountService.findByAccountId(accountId)
+                .stream()
+                .map(ClinicAccount::getClinicId).collect(Collectors.toCollection(ArrayList::new));
+        val matchedClinics = new ArrayList<>(clinicService.findAllById(clinicIds));
+        messages.add("The clinics have been read successfully!");
+        ResponseDto<ArrayList<Clinic>> responseDto = new ResponseDto<>(true, messages, matchedClinics);
         return ResponseEntity.ok().body(responseDto);
     }
 
     @PostMapping("update")
-    public ResponseEntity<ResponseDto<String>> update(@Valid @RequestBody ClinicRequestDto requestDto) {
-        Long id = requestDto.getId();
-        String name = requestDto.getName();
-        Optional<Clinic> clinic = service.findById(id);
-        if (clinic.isEmpty()) {
-            var errors = new ArrayList<String>();
-            ResponseDto<String> responseDto = new ResponseDto<>(false, errors, "The clinic has not been updated!");
-            return ResponseEntity.ok().body(responseDto);
+    public ResponseEntity<ResponseDto<Clinic>> update(@Valid @RequestBody ClinicRequestDto requestDto) {
+        val messages = new ArrayList<String>();
+        val token = requestDto.getToken();
+        val email = tokenService.decode(token);
+        val account = accountService.findByEmail(email);
+        if (account.isEmpty()) {
+            messages.add("Account by given email does not exist!");
+            val responseDto = new ResponseDto<Clinic>(false, messages, Clinic.builder().build());
+            return ResponseEntity.status(HttpStatus.OK).body(responseDto);
         }
-        Clinic newClinic = clinic.get();
-        newClinic.setId(id);
-        newClinic.setName(name);
-        service.update(newClinic);
-        ResponseDto<String> responseDto = new ResponseDto<>(true, new ArrayList<>(), "The clinic has been updated!!");
-        return ResponseEntity.ok().body(responseDto);
+        val accountId = account.get().getId();
+        val clinicId = requestDto.getId();
+        val relation = clinicAccountService.findByAccountIdAndClinicId(accountId, clinicId);
+        if (relation.isEmpty()) {
+            messages.add("You do not have permission to update!");
+            val responseDto = new ResponseDto<Clinic>(false, messages, Clinic.builder().build());
+            return ResponseEntity.status(HttpStatus.OK).body(responseDto);
+        }
+        Optional<Clinic> clinic = clinicService.findById(clinicId);
+        if (clinic.isEmpty()) {
+            messages.add("The clinic does not exist!");
+            val responseDto = new ResponseDto<Clinic>(false, messages, Clinic.builder().build());
+            return ResponseEntity.status(HttpStatus.OK).body(responseDto);
+        }
+        val clinicToUpdate = clinic.get();
+        clinicToUpdate.setName(requestDto.getName());
+        clinicToUpdate.setStreet(requestDto.getStreet());
+        clinicToUpdate.setBuildingNumber(requestDto.getBuildingNumber());
+        clinicToUpdate.setApartmentNumber(requestDto.getApartmentNumber());
+        clinicToUpdate.setPostalCode(requestDto.getPostalCode());
+        clinicToUpdate.setCity(requestDto.getCity());
+        clinicToUpdate.setProvince(requestDto.getProvince());
+        clinicToUpdate.setCountry(requestDto.getCountry());
+        clinicToUpdate.setEmail(requestDto.getEmail());
+        clinicToUpdate.setPhoneNumber(requestDto.getPhoneNumber());
+        clinicService.update(clinicToUpdate);
+        messages.add("The clinic has been updated successfully!");
+        val responseDto = new ResponseDto<>(true, messages, clinicToUpdate);
+        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 
     @PostMapping("delete")
-    public ResponseEntity<ResponseDto<String>> delete(@Valid @RequestBody ClinicRequestDto requestDto) {
-        Long id = requestDto.getId();
-        service.delete(id);
-        ResponseDto<String> responseDto = new ResponseDto<>(true, new ArrayList<>(), "The clinic has been deleted!!");
+    public ResponseEntity<ResponseDto<Boolean>> delete(@Valid @RequestBody DeleteRequestDto requestDto) {
+        val messages = new ArrayList<String>();
+        val token = requestDto.getToken();
+        val email = tokenService.decode(token);
+        val account = accountService.findByEmail(email);
+        if (account.isEmpty()) {
+            messages.add("Account by given email does not exist!");
+            val responseDto = new ResponseDto<>(false, messages, false);
+            return ResponseEntity.status(HttpStatus.OK).body(responseDto);
+        }
+        val accountId = account.get().getId();
+        val clinicIds = requestDto.getIds();
+        val clinicAccountRelations = clinicAccountService.findByAccountIdAndClinicIdIn(accountId, clinicIds);
+        clinicAccountService.deleteAllInBatch(clinicAccountRelations);
+        val ownerRelations = ownerService.findByAccountIdAndClinicIdIn(accountId, clinicIds);
+        ownerService.deleteAllInBatch(ownerRelations);
+        clinicService.deleteByIds(clinicIds);
+        messages.add("Clinics were deleted successfully!");
+        val responseDto = new ResponseDto<>(true, messages, true);
+        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ResponseDto<String>> handleValidation(MethodArgumentNotValidException ex) {
+        val errors = new ArrayList<String>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String message = error.getDefaultMessage();
+            errors.add(message);
+        });
+        val responseDto = new ResponseDto<>(false, errors, "");
         return ResponseEntity.ok().body(responseDto);
     }
 }

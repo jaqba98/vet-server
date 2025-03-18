@@ -2,11 +2,17 @@ package com.jakubolejarczyk.vet_server.model;
 
 import com.jakubolejarczyk.vet_server.domain.OpeningHoursDomain;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import java.sql.Time;
 
 @Entity
-public class OpeningHours extends OpeningHoursDomain {
+@Getter
+@Setter
+@SuperBuilder
+public class OpeningHours implements OpeningHoursDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

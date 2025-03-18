@@ -11,6 +11,6 @@ import java.util.ArrayList;
 @AllArgsConstructor
 public class ResponseDto<TData> {
     private Boolean success;
-    private ArrayList<String> errors;
+    private ArrayList<String> messages;
     private TData data;
 }

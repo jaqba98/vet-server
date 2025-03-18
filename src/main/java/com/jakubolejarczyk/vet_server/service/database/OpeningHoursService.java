@@ -14,7 +14,7 @@ public class OpeningHoursService {
     private final OpeningHoursRepository repository;
 
     public OpeningHours create() {
-        val openingHours = new OpeningHours();
+        val openingHours = OpeningHours.builder().build();
         repository.save(openingHours);
         return openingHours;
     }

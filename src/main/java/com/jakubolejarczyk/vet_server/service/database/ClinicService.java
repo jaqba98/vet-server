@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -40,5 +41,9 @@ public class ClinicService {
 
     public Optional<Clinic> findById(Long id) {
         return repository.findById(id);
+    }
+
+    public List<Clinic> findAllById(List<Long> ids) {
+        return repository.findAllById(ids);
     }
 }
