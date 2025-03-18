@@ -31,4 +31,8 @@ public class OpeningHoursService {
         val id = openingHours.getId();
         repository.deleteById(id);
     }
+
+    public void deleteAllByIdInBatch(List<Long> ids) {
+        repository.deleteAllByIdInBatch(ids);
+    }
 }
