@@ -1,7 +1,6 @@
 package com.jakubolejarczyk.vet_server.controller;
 
 import com.jakubolejarczyk.vet_server.dto.request.AuthRequestDto;
-import com.jakubolejarczyk.vet_server.dto.response.AuthResponseDto;
 import com.jakubolejarczyk.vet_server.service.security.TokenService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

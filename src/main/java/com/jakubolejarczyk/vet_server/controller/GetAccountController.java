@@ -1,7 +1,6 @@
 package com.jakubolejarczyk.vet_server.controller;
 
 import com.jakubolejarczyk.vet_server.dto.request.GetAccountRequestDto;
-import com.jakubolejarczyk.vet_server.dto.response.GetAccountResponseDto;
 import com.jakubolejarczyk.vet_server.model.independent.Account;
 import com.jakubolejarczyk.vet_server.service.crud.independent.AccountService;
 import com.jakubolejarczyk.vet_server.service.security.TokenService;
