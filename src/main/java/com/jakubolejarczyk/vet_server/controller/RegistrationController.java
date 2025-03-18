@@ -23,15 +23,16 @@ public class RegistrationController {
     private final PasswordService passwordService;
 
     @PostMapping("registration")
-    public ResponseEntity<ResponseDto<String>> registration(@Valid @RequestBody RegistrationRequestDto requestDto) {
+    public ResponseEntity<ResponseDto<?>> registration(@Valid @RequestBody RegistrationRequestDto requestDto) {
         val email = requestDto.getEmail();
         val password = requestDto.getPassword();
         val firstName = requestDto.getFirstName();
         val lastName = requestDto.getLastName();
         val hashPassword = passwordService.encode(password);
-        val errors = new ArrayList<String>();
+        val messages = new ArrayList<String>();
         accountService.create(email, hashPassword, firstName, lastName);
-        val responseDto = new ResponseDto<>(true, errors, "The account has been created successfully!");
+        messages.add("The account has been created successfully!");
+        val responseDto = new ResponseDto<>(true, messages, null);
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 
