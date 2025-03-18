@@ -1,19 +1,29 @@
 package com.jakubolejarczyk.vet_server.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.time.LocalDate;
 
-@Getter
-@Setter
-public class VetDomain {
-    private Long id;
-    private String licenseNumber;
-    private LocalDate licenseIssueDate;
-    private LocalDate licenseExpiryDate;
-    private String specializations;
-    private Integer yearsOfExperience;
-    private Long accountId;
-    private Long openingHoursId;
+public interface VetDomain {
+    Long getId();
+    void setId(Long id);
+
+    String getLicenseNumber();
+    void setLicenseNumber(String licenseNumber);
+
+    LocalDate getLicenseIssueDate();
+    void setLicenseIssueDate(LocalDate licenseIssueDate);
+
+    LocalDate getLicenseExpiryDate();
+    void setLicenseExpiryDate(LocalDate licenseExpiryDate);
+
+    String getSpecializations();
+    void setSpecializations(String specializations);
+
+    Integer getYearsOfExperience();
+    void setYearsOfExperience(Integer yearsOfExperience);
+
+    Long getAccountId();
+    void setAccountId(Long accountId);
+
+    Long getOpeningHoursId();
+    void setOpeningHoursId(Long openingHoursId);
 }

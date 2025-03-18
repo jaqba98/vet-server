@@ -2,9 +2,13 @@ package com.jakubolejarczyk.vet_server.model;
 
 import com.jakubolejarczyk.vet_server.domain.ClientDomain;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-public class Client extends ClientDomain {
+@Getter
+@Setter
+public class Client implements ClientDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -1,11 +1,9 @@
 package com.jakubolejarczyk.vet_server.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+public interface ClientDomain {
+    Long getId();
+    void setId(Long id);
 
-@Getter
-@Setter
-public class ClientDomain {
-    private Long id;
-    private Long accountId;
+    Long getAccountId();
+    void setAccountId(Long accountId);
 }

@@ -2,11 +2,15 @@ package com.jakubolejarczyk.vet_server.model;
 
 import com.jakubolejarczyk.vet_server.domain.VetDomain;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
 @Entity
-public class Vet extends VetDomain {
+@Getter
+@Setter
+public class Vet implements VetDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
