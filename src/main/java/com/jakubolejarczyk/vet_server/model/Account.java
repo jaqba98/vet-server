@@ -3,6 +3,7 @@ package com.jakubolejarczyk.vet_server.model;
 import com.jakubolejarczyk.vet_server.domain.AccountDomain;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -10,6 +11,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 public class Account extends AccountDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

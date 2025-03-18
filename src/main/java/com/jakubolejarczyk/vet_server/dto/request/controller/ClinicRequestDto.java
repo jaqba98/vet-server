@@ -2,6 +2,7 @@ package com.jakubolejarczyk.vet_server.dto.request.controller;
 
 import com.jakubolejarczyk.vet_server.domain.ClinicDomain;
 import com.jakubolejarczyk.vet_server.dto.base.BaseRequestDto;
+import com.jakubolejarczyk.vet_server.validator.unique.Unique;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -11,12 +12,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ClinicRequestDto extends BaseRequestDto implements ClinicDomain {
-    @NotNull(message = "Id is required!")
     private Long id;
 
     @NotNull(message = "Name is required!")
     @NotBlank(message = "Name cannot be empty!")
     @Size(max = 150, message = "Name cannot be longer than 150 characters!")
+    @Unique(message = "There is a clinic with the given name!", table = "clinic", column = "name")
     private String name;
 
     @NotNull(message = "Street is required!")
@@ -62,6 +63,5 @@ public class ClinicRequestDto extends BaseRequestDto implements ClinicDomain {
     @Size(max = 20, message = "Phone number cannot be longer than 20 characters!")
     private String phoneNumber;
 
-    @NotNull(message = "Opening hours id is required!")
     private Long openingHoursId;
 }

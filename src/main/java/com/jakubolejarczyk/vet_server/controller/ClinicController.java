@@ -152,9 +152,9 @@ public class ClinicController {
         clinicAccountService.deleteAllInBatch(clinicAccountRelations);
         val ownerRelations = ownerService.findByAccountIdAndClinicIdIn(accountId, clinicIds);
         ownerService.deleteAllInBatch(ownerRelations);
+        clinicService.deleteByIds(clinicIds);
         val openingHoursIds = clinicService.findAllById(clinicIds).stream().map(Clinic::getOpeningHoursId).toList();
         openingHoursService.deleteAllByIdInBatch(openingHoursIds);
-        clinicService.deleteByIds(clinicIds);
         messages.add("Clinics were deleted successfully!");
         val responseDto = new ResponseDto<>(true, messages, true);
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
