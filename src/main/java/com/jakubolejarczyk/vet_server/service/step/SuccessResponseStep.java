@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 @Service
 @AllArgsConstructor
-public class SuccessRole<TData> {
+public class SuccessResponseStep<TData> {
     public ResponseEntity<ResponseDto<TData>> getSuccessResponse(String message, TData data) {
         val messages = new ArrayList<String>();
         messages.add(message);

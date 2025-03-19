@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class GetAccountByToken<TData> {
+public class GetAccountByTokenStep<TData> {
     private final TokenService tokenService;
     private final AccountService accountService;
 

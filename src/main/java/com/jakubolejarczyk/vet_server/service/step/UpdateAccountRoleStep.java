@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class UpdateAccountRole {
+public class UpdateAccountRoleStep {
     private final AccountService accountService;
     private final VetService vetService;
     private final ClientService clientService;
