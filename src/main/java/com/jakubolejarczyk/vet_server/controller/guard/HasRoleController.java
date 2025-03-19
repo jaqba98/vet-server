@@ -1,33 +1,36 @@
-package com.jakubolejarczyk.vet_server.controller.common;
+package com.jakubolejarczyk.vet_server.controller.guard;
 
-public class IsClientController {
+public class HasRoleController {
 //    private final TokenService tokenService;
 //
 //    private final AccountService accountService;
 //
-//    @PostMapping("is-client")
-//    public ResponseEntity<IsClientResponseDto> isClient(@Valid @RequestBody IsClientRequestDto requestDto) {
+//    @PostMapping("has-role")
+//    public ResponseEntity<HasRoleResponseDto> hasRole(@Valid @RequestBody HasRoleRequestDto requestDto) {
 //        String token = requestDto.getToken();
 //        String email = tokenService.decode(token);
 //        Optional<Account> account = accountService.findByEmail(email);
 //        if (account.isEmpty()) {
-//            IsClientResponseDto responseDto = new IsClientResponseDto(false, new ArrayList<>());
+//            HasRoleResponseDto responseDto = new HasRoleResponseDto(false, new ArrayList<>());
 //            return ResponseEntity.ok().body(responseDto);
 //        }
 //        String role = account.get().getRole();
-//        Boolean isClient = role != null && role.contains("client");
-//        IsClientResponseDto responseDto = new IsClientResponseDto(isClient, new ArrayList<>());
+//        if (role == null) {
+//            HasRoleResponseDto responseDto = new HasRoleResponseDto(false, new ArrayList<>());
+//            return ResponseEntity.ok().body(responseDto);
+//        }
+//        HasRoleResponseDto responseDto = new HasRoleResponseDto(true, new ArrayList<>());
 //        return ResponseEntity.ok().body(responseDto);
 //    }
 //
 //    @ExceptionHandler(MethodArgumentNotValidException.class)
-//    public ResponseEntity<IsClientResponseDto> handleValidation(MethodArgumentNotValidException ex) {
+//    public ResponseEntity<HasRoleResponseDto> handleValidation(MethodArgumentNotValidException ex) {
 //        ArrayList<String> errors = new ArrayList<>();
 //        ex.getBindingResult().getAllErrors().forEach((error) -> {
 //            String message = error.getDefaultMessage();
 //            errors.add(message);
 //        });
-//        IsClientResponseDto responseDto = new IsClientResponseDto(false, errors);
+//        HasRoleResponseDto responseDto = new HasRoleResponseDto(false, errors);
 //        return ResponseEntity.ok().body(responseDto);
 //    }
 }

@@ -1,12 +1,14 @@
 package com.jakubolejarczyk.vet_server.service.crud.dependent;
 
 import com.jakubolejarczyk.vet_server.model.dependent.Client;
+import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
 import com.jakubolejarczyk.vet_server.repository.dependent.ClientRepository;
 import lombok.AllArgsConstructor;
 import lombok.val;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -31,8 +33,11 @@ public class ClientService {
         return client;
     }
 
-    public Client delete(Client client) {
-        repository.deleteById(client.getId());
-        return client;
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
+
+    public Optional<Client> findByAccountId(Long accountId) {
+        return repository.findByAccountId(accountId);
     }
 }

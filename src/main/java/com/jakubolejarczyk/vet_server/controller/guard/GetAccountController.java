@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.controller.common;
+package com.jakubolejarczyk.vet_server.controller.guard;
 
 public class GetAccountController {
 //    private final AccountService accountService;

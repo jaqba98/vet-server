@@ -31,9 +31,8 @@ public class OpeningHoursService {
         return openingHours;
     }
 
-    public OpeningHours delete(OpeningHours openingHours) {
-        repository.deleteById(openingHours.getId());
-        return openingHours;
+    public void delete(Long id) {
+        repository.deleteById(id);
     }
 
     public void deleteAllByIdInBatch(List<Long> ids) {

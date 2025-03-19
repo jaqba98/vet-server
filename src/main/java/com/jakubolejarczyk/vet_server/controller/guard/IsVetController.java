@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.controller.common;
+package com.jakubolejarczyk.vet_server.controller.guard;
 
 public class IsVetController {
 //    private final TokenService tokenService;

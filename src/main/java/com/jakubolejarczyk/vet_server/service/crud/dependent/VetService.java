@@ -7,6 +7,7 @@ import lombok.val;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -31,8 +32,11 @@ public class VetService {
         return vet;
     }
 
-    public Vet delete(Vet vet) {
-        repository.deleteById(vet.getId());
-        return vet;
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
+
+    public Optional<Vet> findByAccountId(Long accountId) {
+        return repository.findByAccountId(accountId);
     }
 }
