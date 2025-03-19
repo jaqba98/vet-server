@@ -2,7 +2,7 @@ package com.jakubolejarczyk.vet_server.dto.request.controller;
 
 import com.jakubolejarczyk.vet_server.domain.dependent.ClinicDomain;
 import com.jakubolejarczyk.vet_server.dto.base.TokenRequestDto;
-//import com.jakubolejarczyk.vet_server.validator.unique.Unique;
+import com.jakubolejarczyk.vet_server.validator.unique.Unique;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -17,7 +17,7 @@ public class ClinicRequestDto extends TokenRequestDto implements ClinicDomain {
     @NotNull(message = "Name is required!")
     @NotBlank(message = "Name cannot be empty!")
     @Size(max = 150, message = "Name cannot be longer than 150 characters!")
-//    @Unique(message = "There is a clinic with the given name!", table = "clinic", column = "name")
+    @Unique(message = "There is a clinic with the given name!", table = "clinic", column = "name")
     private String name;
 
     @NotNull(message = "Street is required!")
