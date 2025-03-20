@@ -13,7 +13,7 @@ import java.util.ArrayList;
 @Service
 @AllArgsConstructor
 public class ResponseStep {
-    private final ArrayList<String> messages;
+    private final ArrayList<String> messages = new ArrayList<>();
 
     public ResponseEntity<ResponseDto> getStep(Boolean success) {
         val responseDto = new ResponseDto(success, messages);

@@ -11,7 +11,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 @Service
 @AllArgsConstructor
 public class HandleValidationService {
-    private final ResponseStep<String> responseStep;
+    private final ResponseStep responseStep;
 
     public ResponseEntity<ResponseDto> handle(MethodArgumentNotValidException ex) {
         ex.getBindingResult().getAllErrors().forEach((error) -> {

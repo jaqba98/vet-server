@@ -1,6 +1,6 @@
-package com.jakubolejarczyk.vet_server.controller.common;
-
-public class RegistrationController {
+//package com.jakubolejarczyk.vet_server.controller.common;
+//
+//public class RegistrationController {
 //    private final AccountService accountService;
 //
 //    private final PasswordService passwordService;
@@ -29,4 +29,4 @@ public class RegistrationController {
 //        val responseDto = new ResponseDto<>(false, errors, "");
 //        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
 //    }
-}
+//}
