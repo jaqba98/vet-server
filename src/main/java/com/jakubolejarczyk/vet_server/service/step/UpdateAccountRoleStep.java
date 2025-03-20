@@ -12,8 +12,6 @@ import lombok.AllArgsConstructor;
 import lombok.val;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 @AllArgsConstructor
 public class UpdateAccountRoleStep {
@@ -22,58 +20,40 @@ public class UpdateAccountRoleStep {
     private final ClientService clientService;
     private final OpeningHoursService openingHoursService;
 
-    public void updateRole(Account account, String role) {
+    public void runStep(Account account, String role) {
+        val id = account.getId();
+        val email = account.getEmail();
         if (role.equals("vet")) {
-            removeClient(account);
-            createVet(account);
-            accountService.updateRoleByEmail(account.getEmail(), role);
+            createVet(id);
         }
         else if (role.equals("client")) {
-            removeVet(account);
-            createClient(account);
-            accountService.updateRoleByEmail(account.getEmail(), role);
+            createClient(id);
         }
+        accountService.updateRoleByEmail(email, role);
     }
 
-    private void createVet(Account account) {
-        val accountId = account.getId();
-        val vetByAccountId = vetService.findByAccountId(accountId);
-        if (vetByAccountId.isEmpty()) {
-            OpeningHours openingHours = OpeningHours.builder().build();
-            Vet vet = Vet.builder()
+    private void createVet(Long accountId) {
+        val oldVet = vetService.findByAccountId(accountId);
+        if (oldVet.isPresent()) {
+            return;
+        }
+        OpeningHours openingHours = OpeningHours.builder().build();
+        Vet vet = Vet.builder()
                 .accountId(accountId)
                 .openingHoursId(openingHours.getId())
                 .build();
-            openingHoursService.create(openingHours);
-            vetService.create(vet);
-        }
+        openingHoursService.create(openingHours);
+        vetService.create(vet);
     }
 
-    private void createClient(Account account) {
-        val accountId = account.getId();
-        val clientByAccountId = clientService.findByAccountId(accountId);
-        if (clientByAccountId.isEmpty()) {
-            Client client = Client.builder()
-                    .accountId(account.getId())
-                    .build();
-            clientService.create(client);
+    private void createClient(Long accountId) {
+        val oldClient = clientService.findByAccountId(accountId);
+        if (oldClient.isPresent()) {
+            return;
         }
-    }
-
-    private void removeVet(Account account) {
-        Optional<Vet> vet = vetService.findByAccountId(account.getId());
-        if (vet.isPresent()) {
-            val vetToRemove = vet.get();
-            openingHoursService.delete(vetToRemove.getOpeningHoursId());
-            vetService.delete(vetToRemove.getId());
-        }
-    }
-
-    private void removeClient(Account account) {
-        Optional<Client> client = clientService.findByAccountId(account.getId());
-        if (client.isPresent()) {
-            val clientToRemove = client.get();
-            clientService.delete(clientToRemove.getId());
-        }
+        Client client = Client.builder()
+                .accountId(accountId)
+                .build();
+        clientService.create(client);
     }
 }
