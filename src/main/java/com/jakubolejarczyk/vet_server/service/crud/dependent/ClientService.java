@@ -1,7 +1,6 @@
 package com.jakubolejarczyk.vet_server.service.crud.dependent;
 
 import com.jakubolejarczyk.vet_server.model.dependent.Client;
-import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
 import com.jakubolejarczyk.vet_server.repository.dependent.ClientRepository;
 import lombok.AllArgsConstructor;
 import lombok.val;
