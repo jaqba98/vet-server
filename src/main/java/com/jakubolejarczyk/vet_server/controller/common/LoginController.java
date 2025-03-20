@@ -1,31 +1,39 @@
 package com.jakubolejarczyk.vet_server.controller.common;
 
+import com.jakubolejarczyk.vet_server.dto.request.controller.LoginRequestDto;
+import com.jakubolejarczyk.vet_server.dto.response.ResponseDataDto;
+import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
+import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
+import com.jakubolejarczyk.vet_server.service.step.LoginStep;
+import com.jakubolejarczyk.vet_server.service.step.ResponseStep;
+import lombok.AllArgsConstructor;
+import lombok.val;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/v1")
+@AllArgsConstructor
 public class LoginController {
-//    private final AccountService accountService;
-//
-//    private final PasswordService passwordService;
-//
-//    private final TokenService tokenService;
-//
-//    @PostMapping("login")
-//    public ResponseEntity<ResponseDto<String>> login(@RequestBody LoginRequestDto requestDto) {
-//        val email = requestDto.getEmail();
-//        val password = requestDto.getPassword();
-//        val account = accountService.findByEmail(email);
-//        val errors = new ArrayList<String>();
-//        if (account.isEmpty()) {
-//            errors.add("Incorrect email or password!");
-//            val responseDto = new ResponseDto<>(false, errors, "");
-//            return ResponseEntity.status(HttpStatus.OK).body(responseDto);
-//        }
-//        val encodedPassword = account.get().getPassword();
-//        if (!passwordService.match(password, encodedPassword)) {
-//            errors.add("Incorrect email or password!");
-//            val responseDto = new ResponseDto<>(false, errors, "");
-//            return ResponseEntity.status(HttpStatus.OK).body(responseDto);
-//        }
-//        String token = tokenService.generate(email);
-//        val responseDto = new ResponseDto<>(true, errors, token);
-//        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
-//    }
+    private final HandleValidationService handleValidationService;
+    private final LoginStep loginStep;
+    private final ResponseStep responseStep;
+
+    @PostMapping("login")
+    public ResponseEntity<ResponseDataDto<String>> login(@RequestBody LoginRequestDto requestDto) {
+        val email = requestDto.getEmail();
+        val password = requestDto.getPassword();
+        val token = loginStep.runStep(email, password);
+        if (token.isEmpty()) {
+            responseStep.addMessage("Incorrect email or password!");
+            return responseStep.getStep(false, "");
+        }
+        return responseStep.getStep(true, token);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ResponseDto> handleValidation(MethodArgumentNotValidException ex) {
+        return handleValidationService.handle(ex);
+    }
 }
