@@ -30,12 +30,11 @@ public class HasRoleController {
             return responseStep.getStep(false);
         }
         val accountData = account.getData();
-        // ...
+        // Check if the account has a role
         val role = accountData.getRole();
-        if (role.isEmpty()) {
-            return responseStep.getStep(false);
-        }
-        return responseStep.getStep(true);
+        val hasRole = !role.isEmpty();
+        // Response
+        return responseStep.getStep(hasRole);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

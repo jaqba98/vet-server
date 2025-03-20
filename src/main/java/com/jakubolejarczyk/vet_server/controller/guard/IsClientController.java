@@ -4,7 +4,6 @@ import com.jakubolejarczyk.vet_server.dto.request.guard.GuardRequestDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
 import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.service.step.GetAccountByTokenStep;
-import com.jakubolejarczyk.vet_server.service.step.IsRoleStep;
 import com.jakubolejarczyk.vet_server.service.step.ResponseStep;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -20,7 +19,6 @@ public class IsClientController {
     private final ResponseStep responseStep;
     private final HandleValidationService handleValidationService;
     private final GetAccountByTokenStep getAccountByTokenStep;
-    private final IsRoleStep isRoleStep;
 
     @PostMapping("is-client")
     public ResponseEntity<ResponseDto> isClient(@Valid @RequestBody GuardRequestDto requestDto) {
@@ -32,8 +30,10 @@ public class IsClientController {
             return responseStep.getStep(false);
         }
         val accountData = account.getData();
-        // ...
-        return responseStep.getStep(isRoleStep.runStep(accountData, "client"));
+        // Check if the account has a client role
+        val clientRole = accountData.getRole().contains("client");
+        // Response
+        return responseStep.getStep(clientRole);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
