@@ -24,12 +24,16 @@ public class IsClientController {
 
     @PostMapping("is-client")
     public ResponseEntity<ResponseDto> isClient(@Valid @RequestBody GuardRequestDto requestDto) {
-        val account = getAccountByTokenStep.runStep(requestDto.getToken());
-        if (account.isEmpty()) {
+        // Get account by token
+        val token = requestDto.getToken();
+        val account = getAccountByTokenStep.runStep(token);
+        if (!account.getSuccess()) {
+            responseStep.addMessage("You are not a client!");
             return responseStep.getStep(false);
         }
-        val accountByToken = account.get();
-        return responseStep.getStep(isRoleStep.runStep(accountByToken, "client"));
+        val accountData = account.getData();
+        // ...
+        return responseStep.getStep(isRoleStep.runStep(accountData, "client"));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

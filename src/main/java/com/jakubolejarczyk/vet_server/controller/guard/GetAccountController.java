@@ -24,17 +24,21 @@ public class GetAccountController {
 
     @PostMapping("get-account")
     public ResponseEntity<ResponseDataDto<Account>> getAccount(@Valid @RequestBody GuardRequestDto requestDto) {
-        val account = getAccountByTokenStep.runStep(requestDto.getToken());
-        if (account.isEmpty()) {
+        // Get account by token
+        val token = requestDto.getToken();
+        val account = getAccountByTokenStep.runStep(token);
+        if (!account.getSuccess()) {
+            responseStep.addMessage("Failed to get account!");
             return responseStep.getStep(false, Account.builder().build());
         }
-        val accountByToken = account.get();
+        val accountData = account.getData();
+        // ...
         Account newAccount = Account.builder()
-                .email(accountByToken.getEmail())
-                .firstName(accountByToken.getFirstName())
-                .lastName(accountByToken.getLastName())
-                .role(accountByToken.getRole())
-                .pictureUrl(accountByToken.getPictureUrl())
+                .email(accountData.getEmail())
+                .firstName(accountData.getFirstName())
+                .lastName(accountData.getLastName())
+                .role(accountData.getRole())
+                .pictureUrl(accountData.getPictureUrl())
                 .build();
         return responseStep.getStep(true, newAccount);
     }

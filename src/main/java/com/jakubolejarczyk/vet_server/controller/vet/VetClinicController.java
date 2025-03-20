@@ -57,13 +57,17 @@ public class VetClinicController {
                 .openingHoursId(openingHours.getId())
                 .build();
         val newClinic = clinicService.create(clinic);
-        // Determine account id
-        val account = getAccountByTokenStep.runStep(requestDto.getToken());
-        if (account.isEmpty()) {
+        // ...
+        // Get account by token
+        val token = requestDto.getToken();
+        val account = getAccountByTokenStep.runStep(token);
+        if (!account.getSuccess()) {
+            responseStep.addMessage("Failed to create clinic!");
             return responseStep.getStep(false);
         }
-        val accountByToken = account.get();
-        val accountId = accountByToken.getId();
+        val accountData = account.getData();
+        // ...
+        val accountId = accountData.getId();
         // Create an Owner object
         Owner owner = Owner.builder()
                 .accountId(accountId)
@@ -83,12 +87,16 @@ public class VetClinicController {
 
     @PostMapping("read")
     public ResponseEntity<ResponseDataDto<ArrayList<Clinic>>> read(@Valid @RequestBody VetClinicRequestDto requestDto) {
-        val account = getAccountByTokenStep.runStep(requestDto.getToken());
-        if (account.isEmpty()) {
+        // Get account by token
+        val token = requestDto.getToken();
+        val account = getAccountByTokenStep.runStep(token);
+        if (!account.getSuccess()) {
+            responseStep.addMessage("Failed to read clinics!");
             return responseStep.getStep(false, new ArrayList<>());
         }
-        val accountByToken = account.get();
-        val accountId = accountByToken.getId();
+        val accountData = account.getData();
+        // ...
+        val accountId = accountData.getId();
         val clinicIds = clinicAccountService.findByAccountId(accountId)
             .stream()
             .map(ClinicAccount::getClinicId)
@@ -100,12 +108,16 @@ public class VetClinicController {
 
     @PostMapping("update")
     public ResponseEntity<ResponseDto> update(@Valid @RequestBody VetClinicRequestDto requestDto) throws Exception {
-        val account = getAccountByTokenStep.runStep(requestDto.getToken());
-        if (account.isEmpty()) {
+        // Get account by token
+        val token = requestDto.getToken();
+        val account = getAccountByTokenStep.runStep(token);
+        if (!account.getSuccess()) {
+            responseStep.addMessage("Failed to update clinic!");
             return responseStep.getStep(false);
         }
-        val accountByToken = account.get();
-        val accountId = accountByToken.getId();
+        val accountData = account.getData();
+        // ...
+        val accountId = accountData.getId();
         val clinicId = requestDto.getId();
 
         val own = ownerService.findByAccountIdAndClinicId(accountId, clinicId);
@@ -136,12 +148,16 @@ public class VetClinicController {
 
     @PostMapping("delete")
     public ResponseEntity<ResponseDto> delete(@Valid @RequestBody DeleteRequestDto requestDto) {
-        val account = getAccountByTokenStep.runStep(requestDto.getToken());
-        if (account.isEmpty()) {
+        // Get account by token
+        val token = requestDto.getToken();
+        val account = getAccountByTokenStep.runStep(token);
+        if (!account.getSuccess()) {
+            responseStep.addMessage("Failed to delete clinic!");
             return responseStep.getStep(false);
         }
-        val accountByToken = account.get();
-        val accountId = accountByToken.getId();
+        val accountData = account.getData();
+        // ...
+        val accountId = accountData.getId();
         val clinicIds = requestDto.getIds();
         // Delete clinic account relations
         val clinicAccountRelations = clinicAccountService.findByAccountIdAndClinicIdIn(accountId, clinicIds);

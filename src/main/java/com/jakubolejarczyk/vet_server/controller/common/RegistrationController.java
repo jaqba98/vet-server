@@ -22,6 +22,7 @@ public class RegistrationController {
 
     @PostMapping("registration")
     public ResponseEntity<ResponseDto> registration(@Valid @RequestBody RegistrationRequestDto requestDto) {
+        // ...
         val email = requestDto.getEmail();
         val password = requestDto.getPassword();
         val firstName = requestDto.getFirstName();

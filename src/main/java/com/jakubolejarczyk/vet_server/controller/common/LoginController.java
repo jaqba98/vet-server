@@ -18,6 +18,7 @@ public class LoginController {
 
     @PostMapping("login")
     public ResponseEntity<ResponseDataDto<String>> login(@RequestBody LoginRequestDto requestDto) {
+        // ...
         val email = requestDto.getEmail();
         val password = requestDto.getPassword();
         val token = loginStep.runStep(email, password);

@@ -22,6 +22,7 @@ public class ValidTokenController {
 
     @PostMapping("valid-token")
     public ResponseEntity<ResponseDto> validToken(@Valid @RequestBody GuardRequestDto requestDto) {
+        // ...
         val token = requestDto.getToken();
         val isValid = tokenService.verify(token);
         return responseStep.getStep(isValid);

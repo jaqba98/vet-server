@@ -15,6 +15,7 @@ public class LogoutController {
 
     @PostMapping("logout")
     public ResponseEntity<ResponseDto> logout(@RequestBody LogoutRequestDto requestDto) {
+        // ...
         return responseStep.getStep(true);
     }
 }

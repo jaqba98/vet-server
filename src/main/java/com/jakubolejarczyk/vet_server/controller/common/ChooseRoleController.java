@@ -24,14 +24,17 @@ public class ChooseRoleController {
 
     @PostMapping("choose-role")
     public ResponseEntity<ResponseDto> chooseRole(@Valid @RequestBody ChooseRoleRequestDto requestDto) {
-        val account = getAccountByTokenStep.runStep(requestDto.getToken());
-        if (account.isEmpty()) {
+        // Get account by token
+        val token = requestDto.getToken();
+        val account = getAccountByTokenStep.runStep(token);
+        if (!account.getSuccess()) {
             responseStep.addMessage("Failed to set role!");
             return responseStep.getStep(false);
         }
-        val accountByToken = account.get();
+        val accountData = account.getData();
+        // ...
         val role = requestDto.getRole();
-        updateAccountRoleStep.runStep(accountByToken, role);
+        updateAccountRoleStep.runStep(accountData, role);
         responseStep.addMessage("Role set correctly!");
         return responseStep.getStep(true);
     }
