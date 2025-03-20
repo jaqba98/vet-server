@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class UpdateAccountRoleStep {
+public class SetAccountRoleStep {
     private final AccountService accountService;
     private final VetService vetService;
     private final ClientService clientService;
@@ -33,27 +33,27 @@ public class UpdateAccountRoleStep {
     }
 
     private void createVet(Long accountId) {
-        val oldVet = vetService.findByAccountId(accountId);
-        if (oldVet.isPresent()) {
+        val vet = vetService.findByAccountId(accountId);
+        if (vet.isPresent()) {
             return;
         }
         OpeningHours openingHours = OpeningHours.builder().build();
-        Vet vet = Vet.builder()
+        openingHoursService.create(openingHours);
+        Vet newVet = Vet.builder()
                 .accountId(accountId)
                 .openingHoursId(openingHours.getId())
                 .build();
-        openingHoursService.create(openingHours);
-        vetService.create(vet);
+        vetService.create(newVet);
     }
 
     private void createClient(Long accountId) {
-        val oldClient = clientService.findByAccountId(accountId);
-        if (oldClient.isPresent()) {
+        val client = clientService.findByAccountId(accountId);
+        if (client.isPresent()) {
             return;
         }
-        Client client = Client.builder()
+        Client newClient = Client.builder()
                 .accountId(accountId)
                 .build();
-        clientService.create(client);
+        clientService.create(newClient);
     }
 }

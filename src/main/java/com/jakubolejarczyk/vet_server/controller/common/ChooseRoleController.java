@@ -5,7 +5,7 @@ import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
 import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.service.step.GetAccountByTokenStep;
 import com.jakubolejarczyk.vet_server.service.step.ResponseStep;
-import com.jakubolejarczyk.vet_server.service.step.UpdateAccountRoleStep;
+import com.jakubolejarczyk.vet_server.service.step.SetAccountRoleStep;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.val;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class ChooseRoleController {
     private final GetAccountByTokenStep getAccountByTokenStep;
-    private final UpdateAccountRoleStep updateAccountRoleStep;
+    private final SetAccountRoleStep setAccountRoleStep;
     private final ResponseStep responseStep;
     private final HandleValidationService handleValidationService;
 
@@ -32,9 +32,10 @@ public class ChooseRoleController {
             return responseStep.getStep(false);
         }
         val accountData = account.getData();
-        // ...
+        // Set account role
         val role = requestDto.getRole();
-        updateAccountRoleStep.runStep(accountData, role);
+        setAccountRoleStep.runStep(accountData, role);
+        // Response
         responseStep.addMessage("Role set correctly!");
         return responseStep.getStep(true);
     }
