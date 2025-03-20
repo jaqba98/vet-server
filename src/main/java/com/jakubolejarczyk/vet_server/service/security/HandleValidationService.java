@@ -1,22 +1,23 @@
 package com.jakubolejarczyk.vet_server.service.security;
 
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
+import com.jakubolejarczyk.vet_server.service.step.ResponseStep;
+import lombok.AllArgsConstructor;
 import lombok.val;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
-import java.util.ArrayList;
-
 @Service
+@AllArgsConstructor
 public class HandleValidationService {
-    public ResponseEntity<ResponseDto<String>> handle(MethodArgumentNotValidException ex) {
-        val errors = new ArrayList<String>();
+    private final ResponseStep<String> responseStep;
+
+    public ResponseEntity<ResponseDto> handle(MethodArgumentNotValidException ex) {
         ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String message = error.getDefaultMessage();
-            errors.add(message);
+            val message = error.getDefaultMessage();
+            responseStep.addMessage(message);
         });
-        val responseDto = new ResponseDto<String>(false, errors, null);
-        return ResponseEntity.ok().body(responseDto);
+        return responseStep.getStep(false);
     }
 }

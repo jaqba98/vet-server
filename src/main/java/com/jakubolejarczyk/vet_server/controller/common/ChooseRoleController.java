@@ -1,10 +1,11 @@
 package com.jakubolejarczyk.vet_server.controller.common;
 
 import com.jakubolejarczyk.vet_server.dto.request.controller.ChooseRoleRequestDto;
+import com.jakubolejarczyk.vet_server.dto.response.ResponseDataDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
 import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.service.step.GetAccountByTokenStep;
-import com.jakubolejarczyk.vet_server.service.step.SuccessResponseStep;
+import com.jakubolejarczyk.vet_server.service.step.ResponseStep;
 import com.jakubolejarczyk.vet_server.service.step.UpdateAccountRoleStep;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -20,20 +21,24 @@ public class ChooseRoleController {
     private final GetAccountByTokenStep<String> getAccountByTokenStep;
     private final UpdateAccountRoleStep updateAccountRoleStep;
     private final HandleValidationService handleValidationService;
-    private final SuccessResponseStep<String> successResponseStep;
+    private final ResponseStep<String> responseStep;
 
     @PostMapping("choose-role")
-    public ResponseEntity<ResponseDto<String>> chooseRole(@Valid @RequestBody ChooseRoleRequestDto requestDto) {
-        val account = getAccountByTokenStep.getAccount(requestDto.getToken());
-        if (account.isEmpty()) {
-            return getAccountByTokenStep.buildErrorResponse("");
+    public ResponseEntity<ResponseDataDto<String>> chooseRole(@Valid @RequestBody ChooseRoleRequestDto requestDto) {
+        val token = requestDto.getToken();
+        val role = requestDto.getRole();
+        val account = getAccountByTokenStep.runStep(token);
+        if (account.getSuccess()) {
+            this.updateAccountRoleStep.updateRole(account.getData(), role);
+            responseStep.addMessage("The role has been chosen!");
+            return responseStep.getStep(true, role);
         }
-        this.updateAccountRoleStep.updateRole(account.get(), requestDto.getRole());
-        return successResponseStep.getSuccessResponse("The role has been chosen!", "");
+        responseStep.addMessage("Failed to set role!");
+        return responseStep.getStep(false, role);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ResponseDto<String>> handleValidation(MethodArgumentNotValidException ex) {
+    public ResponseEntity<ResponseDto> handleValidation(MethodArgumentNotValidException ex) {
         return handleValidationService.handle(ex);
     }
 }

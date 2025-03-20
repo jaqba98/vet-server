@@ -9,7 +9,8 @@ import java.util.ArrayList;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ResponseDto {
+public class ResponseDataDto<TData>  {
     private Boolean success;
     private ArrayList<String> messages;
+    private TData data;
 }
