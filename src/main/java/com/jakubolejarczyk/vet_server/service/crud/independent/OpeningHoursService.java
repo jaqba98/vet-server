@@ -38,4 +38,8 @@ public class OpeningHoursService {
     public void deleteAllByIdInBatch(List<Long> ids) {
         repository.deleteAllByIdInBatch(ids);
     }
+
+    public List<OpeningHours> findAllById(List<Long> ids) {
+        return repository.findAllById(ids);
+    }
 }

@@ -11,7 +11,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ClinicRequestDto extends TokenRequestDto implements ClinicDomain {
+public class VetClinicRequestDto extends TokenRequestDto implements ClinicDomain {
     private Long id;
 
     @NotNull(message = "Name is required!")

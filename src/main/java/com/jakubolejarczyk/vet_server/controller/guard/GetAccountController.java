@@ -24,19 +24,19 @@ public class GetAccountController {
 
     @PostMapping("get-account")
     public ResponseEntity<ResponseDataDto<Account>> getAccount(@Valid @RequestBody GuardRequestDto requestDto) {
-        val token = requestDto.getToken();
-        val account = getAccountByTokenStep.runStep(token);
-        if (account.isPresent()) {
-            Account newAccount = Account.builder()
-                    .email(account.get().getEmail())
-                    .firstName(account.get().getFirstName())
-                    .lastName(account.get().getLastName())
-                    .role(account.get().getRole())
-                    .pictureUrl(account.get().getPictureUrl())
-                    .build();
-            return responseStep.getStep(true, newAccount);
+        val account = getAccountByTokenStep.runStep(requestDto.getToken());
+        if (account.isEmpty()) {
+            return responseStep.getStep(false, Account.builder().build());
         }
-        return responseStep.getStep(true, Account.builder().build());
+        val accountByToken = account.get();
+        Account newAccount = Account.builder()
+                .email(accountByToken.getEmail())
+                .firstName(accountByToken.getFirstName())
+                .lastName(accountByToken.getLastName())
+                .role(accountByToken.getRole())
+                .pictureUrl(accountByToken.getPictureUrl())
+                .build();
+        return responseStep.getStep(true, newAccount);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

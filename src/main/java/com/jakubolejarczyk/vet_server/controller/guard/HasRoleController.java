@@ -22,12 +22,12 @@ public class HasRoleController {
 
     @PostMapping("get-account")
     public ResponseEntity<ResponseDto> getAccount(@Valid @RequestBody GuardRequestDto requestDto) {
-        val token = requestDto.getToken();
-        val account = getAccountByTokenStep.runStep(token);
+        val account = getAccountByTokenStep.runStep(requestDto.getToken());
         if (account.isEmpty()) {
             return responseStep.getStep(false);
         }
-        val role = account.get().getRole();
+        val accountByToken = account.get();
+        val role = accountByToken.getRole();
         if (role.isEmpty()) {
             return responseStep.getStep(false);
         }

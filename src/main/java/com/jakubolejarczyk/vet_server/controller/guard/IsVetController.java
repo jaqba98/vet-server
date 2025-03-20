@@ -24,12 +24,12 @@ public class IsVetController {
 
     @PostMapping("is-vet")
     public ResponseEntity<ResponseDto> isVet(@Valid @RequestBody GuardRequestDto requestDto) {
-        val token = requestDto.getToken();
-        val account = getAccountByTokenStep.runStep(token);
+        val account = getAccountByTokenStep.runStep(requestDto.getToken());
         if (account.isEmpty()) {
             return responseStep.getStep(false);
         }
-        return responseStep.getStep(isRoleStep.runStep(account.get(), "vet"));
+        val accountByToken = account.get();
+        return responseStep.getStep(isRoleStep.runStep(accountByToken, "vet"));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

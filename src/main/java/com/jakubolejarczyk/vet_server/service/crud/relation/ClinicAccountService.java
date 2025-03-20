@@ -35,4 +35,16 @@ public class ClinicAccountService {
         repository.deleteById(clinicAccount.getId());
         return clinicAccount;
     }
+
+    public void deleteAllInBatch(List<ClinicAccount> clinicAccounts) {
+        repository.deleteAllInBatch(clinicAccounts);
+    }
+
+    public List<ClinicAccount> findByAccountIdAndClinicIdIn(Long accountId, List<Long> clinicId) {
+        return repository.findByAccountIdAndClinicIdIn(accountId, clinicId);
+    }
+
+    public List<ClinicAccount> findByAccountId(Long accountId) {
+        return repository.findByAccountId(accountId);
+    }
 }

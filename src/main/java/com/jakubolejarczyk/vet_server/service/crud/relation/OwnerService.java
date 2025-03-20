@@ -1,5 +1,6 @@
 package com.jakubolejarczyk.vet_server.service.crud.relation;
 
+import com.jakubolejarczyk.vet_server.model.relation.ClinicAccount;
 import com.jakubolejarczyk.vet_server.model.relation.Owner;
 import com.jakubolejarczyk.vet_server.repository.relation.OwnerRepository;
 import lombok.AllArgsConstructor;
@@ -34,5 +35,13 @@ public class OwnerService {
     public Owner delete(Owner owner) {
         repository.deleteById(owner.getId());
         return owner;
+    }
+
+    public void deleteAllInBatch(List<Owner> owners) {
+        repository.deleteAllInBatch(owners);
+    }
+
+    public List<Owner> findByAccountIdAndClinicIdIn(Long accountId, List<Long> clinicId) {
+        return repository.findByAccountIdAndClinicIdIn(accountId, clinicId);
     }
 }

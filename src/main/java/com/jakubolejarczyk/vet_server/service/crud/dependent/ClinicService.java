@@ -1,6 +1,7 @@
 package com.jakubolejarczyk.vet_server.service.crud.dependent;
 
 import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
+import com.jakubolejarczyk.vet_server.model.independent.OpeningHours;
 import com.jakubolejarczyk.vet_server.repository.dependent.ClinicRepository;
 import lombok.AllArgsConstructor;
 import lombok.val;
@@ -37,7 +38,15 @@ public class ClinicService {
         return clinic;
     }
 
+    public void deleteAllByIdInBatch(List<Long> ids) {
+        repository.deleteAllByIdInBatch(ids);
+    }
+
     public Optional<Clinic> findByName(String name) {
         return repository.findByName(name);
+    }
+
+    public List<Clinic> findAllById(List<Long> ids) {
+        return repository.findAllById(ids);
     }
 }
