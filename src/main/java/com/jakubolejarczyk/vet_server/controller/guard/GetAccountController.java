@@ -32,15 +32,10 @@ public class GetAccountController {
             return responseStep.getStep(false, Account.builder().build());
         }
         val accountData = account.getData();
-        // ...
-        Account newAccount = Account.builder()
-                .email(accountData.getEmail())
-                .firstName(accountData.getFirstName())
-                .lastName(accountData.getLastName())
-                .role(accountData.getRole())
-                .pictureUrl(accountData.getPictureUrl())
-                .build();
-        return responseStep.getStep(true, newAccount);
+        // Delete id
+        accountData.setId(null);
+        // Response
+        return responseStep.getStep(true, accountData);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
