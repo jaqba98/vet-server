@@ -8,6 +8,7 @@ import lombok.val;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -39,6 +40,10 @@ public class OwnerService {
 
     public void deleteAllInBatch(List<Owner> owners) {
         repository.deleteAllInBatch(owners);
+    }
+
+    public Optional<Owner> findByAccountIdAndClinicId(Long accountId, Long clinicId) {
+        return repository.findByAccountIdAndClinicId(accountId, clinicId);
     }
 
     public List<Owner> findByAccountIdAndClinicIdIn(Long accountId, List<Long> clinicId) {

@@ -4,9 +4,10 @@ import com.jakubolejarczyk.vet_server.dto.request.controller.VetClinicRequestDto
 import com.jakubolejarczyk.vet_server.dto.request.crud.DeleteRequestDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDataDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
-import com.jakubolejarczyk.vet_server.model.dependent.Client;
 import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
+import com.jakubolejarczyk.vet_server.model.independent.OpeningHours;
 import com.jakubolejarczyk.vet_server.model.relation.ClinicAccount;
+import com.jakubolejarczyk.vet_server.model.relation.Owner;
 import com.jakubolejarczyk.vet_server.service.crud.dependent.ClinicService;
 import com.jakubolejarczyk.vet_server.service.crud.independent.OpeningHoursService;
 import com.jakubolejarczyk.vet_server.service.crud.relation.ClinicAccountService;
@@ -38,6 +39,45 @@ public class VetClinicController {
 
     @PostMapping("create")
     public ResponseEntity<ResponseDto> create(@Valid @RequestBody VetClinicRequestDto requestDto) {
+        // Create an OpeningHours object
+        OpeningHours openingHours = OpeningHours.builder().build();
+        val newOpeningHours = openingHoursService.create(openingHours);
+        // Create a Clinic object
+        val clinic = Clinic.builder()
+                .name(requestDto.getName())
+                .street(requestDto.getStreet())
+                .buildingNumber(requestDto.getBuildingNumber())
+                .apartmentNumber(requestDto.getApartmentNumber())
+                .postalCode(requestDto.getPostalCode())
+                .city(requestDto.getCity())
+                .province(requestDto.getProvince())
+                .country(requestDto.getCountry())
+                .email(requestDto.getEmail())
+                .phoneNumber(requestDto.getPhoneNumber())
+                .openingHoursId(openingHours.getId())
+                .build();
+        val newClinic = clinicService.create(clinic);
+        // Determine account id
+        val account = getAccountByTokenStep.runStep(requestDto.getToken());
+        if (account.isEmpty()) {
+            return responseStep.getStep(false);
+        }
+        val accountByToken = account.get();
+        val accountId = accountByToken.getId();
+        // Create an Owner object
+        Owner owner = Owner.builder()
+                .accountId(accountId)
+                .clinicId(newClinic.getId())
+                .build();
+        ownerService.create(owner);
+        // Create a Clinic_Account object
+        ClinicAccount clinicAccount = ClinicAccount.builder()
+                .accountId(accountId)
+                .clinicId(newClinic.getId())
+                .build();
+        clinicAccountService.create(clinicAccount);
+        // Return the response dto
+        responseStep.addMessage("The clinic has been established successfully!");
         return responseStep.getStep(true);
     }
 
@@ -59,7 +99,38 @@ public class VetClinicController {
     }
 
     @PostMapping("update")
-    public ResponseEntity<ResponseDto> update(@Valid @RequestBody VetClinicRequestDto requestDto) {
+    public ResponseEntity<ResponseDto> update(@Valid @RequestBody VetClinicRequestDto requestDto) throws Exception {
+        val account = getAccountByTokenStep.runStep(requestDto.getToken());
+        if (account.isEmpty()) {
+            return responseStep.getStep(false);
+        }
+        val accountByToken = account.get();
+        val accountId = accountByToken.getId();
+        val clinicId = requestDto.getId();
+
+        val own = ownerService.findByAccountIdAndClinicId(accountId, clinicId);
+        if (own.isEmpty()) {
+            responseStep.addMessage("You do not have permission to update!");
+            return responseStep.getStep(false);
+        }
+        val clinic = clinicService.findById(clinicId);
+        if (clinic.isEmpty()) {
+            responseStep.addMessage("The clinic does not exist!");
+            return responseStep.getStep(false);
+        }
+        val clinicToUpdate = clinic.get();
+        clinicToUpdate.setName(requestDto.getName());
+        clinicToUpdate.setStreet(requestDto.getStreet());
+        clinicToUpdate.setBuildingNumber(requestDto.getBuildingNumber());
+        clinicToUpdate.setApartmentNumber(requestDto.getApartmentNumber());
+        clinicToUpdate.setPostalCode(requestDto.getPostalCode());
+        clinicToUpdate.setCity(requestDto.getCity());
+        clinicToUpdate.setProvince(requestDto.getProvince());
+        clinicToUpdate.setCountry(requestDto.getCountry());
+        clinicToUpdate.setEmail(requestDto.getEmail());
+        clinicToUpdate.setPhoneNumber(requestDto.getPhoneNumber());
+        clinicService.update(clinicToUpdate);
+        responseStep.addMessage("The clinic has been updated successfully!");
         return responseStep.getStep(true);
     }
 
@@ -92,94 +163,3 @@ public class VetClinicController {
         return handleValidationService.handle(ex);
     }
 }
-
-//public class VetClinicController {
-//    private final OpeningHoursService openingHoursService;
-//    private final ClinicService clinicService;
-//    private final TokenService tokenService;
-//    private final AccountService accountService;
-//    private final OwnerService ownerService;
-//    private final ClinicAccountService clinicAccountService;
-//
-//    @PostMapping("create")
-//    public ResponseEntity<ResponseDto<Clinic>> create(@Valid @RequestBody ClinicRequestDto requestDto) {
-//        val messages = new ArrayList<String>();
-//        // Create an OpeningHours object
-//        val openingHours = openingHoursService.create();
-//        // Create a Clinic object
-//        val clinic = Clinic.builder()
-//                .name(requestDto.getName())
-//                .street(requestDto.getStreet())
-//                .buildingNumber(requestDto.getBuildingNumber())
-//                .apartmentNumber(requestDto.getApartmentNumber())
-//                .postalCode(requestDto.getPostalCode())
-//                .city(requestDto.getCity())
-//                .province(requestDto.getProvince())
-//                .country(requestDto.getCountry())
-//                .email(requestDto.getEmail())
-//                .phoneNumber(requestDto.getPhoneNumber())
-//                .openingHoursId(openingHours.getId())
-//                .build();
-//        val newClinic = clinicService.create(clinic);
-//        // Determine account id
-//        val token = requestDto.getToken();
-//        val email = tokenService.decode(token);
-//        val account = accountService.findByEmail(email);
-//        if (account.isEmpty()) {
-//            messages.add("Account by given email does not exist!");
-//            val responseDto = new ResponseDto<>(false, messages, clinic);
-//            return ResponseEntity.status(HttpStatus.OK).body(responseDto);
-//        }
-//        val accountId = account.get().getId();
-//        // Create an Owner object
-//        ownerService.create(accountId, newClinic.getId());
-//        // Create a Clinic_Account object
-//        clinicAccountService.create(accountId, newClinic.getId());
-//        // Return the response dto
-//        messages.add("The clinic has been established successfully!");
-//        val responseDto = new ResponseDto<>(true, messages, clinic);
-//        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
-//    }
-//
-//    @PostMapping("update")
-//    public ResponseEntity<ResponseDto<Clinic>> update(@Valid @RequestBody ClinicRequestDto requestDto) {
-//        val messages = new ArrayList<String>();
-//        val token = requestDto.getToken();
-//        val email = tokenService.decode(token);
-//        val account = accountService.findByEmail(email);
-//        if (account.isEmpty()) {
-//            messages.add("Account by given email does not exist!");
-//            val responseDto = new ResponseDto<Clinic>(false, messages, Clinic.builder().build());
-//            return ResponseEntity.status(HttpStatus.OK).body(responseDto);
-//        }
-//        val accountId = account.get().getId();
-//        val clinicId = requestDto.getId();
-//        val relation = clinicAccountService.findByAccountIdAndClinicId(accountId, clinicId);
-//        if (relation.isEmpty()) {
-//            messages.add("You do not have permission to update!");
-//            val responseDto = new ResponseDto<Clinic>(false, messages, Clinic.builder().build());
-//            return ResponseEntity.status(HttpStatus.OK).body(responseDto);
-//        }
-//        Optional<Clinic> clinic = clinicService.findById(clinicId);
-//        if (clinic.isEmpty()) {
-//            messages.add("The clinic does not exist!");
-//            val responseDto = new ResponseDto<Clinic>(false, messages, Clinic.builder().build());
-//            return ResponseEntity.status(HttpStatus.OK).body(responseDto);
-//        }
-//        val clinicToUpdate = clinic.get();
-//        clinicToUpdate.setName(requestDto.getName());
-//        clinicToUpdate.setStreet(requestDto.getStreet());
-//        clinicToUpdate.setBuildingNumber(requestDto.getBuildingNumber());
-//        clinicToUpdate.setApartmentNumber(requestDto.getApartmentNumber());
-//        clinicToUpdate.setPostalCode(requestDto.getPostalCode());
-//        clinicToUpdate.setCity(requestDto.getCity());
-//        clinicToUpdate.setProvince(requestDto.getProvince());
-//        clinicToUpdate.setCountry(requestDto.getCountry());
-//        clinicToUpdate.setEmail(requestDto.getEmail());
-//        clinicToUpdate.setPhoneNumber(requestDto.getPhoneNumber());
-//        clinicService.update(clinicToUpdate);
-//        messages.add("The clinic has been updated successfully!");
-//        val responseDto = new ResponseDto<>(true, messages, clinicToUpdate);
-//        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
-//    }
-//}
