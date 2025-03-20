@@ -1,36 +1,41 @@
 package com.jakubolejarczyk.vet_server.controller.guard;
 
+import com.jakubolejarczyk.vet_server.dto.request.guard.GuardRequestDto;
+import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
+import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
+import com.jakubolejarczyk.vet_server.service.step.GetAccountByTokenStep;
+import com.jakubolejarczyk.vet_server.service.step.ResponseStep;
+import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
+import lombok.val;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/v1")
+@AllArgsConstructor
 public class HasRoleController {
-//    private final TokenService tokenService;
-//
-//    private final AccountService accountService;
-//
-//    @PostMapping("has-role")
-//    public ResponseEntity<HasRoleResponseDto> hasRole(@Valid @RequestBody HasRoleRequestDto requestDto) {
-//        String token = requestDto.getToken();
-//        String email = tokenService.decode(token);
-//        Optional<Account> account = accountService.findByEmail(email);
-//        if (account.isEmpty()) {
-//            HasRoleResponseDto responseDto = new HasRoleResponseDto(false, new ArrayList<>());
-//            return ResponseEntity.ok().body(responseDto);
-//        }
-//        String role = account.get().getRole();
-//        if (role == null) {
-//            HasRoleResponseDto responseDto = new HasRoleResponseDto(false, new ArrayList<>());
-//            return ResponseEntity.ok().body(responseDto);
-//        }
-//        HasRoleResponseDto responseDto = new HasRoleResponseDto(true, new ArrayList<>());
-//        return ResponseEntity.ok().body(responseDto);
-//    }
-//
-//    @ExceptionHandler(MethodArgumentNotValidException.class)
-//    public ResponseEntity<HasRoleResponseDto> handleValidation(MethodArgumentNotValidException ex) {
-//        ArrayList<String> errors = new ArrayList<>();
-//        ex.getBindingResult().getAllErrors().forEach((error) -> {
-//            String message = error.getDefaultMessage();
-//            errors.add(message);
-//        });
-//        HasRoleResponseDto responseDto = new HasRoleResponseDto(false, errors);
-//        return ResponseEntity.ok().body(responseDto);
-//    }
+    private final ResponseStep responseStep;
+    private final HandleValidationService handleValidationService;
+    private final GetAccountByTokenStep getAccountByTokenStep;
+
+    @PostMapping("get-account")
+    public ResponseEntity<ResponseDto> getAccount(@Valid @RequestBody GuardRequestDto requestDto) {
+        val token = requestDto.getToken();
+        val account = getAccountByTokenStep.runStep(token);
+        if (account.isEmpty()) {
+            return responseStep.getStep(false);
+        }
+        val role = account.get().getRole();
+        if (role.isEmpty()) {
+            return responseStep.getStep(false);
+        }
+        return responseStep.getStep(true);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ResponseDto> handleValidation(MethodArgumentNotValidException ex) {
+        return handleValidationService.handle(ex);
+    }
 }

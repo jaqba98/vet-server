@@ -3,8 +3,7 @@ package com.jakubolejarczyk.vet_server.controller.guard;
 import com.jakubolejarczyk.vet_server.dto.request.guard.GuardRequestDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
 import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.service.step.GetAccountByTokenStep;
-import com.jakubolejarczyk.vet_server.service.step.IsRoleStep;
+import com.jakubolejarczyk.vet_server.service.security.TokenService;
 import com.jakubolejarczyk.vet_server.service.step.ResponseStep;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -16,20 +15,16 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1")
 @AllArgsConstructor
-public class IsClientController {
+public class ValidTokenController {
     private final ResponseStep responseStep;
+    private final TokenService tokenService;
     private final HandleValidationService handleValidationService;
-    private final GetAccountByTokenStep getAccountByTokenStep;
-    private final IsRoleStep isRoleStep;
 
-    @PostMapping("is-client")
-    public ResponseEntity<ResponseDto> isClient(@Valid @RequestBody GuardRequestDto requestDto) {
+    @PostMapping("valid-token")
+    public ResponseEntity<ResponseDto> validToken(@Valid @RequestBody GuardRequestDto requestDto) {
         val token = requestDto.getToken();
-        val account = getAccountByTokenStep.runStep(token);
-        if (account.isEmpty()) {
-            return responseStep.getStep(false);
-        }
-        return responseStep.getStep(isRoleStep.runStep(account.get(), "client"));
+        val isValid = tokenService.verify(token);
+        return responseStep.getStep(isValid);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
