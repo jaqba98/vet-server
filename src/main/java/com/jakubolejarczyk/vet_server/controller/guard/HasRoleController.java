@@ -20,8 +20,8 @@ public class HasRoleController {
     private final HandleValidationService handleValidationService;
     private final GetAccountByTokenStep getAccountByTokenStep;
 
-    @PostMapping("get-account")
-    public ResponseEntity<ResponseDto> getAccount(@Valid @RequestBody GuardRequestDto requestDto) {
+    @PostMapping("has-role")
+    public ResponseEntity<ResponseDto> hasRole(@Valid @RequestBody GuardRequestDto requestDto) {
         val account = getAccountByTokenStep.runStep(requestDto.getToken());
         if (account.isEmpty()) {
             return responseStep.getStep(false);
