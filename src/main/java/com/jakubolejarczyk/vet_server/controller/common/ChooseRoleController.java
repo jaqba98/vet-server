@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1")
 @AllArgsConstructor
 public class ChooseRoleController {
-    private final HandleValidationService handleValidationService;
     private final GetAccountByTokenStep getAccountByTokenStep;
     private final UpdateAccountRoleStep updateAccountRoleStep;
     private final ResponseStep responseStep;
+    private final HandleValidationService handleValidationService;
 
     @PostMapping("choose-role")
     public ResponseEntity<ResponseDto> chooseRole(@Valid @RequestBody ChooseRoleRequestDto requestDto) {
