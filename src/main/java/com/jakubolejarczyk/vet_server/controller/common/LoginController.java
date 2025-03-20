@@ -18,12 +18,14 @@ public class LoginController {
 
     @PostMapping("login")
     public ResponseEntity<ResponseDataDto<String>> login(@RequestBody LoginRequestDto requestDto) {
+        // Account auth
         val email = requestDto.getEmail();
         val password = requestDto.getPassword();
         val auth = accountAuth.runStep(email, password);
         if (!auth.getSuccess()) {
             responseStep.addMessage("Incorrect email or password!");
         }
+        // Response
         return responseStep.getStep(auth.getSuccess(), auth.getData());
     }
 }

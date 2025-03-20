@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class RegistrationStep {
+public class CreateAccountStep {
     private final AccountService accountService;
     private final PasswordService passwordService;
 
