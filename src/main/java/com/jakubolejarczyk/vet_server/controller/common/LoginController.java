@@ -26,6 +26,7 @@ public class LoginController {
             responseStep.addMessage("Incorrect email or password!");
         }
         // Response
+        responseStep.addMessage("You have logged in successfully!");
         return responseStep.getStep(auth.getSuccess(), auth.getData());
     }
 }
