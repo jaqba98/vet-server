@@ -41,10 +41,19 @@ public class VetClinicController {
 
     @PostMapping("create")
     public ResponseEntity<ResponseDto> create(@Valid @RequestBody VetClinicRequestDto requestDto) {
-        // Create an OpeningHours object
+        // Get account by token
+        val token = requestDto.getToken();
+        val account = getAccountByTokenStep.runStep(token);
+        if (!account.getSuccess()) {
+            responseStep.addMessage("Failed to create clinic!");
+            return responseStep.getStep(false);
+        }
+        val accountData = account.getData();
+        val accountId = accountData.getId();
+        // Create an opening hours
         OpeningHours openingHours = OpeningHours.builder().build();
         val newOpeningHours = openingHoursService.create(openingHours);
-        // Create a Clinic object
+        // Create a clinic
         val clinic = Clinic.builder()
                 .name(requestDto.getName())
                 .street(requestDto.getStreet())
@@ -56,34 +65,22 @@ public class VetClinicController {
                 .country(requestDto.getCountry())
                 .email(requestDto.getEmail())
                 .phoneNumber(requestDto.getPhoneNumber())
-                .openingHoursId(openingHours.getId())
+                .openingHoursId(newOpeningHours.getId())
                 .build();
         val newClinic = clinicService.create(clinic);
-        // ...
-        // Get account by token
-        val token = requestDto.getToken();
-        val account = getAccountByTokenStep.runStep(token);
-        if (!account.getSuccess()) {
-            responseStep.addMessage("Failed to create clinic!");
-            return responseStep.getStep(false);
-        }
-        val accountData = account.getData();
-
-        // ...
-        val accountId = accountData.getId();
-        // Create an Owner object
+        // Create an owner
         Owner owner = Owner.builder()
                 .accountId(accountId)
                 .clinicId(newClinic.getId())
                 .build();
         ownerService.create(owner);
-        // Create a Clinic_Account object
+        // Create a clinic_account
         ClinicAccount clinicAccount = ClinicAccount.builder()
                 .accountId(accountId)
                 .clinicId(newClinic.getId())
                 .build();
         clinicAccountService.create(clinicAccount);
-        // Return the response dto
+        // Response
         responseStep.addMessage("The clinic has been established successfully!");
         return responseStep.getStep(true);
     }
