@@ -13,6 +13,7 @@ import com.jakubolejarczyk.vet_server.service.crud.independent.OpeningHoursServi
 import com.jakubolejarczyk.vet_server.service.crud.relation.ClinicAccountService;
 import com.jakubolejarczyk.vet_server.service.crud.relation.OwnerService;
 import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
+import com.jakubolejarczyk.vet_server.service.step.AccountClinicsStep;
 import com.jakubolejarczyk.vet_server.service.step.GetAccountByTokenStep;
 import com.jakubolejarczyk.vet_server.service.step.ResponseStep;
 import jakarta.validation.Valid;
@@ -36,6 +37,7 @@ public class VetClinicController {
     private final OwnerService ownerService;
     private final OpeningHoursService openingHoursService;
     private final ClinicService clinicService;
+    private final AccountClinicsStep accountClinicsStep;
 
     @PostMapping("create")
     public ResponseEntity<ResponseDto> create(@Valid @RequestBody VetClinicRequestDto requestDto) {
@@ -66,6 +68,7 @@ public class VetClinicController {
             return responseStep.getStep(false);
         }
         val accountData = account.getData();
+
         // ...
         val accountId = accountData.getId();
         // Create an Owner object
@@ -95,15 +98,11 @@ public class VetClinicController {
             return responseStep.getStep(false, new ArrayList<>());
         }
         val accountData = account.getData();
-        // ...
-        val accountId = accountData.getId();
-        val clinicIds = clinicAccountService.findByAccountId(accountId)
-            .stream()
-            .map(ClinicAccount::getClinicId)
-            .collect(Collectors.toCollection(ArrayList::new));
-        val matchedClinics = new ArrayList<>(clinicService.findAllById(clinicIds));
+        // Find all clinics owned by the account
+        val clinics = accountClinicsStep.runStep(accountData);
+        // Response
         responseStep.addMessage("The clinics have been read successfully!");
-        return responseStep.getStep(true, matchedClinics);
+        return responseStep.getStep(true, clinics.getData());
     }
 
     @PostMapping("update")
