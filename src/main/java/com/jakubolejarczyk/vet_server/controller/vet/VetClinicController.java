@@ -24,7 +24,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/vet-clinic")
@@ -112,20 +111,21 @@ public class VetClinicController {
             return responseStep.getStep(false);
         }
         val accountData = account.getData();
-        // ...
         val accountId = accountData.getId();
         val clinicId = requestDto.getId();
-
-        val own = ownerService.findByAccountIdAndClinicId(accountId, clinicId);
-        if (own.isEmpty()) {
+        // Check permission to clinic
+        val ownerRelation = ownerService.findByAccountIdAndClinicId(accountId, clinicId);
+        if (ownerRelation.isEmpty()) {
             responseStep.addMessage("You do not have permission to update!");
             return responseStep.getStep(false);
         }
+        // Get the clinic by id
         val clinic = clinicService.findById(clinicId);
         if (clinic.isEmpty()) {
             responseStep.addMessage("The clinic does not exist!");
             return responseStep.getStep(false);
         }
+        // Merge new clinic with existed clinic
         val clinicToUpdate = clinic.get();
         clinicToUpdate.setName(requestDto.getName());
         clinicToUpdate.setStreet(requestDto.getStreet());
@@ -138,6 +138,7 @@ public class VetClinicController {
         clinicToUpdate.setEmail(requestDto.getEmail());
         clinicToUpdate.setPhoneNumber(requestDto.getPhoneNumber());
         clinicService.update(clinicToUpdate);
+        // Response
         responseStep.addMessage("The clinic has been updated successfully!");
         return responseStep.getStep(true);
     }
