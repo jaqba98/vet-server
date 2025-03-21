@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("/api/v1/vet-clinic")
+@RequestMapping("/api/v1")
 @AllArgsConstructor
 public class VetClinicController {
     private final ResponseStep responseStep;
@@ -38,7 +38,7 @@ public class VetClinicController {
     private final ClinicService clinicService;
     private final AccountClinicsStep accountClinicsStep;
 
-    @PostMapping("create")
+    @PostMapping("vet-clinic/create")
     public ResponseEntity<ResponseDto> create(@Valid @RequestBody VetClinicRequestDto requestDto) {
         // Get account by token
         val token = requestDto.getToken();
@@ -84,7 +84,7 @@ public class VetClinicController {
         return responseStep.getStep(true);
     }
 
-    @PostMapping("read")
+    @PostMapping("vet-clinic/read")
     public ResponseEntity<ResponseDataDto<ArrayList<Clinic>>> read(@Valid @RequestBody VetClinicRequestDto requestDto) {
         // Get account by token
         val token = requestDto.getToken();
@@ -101,7 +101,7 @@ public class VetClinicController {
         return responseStep.getStep(true, clinics.getData());
     }
 
-    @PostMapping("update")
+    @PostMapping("vet-clinic/update")
     public ResponseEntity<ResponseDto> update(@Valid @RequestBody VetClinicRequestDto requestDto) throws Exception {
         // Get account by token
         val token = requestDto.getToken();
@@ -143,7 +143,7 @@ public class VetClinicController {
         return responseStep.getStep(true);
     }
 
-    @PostMapping("delete")
+    @PostMapping("vet-clinic/delete")
     public ResponseEntity<ResponseDto> delete(@Valid @RequestBody DeleteRequestDto requestDto) {
         // Get account by token
         val token = requestDto.getToken();
