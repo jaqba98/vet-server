@@ -152,7 +152,6 @@ public class VetClinicController {
             return responseStep.getStep(false);
         }
         val accountData = account.getData();
-        // ...
         val accountId = accountData.getId();
         val clinicIds = requestDto.getIds();
         // Delete clinic account relations
@@ -161,11 +160,12 @@ public class VetClinicController {
         // Delete owner relations
         val ownerRelations = ownerService.findByAccountIdAndClinicIdIn(accountId, clinicIds);
         ownerService.deleteAllInBatch(ownerRelations);
-        // Delete opening hour
+        // Delete opening hours
         val openingHoursIds = clinicService.findAllById(clinicIds).stream().map(Clinic::getOpeningHoursId).toList();
         openingHoursService.deleteAllByIdInBatch(openingHoursIds);
         // Delete clinics
         clinicService.deleteAllByIdInBatch(clinicIds);
+        // Response
         responseStep.addMessage("Clinics were deleted successfully!");
         return responseStep.getStep(true);
     }
