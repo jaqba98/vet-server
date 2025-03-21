@@ -1,6 +1,6 @@
-package com.jakubolejarczyk.vet_server.controller.vet;
+package com.jakubolejarczyk.vet_server.controller.common;
 
-import com.jakubolejarczyk.vet_server.dto.request.controller.VetClinicRequestDto;
+import com.jakubolejarczyk.vet_server.dto.request.controller.ClinicRequestDto;
 import com.jakubolejarczyk.vet_server.dto.request.crud.DeleteRequestDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDataDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
@@ -28,7 +28,7 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("/api/v1")
 @AllArgsConstructor
-public class VetClinicController {
+public class ClinicController {
     private final ResponseStep responseStep;
     private final GetAccountByTokenStep getAccountByTokenStep;
     private final HandleValidationService handleValidationService;
@@ -38,8 +38,8 @@ public class VetClinicController {
     private final ClinicService clinicService;
     private final AccountClinicsStep accountClinicsStep;
 
-    @PostMapping("vet-clinic/create")
-    public ResponseEntity<ResponseDto> create(@Valid @RequestBody VetClinicRequestDto requestDto) {
+    @PostMapping("clinic-create")
+    public ResponseEntity<ResponseDto> create(@Valid @RequestBody ClinicRequestDto requestDto) {
         // Get account by token
         val token = requestDto.getToken();
         val account = getAccountByTokenStep.runStep(token);
@@ -84,8 +84,8 @@ public class VetClinicController {
         return responseStep.getStep(true);
     }
 
-    @PostMapping("vet-clinic/read")
-    public ResponseEntity<ResponseDataDto<ArrayList<Clinic>>> read(@Valid @RequestBody VetClinicRequestDto requestDto) {
+    @PostMapping("clinic-read")
+    public ResponseEntity<ResponseDataDto<ArrayList<Clinic>>> read(@Valid @RequestBody ClinicRequestDto requestDto) {
         // Get account by token
         val token = requestDto.getToken();
         val account = getAccountByTokenStep.runStep(token);
@@ -101,8 +101,8 @@ public class VetClinicController {
         return responseStep.getStep(true, clinics.getData());
     }
 
-    @PostMapping("vet-clinic/update")
-    public ResponseEntity<ResponseDto> update(@Valid @RequestBody VetClinicRequestDto requestDto) throws Exception {
+    @PostMapping("clinic-update")
+    public ResponseEntity<ResponseDto> update(@Valid @RequestBody ClinicRequestDto requestDto) throws Exception {
         // Get account by token
         val token = requestDto.getToken();
         val account = getAccountByTokenStep.runStep(token);
@@ -143,7 +143,7 @@ public class VetClinicController {
         return responseStep.getStep(true);
     }
 
-    @PostMapping("vet-clinic/delete")
+    @PostMapping("clinic-delete")
     public ResponseEntity<ResponseDto> delete(@Valid @RequestBody DeleteRequestDto requestDto) {
         // Get account by token
         val token = requestDto.getToken();
