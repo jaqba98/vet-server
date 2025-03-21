@@ -1,5 +1,6 @@
 package com.jakubolejarczyk.vet_server.controller.common;
 
+import com.jakubolejarczyk.vet_server.dto.base.TokenRequestDto;
 import com.jakubolejarczyk.vet_server.dto.request.controller.ClinicRequestDto;
 import com.jakubolejarczyk.vet_server.dto.request.crud.DeleteRequestDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDataDto;
@@ -85,7 +86,7 @@ public class ClinicController {
     }
 
     @PostMapping("clinic-read")
-    public ResponseEntity<ResponseDataDto<ArrayList<Clinic>>> read(@Valid @RequestBody ClinicRequestDto requestDto) {
+    public ResponseEntity<ResponseDataDto<ArrayList<Clinic>>> read(@Valid @RequestBody TokenRequestDto requestDto) {
         // Get account by token
         val token = requestDto.getToken();
         val account = getAccountByTokenStep.runStep(token);
