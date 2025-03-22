@@ -20,6 +20,7 @@ import com.jakubolejarczyk.vet_server.service.step.ResponseStep;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.val;
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,7 @@ import java.util.ArrayList;
 public class ClinicController {
     private final ResponseStep responseStep;
     private final GetAccountByTokenStep getAccountByTokenStep;
-    private final HandleValidationService handleValidationService;
+    private final ObjectFactory<HandleValidationService> handleValidationService;
     private final ClinicAccountService clinicAccountService;
     private final OwnerService ownerService;
     private final OpeningHoursService openingHoursService;
@@ -174,6 +175,6 @@ public class ClinicController {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ResponseDto> handleValidation(MethodArgumentNotValidException ex) {
-        return handleValidationService.handle(ex);
+        return handleValidationService.getObject().handle(ex);
     }
 }

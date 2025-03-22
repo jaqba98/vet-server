@@ -8,6 +8,7 @@ import com.jakubolejarczyk.vet_server.service.step.ResponseStep;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.val;
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1")
 @AllArgsConstructor
 public class RegistrationController {
-    private final HandleValidationService handleValidationService;
+    private final ObjectFactory<HandleValidationService> handleValidationService;
     private final CreateAccountStep createAccountStep;
     private final ResponseStep responseStep;
 
@@ -35,7 +36,7 @@ public class RegistrationController {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ResponseDto> handleValidation(MethodArgumentNotValidException ex) {
-        return handleValidationService.handle(ex);
+        return handleValidationService.getObject().handle(ex);
     }
 }
 

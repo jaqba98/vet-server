@@ -8,6 +8,7 @@ import com.jakubolejarczyk.vet_server.service.step.ResponseStep;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.val;
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class HasRoleController {
     private final ResponseStep responseStep;
-    private final HandleValidationService handleValidationService;
+    private final ObjectFactory<HandleValidationService> handleValidationService;
     private final GetAccountByTokenStep getAccountByTokenStep;
 
     @PostMapping("has-role")
@@ -39,6 +40,6 @@ public class HasRoleController {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ResponseDto> handleValidation(MethodArgumentNotValidException ex) {
-        return handleValidationService.handle(ex);
+        return handleValidationService.getObject().handle(ex);
     }
 }

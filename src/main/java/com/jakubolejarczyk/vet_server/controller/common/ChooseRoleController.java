@@ -9,6 +9,7 @@ import com.jakubolejarczyk.vet_server.service.step.SetAccountRoleStep;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.val;
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class ChooseRoleController {
     private final GetAccountByTokenStep getAccountByTokenStep;
     private final SetAccountRoleStep setAccountRoleStep;
     private final ResponseStep responseStep;
-    private final HandleValidationService handleValidationService;
+    private final ObjectFactory<HandleValidationService> handleValidationService;
 
     @PostMapping("choose-role")
     public ResponseEntity<ResponseDto> chooseRole(@Valid @RequestBody ChooseRoleRequestDto requestDto) {
@@ -42,6 +43,6 @@ public class ChooseRoleController {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ResponseDto> handleValidation(MethodArgumentNotValidException ex) {
-        return handleValidationService.handle(ex);
+        return handleValidationService.getObject().handle(ex);
     }
 }
