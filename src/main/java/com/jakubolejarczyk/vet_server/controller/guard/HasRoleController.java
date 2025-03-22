@@ -33,7 +33,7 @@ public class HasRoleController {
         val accountData = account.getData();
         // Check if the account has a role
         val role = accountData.getRole();
-        val hasRole = !role.isEmpty();
+        val hasRole = role != null;
         // Response
         return responseStep.getStep(hasRole);
     }

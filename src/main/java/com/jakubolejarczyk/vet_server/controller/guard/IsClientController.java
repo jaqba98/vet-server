@@ -32,7 +32,8 @@ public class IsClientController {
         }
         val accountData = account.getData();
         // Check if the account has a client role
-        val clientRole = accountData.getRole().contains("client");
+        val role = accountData.getRole();
+        val clientRole = role != null && role.contains("client");
         // Response
         return responseStep.getStep(clientRole);
     }

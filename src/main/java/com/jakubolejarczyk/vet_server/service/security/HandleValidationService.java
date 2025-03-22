@@ -4,6 +4,7 @@ import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
 import com.jakubolejarczyk.vet_server.service.step.ResponseStep;
 import lombok.AllArgsConstructor;
 import lombok.val;
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -11,13 +12,13 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 @Service
 @AllArgsConstructor
 public class HandleValidationService {
-    private final ResponseStep responseStep;
+    private final ObjectFactory<ResponseStep> responseStep;
 
     public ResponseEntity<ResponseDto> handle(MethodArgumentNotValidException ex) {
         ex.getBindingResult().getAllErrors().forEach((error) -> {
             val message = error.getDefaultMessage();
-            responseStep.addMessage(message);
+            responseStep.getObject().addMessage(message);
         });
-        return responseStep.getStep(false);
+        return responseStep.getObject().getStep(false);
     }
 }

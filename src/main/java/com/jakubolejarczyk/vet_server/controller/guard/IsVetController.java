@@ -32,7 +32,8 @@ public class IsVetController {
         }
         val accountData = account.getData();
         // Check if the account has a vet role
-        val clientRole = accountData.getRole().contains("vet");
+        val role = accountData.getRole();
+        val clientRole = role != null && role.contains("vet");
         // Response
         return responseStep.getStep(clientRole);
     }
