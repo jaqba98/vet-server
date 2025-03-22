@@ -15,6 +15,7 @@ public class HandleValidationService {
     private final ObjectFactory<ResponseStep> responseStep;
 
     public ResponseEntity<ResponseDto> handle(MethodArgumentNotValidException ex) {
+        responseStep.getObject().getRidOfMessages();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
             val message = error.getDefaultMessage();
             responseStep.getObject().addMessage(message);

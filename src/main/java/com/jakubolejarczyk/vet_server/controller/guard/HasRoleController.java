@@ -17,25 +17,27 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1")
 @AllArgsConstructor
 public class HasRoleController {
-    private final ResponseStep responseStep;
+    private final ObjectFactory<ResponseStep> responseStep;
     private final ObjectFactory<HandleValidationService> handleValidationService;
     private final GetAccountByTokenStep getAccountByTokenStep;
 
     @PostMapping("has-role")
     public ResponseEntity<ResponseDto> hasRole(@Valid @RequestBody GuardRequestDto requestDto) {
+        // Clean response
+        responseStep.getObject().getRidOfMessages();
         // Get account by token
         val token = requestDto.getToken();
         val account = getAccountByTokenStep.runStep(token);
         if (!account.getSuccess()) {
-            responseStep.addMessage("Role is not set!");
-            return responseStep.getStep(false);
+            responseStep.getObject().addMessage("Role is not set!");
+            return responseStep.getObject().getStep(false);
         }
         val accountData = account.getData();
         // Check if the account has a role
         val role = accountData.getRole();
         val hasRole = role != null;
         // Response
-        return responseStep.getStep(hasRole);
+        return responseStep.getObject().getStep(hasRole);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

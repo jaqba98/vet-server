@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.*;
 public class RegistrationController {
     private final ObjectFactory<HandleValidationService> handleValidationService;
     private final CreateAccountStep createAccountStep;
-    private final ResponseStep responseStep;
+    private final ObjectFactory<ResponseStep> responseStep;
 
     @PostMapping("registration")
     public ResponseEntity<ResponseDto> registration(@Valid @RequestBody RegistrationRequestDto requestDto) {
+        // Clean response
+        responseStep.getObject().getRidOfMessages();
         // Create account
         val email = requestDto.getEmail();
         val password = requestDto.getPassword();
@@ -30,8 +32,8 @@ public class RegistrationController {
         val lastName = requestDto.getLastName();
         createAccountStep.runStep(email, password, firstName, lastName);
         // Response
-        responseStep.addMessage("The account has been created successfully!");
-        return responseStep.getStep(true);
+        responseStep.getObject().addMessage("The account has been created successfully!");
+        return responseStep.getObject().getStep(true);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

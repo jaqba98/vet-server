@@ -17,25 +17,27 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1")
 @AllArgsConstructor
 public class IsVetController {
-    private final ResponseStep responseStep;
+    private final ObjectFactory<ResponseStep> responseStep;
     private final ObjectFactory<HandleValidationService> handleValidationService;
     private final GetAccountByTokenStep getAccountByTokenStep;
 
     @PostMapping("is-vet")
     public ResponseEntity<ResponseDto> isVet(@Valid @RequestBody GuardRequestDto requestDto) {
+        // Clean response
+        responseStep.getObject().getRidOfMessages();
         // Get account by token
         val token = requestDto.getToken();
         val account = getAccountByTokenStep.runStep(token);
         if (!account.getSuccess()) {
-            responseStep.addMessage("You are not a vet!");
-            return responseStep.getStep(false);
+            responseStep.getObject().addMessage("You are not a vet!");
+            return responseStep.getObject().getStep(false);
         }
         val accountData = account.getData();
         // Check if the account has a vet role
         val role = accountData.getRole();
         val clientRole = role != null && role.contains("vet");
         // Response
-        return responseStep.getStep(clientRole);
+        return responseStep.getObject().getStep(clientRole);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

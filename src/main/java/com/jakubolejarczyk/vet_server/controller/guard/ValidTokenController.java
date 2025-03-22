@@ -17,17 +17,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1")
 @AllArgsConstructor
 public class ValidTokenController {
-    private final ResponseStep responseStep;
+    private final ObjectFactory<ResponseStep> responseStep;
     private final TokenService tokenService;
     private final ObjectFactory<HandleValidationService> handleValidationService;
 
     @PostMapping("valid-token")
     public ResponseEntity<ResponseDto> validToken(@Valid @RequestBody GuardRequestDto requestDto) {
+        // Clean response
+        responseStep.getObject().getRidOfMessages();
         // Check if the token is valid
         val token = requestDto.getToken();
         val isValid = tokenService.verify(token);
         // Response
-        return responseStep.getStep(isValid);
+        return responseStep.getObject().getStep(isValid);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

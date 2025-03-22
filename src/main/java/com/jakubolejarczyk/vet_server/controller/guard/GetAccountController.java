@@ -19,24 +19,26 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1")
 @AllArgsConstructor
 public class GetAccountController {
-    private final ResponseStep responseStep;
+    private final ObjectFactory<ResponseStep> responseStep;
     private final ObjectFactory<HandleValidationService> handleValidationService;
     private final GetAccountByTokenStep getAccountByTokenStep;
 
     @PostMapping("get-account")
     public ResponseEntity<ResponseDataDto<Account>> getAccount(@Valid @RequestBody GuardRequestDto requestDto) {
+        // Clean response
+        responseStep.getObject().getRidOfMessages();
         // Get account by token
         val token = requestDto.getToken();
         val account = getAccountByTokenStep.runStep(token);
         if (!account.getSuccess()) {
-            responseStep.addMessage("Failed to get account!");
-            return responseStep.getStep(false, Account.builder().build());
+            responseStep.getObject().addMessage("Failed to get account!");
+            return responseStep.getObject().getStep(false, Account.builder().build());
         }
         val accountData = account.getData();
         // Delete id
         accountData.setId(null);
         // Response
-        return responseStep.getStep(true, accountData);
+        return responseStep.getObject().getStep(true, accountData);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

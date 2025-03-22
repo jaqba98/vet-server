@@ -31,7 +31,7 @@ import java.util.ArrayList;
 @RequestMapping("/api/v1")
 @AllArgsConstructor
 public class ClinicController {
-    private final ResponseStep responseStep;
+    private final ObjectFactory<ResponseStep> responseStep;
     private final GetAccountByTokenStep getAccountByTokenStep;
     private final ObjectFactory<HandleValidationService> handleValidationService;
     private final ClinicAccountService clinicAccountService;
@@ -42,12 +42,14 @@ public class ClinicController {
 
     @PostMapping("clinic-create")
     public ResponseEntity<ResponseDto> create(@Valid @RequestBody ClinicRequestDto requestDto) {
+        // Clean response
+        responseStep.getObject().getRidOfMessages();
         // Get account by token
         val token = requestDto.getToken();
         val account = getAccountByTokenStep.runStep(token);
         if (!account.getSuccess()) {
-            responseStep.addMessage("Failed to create clinic!");
-            return responseStep.getStep(false);
+            responseStep.getObject().addMessage("Failed to create clinic!");
+            return responseStep.getObject().getStep(false);
         }
         val accountData = account.getData();
         val accountId = accountData.getId();
@@ -82,35 +84,39 @@ public class ClinicController {
                 .build();
         clinicAccountService.create(clinicAccount);
         // Response
-        responseStep.addMessage("The clinic has been established successfully!");
-        return responseStep.getStep(true);
+        responseStep.getObject().addMessage("The clinic has been established successfully!");
+        return responseStep.getObject().getStep(true);
     }
 
     @PostMapping("clinic-read")
     public ResponseEntity<ResponseDataDto<ArrayList<Clinic>>> read(@Valid @RequestBody TokenRequestDto requestDto) {
+        // Clean response
+        responseStep.getObject().getRidOfMessages();
         // Get account by token
         val token = requestDto.getToken();
         val account = getAccountByTokenStep.runStep(token);
         if (!account.getSuccess()) {
-            responseStep.addMessage("Failed to read clinics!");
-            return responseStep.getStep(false, new ArrayList<>());
+            responseStep.getObject().addMessage("Failed to read clinics!");
+            return responseStep.getObject().getStep(false, new ArrayList<>());
         }
         val accountData = account.getData();
         // Find all clinics owned by the account
         val clinics = accountClinicsStep.runStep(accountData);
         // Response
-        responseStep.addMessage("The clinics have been read successfully!");
-        return responseStep.getStep(true, clinics.getData());
+        responseStep.getObject().addMessage("The clinics have been read successfully!");
+        return responseStep.getObject().getStep(true, clinics.getData());
     }
 
     @PostMapping("clinic-update")
     public ResponseEntity<ResponseDto> update(@Valid @RequestBody ClinicRequestDto requestDto) throws Exception {
+        // Clean response
+        responseStep.getObject().getRidOfMessages();
         // Get account by token
         val token = requestDto.getToken();
         val account = getAccountByTokenStep.runStep(token);
         if (!account.getSuccess()) {
-            responseStep.addMessage("Failed to update clinic!");
-            return responseStep.getStep(false);
+            responseStep.getObject().addMessage("Failed to update clinic!");
+            return responseStep.getObject().getStep(false);
         }
         val accountData = account.getData();
         val accountId = accountData.getId();
@@ -118,14 +124,14 @@ public class ClinicController {
         // Check permission to clinic
         val ownerRelation = ownerService.findByAccountIdAndClinicId(accountId, clinicId);
         if (ownerRelation.isEmpty()) {
-            responseStep.addMessage("You do not have permission to update!");
-            return responseStep.getStep(false);
+            responseStep.getObject().addMessage("You do not have permission to update!");
+            return responseStep.getObject().getStep(false);
         }
         // Get the clinic by id
         val clinic = clinicService.findById(clinicId);
         if (clinic.isEmpty()) {
-            responseStep.addMessage("The clinic does not exist!");
-            return responseStep.getStep(false);
+            responseStep.getObject().addMessage("The clinic does not exist!");
+            return responseStep.getObject().getStep(false);
         }
         // Merge new clinic with existed clinic
         val clinicToUpdate = clinic.get();
@@ -141,18 +147,20 @@ public class ClinicController {
         clinicToUpdate.setPhoneNumber(requestDto.getPhoneNumber());
         clinicService.update(clinicToUpdate);
         // Response
-        responseStep.addMessage("The clinic has been updated successfully!");
-        return responseStep.getStep(true);
+        responseStep.getObject().addMessage("The clinic has been updated successfully!");
+        return responseStep.getObject().getStep(true);
     }
 
     @PostMapping("clinic-delete")
     public ResponseEntity<ResponseDto> delete(@Valid @RequestBody DeleteRequestDto requestDto) {
+        // Clean response
+        responseStep.getObject().getRidOfMessages();
         // Get account by token
         val token = requestDto.getToken();
         val account = getAccountByTokenStep.runStep(token);
         if (!account.getSuccess()) {
-            responseStep.addMessage("Failed to delete clinic!");
-            return responseStep.getStep(false);
+            responseStep.getObject().addMessage("Failed to delete clinic!");
+            return responseStep.getObject().getStep(false);
         }
         val accountData = account.getData();
         val accountId = accountData.getId();
@@ -169,8 +177,8 @@ public class ClinicController {
         // Delete clinics
         clinicService.deleteAllByIdInBatch(clinicIds);
         // Response
-        responseStep.addMessage("Clinics were deleted successfully!");
-        return responseStep.getStep(true);
+        responseStep.getObject().addMessage("Clinics were deleted successfully!");
+        return responseStep.getObject().getStep(true);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

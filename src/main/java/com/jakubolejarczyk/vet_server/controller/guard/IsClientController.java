@@ -17,25 +17,27 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1")
 @AllArgsConstructor
 public class IsClientController {
-    private final ResponseStep responseStep;
+    private final ObjectFactory<ResponseStep> responseStep;
     private final ObjectFactory<HandleValidationService> handleValidationService;
     private final GetAccountByTokenStep getAccountByTokenStep;
 
     @PostMapping("is-client")
     public ResponseEntity<ResponseDto> isClient(@Valid @RequestBody GuardRequestDto requestDto) {
+        // Clean response
+        responseStep.getObject().getRidOfMessages();
         // Get account by token
         val token = requestDto.getToken();
         val account = getAccountByTokenStep.runStep(token);
         if (!account.getSuccess()) {
-            responseStep.addMessage("You are not a client!");
-            return responseStep.getStep(false);
+            responseStep.getObject().addMessage("You are not a client!");
+            return responseStep.getObject().getStep(false);
         }
         val accountData = account.getData();
         // Check if the account has a client role
         val role = accountData.getRole();
         val clientRole = role != null && role.contains("client");
         // Response
-        return responseStep.getStep(clientRole);
+        return responseStep.getObject().getStep(clientRole);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

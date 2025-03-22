@@ -28,4 +28,8 @@ public class ResponseStep {
     public void addMessage(String message) {
         messages.add(message);
     }
+
+    public void getRidOfMessages() {
+        messages.clear();
+    }
 }

@@ -20,25 +20,27 @@ import org.springframework.web.bind.annotation.*;
 public class ChooseRoleController {
     private final GetAccountByTokenStep getAccountByTokenStep;
     private final SetAccountRoleStep setAccountRoleStep;
-    private final ResponseStep responseStep;
+    private final ObjectFactory<ResponseStep> responseStep;
     private final ObjectFactory<HandleValidationService> handleValidationService;
 
     @PostMapping("choose-role")
     public ResponseEntity<ResponseDto> chooseRole(@Valid @RequestBody ChooseRoleRequestDto requestDto) {
+        // Clean response
+        responseStep.getObject().getRidOfMessages();
         // Get account by token
         val token = requestDto.getToken();
         val account = getAccountByTokenStep.runStep(token);
         if (!account.getSuccess()) {
-            responseStep.addMessage("Failed to set role!");
-            return responseStep.getStep(false);
+            responseStep.getObject().addMessage("Failed to set role!");
+            return responseStep.getObject().getStep(false);
         }
         val accountData = account.getData();
         // Set account role
         val role = requestDto.getRole();
         setAccountRoleStep.runStep(accountData, role);
         // Response
-        responseStep.addMessage("Role set correctly!");
-        return responseStep.getStep(true);
+        responseStep.getObject().addMessage("Role set correctly!");
+        return responseStep.getObject().getStep(true);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
