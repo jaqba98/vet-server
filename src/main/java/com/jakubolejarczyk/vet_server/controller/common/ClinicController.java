@@ -108,7 +108,7 @@ public class ClinicController {
     }
 
     @PostMapping("clinic-update")
-    public ResponseEntity<ResponseDto> update(@Valid @RequestBody ClinicRequestDto requestDto) throws Exception {
+    public ResponseEntity<ResponseDataDto<Clinic>> update(@Valid @RequestBody ClinicRequestDto requestDto) throws Exception {
         // Clean response
         responseStep.getObject().getRidOfMessages();
         // Get account by token
@@ -116,22 +116,23 @@ public class ClinicController {
         val account = getAccountByTokenStep.runStep(token);
         if (!account.getSuccess()) {
             responseStep.getObject().addMessage("Failed to update clinic!");
-            return responseStep.getObject().getStep(false);
+            return responseStep.getObject().getStep(false, Clinic.builder().build());
         }
         val accountData = account.getData();
         val accountId = accountData.getId();
         val clinicId = requestDto.getId();
         // Check permission to clinic
         val ownerRelation = ownerService.findByAccountIdAndClinicId(accountId, clinicId);
+        System.out.println(accountId + " / " +  clinicId + " / " + ownerRelation);
         if (ownerRelation.isEmpty()) {
             responseStep.getObject().addMessage("You do not have permission to update!");
-            return responseStep.getObject().getStep(false);
+            return responseStep.getObject().getStep(false, Clinic.builder().build());
         }
         // Get the clinic by id
         val clinic = clinicService.findById(clinicId);
         if (clinic.isEmpty()) {
             responseStep.getObject().addMessage("The clinic does not exist!");
-            return responseStep.getObject().getStep(false);
+            return responseStep.getObject().getStep(false, Clinic.builder().build());
         }
         // Merge new clinic with existed clinic
         val clinicToUpdate = clinic.get();
@@ -148,7 +149,7 @@ public class ClinicController {
         clinicService.update(clinicToUpdate);
         // Response
         responseStep.getObject().addMessage("The clinic has been updated successfully!");
-        return responseStep.getObject().getStep(true);
+        return responseStep.getObject().getStep(true, clinicToUpdate);
     }
 
     @PostMapping("clinic-delete")
