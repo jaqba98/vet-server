@@ -62,16 +62,6 @@ CREATE TABLE MedicalRecord (
     notes TEXT NOT NULL
 );
 
-CREATE TABLE Services (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    description VARCHAR(255) NOT NULL,
-    category VARCHAR(255) NOT NULL,
-    duration_minutes INTEGER NOT NULL,
-    price VARCHAR(255) NOT NULL,
-    is_available BOOLEAN NOT NULL
-);
-
 CREATE TABLE Invoice (
     id SERIAL PRIMARY KEY,
     invoice_date DATE NOT NULL,
@@ -99,6 +89,18 @@ CREATE TABLE Clinic (
     phone_number VARCHAR(10) NOT NULL,
     opening_hours_id INTEGER NOT NULL,
     FOREIGN KEY (opening_hours_id) REFERENCES OpeningHours(id)
+);
+
+CREATE TABLE Service (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    category VARCHAR(255) NOT NULL,
+    duration_minutes INTEGER NOT NULL,
+    price VARCHAR(255) NOT NULL,
+    is_available VARCHAR(255) NOT NULL,
+    clinic_id INTEGER NOT NULL,
+    FOREIGN KEY (clinic_id) REFERENCES Clinic(id)
 );
 
 CREATE TABLE Vet (
@@ -193,14 +195,6 @@ CREATE TABLE MedicalRecord_Medication (
     medication_id INTEGER NOT NULL,
     FOREIGN KEY (medical_record_id) REFERENCES MedicalRecord(id),
     FOREIGN KEY (medication_id) REFERENCES Medication(id)
-);
-
-CREATE TABLE Services_Clinic (
-    id SERIAL PRIMARY KEY,
-    services_id INTEGER NOT NULL,
-    clinic_id INTEGER NOT NULL,
-    FOREIGN KEY (services_id) REFERENCES Services(id),
-    FOREIGN KEY (clinic_id) REFERENCES Clinic(id)
 );
 
 CREATE TABLE Appointment_Services (
