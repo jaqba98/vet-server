@@ -165,17 +165,17 @@ public class ClinicController {
         val accountData = account.getData();
         val accountId = accountData.getId();
         val clinicIds = requestDto.getIds();
+        val openingHoursIds = clinicService.findAllById(clinicIds).stream().map(Clinic::getOpeningHoursId).toList();
         // Delete clinic account relations
         val clinicAccountRelations = clinicAccountService.findByAccountIdAndClinicIdIn(accountId, clinicIds);
         clinicAccountService.deleteAllInBatch(clinicAccountRelations);
         // Delete owner relations
         val ownerRelations = ownerService.findByAccountIdAndClinicIdIn(accountId, clinicIds);
         ownerService.deleteAllInBatch(ownerRelations);
-        // Delete opening hours
-        val openingHoursIds = clinicService.findAllById(clinicIds).stream().map(Clinic::getOpeningHoursId).toList();
-        openingHoursService.deleteAllByIdInBatch(openingHoursIds);
         // Delete clinics
         clinicService.deleteAllByIdInBatch(clinicIds);
+        // Delete opening hours
+        openingHoursService.deleteAllByIdInBatch(openingHoursIds);
         // Response
         responseStep.getObject().addMessage("Clinics were deleted successfully!");
         return responseStep.getObject().getStep(true);
