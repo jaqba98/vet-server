@@ -18,7 +18,8 @@ CREATE TABLE OpeningHours (
     saturday_from TIME NULL,
     saturday_to TIME NULL,
     sunday_from TIME NULL,
-    sunday_to TIME NULL
+    sunday_to TIME NULL,
+    is_archived BOOLEAN NOT NULL
 );
 
 CREATE TABLE Contact (
@@ -80,15 +81,26 @@ CREATE TABLE Clinic (
     name VARCHAR(150) NOT NULL UNIQUE,
     street VARCHAR(100) NOT NULL,
     building_number VARCHAR(10) NOT NULL,
-    apartment_number VARCHAR(10) NULL,
+    apartment_number VARCHAR(10) NOT NULL,
     postal_code VARCHAR(10) NOT NULL,
     city VARCHAR(80) NOT NULL,
     province VARCHAR(80) NOT NULL,
     country VARCHAR(56) NOT NULL,
     email VARCHAR(255) NOT NULL,
-    phone_number VARCHAR(10) NOT NULL,
+    phone_number VARCHAR(20) NOT NULL,
+    is_archived BOOLEAN NOT NULL,
     opening_hours_id INTEGER NOT NULL,
     FOREIGN KEY (opening_hours_id) REFERENCES OpeningHours(id)
+);
+
+CREATE TABLE Employment (
+    id SERIAL PRIMARY KEY,
+    is_owner BOOLEAN NOT NULL,
+    is_archived BOOLEAN NOT NULL,
+    account_id INTEGER NOT NULL,
+    clinic_id INTEGER NOT NULL,
+    FOREIGN KEY (account_id) REFERENCES Account(id),
+    FOREIGN KEY (clinic_id) REFERENCES Clinic(id)
 );
 
 CREATE TABLE VetService (
@@ -157,14 +169,6 @@ CREATE TABLE Appointment (
 );
 
 -- ## Create tables with relations between them. ##
-CREATE TABLE Clinic_Account (
-    id SERIAL PRIMARY KEY,
-    account_id INTEGER NOT NULL,
-    clinic_id INTEGER NOT NULL,
-    FOREIGN KEY (account_id) REFERENCES Account(id),
-    FOREIGN KEY (clinic_id) REFERENCES Clinic(id)
-);
-
 CREATE TABLE Account_Contact (
     id SERIAL PRIMARY KEY,
     account_id INTEGER NOT NULL,
