@@ -8,8 +8,7 @@ import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
 import com.jakubolejarczyk.vet_server.model.dependent.VetService;
 import com.jakubolejarczyk.vet_server.service.crud.dependent.ClinicService;
 import com.jakubolejarczyk.vet_server.service.crud.independent.OpeningHoursService;
-import com.jakubolejarczyk.vet_server.service.crud.relation.ClinicAccountService;
-import com.jakubolejarczyk.vet_server.service.crud.relation.OwnerService;
+import com.jakubolejarczyk.vet_server.service.crud.dependent.EmploymentService;
 import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.service.step.AccountClinicsStep;
 import com.jakubolejarczyk.vet_server.service.step.GetAccountByTokenStep;
@@ -30,7 +29,7 @@ public class VetServiceController {
     private final ObjectFactory<ResponseStep> responseStep;
     private final GetAccountByTokenStep getAccountByTokenStep;
     private final ObjectFactory<HandleValidationService> handleValidationService;
-    private final ClinicAccountService clinicAccountService;
+    private final EmploymentService employmentService;
     private final OwnerService ownerService;
     private final OpeningHoursService openingHoursService;
     private final ClinicService clinicService;

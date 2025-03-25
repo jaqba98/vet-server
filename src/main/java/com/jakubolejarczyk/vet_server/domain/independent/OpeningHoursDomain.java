@@ -18,4 +18,5 @@ public interface OpeningHoursDomain {
     Time getSaturdayTo();
     Time getSundayFrom();
     Time getSundayTo();
+    Boolean getIsArchived();
 }

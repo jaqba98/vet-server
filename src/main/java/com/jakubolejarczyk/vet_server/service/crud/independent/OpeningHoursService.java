@@ -13,30 +13,29 @@ import java.util.List;
 public class OpeningHoursService {
     private final OpeningHoursRepository repository;
 
-    public OpeningHours create(OpeningHours openingHours) {
+    public void create(OpeningHours openingHours) {
         repository.save(openingHours);
-        return openingHours;
     }
 
     public List<OpeningHours> read() {
         return repository.findAll();
     }
 
-    public OpeningHours update(OpeningHours openingHours) throws Exception {
-        val openingHoursById = repository.findById(openingHours.getId());
+    public void update(OpeningHours openingHours) throws Exception {
+        val openingHoursId = openingHours.getId();
+        val openingHoursById = repository.findById(openingHoursId);
         if (openingHoursById.isEmpty()) {
-            throw new Exception("The update method cannot update a record that does not exist!");
+            throw new Exception("The update method cannot be performed! The clinic does not exist!");
         }
         repository.save(openingHours);
-        return openingHours;
     }
 
-    public void delete(Long id) {
-        repository.deleteById(id);
+    public void delete(Long openingHoursId) {
+        repository.deleteById(openingHoursId);
     }
 
-    public void deleteAllByIdInBatch(List<Long> ids) {
-        repository.deleteAllByIdInBatch(ids);
+    public void deleteAll(List<Long> openingHoursIds) {
+        repository.deleteAllByIdInBatch(openingHoursIds);
     }
 
     public List<OpeningHours> findAllById(List<Long> ids) {

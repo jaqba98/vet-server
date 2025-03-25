@@ -1,6 +1,6 @@
-package com.jakubolejarczyk.vet_server.model.relation;
+package com.jakubolejarczyk.vet_server.model.dependent;
 
-import com.jakubolejarczyk.vet_server.domain.relation.ClinicAccountDomain;
+import com.jakubolejarczyk.vet_server.domain.dependent.EmploymentDomain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,10 +12,16 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @SuperBuilder
 @NoArgsConstructor
-public class ClinicAccount implements ClinicAccountDomain {
+public class Employment implements EmploymentDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "is_owner", nullable = false)
+    Boolean isOwner;
+
+    @Column(name = "is_archived", nullable = false)
+    Boolean isArchived;
 
     @Column(name = "account_id", nullable = false)
     private Long accountId;

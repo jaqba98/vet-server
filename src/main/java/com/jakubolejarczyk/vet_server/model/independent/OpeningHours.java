@@ -61,4 +61,7 @@ public class OpeningHours implements OpeningHoursDomain {
 
     @Column(name = "sunday_to")
     private Time sundayTo;
+
+    @Column(name = "is_archived", nullable = false)
+    Boolean isArchived;
 }

@@ -17,7 +17,7 @@ public class Clinic implements ClinicDomain {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true, length = 150)
+    @Column(nullable = false, length = 150, unique = true)
     private String name;
 
     @Column(nullable = false, length = 100)
@@ -46,6 +46,9 @@ public class Clinic implements ClinicDomain {
 
     @Column(name = "phone_number", nullable = false, length = 20)
     private String phoneNumber;
+
+    @Column(name = "is_archived", nullable = false)
+    Boolean isArchived;
 
     @Column(name = "opening_hours_id", nullable = false)
     private Long openingHoursId;

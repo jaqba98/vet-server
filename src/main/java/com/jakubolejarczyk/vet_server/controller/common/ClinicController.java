@@ -7,12 +7,11 @@ import com.jakubolejarczyk.vet_server.dto.response.ResponseDataDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
 import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
 import com.jakubolejarczyk.vet_server.model.independent.OpeningHours;
-import com.jakubolejarczyk.vet_server.model.relation.ClinicAccount;
+import com.jakubolejarczyk.vet_server.model.dependent.Employment;
 import com.jakubolejarczyk.vet_server.model.relation.Owner;
 import com.jakubolejarczyk.vet_server.service.crud.dependent.ClinicService;
 import com.jakubolejarczyk.vet_server.service.crud.independent.OpeningHoursService;
-import com.jakubolejarczyk.vet_server.service.crud.relation.ClinicAccountService;
-import com.jakubolejarczyk.vet_server.service.crud.relation.OwnerService;
+import com.jakubolejarczyk.vet_server.service.crud.dependent.EmploymentService;
 import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.service.step.AccountClinicsStep;
 import com.jakubolejarczyk.vet_server.service.step.GetAccountByTokenStep;
@@ -34,7 +33,7 @@ public class ClinicController {
     private final ObjectFactory<ResponseStep> responseStep;
     private final GetAccountByTokenStep getAccountByTokenStep;
     private final ObjectFactory<HandleValidationService> handleValidationService;
-    private final ClinicAccountService clinicAccountService;
+    private final EmploymentService clinicAccountService;
     private final OwnerService ownerService;
     private final OpeningHoursService openingHoursService;
     private final ClinicService clinicService;
@@ -54,7 +53,7 @@ public class ClinicController {
         val accountData = account.getData();
         val accountId = accountData.getId();
         // Create an opening hours
-        OpeningHours openingHours = OpeningHours.builder().build();
+        OpeningHours openingHours = com.jakubolejarczyk.vet_server.model.independent.OpeningHours.builder().build();
         val newOpeningHours = openingHoursService.create(openingHours);
         // Create a clinic
         val clinic = Clinic.builder()
@@ -78,11 +77,11 @@ public class ClinicController {
                 .build();
         ownerService.create(owner);
         // Create a clinic_account
-        ClinicAccount clinicAccount = ClinicAccount.builder()
+        Employment employment = Employment.builder()
                 .accountId(accountId)
                 .clinicId(newClinic.getId())
                 .build();
-        clinicAccountService.create(clinicAccount);
+        clinicAccountService.create(employment);
         // Response
         responseStep.getObject().addMessage("The clinic has been established successfully!");
         return responseStep.getObject().getStep(true);

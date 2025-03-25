@@ -12,5 +12,6 @@ public interface ClinicDomain {
     String getCountry();
     String getEmail();
     String getPhoneNumber();
+    Boolean getIsArchived();
     Long getOpeningHoursId();
 }
