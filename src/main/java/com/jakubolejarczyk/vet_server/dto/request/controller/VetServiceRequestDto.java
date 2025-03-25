@@ -42,5 +42,6 @@ public class VetServiceRequestDto extends TokenRequestDto implements VetServiceD
     @NotNull(message = "Is archived is required!")
     private Boolean isArchived;
 
+    @NotNull(message = "Clinic id is required!")
     private Long clinicId;
 }
