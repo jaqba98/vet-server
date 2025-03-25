@@ -91,15 +91,16 @@ CREATE TABLE Clinic (
     FOREIGN KEY (opening_hours_id) REFERENCES OpeningHours(id)
 );
 
-CREATE TABLE Services (
+CREATE TABLE VetService (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description VARCHAR(255) NOT NULL,
     category VARCHAR(255) NOT NULL,
-    duration_minutes VARCHAR(255) NOT NULL,
-    price VARCHAR(255) NOT NULL,
-    is_available VARCHAR(255) NOT NULL,
-    clinic_id INTEGER NULL,
+    duration_minutes INTEGER NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    is_available BOOLEAN NOT NULL,
+    is_archived BOOLEAN NOT NULL,
+    clinic_id INTEGER NOT NULL,
     FOREIGN KEY (clinic_id) REFERENCES Clinic(id)
 );
 

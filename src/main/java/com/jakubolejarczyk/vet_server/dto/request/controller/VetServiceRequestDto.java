@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.dto.request.controller;
 
-import com.jakubolejarczyk.vet_server.domain.dependent.ServicesDomain;
+import com.jakubolejarczyk.vet_server.domain.dependent.VetServiceDomain;
 import com.jakubolejarczyk.vet_server.dto.base.TokenRequestDto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -8,9 +8,11 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
-public class ServicesRequestDto extends TokenRequestDto implements ServicesDomain {
+public class VetServiceRequestDto extends TokenRequestDto implements VetServiceDomain {
     private Long id;
 
     @NotNull(message = "Name is required!")
@@ -29,19 +31,16 @@ public class ServicesRequestDto extends TokenRequestDto implements ServicesDomai
     private String category;
 
     @NotNull(message = "Duration minutes is required!")
-    @NotBlank(message = "Duration minutes cannot be empty!")
-    @Size(max = 255, message = "Duration minutes cannot be longer than 255 characters!")
-    private String durationMinutes;
+    private Integer durationMinutes;
 
     @NotNull(message = "Price is required!")
-    @NotBlank(message = "Price cannot be empty!")
-    @Size(max = 255, message = "Price cannot be longer than 255 characters!")
-    private String price;
+    private BigDecimal price;
 
     @NotNull(message = "Is available is required!")
-    @NotBlank(message = "Is available cannot be empty!")
-    @Size(max = 255, message = "Is available cannot be longer than 255 characters!")
-    private String isAvailable;
+    private Boolean isAvailable;
+
+    @NotNull(message = "Is archived is required!")
+    private Boolean isArchived;
 
     private Long clinicId;
 }

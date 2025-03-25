@@ -1,18 +1,20 @@
 package com.jakubolejarczyk.vet_server.model.dependent;
 
-import com.jakubolejarczyk.vet_server.domain.dependent.ServicesDomain;
+import com.jakubolejarczyk.vet_server.domain.dependent.VetServiceDomain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.math.BigDecimal;
+
 @Entity
 @Getter
 @Setter
 @SuperBuilder
 @NoArgsConstructor
-public class Services implements ServicesDomain {
+public class VetService implements VetServiceDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,13 +29,16 @@ public class Services implements ServicesDomain {
     private String category;
 
     @Column(name = "duration_minutes", nullable = false)
-    private String durationMinutes;
+    private Integer durationMinutes;
 
-    @Column(nullable = false)
-    private String price;
+    @Column(precision = 10, scale = 2, nullable = false)
+    private BigDecimal price;
 
     @Column(name = "is_available", nullable = false)
-    private String isAvailable;
+    private Boolean isAvailable;
+
+    @Column(name = "is_archived", nullable = false)
+    private Boolean isArchived;
 
     @Column(name = "clinic_id", nullable = false)
     private Long clinicId;
