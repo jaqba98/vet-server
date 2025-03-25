@@ -30,7 +30,6 @@ public class VetServiceController {
     private final GetAccountByTokenStep getAccountByTokenStep;
     private final ObjectFactory<HandleValidationService> handleValidationService;
     private final EmploymentService employmentService;
-    private final OwnerService ownerService;
     private final OpeningHoursService openingHoursService;
     private final ClinicService clinicService;
     private final AccountClinicsStep accountClinicsStep;

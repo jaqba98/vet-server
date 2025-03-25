@@ -1,11 +1,11 @@
 package com.jakubolejarczyk.vet_server.controller.common;
 
 import com.jakubolejarczyk.vet_server.dto.base.TokenRequestDto;
-import com.jakubolejarczyk.vet_server.dto.request.controller.ClinicRequestDto;
+import com.jakubolejarczyk.vet_server.dto.request.controller.OpeningHoursRequestDto;
 import com.jakubolejarczyk.vet_server.dto.request.crud.DeleteRequestDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDataDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
-import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
+import com.jakubolejarczyk.vet_server.model.independent.OpeningHours;
 import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.service.step.ResponseStep;
 import jakarta.validation.Valid;
@@ -21,51 +21,51 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("/api/v1")
 @AllArgsConstructor
-public class ClinicController {
+public class OpeningHoursController {
     private final ObjectFactory<ResponseStep> responseStep;
     private final ObjectFactory<HandleValidationService> handleValidationService;
 
-    @PostMapping("clinic-create")
-    public ResponseEntity<ResponseDto> create(@Valid @RequestBody ClinicRequestDto requestDto) {
+    @PostMapping("opening-hours-create")
+    public ResponseEntity<ResponseDto> create(@Valid @RequestBody OpeningHoursRequestDto requestDto) {
         // Variables
         val objectResponseStep = responseStep.getObject();
         // Clean response
         objectResponseStep.getRidOfMessages();
         // Response
-        objectResponseStep.addMessage("The clinic has been created successfully!");
+        objectResponseStep.addMessage("The opening hours has been created successfully!");
         return objectResponseStep.getStep(true);
     }
 
-    @PostMapping("clinic-read")
-    public ResponseEntity<ResponseDataDto<ArrayList<Clinic>>> read(@Valid @RequestBody TokenRequestDto requestDto) {
+    @PostMapping("opening-hours-read")
+    public ResponseEntity<ResponseDataDto<ArrayList<OpeningHours>>> read(@Valid @RequestBody TokenRequestDto requestDto) {
         // Variables
         val objectResponseStep = responseStep.getObject();
         // Clean response
         objectResponseStep.getRidOfMessages();
         // Response
-        objectResponseStep.addMessage("The clinics has been read successfully!");
+        objectResponseStep.addMessage("The opening hours has been read successfully!");
         return objectResponseStep.getStep(true, new ArrayList<>());
     }
 
-    @PostMapping("clinic-update")
-    public ResponseEntity<ResponseDataDto<Clinic>> update(@Valid @RequestBody ClinicRequestDto requestDto) {
+    @PostMapping("opening-hours-update")
+    public ResponseEntity<ResponseDataDto<OpeningHours>> update(@Valid @RequestBody OpeningHoursRequestDto requestDto) {
         // Variables
         val objectResponseStep = responseStep.getObject();
         // Clean response
         objectResponseStep.getRidOfMessages();
         // Response
-        objectResponseStep.addMessage("The clinic has been updated successfully!");
-        return objectResponseStep.getStep(true, Clinic.builder().build());
+        objectResponseStep.addMessage("The opening hours has been updated successfully!");
+        return objectResponseStep.getStep(true, OpeningHours.builder().build());
     }
 
-    @PostMapping("clinic-delete")
+    @PostMapping("opening-hours-delete")
     public ResponseEntity<ResponseDto> delete(@Valid @RequestBody DeleteRequestDto requestDto) {
         // Variables
         val objectResponseStep = responseStep.getObject();
         // Clean response
         objectResponseStep.getRidOfMessages();
         // Response
-        objectResponseStep.addMessage("The clinic has been deleted successfully!");
+        objectResponseStep.addMessage("The opening hours has been deleted successfully!");
         return objectResponseStep.getStep(true);
     }
 

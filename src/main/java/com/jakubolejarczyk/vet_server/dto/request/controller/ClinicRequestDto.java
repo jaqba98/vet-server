@@ -30,6 +30,7 @@ public class ClinicRequestDto extends TokenRequestDto implements ClinicDomain {
     @Size(max = 10, message = "Building number cannot be longer than 10 characters!")
     private String buildingNumber;
 
+    @NotNull(message = "Apartment number is required!")
     @Size(max = 10, message = "Apartment number cannot be longer than 10 characters!")
     private String apartmentNumber;
 
@@ -62,6 +63,9 @@ public class ClinicRequestDto extends TokenRequestDto implements ClinicDomain {
     @NotBlank(message = "Phone number cannot be empty!")
     @Size(max = 20, message = "Phone number cannot be longer than 20 characters!")
     private String phoneNumber;
+
+    @NotNull(message = "Is archived is required!")
+    private Boolean isArchived;
 
     private Long openingHoursId;
 }
