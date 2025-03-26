@@ -4,12 +4,12 @@ import com.jakubolejarczyk.vet_server.domain.base.BaseDomain;
 
 import java.math.BigDecimal;
 
-public class VetServiceDomain extends BaseDomain {
-    protected String name;
-    protected String description;
-    protected String category;
-    protected Integer durationMinutes;
-    protected BigDecimal price;
-    protected Boolean isAvailable;
-    protected Long clinicId;
+public interface VetServiceDomain extends BaseDomain {
+    String getName();
+    String getDescription();
+    String getCategory();
+    Integer getDurationMinutes();
+    BigDecimal getPrice();
+    Boolean getIsAvailable();
+    Long getClinicId();
 }
