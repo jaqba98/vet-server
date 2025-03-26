@@ -15,7 +15,7 @@ public class UpdateClinicStep {
 
     public StepResponse<Clinic> runStep(ResponseStep responseStep, ClinicDomain requestDto, ClinicDomain currentClinic) throws Exception {
         try {
-            val clinic = Clinic.builder()
+            val clinic = com.jakubolejarczyk.vet_server.model.dependent.Clinic.builder()
                     .id(currentClinic.getId())
                     .name(requestDto.getName())
                     .street(requestDto.getStreet())

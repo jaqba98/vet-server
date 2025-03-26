@@ -17,6 +17,9 @@ public class Client implements ClientDomain {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "is_archived", nullable = false)
+    private Boolean isArchived;
+
     @Column(name = "account_id", nullable = false)
     private Long accountId;
 }

@@ -101,23 +101,23 @@ public class ClinicController {
         val clinicId = requestDto.getId();
         // Get Account By Token Step
         val accountResponse = getAccountByTokenStep.runStep(responseStep, requestDto.getToken());
-        if (accountResponse.getError()) return responseStep.getStep(false, Clinic.builder().build());
+        if (accountResponse.getError()) return responseStep.getStep(false, com.jakubolejarczyk.vet_server.model.dependent.Clinic.builder().build());
         val account = accountResponse.getData();
         // Get Clinic Ids For Owner Account Step
         val accountId = account.getId();
         val clinicIdsResponse = getClinicIdsForOwnerAccountStep.runStep(responseStep, accountId);
-        if (clinicIdsResponse.getError()) return responseStep.getStep(false, Clinic.builder().build());
+        if (clinicIdsResponse.getError()) return responseStep.getStep(false, com.jakubolejarczyk.vet_server.model.dependent.Clinic.builder().build());
         val clinicIds = clinicIdsResponse.getData();
         // Check Permission Step
         val permissionResponse = checkPermissionStep.runStep(responseStep, clinicIds, clinicId);
-        if (permissionResponse.getError()) return responseStep.getStep(false, Clinic.builder().build());
+        if (permissionResponse.getError()) return responseStep.getStep(false, com.jakubolejarczyk.vet_server.model.dependent.Clinic.builder().build());
         // Get Current Clinic By Id
         val currentClinicResponse = getClinicByIdStep.runStep(responseStep, clinicId);
-        if (currentClinicResponse.getError()) return responseStep.getStep(false, Clinic.builder().build());
+        if (currentClinicResponse.getError()) return responseStep.getStep(false, com.jakubolejarczyk.vet_server.model.dependent.Clinic.builder().build());
         val currentClinic = currentClinicResponse.getData();
         // Update Clinic Step
         val updateResponse = updateClinicStep.runStep(responseStep, requestDto, currentClinic);
-        if (updateResponse.getError()) return responseStep.getStep(false, Clinic.builder().build());
+        if (updateResponse.getError()) return responseStep.getStep(false, com.jakubolejarczyk.vet_server.model.dependent.Clinic.builder().build());
         val clinic = updateResponse.getData();
         // Return response
         responseStep.addMessage("The clinic have been updated successfully!");

@@ -34,4 +34,7 @@ public class Account implements AccountDomain {
 
     @Column(name ="picture_url")
     private String pictureUrl;
+
+    @Column(name = "is_archived", nullable = false)
+    private Boolean isArchived;
 }

@@ -51,7 +51,7 @@ public class SetAccountRoleStep {
         if (client.isPresent()) {
             return;
         }
-        Client newClient = Client.builder()
+        Client newClient = com.jakubolejarczyk.vet_server.model.dependent.Client.builder()
                 .accountId(accountId)
                 .build();
         clientService.create(newClient);

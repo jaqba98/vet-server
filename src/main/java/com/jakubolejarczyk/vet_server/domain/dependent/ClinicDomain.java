@@ -7,7 +7,7 @@ public interface ClinicDomain extends BaseDomain {
     String getStreet();
     String getBuildingNumber();
     String getApartmentNumber();
-    String gtPostalCode();
+    String getPostalCode();
     String getCity();
     String getProvince();
     String getCountry();

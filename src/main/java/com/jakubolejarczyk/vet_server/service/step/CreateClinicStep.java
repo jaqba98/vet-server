@@ -15,7 +15,7 @@ public class CreateClinicStep {
 
     public StepResponse<Clinic> runStep(ResponseStep responseStep, ClinicCreateRequestDto requestDto, Long openingHoursId) {
         try {
-            val clinic = clinicService.create(Clinic.builder()
+            val clinic = clinicService.create(com.jakubolejarczyk.vet_server.model.dependent.Clinic.builder()
                     .name(requestDto.getName())
                     .street(requestDto.getStreet())
                     .buildingNumber(requestDto.getBuildingNumber())
@@ -37,7 +37,7 @@ public class CreateClinicStep {
             responseStep.addMessage("Failed to create clinic!");
             return StepResponse.<Clinic>builder()
                     .error(true)
-                    .data(Clinic.builder().build())
+                    .data(com.jakubolejarczyk.vet_server.model.dependent.Clinic.builder().build())
                     .build();
         }
     }

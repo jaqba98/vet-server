@@ -23,7 +23,7 @@ public class GetClinicByIdStep {
         responseStep.addMessage("Failed to get clinic by ID!");
         return StepResponse.<Clinic>builder()
                 .error(false)
-                .data(Clinic.builder().build())
+                .data(com.jakubolejarczyk.vet_server.model.dependent.Clinic.builder().build())
                 .build();
     }
 }

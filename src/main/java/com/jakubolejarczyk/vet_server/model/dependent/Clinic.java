@@ -26,7 +26,7 @@ public class Clinic implements ClinicDomain {
     @Column(name = "building_number", nullable = false, length = 10)
     private String buildingNumber;
 
-    @Column(name = "apartment_number", nullable = false, length = 10)
+    @Column(name = "apartment_number", length = 10)
     private String apartmentNumber;
 
     @Column(name = "postal_code", nullable = false, length = 10)

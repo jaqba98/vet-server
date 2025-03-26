@@ -29,10 +29,13 @@ public class Vet implements VetDomain {
     private LocalDate licenseExpiryDate;
 
     @Column
-    private String specializations;
+    private String specialization;
 
     @Column(name = "years_of_experience")
     private Integer yearsOfExperience;
+
+    @Column(name = "is_archived", nullable = false)
+    Boolean isArchived;
 
     @Column(name = "account_id", nullable = false)
     private Long accountId;
