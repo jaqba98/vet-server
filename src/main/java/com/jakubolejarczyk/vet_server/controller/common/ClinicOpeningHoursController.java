@@ -20,7 +20,7 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("/api/v1")
 @AllArgsConstructor
-public class OpeningHoursController {
+public class ClinicOpeningHoursController {
     private final ObjectFactory<ResponseStep> responseStep;
     private final GetAccountByToken getAccountByTokenStep;
     private final GetClinicIdsForAccountStep getClinicIdsForAccountStep;
@@ -31,7 +31,7 @@ public class OpeningHoursController {
     private final UpdateOpeningHoursStep updateOpeningHoursStep;
     private final ObjectFactory<HandleValidationService> handleValidationService;
 
-    @PostMapping("opening-hours-read")
+    @PostMapping("clinic-opening-hours-read")
     public ResponseEntity<ResponseDataDto<ArrayList<OpeningHours>>> read(@Valid @RequestBody TokenRequestDto requestDto) {
         // Init
         val responseStep = this.responseStep.getObject();
@@ -58,7 +58,7 @@ public class OpeningHoursController {
         return responseStep.getStep(true, openingHours);
     }
 
-    @PostMapping("opening-hours-update")
+    @PostMapping("clinic-opening-hours-update")
     public ResponseEntity<ResponseDataDto<OpeningHours>> update(@Valid @RequestBody OpeningHoursRequestDto requestDto) {
         // Init
         val responseStep = this.responseStep.getObject();
