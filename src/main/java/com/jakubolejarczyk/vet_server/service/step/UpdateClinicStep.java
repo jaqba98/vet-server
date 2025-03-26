@@ -14,10 +14,10 @@ import org.springframework.stereotype.Service;
 public class UpdateClinicStep {
     private final ClinicService clinicService;
 
-    public StepResponse<Clinic> runStep(ResponseStep responseStep, ClinicDomain requestDto) throws Exception {
+    public StepResponse<Clinic> runStep(ResponseStep responseStep, ClinicDomain requestDto, ClinicDomain currentClinic) throws Exception {
         try {
             val clinic = Clinic.builder()
-                    .id(requestDto.getId())
+                    .id(currentClinic.getId())
                     .name(requestDto.getName())
                     .street(requestDto.getStreet())
                     .buildingNumber(requestDto.getBuildingNumber())
@@ -29,6 +29,7 @@ public class UpdateClinicStep {
                     .email(requestDto.getEmail())
                     .phoneNumber(requestDto.getPhoneNumber())
                     .isArchived(requestDto.getIsArchived())
+                    .openingHoursId(currentClinic.getOpeningHoursId())
                     .build();
             clinicService.update(clinic);
             return StepResponse.<Clinic>builder()

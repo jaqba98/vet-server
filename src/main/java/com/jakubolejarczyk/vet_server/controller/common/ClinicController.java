@@ -41,6 +41,7 @@ public class ClinicController {
     private final UpdateClinicIdsIsArchivedStep updateClinicIdsIsArchivedStep;
     private final GetOpeningHoursIdsForClinicIdsStep getOpeningHoursIdsForClinicIdsStep;
     private final UpdateOpeningHoursIdsIsArchivedStep updateOpeningHoursIdsIsArchivedStep;
+    private final GetClinicByIdStep getClinicByIdStep;
 
     @PostMapping("clinic-create")
     public ResponseEntity<ResponseDto> create(@Valid @RequestBody ClinicCreateRequestDto requestDto) {
@@ -110,8 +111,12 @@ public class ClinicController {
         // Check Permission Step
         val permissionResponse = checkPermissionStep.runStep(responseStep, clinicIds, clinicId);
         if (permissionResponse.getError()) return responseStep.getStep(false, Clinic.builder().build());
-        // Update the clinic
-        val updateResponse = updateClinicStep.runStep(responseStep, requestDto);
+        // Get Current Clinic By Id
+        val currentClinicResponse = getClinicByIdStep.runStep(responseStep, clinicId);
+        if (currentClinicResponse.getError()) return responseStep.getStep(false, Clinic.builder().build());
+        val currentClinic = currentClinicResponse.getData();
+        // Update Clinic Step
+        val updateResponse = updateClinicStep.runStep(responseStep, requestDto, currentClinic);
         if (updateResponse.getError()) return responseStep.getStep(false, Clinic.builder().build());
         val clinic = updateResponse.getData();
         // Return response

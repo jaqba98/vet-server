@@ -39,6 +39,10 @@ public class ClinicService {
         return repository.findByName(name);
     }
 
+    public Optional<Clinic> findById(Long id) {
+        return repository.findById(id);
+    }
+
     public List<Clinic> findAllByIds(List<Long> ids) {
         return repository.findAllByIds(ids);
     }
