@@ -1,6 +1,5 @@
 package com.jakubolejarczyk.vet_server.service.crud.independent;
 
-import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
 import com.jakubolejarczyk.vet_server.model.independent.OpeningHours;
 import com.jakubolejarczyk.vet_server.repository.independent.OpeningHoursRepository;
 import lombok.AllArgsConstructor;
@@ -54,5 +53,9 @@ public class OpeningHoursService {
 
     public List<OpeningHours> findAllByIds(List<Long> ids) {
         return repository.findAllByIds(ids);
+    }
+
+    public void updateIsArchived(List<Long> ids, Boolean isArchived) {
+        repository.updateIsArchived(ids, isArchived);
     }
 }

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class UpdateOpeningHoursStep {
     private final OpeningHoursService openingHoursService;
 
-    public StepResponse<OpeningHours> runStep(ResponseStep responseStep, OpeningHoursRequestDto requestDto) {
+    public StepResponse<OpeningHours> runStep(ResponseStep responseStep, OpeningHoursRequestDto requestDto) throws Exception {
         try {
             val openingHours = OpeningHours.builder()
                     .id(requestDto.getId())
@@ -24,7 +24,7 @@ public class UpdateOpeningHoursStep {
                     .wednesdayFrom(requestDto.getWednesdayFrom())
                     .wednesdayTo(requestDto.getWednesdayTo())
                     .thursdayFrom(requestDto.getThursdayFrom())
-                    .tuesdayTo(requestDto.getTuesdayTo())
+                    .thursdayTo(requestDto.getThursdayTo())
                     .fridayFrom(requestDto.getFridayFrom())
                     .fridayTo(requestDto.getFridayTo())
                     .saturdayFrom(requestDto.getSaturdayFrom())
@@ -39,11 +39,7 @@ public class UpdateOpeningHoursStep {
                     .data(openingHours)
                     .build();
         } catch (Exception e) {
-            responseStep.addMessage("Failed to update opening hours!");
-            return StepResponse.<OpeningHours>builder()
-                    .error(true)
-                    .data(OpeningHours.builder().build())
-                    .build();
+            throw new Exception(e);
         }
     }
 }

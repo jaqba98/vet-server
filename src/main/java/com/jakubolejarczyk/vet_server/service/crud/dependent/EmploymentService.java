@@ -13,8 +13,8 @@ import java.util.List;
 public class EmploymentService {
     private final EmploymentRepository repository;
 
-    public void create(Employment employment) {
-        repository.save(employment);
+    public Employment create(Employment employment) {
+        return repository.save(employment);
     }
 
     public List<Employment> read() {
@@ -40,5 +40,13 @@ public class EmploymentService {
 
     public List<Employment> findAllByAccountIdAndIsOwner(Long accountId) {
         return repository.findAllByAccountIdAndIsOwner(accountId);
+    }
+
+    public List<Employment> findAllByAccountIdAndClinicIdsInAndIsOwner(Long accountId, List<Long> clinicIds) {
+        return repository.findAllByAccountIdAndClinicIdsInAndIsOwner(accountId, clinicIds);
+    }
+
+    public void updateIsArchived(List<Long> ids, Boolean isArchived) {
+        repository.updateIsArchived(ids, isArchived);
     }
 }

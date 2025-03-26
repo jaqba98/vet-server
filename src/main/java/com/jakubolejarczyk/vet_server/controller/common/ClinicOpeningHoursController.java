@@ -59,7 +59,7 @@ public class ClinicOpeningHoursController {
     }
 
     @PostMapping("clinic-opening-hours-update")
-    public ResponseEntity<ResponseDataDto<OpeningHours>> update(@Valid @RequestBody OpeningHoursRequestDto requestDto) {
+    public ResponseEntity<ResponseDataDto<OpeningHours>> update(@Valid @RequestBody OpeningHoursRequestDto requestDto) throws Exception {
         // Init
         val responseStep = this.responseStep.getObject();
         responseStep.getRidOfMessages();

@@ -14,8 +14,8 @@ import java.util.Optional;
 public class ClinicService {
     private final ClinicRepository repository;
 
-    public void create(Clinic clinic) {
-        repository.save(clinic);
+    public Clinic create(Clinic clinic) {
+        return repository.save(clinic);
     }
 
     public List<Clinic> read() {
@@ -41,5 +41,9 @@ public class ClinicService {
 
     public List<Clinic> findAllByIds(List<Long> ids) {
         return repository.findAllByIds(ids);
+    }
+
+    public void updateIsArchived(List<Long> ids, Boolean isArchived) {
+        repository.updateIsArchived(ids, isArchived);
     }
 }
