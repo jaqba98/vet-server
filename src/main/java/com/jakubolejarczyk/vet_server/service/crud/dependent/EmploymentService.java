@@ -34,6 +34,10 @@ public class EmploymentService {
         repository.deleteById(employmentId);
     }
 
+    public List<Employment> findAllByIds(List<Long> ids) {
+        return repository.findAllById(ids);
+    }
+
     public List<Employment> findAllByAccountId(Long accountId) {
         return repository.findAllByAccountId(accountId);
     }

@@ -7,7 +7,7 @@ import com.jakubolejarczyk.vet_server.dto.response.ResponseDataDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
 import com.jakubolejarczyk.vet_server.model.dependent.Employment;
 import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.service.step.ResponseStep;
+import com.jakubolejarczyk.vet_server.service.step.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.val;
@@ -23,6 +23,10 @@ import java.util.ArrayList;
 @AllArgsConstructor
 public class EmploymentController {
     private final ObjectFactory<ResponseStep> responseStep;
+    private final GetAccountByToken getAccountByTokenStep;
+    private final GetClinicIdsForAccountStep getClinicIdsForAccountStep;
+    private final GetEmploymentIdsForOwnerAccountStep getEmploymentIdsForOwnerAccountStep;
+    private final GetEmploymentByIdsStep getEmploymentByIdsStep;
     private final ObjectFactory<HandleValidationService> handleValidationService;
 
     @PostMapping("employment-create")
@@ -38,13 +42,25 @@ public class EmploymentController {
 
     @PostMapping("employment-read")
     public ResponseEntity<ResponseDataDto<ArrayList<Employment>>> read(@Valid @RequestBody TokenRequestDto requestDto) {
-        // Variables
-        val objectResponseStep = responseStep.getObject();
-        // Clean response
-        objectResponseStep.getRidOfMessages();
-        // Response
-        objectResponseStep.addMessage("The employments has been read successfully!");
-        return objectResponseStep.getStep(true, new ArrayList<>());
+        // Init
+        val responseStep = this.responseStep.getObject();
+        responseStep.getRidOfMessages();
+        // Get Account By Token Step
+        val accountResponse = getAccountByTokenStep.runStep(responseStep, requestDto.getToken());
+        if (accountResponse.getError()) return responseStep.getStep(false, new ArrayList<>());
+        val account = accountResponse.getData();
+        // Get Employment Ids For Owner Account Step
+        val accountId = account.getId();
+        val employmentIdsResponse = getEmploymentIdsForOwnerAccountStep.runStep(responseStep, accountId);
+        if (employmentIdsResponse.getError()) return responseStep.getStep(false, new ArrayList<>());
+        val employmentIds = employmentIdsResponse.getData();
+        // Get Employment By Ids Step
+        val employmentResponse = getEmploymentByIdsStep.runStep(responseStep, employmentIds);
+        if (employmentResponse.getError()) return responseStep.getStep(false, new ArrayList<>());
+        val employment = employmentResponse.getData();
+        // Return response
+        responseStep.addMessage("The employment has been read successfully!");
+        return responseStep.getStep(true, employment);
     }
 
     @PostMapping("employment-update")
