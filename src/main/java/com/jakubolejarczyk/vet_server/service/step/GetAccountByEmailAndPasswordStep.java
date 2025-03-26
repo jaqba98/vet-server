@@ -10,14 +10,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class AccountAuthStep {
+public class GetAccountByEmailAndPasswordStep {
     private final AccountService accountService;
     private final PasswordService passwordService;
     private final TokenService tokenService;
 
-    public StepResponse<String> runStep(String email, String password) {
+    public StepResponse<String> runStep(ResponseStep responseStep, String email, String password) {
         val account = accountService.findByEmail(email);
         if (account.isEmpty()) {
+            responseStep.addMessage("Incorrect email or password!");
             return StepResponse.<String>builder()
                     .error(true)
                     .data("")
@@ -26,11 +27,13 @@ public class AccountAuthStep {
         val encodedPassword = account.get().getPassword();
         if (passwordService.match(password, encodedPassword)) {
             String token = tokenService.generate(email);
+            responseStep.addMessage("You have logged in successfully!");
             return StepResponse.<String>builder()
                     .error(false)
                     .data(token)
                     .build();
         }
+        responseStep.addMessage("Incorrect email or password!");
         return StepResponse.<String>builder()
                 .error(true)
                 .data("")
