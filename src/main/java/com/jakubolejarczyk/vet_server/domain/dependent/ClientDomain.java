@@ -1,6 +1,7 @@
 package com.jakubolejarczyk.vet_server.domain.dependent;
 
-public interface ClientDomain {
-    Long getId();
-    Long getAccountId();
+import com.jakubolejarczyk.vet_server.domain.base.BaseDomain;
+
+public class ClientDomain extends BaseDomain {
+    protected Long accountId;
 }

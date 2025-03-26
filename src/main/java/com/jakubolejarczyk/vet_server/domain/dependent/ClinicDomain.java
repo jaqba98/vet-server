@@ -1,17 +1,17 @@
 package com.jakubolejarczyk.vet_server.domain.dependent;
 
-public interface ClinicDomain {
-    Long getId();
-    String getName();
-    String getStreet();
-    String getBuildingNumber();
-    String getApartmentNumber();
-    String getPostalCode();
-    String getCity();
-    String getProvince();
-    String getCountry();
-    String getEmail();
-    String getPhoneNumber();
-    Boolean getIsArchived();
-    Long getOpeningHoursId();
+import com.jakubolejarczyk.vet_server.domain.base.BaseDomain;
+
+public class ClinicDomain extends BaseDomain {
+    protected String name;
+    protected String street;
+    protected String buildingNumber;
+    protected String apartmentNumber;
+    protected String postalCode;
+    protected String city;
+    protected String province;
+    protected String country;
+    protected String email;
+    protected String phoneNumber;
+    protected Long openingHoursId;
 }

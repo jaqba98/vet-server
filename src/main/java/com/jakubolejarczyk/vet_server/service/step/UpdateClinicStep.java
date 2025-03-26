@@ -1,7 +1,6 @@
 package com.jakubolejarczyk.vet_server.service.step;
 
 import com.jakubolejarczyk.vet_server.domain.dependent.ClinicDomain;
-import com.jakubolejarczyk.vet_server.dto.request.controller.ClinicCreateRequestDto;
 import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
 import com.jakubolejarczyk.vet_server.service.crud.dependent.ClinicService;
 import com.jakubolejarczyk.vet_server.service.model.StepResponse;
