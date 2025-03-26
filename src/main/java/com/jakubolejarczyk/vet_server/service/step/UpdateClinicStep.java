@@ -1,6 +1,7 @@
 package com.jakubolejarczyk.vet_server.service.step;
 
-import com.jakubolejarczyk.vet_server.dto.request.controller.ClinicRequestDto;
+import com.jakubolejarczyk.vet_server.domain.dependent.ClinicDomain;
+import com.jakubolejarczyk.vet_server.dto.request.controller.ClinicCreateRequestDto;
 import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
 import com.jakubolejarczyk.vet_server.service.crud.dependent.ClinicService;
 import com.jakubolejarczyk.vet_server.service.model.StepResponse;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class UpdateClinicStep {
     private final ClinicService clinicService;
 
-    public StepResponse<Clinic> runStep(ResponseStep responseStep, ClinicRequestDto requestDto) throws Exception {
+    public StepResponse<Clinic> runStep(ResponseStep responseStep, ClinicDomain requestDto) throws Exception {
         try {
             val clinic = Clinic.builder()
                     .id(requestDto.getId())
@@ -28,7 +29,6 @@ public class UpdateClinicStep {
                     .email(requestDto.getEmail())
                     .phoneNumber(requestDto.getPhoneNumber())
                     .isArchived(requestDto.getIsArchived())
-                    .openingHoursId(requestDto.getOpeningHoursId())
                     .build();
             clinicService.update(clinic);
             return StepResponse.<Clinic>builder()

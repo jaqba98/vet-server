@@ -1,7 +1,8 @@
 package com.jakubolejarczyk.vet_server.controller.common;
 
 import com.jakubolejarczyk.vet_server.dto.base.TokenRequestDto;
-import com.jakubolejarczyk.vet_server.dto.request.controller.ClinicRequestDto;
+import com.jakubolejarczyk.vet_server.dto.request.controller.ClinicCreateRequestDto;
+import com.jakubolejarczyk.vet_server.dto.request.controller.ClinicUpdateRequestDto;
 import com.jakubolejarczyk.vet_server.dto.request.crud.DeleteRequestDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDataDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
@@ -42,7 +43,7 @@ public class ClinicController {
     private final UpdateOpeningHoursIdsIsArchivedStep updateOpeningHoursIdsIsArchivedStep;
 
     @PostMapping("clinic-create")
-    public ResponseEntity<ResponseDto> create(@Valid @RequestBody ClinicRequestDto requestDto) {
+    public ResponseEntity<ResponseDto> create(@Valid @RequestBody ClinicCreateRequestDto requestDto) {
         // Init
         val responseStep = this.responseStep.getObject();
         responseStep.getRidOfMessages();
@@ -92,7 +93,7 @@ public class ClinicController {
     }
 
     @PostMapping("clinic-update")
-    public ResponseEntity<ResponseDataDto<Clinic>> update(@Valid @RequestBody ClinicRequestDto requestDto) throws Exception {
+    public ResponseEntity<ResponseDataDto<Clinic>> update(@Valid @RequestBody ClinicUpdateRequestDto requestDto) throws Exception {
         // Init
         val responseStep = this.responseStep.getObject();
         responseStep.getRidOfMessages();

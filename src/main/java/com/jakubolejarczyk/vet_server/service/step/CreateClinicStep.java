@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.service.step;
 
-import com.jakubolejarczyk.vet_server.dto.request.controller.ClinicRequestDto;
+import com.jakubolejarczyk.vet_server.dto.request.controller.ClinicCreateRequestDto;
 import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
 import com.jakubolejarczyk.vet_server.service.crud.dependent.ClinicService;
 import com.jakubolejarczyk.vet_server.service.model.StepResponse;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class CreateClinicStep {
     private final ClinicService clinicService;
 
-    public StepResponse<Clinic> runStep(ResponseStep responseStep, ClinicRequestDto requestDto, Long openingHoursId) {
+    public StepResponse<Clinic> runStep(ResponseStep responseStep, ClinicCreateRequestDto requestDto, Long openingHoursId) {
         try {
             val clinic = clinicService.create(Clinic.builder()
                     .name(requestDto.getName())
