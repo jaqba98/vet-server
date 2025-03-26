@@ -13,7 +13,7 @@ import java.util.List;
 public class OpeningHoursService {
     private final OpeningHoursRepository repository;
 
-    public OpeningHours create() {
+    public OpeningHours create(Boolean isArchived) {
         OpeningHours openingHours = OpeningHours.builder()
                 .mondayFrom(null)
                 .mondayTo(null)
@@ -29,7 +29,7 @@ public class OpeningHoursService {
                 .saturdayTo(null)
                 .sundayFrom(null)
                 .sundayTo(null)
-                .isArchived(false)
+                .isArchived(isArchived)
                 .build();
         return repository.save(openingHours);
     }

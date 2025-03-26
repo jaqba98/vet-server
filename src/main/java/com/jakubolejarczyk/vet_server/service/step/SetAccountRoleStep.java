@@ -38,7 +38,7 @@ public class SetAccountRoleStep {
         if (vet.isPresent()) {
             return;
         }
-        OpeningHours newOpeningHours = openingHoursService.create();
+        OpeningHours newOpeningHours = openingHoursService.create(false);
         Vet newVet = Vet.builder()
                 .accountId(accountId)
                 .openingHoursId(newOpeningHours.getId())

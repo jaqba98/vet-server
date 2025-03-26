@@ -26,7 +26,7 @@ public class CreateClinicStep {
                     .country(requestDto.getCountry())
                     .email(requestDto.getEmail())
                     .phoneNumber(requestDto.getPhoneNumber())
-                    .isArchived(false)
+                    .isArchived(requestDto.getIsArchived())
                     .openingHoursId(openingHoursId)
                     .build());
             return StepResponse.<Clinic>builder()

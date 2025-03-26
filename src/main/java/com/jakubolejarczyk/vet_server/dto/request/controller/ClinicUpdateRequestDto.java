@@ -13,6 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ClinicUpdateRequestDto extends TokenRequestDto implements ClinicDomain {
+    @Null()
     private Long id;
 
     @NotNull(message = "Name is required!")
@@ -64,7 +65,7 @@ public class ClinicUpdateRequestDto extends TokenRequestDto implements ClinicDom
     @Size(max = 20, message = "Phone number cannot be longer than 20 characters!")
     private String phoneNumber;
 
-    @NotNull(message = "Is archived is required!")
+    @Null()
     private Boolean isArchived;
 
     @Null()

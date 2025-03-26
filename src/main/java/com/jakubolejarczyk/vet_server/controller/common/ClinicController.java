@@ -48,12 +48,13 @@ public class ClinicController {
         // Init
         val responseStep = this.responseStep.getObject();
         responseStep.getRidOfMessages();
+        val isArchived = requestDto.getIsArchived();
         // Get Account By Token Step
         val accountResponse = getAccountByTokenStep.runStep(responseStep, requestDto.getToken());
         if (accountResponse.getError()) return responseStep.getStep(false);
         val account = accountResponse.getData();
         // Create Opening Hours Step
-        val openingHoursResponse = createOpeningHoursStep.runStep(responseStep);
+        val openingHoursResponse = createOpeningHoursStep.runStep(responseStep, isArchived);
         if (openingHoursResponse.getError()) return responseStep.getStep(false);
         val openingHours = openingHoursResponse.getData();
         // Create Clinic Step
@@ -62,8 +63,7 @@ public class ClinicController {
         val clinic = clinicResponse.getData();
         // Create Employment Step
         val accountId = account.getId();
-        val clinicId = clinic.getId();
-        val employmentResponse = createEmploymentStep.runStep(responseStep, true, accountId, clinicId);
+        val employmentResponse = createEmploymentStep.runStep(responseStep, true, accountId, clinic);
         if (employmentResponse.getError()) return responseStep.getStep(false);
         // Return response
         responseStep.addMessage("The clinic has been created successfully!");

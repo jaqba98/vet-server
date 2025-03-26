@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 public class CreateOpeningHoursStep {
     private final OpeningHoursService openingHoursService;
 
-    public StepResponse<OpeningHours> runStep(ResponseStep responseStep) {
+    public StepResponse<OpeningHours> runStep(ResponseStep responseStep, Boolean isArchived) {
         try {
-            val openingHours = openingHoursService.create();
+            val openingHours = openingHoursService.create(isArchived);
             return StepResponse.<OpeningHours>builder()
                     .error(false)
                     .data(openingHours)

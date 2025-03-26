@@ -65,9 +65,7 @@ public class ClinicCreateRequestDto extends TokenRequestDto implements ClinicDom
     @Size(max = 20, message = "Phone number cannot be longer than 20 characters!")
     private String phoneNumber;
 
-    @NotNull(message = "Is archived is required!")
     private Boolean isArchived;
 
-    @Null()
     private Long openingHoursId;
 }

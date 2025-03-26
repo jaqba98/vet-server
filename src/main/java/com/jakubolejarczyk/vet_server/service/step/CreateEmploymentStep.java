@@ -1,5 +1,6 @@
 package com.jakubolejarczyk.vet_server.service.step;
 
+import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
 import com.jakubolejarczyk.vet_server.model.dependent.Employment;
 import com.jakubolejarczyk.vet_server.service.crud.dependent.EmploymentService;
 import com.jakubolejarczyk.vet_server.service.model.StepResponse;
@@ -12,13 +13,13 @@ import org.springframework.stereotype.Service;
 public class CreateEmploymentStep {
     private final EmploymentService employmentService;
 
-    public StepResponse<Employment> runStep(ResponseStep responseStep, Boolean isOwner, Long accountId, Long clinicId) {
+    public StepResponse<Employment> runStep(ResponseStep responseStep, Boolean isOwner, Long accountId, Clinic clinic) {
         try {
             val employment = employmentService.create(Employment.builder()
                     .isOwner(isOwner)
-                    .isArchived(false)
+                    .isArchived(clinic.getIsArchived())
                     .accountId(accountId)
-                    .clinicId(clinicId)
+                    .clinicId(clinic.getId())
                     .build());
             return StepResponse.<Employment>builder()
                     .error(false)
