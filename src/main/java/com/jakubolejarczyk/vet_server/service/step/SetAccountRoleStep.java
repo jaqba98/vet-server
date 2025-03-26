@@ -20,7 +20,7 @@ public class SetAccountRoleStep {
     private final ClientService clientService;
     private final OpeningHoursService openingHoursService;
 
-    public void runStep(Account account, String role) {
+    public void runStep(ResponseStep responseStep, Account account, String role) {
         val id = account.getId();
         val email = account.getEmail();
         if (role.equals("vet")) {
@@ -30,6 +30,7 @@ public class SetAccountRoleStep {
             createClient(id);
         }
         accountService.updateRoleByEmail(email, role);
+        responseStep.addMessage("Role set correctly!");
     }
 
     private void createVet(Long accountId) {
@@ -37,11 +38,10 @@ public class SetAccountRoleStep {
         if (vet.isPresent()) {
             return;
         }
-        OpeningHours openingHours = OpeningHours.builder().build();
-        openingHoursService.create();
+        OpeningHours newOpeningHours = openingHoursService.create();
         Vet newVet = Vet.builder()
                 .accountId(accountId)
-                .openingHoursId(openingHours.getId())
+                .openingHoursId(newOpeningHours.getId())
                 .build();
         vetService.create(newVet);
     }

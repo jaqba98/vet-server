@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @RestController
 @RequestMapping("/api/v1")
 @AllArgsConstructor
@@ -25,22 +27,18 @@ public class ChooseRoleController {
 
     @PostMapping("choose-role")
     public ResponseEntity<ResponseDto> chooseRole(@Valid @RequestBody ChooseRoleRequestDto requestDto) {
-        // Clean response
-        responseStep.getObject().getRidOfMessages();
-        // Get account by token
-        val token = requestDto.getToken();
-        val account = getAccountByTokenStep.runStep(responseStep.getObject(), token);
-        if (account.getError()) {
-            responseStep.getObject().addMessage("Failed to set role!");
-            return responseStep.getObject().getStep(false);
-        }
-        val accountData = account.getData();
-        // Set account role
+        // Init
+        val responseStep = this.responseStep.getObject();
+        responseStep.getRidOfMessages();
         val role = requestDto.getRole();
-        setAccountRoleStep.runStep(accountData, role);
-        // Response
-        responseStep.getObject().addMessage("Role set correctly!");
-        return responseStep.getObject().getStep(true);
+        // Get Account By Token Step
+        val accountResponse = getAccountByTokenStep.runStep(responseStep, requestDto.getToken());
+        if (accountResponse.getError()) return responseStep.getStep(false);
+        val account = accountResponse.getData();
+        // Set Account Role Step
+        setAccountRoleStep.runStep(responseStep, account, role);
+        // Return response
+        return responseStep.getStep(true);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
