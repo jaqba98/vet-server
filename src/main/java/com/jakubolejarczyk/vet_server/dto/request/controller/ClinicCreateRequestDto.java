@@ -5,6 +5,7 @@ import com.jakubolejarczyk.vet_server.dto.base.TokenRequestDto;
 import com.jakubolejarczyk.vet_server.validator.unique.Unique;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -67,5 +68,6 @@ public class ClinicCreateRequestDto extends TokenRequestDto implements ClinicDom
     @NotNull(message = "Is archived is required!")
     private Boolean isArchived;
 
+    @Null()
     private Long openingHoursId;
 }
