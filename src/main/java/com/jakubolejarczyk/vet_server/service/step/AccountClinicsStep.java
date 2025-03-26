@@ -21,13 +21,13 @@ public class AccountClinicsStep {
 
     public StepResponse<ArrayList<Clinic>> runStep(Account accountData) {
         val accountId = accountData.getId();
-        val clinicIds = employmentService.findByAccountId(accountId)
+        val clinicIds = employmentService.findAllByAccountId(accountId)
                 .stream()
                 .map(Employment::getClinicId)
                 .collect(Collectors.toCollection(ArrayList::new));
-        val data = new ArrayList<>(clinicService.findAllById(clinicIds));
+        val data = new ArrayList<>(clinicService.findAllByIds(clinicIds));
         return StepResponse.<ArrayList<Clinic>>builder()
-                .success(true)
+                .error(false)
                 .data(data)
                 .build();
     }

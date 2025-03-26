@@ -35,19 +35,11 @@ public class ClinicService {
         repository.deleteById(clinicId);
     }
 
-    public void deleteAll(List<Long> ids) {
-        repository.deleteAllByIdInBatch(ids);
-    }
-
-    public Optional<Clinic> findById(Long id) {
-        return repository.findById(id);
-    }
-
     public Optional<Clinic> findByName(String name) {
         return repository.findByName(name);
     }
 
-    public List<Clinic> findAllById(List<Long> ids) {
-        return repository.findAllById(ids);
+    public List<Clinic> findAllByIds(List<Long> ids) {
+        return repository.findAllByIds(ids);
     }
 }

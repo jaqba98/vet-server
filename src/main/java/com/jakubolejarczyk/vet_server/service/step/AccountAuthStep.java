@@ -19,7 +19,7 @@ public class AccountAuthStep {
         val account = accountService.findByEmail(email);
         if (account.isEmpty()) {
             return StepResponse.<String>builder()
-                    .success(false)
+                    .error(true)
                     .data("")
                     .build();
         }
@@ -27,12 +27,12 @@ public class AccountAuthStep {
         if (passwordService.match(password, encodedPassword)) {
             String token = tokenService.generate(email);
             return StepResponse.<String>builder()
-                    .success(true)
+                    .error(false)
                     .data(token)
                     .build();
         }
         return StepResponse.<String>builder()
-                .success(false)
+                .error(true)
                 .data("")
                 .build();
     }

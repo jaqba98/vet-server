@@ -25,11 +25,11 @@ public class LoginController {
         val email = requestDto.getEmail();
         val password = requestDto.getPassword();
         val auth = accountAuthStep.runStep(email, password);
-        if (!auth.getSuccess()) {
+        if (auth.getError()) {
             responseStep.getObject().addMessage("Incorrect email or password!");
         }
         // Response
         responseStep.getObject().addMessage("You have logged in successfully!");
-        return responseStep.getObject().getStep(auth.getSuccess(), auth.getData());
+        return responseStep.getObject().getStep(true, auth.getData());
     }
 }

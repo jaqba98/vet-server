@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import java.sql.Time;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "openinghours")
@@ -21,46 +21,46 @@ public class OpeningHours implements OpeningHoursDomain {
     private Long id;
 
     @Column(name = "monday_from")
-    private Time mondayFrom;
+    private LocalTime mondayFrom;
 
     @Column(name = "monday_to")
-    private Time mondayTo;
+    private LocalTime mondayTo;
 
     @Column(name = "tuesday_from")
-    private Time tuesdayFrom;
+    private LocalTime tuesdayFrom;
 
     @Column(name = "tuesday_to")
-    private Time tuesdayTo;
+    private LocalTime tuesdayTo;
 
     @Column(name = "wednesday_from")
-    private Time wednesdayFrom;
+    private LocalTime wednesdayFrom;
 
     @Column(name = "wednesday_to")
-    private Time wednesdayTo;
+    private LocalTime wednesdayTo;
 
     @Column(name = "thursday_from")
-    private Time thursdayFrom;
+    private LocalTime thursdayFrom;
 
     @Column(name = "thursday_to")
-    private Time thursdayTo;
+    private LocalTime thursdayTo;
 
     @Column(name = "friday_from")
-    private Time fridayFrom;
+    private LocalTime fridayFrom;
 
     @Column(name = "friday_to")
-    private Time fridayTo;
+    private LocalTime fridayTo;
 
     @Column(name = "saturday_from")
-    private Time saturdayFrom;
+    private LocalTime saturdayFrom;
 
     @Column(name = "saturday_to")
-    private Time saturdayTo;
+    private LocalTime saturdayTo;
 
     @Column(name = "sunday_from")
-    private Time sundayFrom;
+    private LocalTime sundayFrom;
 
     @Column(name = "sunday_to")
-    private Time sundayTo;
+    private LocalTime sundayTo;
 
     @Column(name = "is_archived", nullable = false)
     Boolean isArchived;

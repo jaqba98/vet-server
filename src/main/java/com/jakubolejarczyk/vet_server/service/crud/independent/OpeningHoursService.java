@@ -1,5 +1,6 @@
 package com.jakubolejarczyk.vet_server.service.crud.independent;
 
+import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
 import com.jakubolejarczyk.vet_server.model.independent.OpeningHours;
 import com.jakubolejarczyk.vet_server.repository.independent.OpeningHoursRepository;
 import lombok.AllArgsConstructor;
@@ -13,8 +14,25 @@ import java.util.List;
 public class OpeningHoursService {
     private final OpeningHoursRepository repository;
 
-    public void create(OpeningHours openingHours) {
-        repository.save(openingHours);
+    public OpeningHours create() {
+        OpeningHours openingHours = OpeningHours.builder()
+                .mondayFrom(null)
+                .mondayTo(null)
+                .tuesdayFrom(null)
+                .tuesdayTo(null)
+                .wednesdayFrom(null)
+                .wednesdayTo(null)
+                .tuesdayFrom(null)
+                .tuesdayTo(null)
+                .fridayFrom(null)
+                .fridayTo(null)
+                .saturdayFrom(null)
+                .saturdayTo(null)
+                .sundayFrom(null)
+                .sundayTo(null)
+                .isArchived(false)
+                .build();
+        return repository.save(openingHours);
     }
 
     public List<OpeningHours> read() {
@@ -34,11 +52,7 @@ public class OpeningHoursService {
         repository.deleteById(openingHoursId);
     }
 
-    public void deleteAll(List<Long> openingHoursIds) {
-        repository.deleteAllByIdInBatch(openingHoursIds);
-    }
-
-    public List<OpeningHours> findAllById(List<Long> ids) {
-        return repository.findAllById(ids);
+    public List<OpeningHours> findAllByIds(List<Long> ids) {
+        return repository.findAllByIds(ids);
     }
 }

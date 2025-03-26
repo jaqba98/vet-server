@@ -26,7 +26,7 @@ public class ResponseStep {
     }
 
     public void addMessage(String message) {
-        messages.add(message);
+        messages.addLast(message);
     }
 
     public void getRidOfMessages() {

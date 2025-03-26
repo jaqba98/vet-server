@@ -3,7 +3,7 @@ package com.jakubolejarczyk.vet_server.controller.common;
 import com.jakubolejarczyk.vet_server.dto.request.controller.ChooseRoleRequestDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
 import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.service.step.GetAccountByTokenStep;
+import com.jakubolejarczyk.vet_server.service.step.GetAccountByToken;
 import com.jakubolejarczyk.vet_server.service.step.ResponseStep;
 import com.jakubolejarczyk.vet_server.service.step.SetAccountRoleStep;
 import jakarta.validation.Valid;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1")
 @AllArgsConstructor
 public class ChooseRoleController {
-    private final GetAccountByTokenStep getAccountByTokenStep;
+    private final GetAccountByToken getAccountByTokenStep;
     private final SetAccountRoleStep setAccountRoleStep;
     private final ObjectFactory<ResponseStep> responseStep;
     private final ObjectFactory<HandleValidationService> handleValidationService;
@@ -29,8 +29,8 @@ public class ChooseRoleController {
         responseStep.getObject().getRidOfMessages();
         // Get account by token
         val token = requestDto.getToken();
-        val account = getAccountByTokenStep.runStep(token);
-        if (!account.getSuccess()) {
+        val account = getAccountByTokenStep.runStep(responseStep.getObject(), token);
+        if (account.getError()) {
             responseStep.getObject().addMessage("Failed to set role!");
             return responseStep.getObject().getStep(false);
         }

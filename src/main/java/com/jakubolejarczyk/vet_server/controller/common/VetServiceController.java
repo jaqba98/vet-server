@@ -11,7 +11,7 @@ import com.jakubolejarczyk.vet_server.service.crud.independent.OpeningHoursServi
 import com.jakubolejarczyk.vet_server.service.crud.dependent.EmploymentService;
 import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.service.step.AccountClinicsStep;
-import com.jakubolejarczyk.vet_server.service.step.GetAccountByTokenStep;
+import com.jakubolejarczyk.vet_server.service.step.GetAccountByToken;
 import com.jakubolejarczyk.vet_server.service.step.ResponseStep;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -27,7 +27,7 @@ import java.util.ArrayList;
 @AllArgsConstructor
 public class VetServiceController {
     private final ObjectFactory<ResponseStep> responseStep;
-    private final GetAccountByTokenStep getAccountByTokenStep;
+    private final GetAccountByToken getAccountByTokenStep;
     private final ObjectFactory<HandleValidationService> handleValidationService;
     private final EmploymentService employmentService;
     private final OpeningHoursService openingHoursService;

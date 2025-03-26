@@ -1,22 +1,22 @@
 package com.jakubolejarczyk.vet_server.domain.independent;
 
-import java.sql.Time;
+import java.time.LocalTime;
 
 public interface OpeningHoursDomain {
     Long getId();
-    Time getMondayFrom();
-    Time getMondayTo();
-    Time getTuesdayFrom();
-    Time getTuesdayTo();
-    Time getWednesdayFrom();
-    Time getWednesdayTo();
-    Time getThursdayFrom();
-    Time getThursdayTo();
-    Time getFridayFrom();
-    Time getFridayTo();
-    Time getSaturdayFrom();
-    Time getSaturdayTo();
-    Time getSundayFrom();
-    Time getSundayTo();
+    LocalTime getMondayFrom();
+    LocalTime getMondayTo();
+    LocalTime getTuesdayFrom();
+    LocalTime getTuesdayTo();
+    LocalTime getWednesdayFrom();
+    LocalTime getWednesdayTo();
+    LocalTime getThursdayFrom();
+    LocalTime getThursdayTo();
+    LocalTime getFridayFrom();
+    LocalTime getFridayTo();
+    LocalTime getSaturdayFrom();
+    LocalTime getSaturdayTo();
+    LocalTime getSundayFrom();
+    LocalTime getSundayTo();
     Boolean getIsArchived();
 }

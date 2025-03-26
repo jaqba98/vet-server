@@ -8,6 +8,6 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @SuperBuilder
 public class StepResponse<TData> {
-    Boolean success;
+    Boolean error;
     TData data;
 }

@@ -7,7 +7,6 @@ import lombok.val;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -35,23 +34,11 @@ public class EmploymentService {
         repository.deleteById(employmentId);
     }
 
-    public void deleteAll(List<Long> employmentIds) {
-        repository.deleteAllByIdInBatch(employmentIds);
+    public List<Employment> findAllByAccountId(Long accountId) {
+        return repository.findAllByAccountId(accountId);
     }
 
-    public Optional<Employment> findById(Long id) {
-        return repository.findById(id);
-    }
-
-    public List<Employment> findAllById(List<Long> ids) {
-        return repository.findAllById(ids);
-    }
-
-    public List<Employment> findByAccountIdAndClinicIdIn(Long accountId, List<Long> clinicId) {
-        return repository.findByAccountIdAndClinicIdIn(accountId, clinicId);
-    }
-
-    public List<Employment> findByAccountId(Long accountId) {
-        return repository.findByAccountId(accountId);
+    public List<Employment> findAllByAccountIdAndIsOwner(Long accountId) {
+        return repository.findAllByAccountIdAndIsOwner(accountId);
     }
 }
