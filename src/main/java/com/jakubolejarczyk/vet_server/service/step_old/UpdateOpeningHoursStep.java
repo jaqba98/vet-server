@@ -1,9 +1,9 @@
-package com.jakubolejarczyk.vet_server.service.step;
+package com.jakubolejarczyk.vet_server.service.step_old;
 
 import com.jakubolejarczyk.vet_server.dto.request.controller.OpeningHoursRequestDto;
 import com.jakubolejarczyk.vet_server.model.independent.OpeningHours;
 import com.jakubolejarczyk.vet_server.service.crud.independent.OpeningHoursService;
-import com.jakubolejarczyk.vet_server.service.model.StepResponse;
+import com.jakubolejarczyk.vet_server.service.model.StepModel;
 import lombok.AllArgsConstructor;
 import lombok.val;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class UpdateOpeningHoursStep {
     private final OpeningHoursService openingHoursService;
 
-    public StepResponse<OpeningHours> runStep(ResponseStep responseStep, OpeningHoursRequestDto requestDto) throws Exception {
+    public StepModel<OpeningHours> runStep(ResponseStep responseStep, OpeningHoursRequestDto requestDto) throws Exception {
         try {
             val openingHours = OpeningHours.builder()
                     .id(requestDto.getId())
@@ -34,7 +34,7 @@ public class UpdateOpeningHoursStep {
                     .isArchived(requestDto.getIsArchived())
                     .build();
             openingHoursService.update(openingHours);
-            return StepResponse.<OpeningHours>builder()
+            return StepModel.<OpeningHours>builder()
                     .error(false)
                     .data(openingHours)
                     .build();

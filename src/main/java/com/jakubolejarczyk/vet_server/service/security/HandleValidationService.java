@@ -1,7 +1,7 @@
 package com.jakubolejarczyk.vet_server.service.security;
 
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
-import com.jakubolejarczyk.vet_server.service.step.ResponseStep;
+import com.jakubolejarczyk.vet_server.service.step_old.ResponseStep;
 import lombok.AllArgsConstructor;
 import lombok.val;
 import org.springframework.beans.factory.ObjectFactory;

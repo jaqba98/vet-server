@@ -2,8 +2,8 @@ package com.jakubolejarczyk.vet_server.controller.common;
 
 import com.jakubolejarczyk.vet_server.dto.request.controller.LoginRequestDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDataDto;
-import com.jakubolejarczyk.vet_server.service.step.GetAccountByEmailAndPasswordStep;
-import com.jakubolejarczyk.vet_server.service.step.ResponseStep;
+import com.jakubolejarczyk.vet_server.service.step_old.GetAccountByEmailAndPasswordStep;
+import com.jakubolejarczyk.vet_server.service.step_old.ResponseStep;
 import lombok.AllArgsConstructor;
 import lombok.val;
 import org.springframework.beans.factory.ObjectFactory;

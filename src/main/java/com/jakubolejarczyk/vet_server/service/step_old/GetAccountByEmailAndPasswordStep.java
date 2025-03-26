@@ -1,7 +1,7 @@
-package com.jakubolejarczyk.vet_server.service.step;
+package com.jakubolejarczyk.vet_server.service.step_old;
 
 import com.jakubolejarczyk.vet_server.service.crud.independent.AccountService;
-import com.jakubolejarczyk.vet_server.service.model.StepResponse;
+import com.jakubolejarczyk.vet_server.service.model.StepModel;
 import com.jakubolejarczyk.vet_server.service.security.PasswordService;
 import com.jakubolejarczyk.vet_server.service.security.TokenService;
 import lombok.AllArgsConstructor;
@@ -15,11 +15,11 @@ public class GetAccountByEmailAndPasswordStep {
     private final PasswordService passwordService;
     private final TokenService tokenService;
 
-    public StepResponse<String> runStep(ResponseStep responseStep, String email, String password) {
+    public StepModel<String> runStep(ResponseStep responseStep, String email, String password) {
         val account = accountService.findByEmail(email);
         if (account.isEmpty()) {
             responseStep.addMessage("Incorrect email or password!");
-            return StepResponse.<String>builder()
+            return StepModel.<String>builder()
                     .error(true)
                     .data("")
                     .build();
@@ -28,13 +28,13 @@ public class GetAccountByEmailAndPasswordStep {
         if (passwordService.match(password, encodedPassword)) {
             String token = tokenService.generate(email);
             responseStep.addMessage("You have logged in successfully!");
-            return StepResponse.<String>builder()
+            return StepModel.<String>builder()
                     .error(false)
                     .data(token)
                     .build();
         }
         responseStep.addMessage("Incorrect email or password!");
-        return StepResponse.<String>builder()
+        return StepModel.<String>builder()
                 .error(true)
                 .data("")
                 .build();

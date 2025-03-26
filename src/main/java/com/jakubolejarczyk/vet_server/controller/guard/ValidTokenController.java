@@ -4,7 +4,7 @@ import com.jakubolejarczyk.vet_server.dto.request.guard.GuardRequestDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
 import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.service.security.TokenService;
-import com.jakubolejarczyk.vet_server.service.step.ResponseStep;
+import com.jakubolejarczyk.vet_server.service.step_old.ResponseStep;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.val;

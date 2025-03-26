@@ -1,7 +1,7 @@
-package com.jakubolejarczyk.vet_server.service.step;
+package com.jakubolejarczyk.vet_server.service.step_old;
 
 import com.jakubolejarczyk.vet_server.service.crud.dependent.ClinicService;
-import com.jakubolejarczyk.vet_server.service.model.StepResponse;
+import com.jakubolejarczyk.vet_server.service.model.StepModel;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +12,9 @@ import java.util.List;
 public class UpdateOpeningHoursIdsIsArchivedStep {
     private final ClinicService clinicService;
 
-    public StepResponse<Boolean> runStep(ResponseStep responseStep, List<Long> ids, Boolean isArchived) {
+    public StepModel<Boolean> runStep(ResponseStep responseStep, List<Long> ids, Boolean isArchived) {
         clinicService.updateIsArchived(ids, isArchived);
-        return StepResponse.<Boolean>builder()
+        return StepModel.<Boolean>builder()
                 .error(false)
                 .data(true)
                 .build();

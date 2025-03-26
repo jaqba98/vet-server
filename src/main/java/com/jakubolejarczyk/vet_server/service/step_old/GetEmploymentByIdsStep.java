@@ -1,8 +1,8 @@
-package com.jakubolejarczyk.vet_server.service.step;
+package com.jakubolejarczyk.vet_server.service.step_old;
 
 import com.jakubolejarczyk.vet_server.model.dependent.Employment;
 import com.jakubolejarczyk.vet_server.service.crud.dependent.EmploymentService;
-import com.jakubolejarczyk.vet_server.service.model.StepResponse;
+import com.jakubolejarczyk.vet_server.service.model.StepModel;
 import lombok.AllArgsConstructor;
 import lombok.val;
 import org.springframework.stereotype.Service;
@@ -15,9 +15,9 @@ import java.util.List;
 public class GetEmploymentByIdsStep {
     private final EmploymentService employmentService;
 
-    public StepResponse<ArrayList<Employment>> runStep(ResponseStep responseStep, List<Long> ids) {
+    public StepModel<ArrayList<Employment>> runStep(ResponseStep responseStep, List<Long> ids) {
         val employment = new ArrayList<>(employmentService.findAllByIds(ids));
-        return StepResponse.<ArrayList<Employment>>builder()
+        return StepModel.<ArrayList<Employment>>builder()
                 .error(false)
                 .data(employment)
                 .build();

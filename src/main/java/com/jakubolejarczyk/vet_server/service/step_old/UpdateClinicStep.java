@@ -1,21 +1,22 @@
-package com.jakubolejarczyk.vet_server.service.step;
+package com.jakubolejarczyk.vet_server.service.step_old;
 
-import com.jakubolejarczyk.vet_server.dto.request.controller.ClinicCreateRequestDto;
+import com.jakubolejarczyk.vet_server.domain.dependent.ClinicDomain;
 import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
 import com.jakubolejarczyk.vet_server.service.crud.dependent.ClinicService;
-import com.jakubolejarczyk.vet_server.service.model.StepResponse;
+import com.jakubolejarczyk.vet_server.service.model.StepModel;
 import lombok.AllArgsConstructor;
 import lombok.val;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class CreateClinicStep {
+public class UpdateClinicStep {
     private final ClinicService clinicService;
 
-    public StepResponse<Clinic> runStep(ResponseStep responseStep, ClinicCreateRequestDto requestDto, Long openingHoursId) {
+    public StepModel<Clinic> runStep(ResponseStep responseStep, ClinicDomain requestDto, ClinicDomain currentClinic) throws Exception {
         try {
-            val clinic = clinicService.create(com.jakubolejarczyk.vet_server.model.dependent.Clinic.builder()
+            val clinic = com.jakubolejarczyk.vet_server.model.dependent.Clinic.builder()
+                    .id(currentClinic.getId())
                     .name(requestDto.getName())
                     .street(requestDto.getStreet())
                     .buildingNumber(requestDto.getBuildingNumber())
@@ -27,18 +28,15 @@ public class CreateClinicStep {
                     .email(requestDto.getEmail())
                     .phoneNumber(requestDto.getPhoneNumber())
                     .isArchived(requestDto.getIsArchived())
-                    .openingHoursId(openingHoursId)
-                    .build());
-            return StepResponse.<Clinic>builder()
+                    .openingHoursId(currentClinic.getOpeningHoursId())
+                    .build();
+            clinicService.update(clinic);
+            return StepModel.<Clinic>builder()
                     .error(false)
                     .data(clinic)
                     .build();
         } catch (Exception e) {
-            responseStep.addMessage("Failed to create clinic!");
-            return StepResponse.<Clinic>builder()
-                    .error(true)
-                    .data(com.jakubolejarczyk.vet_server.model.dependent.Clinic.builder().build())
-                    .build();
+            throw new Exception(e);
         }
     }
 }
