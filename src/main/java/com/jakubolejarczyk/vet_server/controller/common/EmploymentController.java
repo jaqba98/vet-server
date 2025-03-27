@@ -8,6 +8,7 @@ import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
 import com.jakubolejarczyk.vet_server.model.dependent.Employment;
 import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.service.step.get.GetAccountByTokenStep;
+import com.jakubolejarczyk.vet_server.service.step.get.GetEmploymentsByIdsStep;
 import com.jakubolejarczyk.vet_server.service.step_old.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -27,7 +28,7 @@ public class EmploymentController {
     private final GetAccountByTokenStep getAccountByTokenStep;
     private final GetClinicIdsForAccountStep getClinicIdsForAccountStep;
     private final GetEmploymentIdsForOwnerAccountStep getEmploymentIdsForOwnerAccountStep;
-    private final GetEmploymentByIdsStep getEmploymentByIdsStep;
+    private final GetEmploymentsByIdsStep getEmploymentsByIdsStep;
     private final ObjectFactory<HandleValidationService> handleValidationService;
 
     @PostMapping("employment-create")
@@ -56,7 +57,7 @@ public class EmploymentController {
         if (employmentIdsResponse.getError()) return responseStep.getStep(false, new ArrayList<>());
         val employmentIds = employmentIdsResponse.getData();
         // Get Employment By Ids Step
-        val employmentResponse = getEmploymentByIdsStep.runStep(responseStep, employmentIds);
+        val employmentResponse = getEmploymentsByIdsStep.runStep(responseStep, employmentIds);
         if (employmentResponse.getError()) return responseStep.getStep(false, new ArrayList<>());
         val employment = employmentResponse.getData();
         // Return response
