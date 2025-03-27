@@ -2,7 +2,7 @@ package com.jakubolejarczyk.vet_server.controller.common;
 
 import com.jakubolejarczyk.vet_server.dto.request.controller.LoginRequestDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDataDto;
-import com.jakubolejarczyk.vet_server.service.step_old.GetAccountByEmailAndPasswordStep;
+import com.jakubolejarczyk.vet_server.service.step.GetTokenByLoginDetailsStep;
 import com.jakubolejarczyk.vet_server.service.step_old.ResponseStep;
 import lombok.AllArgsConstructor;
 import lombok.val;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1")
 @AllArgsConstructor
 public class LoginController {
-    private final GetAccountByEmailAndPasswordStep getAccountByEmailAndPasswordStep;
+    private final GetTokenByLoginDetailsStep getAccountByEmailAndPasswordStep;
     private final ObjectFactory<ResponseStep> responseStep;
 
     @PostMapping("login")
