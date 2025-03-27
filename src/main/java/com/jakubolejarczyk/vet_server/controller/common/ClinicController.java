@@ -14,6 +14,7 @@ import com.jakubolejarczyk.vet_server.service.step.create.CreateEmploymentStep;
 import com.jakubolejarczyk.vet_server.service.step.create.CreateOpeningHoursStep;
 import com.jakubolejarczyk.vet_server.service.step.get.GetAccountByTokenStep;
 import com.jakubolejarczyk.vet_server.service.step.get.GetClinicByIdStep;
+import com.jakubolejarczyk.vet_server.service.step.get.GetClinicsByIdsStep;
 import com.jakubolejarczyk.vet_server.service.step_old.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -37,7 +38,7 @@ public class ClinicController {
     private final ObjectFactory<HandleValidationService> handleValidationService;
     private final CreateEmploymentStep createEmploymentStep;
     private final GetClinicIdsForAccountStep getClinicIdsForAccountStep;
-    private final GetClinicByIdsStep getClinicByIdsStep;
+    private final GetClinicsByIdsStep getClinicsByIdsStep;
     private final GetClinicIdsForOwnerAccountStep getClinicIdsForOwnerAccountStep;
     private final CheckPermissionStep checkPermissionStep;
     private final UpdateClinicStep updateClinicStep;
@@ -90,7 +91,7 @@ public class ClinicController {
         if (clinicIdsResponse.getError()) return responseStep.getStep(false, new ArrayList<>());
         val clinicIds = clinicIdsResponse.getData();
         // Get Clinic By Ids
-        var clinicsResponse = getClinicByIdsStep.runStep(responseStep, clinicIds);
+        var clinicsResponse = getClinicsByIdsStep.runStep(responseStep, clinicIds);
         if (clinicsResponse.getError()) return responseStep.getStep(false, new ArrayList<>());
         val clinics = clinicsResponse.getData();
         // Return response
