@@ -18,10 +18,10 @@ public class Employment implements EmploymentDomain {
     private Long id;
 
     @Column(name = "is_owner", nullable = false)
-    Boolean isOwner;
+    private Boolean isOwner;
 
     @Column(name = "is_archived", nullable = false)
-    Boolean isArchived;
+    private Boolean isArchived;
 
     @Column(name = "account_id", nullable = false)
     private Long accountId;
