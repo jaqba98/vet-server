@@ -3,7 +3,7 @@ package com.jakubolejarczyk.vet_server.controller.guard;
 import com.jakubolejarczyk.vet_server.dto.request.guard.GuardRequestDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
 import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.service.step_old.GetAccountByToken;
+import com.jakubolejarczyk.vet_server.service.step.GetAccountByTokenStep;
 import com.jakubolejarczyk.vet_server.service.step_old.ResponseStep;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class IsVetController {
     private final ObjectFactory<ResponseStep> responseStep;
     private final ObjectFactory<HandleValidationService> handleValidationService;
-    private final GetAccountByToken getAccountByTokenStep;
+    private final GetAccountByTokenStep getAccountByTokenStep;
 
     @PostMapping("is-vet")
     public ResponseEntity<ResponseDto> isVet(@Valid @RequestBody GuardRequestDto requestDto) {

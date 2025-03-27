@@ -5,7 +5,7 @@ import com.jakubolejarczyk.vet_server.dto.response.ResponseDataDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
 import com.jakubolejarczyk.vet_server.model.independent.Account;
 import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.service.step_old.GetAccountByToken;
+import com.jakubolejarczyk.vet_server.service.step.GetAccountByTokenStep;
 import com.jakubolejarczyk.vet_server.service.step_old.ResponseStep;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 public class GetAccountController {
     private final ObjectFactory<ResponseStep> responseStep;
     private final ObjectFactory<HandleValidationService> handleValidationService;
-    private final GetAccountByToken getAccountByTokenStep;
+    private final GetAccountByTokenStep getAccountByTokenStep;
 
     @PostMapping("get-account")
     public ResponseEntity<ResponseDataDto<Account>> getAccount(@Valid @RequestBody GuardRequestDto requestDto) {

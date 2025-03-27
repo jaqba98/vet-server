@@ -1,5 +1,7 @@
 package com.jakubolejarczyk.vet_server.service.model;
 
-public interface StepModel<TData, TResponse> {
-    StepResponse<TResponse> runStep(TData data);
+import com.jakubolejarczyk.vet_server.service.output.StepOutput;
+
+public interface StepModel<TInput, TOutput> {
+    StepOutput<TOutput> runStep(TInput input);
 }

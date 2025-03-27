@@ -6,6 +6,7 @@ import com.jakubolejarczyk.vet_server.dto.response.ResponseDataDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
 import com.jakubolejarczyk.vet_server.model.independent.OpeningHours;
 import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
+import com.jakubolejarczyk.vet_server.service.step.GetAccountByTokenStep;
 import com.jakubolejarczyk.vet_server.service.step_old.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 @AllArgsConstructor
 public class ClinicOpeningHoursController {
     private final ObjectFactory<ResponseStep> responseStep;
-    private final GetAccountByToken getAccountByTokenStep;
+    private final GetAccountByTokenStep getAccountByTokenStep;
     private final GetClinicIdsForAccountStep getClinicIdsForAccountStep;
     private final GetOpeningHoursIdsForClinicIdsStep getOpeningHoursIdsForClinicIdsStep;
     private final GetOpeningHoursByIdsStep getOpeningHoursByIdsStep;

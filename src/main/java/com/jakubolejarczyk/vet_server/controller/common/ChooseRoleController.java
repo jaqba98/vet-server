@@ -3,7 +3,7 @@ package com.jakubolejarczyk.vet_server.controller.common;
 import com.jakubolejarczyk.vet_server.dto.request.controller.ChooseRoleRequestDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
 import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.service.step_old.GetAccountByToken;
+import com.jakubolejarczyk.vet_server.service.step.GetAccountByTokenStep;
 import com.jakubolejarczyk.vet_server.service.step_old.ResponseStep;
 import com.jakubolejarczyk.vet_server.service.step_old.SetAccountRoleStep;
 import jakarta.validation.Valid;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1")
 @AllArgsConstructor
 public class ChooseRoleController {
-    private final GetAccountByToken getAccountByTokenStep;
+    private final GetAccountByTokenStep getAccountByTokenStep;
     private final SetAccountRoleStep setAccountRoleStep;
     private final ObjectFactory<ResponseStep> responseStep;
     private final ObjectFactory<HandleValidationService> handleValidationService;

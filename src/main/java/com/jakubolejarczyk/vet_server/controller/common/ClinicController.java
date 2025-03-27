@@ -9,6 +9,7 @@ import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
 import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
 import com.jakubolejarczyk.vet_server.model.dependent.Employment;
 import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
+import com.jakubolejarczyk.vet_server.service.step.GetAccountByTokenStep;
 import com.jakubolejarczyk.vet_server.service.step_old.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -26,7 +27,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class ClinicController {
     private final ObjectFactory<ResponseStep> responseStep;
-    private final GetAccountByToken getAccountByTokenStep;
+    private final GetAccountByTokenStep getAccountByTokenStep;
     private final CreateOpeningHoursStep createOpeningHoursStep;
     private final CreateClinicStep createClinicStep;
     private final ObjectFactory<HandleValidationService> handleValidationService;
