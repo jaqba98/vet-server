@@ -5,6 +5,8 @@ import com.jakubolejarczyk.vet_server.repository.independent.OpeningHoursReposit
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class OpeningHoursService {
@@ -12,5 +14,9 @@ public class OpeningHoursService {
 
     public OpeningHours create(OpeningHours openingHours) {
         return repository.save(openingHours);
+    }
+
+    public Optional<OpeningHours> findById(Long id) {
+        return repository.findById(id);
     }
 }
