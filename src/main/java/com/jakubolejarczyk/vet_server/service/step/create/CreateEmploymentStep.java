@@ -2,7 +2,7 @@ package com.jakubolejarczyk.vet_server.service.step.create;
 
 import com.jakubolejarczyk.vet_server.model.dependent.Employment;
 import com.jakubolejarczyk.vet_server.service.crud.dependent.EmploymentService;
-import com.jakubolejarczyk.vet_server.service.input.CreateEmploymentInput;
+import com.jakubolejarczyk.vet_server.service.input.create.CreateEmploymentInput;
 import com.jakubolejarczyk.vet_server.service.model.StepModel;
 import com.jakubolejarczyk.vet_server.service.output.StepOutput;
 import lombok.AllArgsConstructor;

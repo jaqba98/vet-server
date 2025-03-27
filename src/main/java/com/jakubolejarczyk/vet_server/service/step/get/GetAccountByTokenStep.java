@@ -2,7 +2,7 @@ package com.jakubolejarczyk.vet_server.service.step.get;
 
 import com.jakubolejarczyk.vet_server.model.independent.Account;
 import com.jakubolejarczyk.vet_server.service.crud.independent.AccountService;
-import com.jakubolejarczyk.vet_server.service.input.GetAccountByTokenInput;
+import com.jakubolejarczyk.vet_server.service.input.get.GetAccountByTokenInput;
 import com.jakubolejarczyk.vet_server.service.model.StepModel;
 import com.jakubolejarczyk.vet_server.service.output.StepOutput;
 import com.jakubolejarczyk.vet_server.service.security.TokenService;

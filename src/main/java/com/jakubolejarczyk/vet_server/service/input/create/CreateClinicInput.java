@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.service.input;
+package com.jakubolejarczyk.vet_server.service.input.create;
 
 public record CreateClinicInput(
         String name,

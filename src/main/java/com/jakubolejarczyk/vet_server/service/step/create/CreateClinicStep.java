@@ -3,7 +3,7 @@ package com.jakubolejarczyk.vet_server.service.step.create;
 import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
 import com.jakubolejarczyk.vet_server.service.crud.dependent.ClinicService;
 import com.jakubolejarczyk.vet_server.service.crud.independent.OpeningHoursService;
-import com.jakubolejarczyk.vet_server.service.input.CreateClinicInput;
+import com.jakubolejarczyk.vet_server.service.input.create.CreateClinicInput;
 import com.jakubolejarczyk.vet_server.service.model.StepModel;
 import com.jakubolejarczyk.vet_server.service.output.StepOutput;
 import lombok.AllArgsConstructor;

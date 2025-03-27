@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.service.input;
+package com.jakubolejarczyk.vet_server.service.input.get;
 
 import java.util.List;
 

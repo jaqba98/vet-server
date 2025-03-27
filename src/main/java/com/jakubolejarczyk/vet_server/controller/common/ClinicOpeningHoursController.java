@@ -7,6 +7,7 @@ import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
 import com.jakubolejarczyk.vet_server.model.independent.OpeningHours;
 import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.service.step.get.GetAccountByTokenStep;
+import com.jakubolejarczyk.vet_server.service.step.get.GetOpeningHoursByIdsStep;
 import com.jakubolejarczyk.vet_server.service.step_old.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

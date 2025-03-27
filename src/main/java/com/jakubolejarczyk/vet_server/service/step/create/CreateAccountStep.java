@@ -2,7 +2,7 @@ package com.jakubolejarczyk.vet_server.service.step.create;
 
 import com.jakubolejarczyk.vet_server.model.independent.Account;
 import com.jakubolejarczyk.vet_server.service.crud.independent.AccountService;
-import com.jakubolejarczyk.vet_server.service.input.CreateAccountInput;
+import com.jakubolejarczyk.vet_server.service.input.create.CreateAccountInput;
 import com.jakubolejarczyk.vet_server.service.model.StepModel;
 import com.jakubolejarczyk.vet_server.service.output.StepOutput;
 import com.jakubolejarczyk.vet_server.service.security.PasswordService;

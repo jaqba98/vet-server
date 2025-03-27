@@ -2,7 +2,7 @@ package com.jakubolejarczyk.vet_server.service.step.get;
 
 import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
 import com.jakubolejarczyk.vet_server.service.crud.dependent.ClinicService;
-import com.jakubolejarczyk.vet_server.service.input.GetClinicsByIdsInput;
+import com.jakubolejarczyk.vet_server.service.input.get.GetClinicsByIdsInput;
 import com.jakubolejarczyk.vet_server.service.model.StepModel;
 import com.jakubolejarczyk.vet_server.service.output.StepOutput;
 import lombok.AllArgsConstructor;
