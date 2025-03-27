@@ -12,6 +12,10 @@ import java.util.Optional;
 public class AccountService {
     private final AccountRepository repository;
 
+    public Account create(Account account) {
+        return repository.save(account);
+    }
+
     public Optional<Account> findByEmail(String email) {
         return repository.findByEmail(email);
     }
