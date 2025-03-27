@@ -3,7 +3,7 @@ package com.jakubolejarczyk.vet_server.controller.common;
 import com.jakubolejarczyk.vet_server.dto.request.controller.ChooseRoleRequestDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
 import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.service.step.GetAccountByTokenStep;
+import com.jakubolejarczyk.vet_server.service.step.get.GetAccountByTokenStep;
 import com.jakubolejarczyk.vet_server.service.step_old.ResponseStep;
 import com.jakubolejarczyk.vet_server.service.step_old.SetAccountRoleStep;
 import jakarta.validation.Valid;

@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.service.step;
+package com.jakubolejarczyk.vet_server.service.step.create;
 
 import com.jakubolejarczyk.vet_server.model.independent.OpeningHours;
 import com.jakubolejarczyk.vet_server.service.crud.independent.OpeningHoursService;

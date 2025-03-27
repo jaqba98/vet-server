@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.service.step;
+package com.jakubolejarczyk.vet_server.service.step.get;
 
 import com.jakubolejarczyk.vet_server.model.independent.Account;
 import com.jakubolejarczyk.vet_server.service.crud.independent.AccountService;
@@ -19,8 +19,7 @@ public class GetAccountByTokenStep implements StepModel<GetAccountByTokenInput, 
     @Override
     public StepOutput<Account> runStep(GetAccountByTokenInput input) {
         try {
-            val token = input.token();
-            val email = tokenService.decode(token);
+            val email = tokenService.decode(input.token());
             val account = accountService.findByEmail(email);
             if (account.isPresent()) {
                 return StepOutput.<Account>builder()

@@ -2,7 +2,7 @@ package com.jakubolejarczyk.vet_server.controller.common;
 
 import com.jakubolejarczyk.vet_server.dto.request.controller.LoginRequestDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDataDto;
-import com.jakubolejarczyk.vet_server.service.step.GetTokenByLoginDetailsStep;
+import com.jakubolejarczyk.vet_server.service.step.get.GetTokenByLoginDetailsStep;
 import com.jakubolejarczyk.vet_server.service.step_old.ResponseStep;
 import lombok.AllArgsConstructor;
 import lombok.val;

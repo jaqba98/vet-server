@@ -5,7 +5,7 @@ import com.jakubolejarczyk.vet_server.dto.response.ResponseDataDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
 import com.jakubolejarczyk.vet_server.model.independent.Account;
 import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.service.step.GetAccountByTokenStep;
+import com.jakubolejarczyk.vet_server.service.step.get.GetAccountByTokenStep;
 import com.jakubolejarczyk.vet_server.service.step_old.ResponseStep;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.service.step;
+package com.jakubolejarczyk.vet_server.service.step.create;
 
 import com.jakubolejarczyk.vet_server.model.dependent.Employment;
 import com.jakubolejarczyk.vet_server.service.crud.dependent.EmploymentService;
@@ -17,14 +17,11 @@ public class CreateEmploymentStep implements StepModel<CreateEmploymentInput, Em
     @Override
     public StepOutput<Employment> runStep(CreateEmploymentInput input) {
         try {
-            val isOwner = input.isOwner();
-            val accountId = input.accountId();
-            val clinicId = input.clinicId();
             val employment = Employment.builder()
-                    .isOwner(isOwner)
+                    .isOwner(input.isOwner())
                     .isArchived(false)
-                    .accountId(accountId)
-                    .clinicId(clinicId)
+                    .accountId(input.accountId())
+                    .clinicId(input.clinicId())
                     .build();
             val newEmployment = employmentService.create(employment);
             return StepOutput.<Employment>builder()

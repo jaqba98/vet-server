@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.service.step;
+package com.jakubolejarczyk.vet_server.service.step.create;
 
 import com.jakubolejarczyk.vet_server.model.independent.Account;
 import com.jakubolejarczyk.vet_server.service.crud.independent.AccountService;
@@ -19,8 +19,7 @@ public class CreateAccountStep implements StepModel<CreateAccountInput, Account>
     @Override
     public StepOutput<Account> runStep(CreateAccountInput input) {
         try {
-            val email = input.email();
-            val accountByEmail = accountService.findByEmail(email);
+            val accountByEmail = accountService.findByEmail(input.email());
             if (accountByEmail.isPresent()) {
                 return StepOutput.<Account>builder()
                         .success(false)
@@ -32,7 +31,7 @@ public class CreateAccountStep implements StepModel<CreateAccountInput, Account>
             val lastName = input.lastName();
             val hashPassword = passwordService.encode(password);
             val account = Account.builder()
-                    .email(email)
+                    .email(input.email())
                     .password(hashPassword)
                     .firstName(firstName)
                     .lastName(lastName)

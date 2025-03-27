@@ -3,7 +3,7 @@ package com.jakubolejarczyk.vet_server.controller.common;
 import com.jakubolejarczyk.vet_server.dto.request.controller.RegistrationRequestDto;
 import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
 import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.service.step.CreateAccountStep;
+import com.jakubolejarczyk.vet_server.service.step.create.CreateAccountStep;
 import com.jakubolejarczyk.vet_server.service.step_old.ResponseStep;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

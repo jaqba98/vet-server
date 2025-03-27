@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.service.step;
+package com.jakubolejarczyk.vet_server.service.step.get;
 
 import com.jakubolejarczyk.vet_server.service.crud.independent.AccountService;
 import com.jakubolejarczyk.vet_server.service.model.StepModel;
@@ -20,13 +20,11 @@ public class GetTokenByLoginDetailsStep implements StepModel<GetTokenByLoginDeta
     @Override
     public StepOutput<String> runStep(GetTokenByLoginDetailsInput input) {
         try {
-            val email = input.email();
-            val account = accountService.findByEmail(email);
+            val account = accountService.findByEmail(input.email());
             if (account.isPresent()) {
-                val password = input.password();
                 val encodedPassword = account.get().getPassword();
-                if (passwordService.match(password, encodedPassword)) {
-                    val token = tokenService.generate(email);
+                if (passwordService.match(input.password(), encodedPassword)) {
+                    val token = tokenService.generate(input.email());
                     return StepOutput.<String>builder()
                             .success(true)
                             .data(token)
