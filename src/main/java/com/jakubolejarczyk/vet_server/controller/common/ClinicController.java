@@ -13,6 +13,7 @@ import com.jakubolejarczyk.vet_server.service.step.create.CreateClinicStep;
 import com.jakubolejarczyk.vet_server.service.step.create.CreateEmploymentStep;
 import com.jakubolejarczyk.vet_server.service.step.create.CreateOpeningHoursStep;
 import com.jakubolejarczyk.vet_server.service.step.get.GetAccountByTokenStep;
+import com.jakubolejarczyk.vet_server.service.step.get.GetClinicByIdStep;
 import com.jakubolejarczyk.vet_server.service.step_old.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
