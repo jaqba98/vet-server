@@ -14,15 +14,9 @@ import java.util.ArrayList;
 public class ResponseService<TData, TMetaData> {
     private final ArrayList<String> messages = new ArrayList<>();
 
-    public ResponseEntity<ResponseDto<TData, TMetaData>> getResponse(Boolean success, TData data, TMetaData metaData) {
-        val body = ResponseDto.<TData, TMetaData>builder()
-                .success(success)
-                .messages(messages)
-                .data(data)
-                .metaData(metaData)
-                .build();
-        val status = success ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
-        return ResponseEntity.status(status).body(body);
+    public ResponseEntity<ResponseDto<TData, TMetaData>> getResponse(Boolean success, TData data, TMetaData metadata) {
+        val body = new ResponseDto<>(success, messages, data, metadata);
+        return ResponseEntity.status(HttpStatus.OK).body(body);
     }
 
     public void addMessage(String message) {
