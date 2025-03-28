@@ -5,26 +5,25 @@ import com.jakubolejarczyk.vet_server.service.crud.independent.OpeningHoursServi
 import com.jakubolejarczyk.vet_server.service.input.create.CreateOpeningHoursInput;
 import com.jakubolejarczyk.vet_server.service.model.StepModel;
 import com.jakubolejarczyk.vet_server.service.model.StepOutput;
+import com.jakubolejarczyk.vet_server.service.output.create.CreateOpeningHoursOutput;
 import lombok.AllArgsConstructor;
 import lombok.val;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class CreateOpeningHoursStep implements StepModel<CreateOpeningHoursInput, OpeningHours> {
+public class CreateOpeningHoursStep implements StepModel<CreateOpeningHoursInput, CreateOpeningHoursOutput> {
     private final OpeningHoursService openingHoursService;
 
     @Override
-    public StepOutput<OpeningHours> runStep(CreateOpeningHoursInput input) {
+    public StepOutput<CreateOpeningHoursOutput> runStep(CreateOpeningHoursInput input) {
         try {
             val openingHours = OpeningHours.builder()
                     .isArchived(false)
                     .build();
             val newOpeningHours = openingHoursService.create(openingHours);
-            return StepOutput.<OpeningHours>builder()
-                    .success(true)
-                    .data(newOpeningHours)
-                    .build();
+            val output = new CreateOpeningHoursOutput(newOpeningHours);
+            return new StepOutput<>(true, "The opening hours has been established", output);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
