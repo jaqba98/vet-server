@@ -1,15 +1,17 @@
 package com.jakubolejarczyk.vet_server.dto.response;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.ArrayList;
+import java.util.List;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
-public class ResponseDto<TData, TMetadata> {
+public class Response<TData, TMetadata> {
     private Boolean success;
-    private ArrayList<String> messages;
+    private List<String> messages;
     private TData data;
     private TMetadata metadata;
 }

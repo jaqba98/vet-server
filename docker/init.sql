@@ -36,7 +36,8 @@ CREATE TABLE Account (
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
     role VARCHAR(6) NULL,
-    picture_url VARCHAR(255) NULL
+    picture_url VARCHAR(255) NULL,
+    is_archived BOOLEAN NOT NULL
 );
 
 CREATE TABLE Pet (

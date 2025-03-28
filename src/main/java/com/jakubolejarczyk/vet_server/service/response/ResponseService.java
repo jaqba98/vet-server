@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.service.response;
 
-import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
+import com.jakubolejarczyk.vet_server.dto.response.Response;
 import lombok.AllArgsConstructor;
 import lombok.val;
 import org.springframework.http.HttpStatus;
@@ -14,8 +14,8 @@ import java.util.ArrayList;
 public class ResponseService<TData, TMetaData> {
     private final ArrayList<String> messages = new ArrayList<>();
 
-    public ResponseEntity<ResponseDto<TData, TMetaData>> getResponse(Boolean success, TData data, TMetaData metadata) {
-        val body = new ResponseDto<>(success, messages, data, metadata);
+    public ResponseEntity<Response<TData, TMetaData>> getResponse(Boolean success, TData data, TMetaData metadata) {
+        val body = new Response<>(success, messages, data, metadata);
         return ResponseEntity.status(HttpStatus.OK).body(body);
     }
 

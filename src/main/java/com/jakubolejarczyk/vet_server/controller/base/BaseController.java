@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.controller.base;
 
-import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
+import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.service.response.ResponseService;
 import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
 import org.springframework.beans.factory.ObjectFactory;
@@ -22,7 +22,7 @@ public abstract class BaseController<TRequest, TData, TMetadata> {
         this.responseService = responseService;
     }
 
-    public abstract ResponseEntity<ResponseDto<TData, TMetadata>> runController(TRequest request);
+    public abstract ResponseEntity<Response<TData, TMetadata>> runController(TRequest request);
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleValidation(MethodArgumentNotValidException ex) {
