@@ -1,12 +1,10 @@
 package com.jakubolejarczyk.vet_server.controller.common;
 
-import com.jakubolejarczyk.vet_server.controller.base.BaseController;
-import com.jakubolejarczyk.vet_server.dto.request.common.LoginRequest;
+import com.jakubolejarczyk.vet_server.service.base.BaseController;
 import com.jakubolejarczyk.vet_server.dto.request.common.RegistrationRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.service.step.create.CreateAccountStep;
-import com.jakubolejarczyk.vet_server.service.step.get.GetTokenByLoginDetailsStep;
 import com.jakubolejarczyk.vet_server.service.store.StepStore;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.ObjectFactory;

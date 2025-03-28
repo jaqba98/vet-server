@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.controller.common;
 
-import com.jakubolejarczyk.vet_server.controller.base.BaseController;
+import com.jakubolejarczyk.vet_server.service.base.BaseController;
 import com.jakubolejarczyk.vet_server.dto.request.common.ChooseRoleRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;

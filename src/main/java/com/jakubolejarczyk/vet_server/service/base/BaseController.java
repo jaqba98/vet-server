@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.controller.base;
+package com.jakubolejarczyk.vet_server.service.base;
 
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.service.model.StepModel;
