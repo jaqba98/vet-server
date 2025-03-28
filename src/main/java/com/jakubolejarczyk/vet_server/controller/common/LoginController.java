@@ -1,34 +1,48 @@
-//package com.jakubolejarczyk.vet_server.controller.common;
-//
-//import com.jakubolejarczyk.vet_server.dto.request.controller.LoginRequestDto;
-//import com.jakubolejarczyk.vet_server.dto.response.ResponseDataDto;
-//import com.jakubolejarczyk.vet_server.service.step.get.GetTokenByLoginDetailsStep;
-//import com.jakubolejarczyk.vet_server.service.step_old.ResponseStep;
-//import lombok.AllArgsConstructor;
-//import lombok.val;
-//import org.springframework.beans.factory.ObjectFactory;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.web.bind.annotation.*;
-//
-//@RestController
-//@RequestMapping("/api/v1")
-//@AllArgsConstructor
-//public class LoginController {
-//    private final GetTokenByLoginDetailsStep getAccountByEmailAndPasswordStep;
-//    private final ObjectFactory<ResponseStep> responseStep;
-//
-//    @PostMapping("login")
-//    public ResponseEntity<ResponseDataDto<String>> login(@RequestBody LoginRequestDto requestDto) {
-//        // Init
-//        val responseStep = this.responseStep.getObject();
-//        responseStep.getRidOfMessages();
-//        val email = requestDto.getEmail();
-//        val password = requestDto.getPassword();
-//        // Get Account By Email And Password Step
-//        val accountResponse = getAccountByEmailAndPasswordStep.runStep(responseStep, email, password);
-//        if (accountResponse.getError()) return responseStep.getStep(false, "");
-//        // Return response
-//        val token = accountResponse.getData();
-//        return responseStep.getStep(true, token);
-//    }
-//}
+package com.jakubolejarczyk.vet_server.controller.common;
+
+import com.jakubolejarczyk.vet_server.controller.base.BaseController;
+import com.jakubolejarczyk.vet_server.dto.data.common.LoginDataDto;
+import com.jakubolejarczyk.vet_server.dto.metadata.common.LoginMetadataDto;
+import com.jakubolejarczyk.vet_server.dto.request.controller.common.LoginRequestDto;
+import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
+import com.jakubolejarczyk.vet_server.service.input.get.GetTokenByLoginDetailsInput;
+import com.jakubolejarczyk.vet_server.service.response.ResponseService;
+import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
+import com.jakubolejarczyk.vet_server.service.step.get.GetTokenByLoginDetailsStep;
+import jakarta.validation.Valid;
+import lombok.val;
+import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/v1")
+public class LoginController extends BaseController<LoginRequestDto, LoginDataDto, LoginMetadataDto> {
+    private final GetTokenByLoginDetailsStep getTokenByLoginDetailsStep;
+
+    protected LoginController(
+            ObjectFactory<HandleValidationService> handleValidationService,
+            ObjectFactory<ResponseService<LoginDataDto, LoginMetadataDto>> responseService,
+            GetTokenByLoginDetailsStep getTokenByLoginDetailsStep
+    ) {
+        super(handleValidationService, responseService);
+        this.getTokenByLoginDetailsStep = getTokenByLoginDetailsStep;
+    }
+
+    @Override
+    @PostMapping("login")
+    public ResponseEntity<ResponseDto<LoginDataDto, LoginMetadataDto>>
+    runController(@Valid @RequestBody LoginRequestDto requestDto) {
+        responseService.getObject().cleanUp();
+        val email = requestDto.getEmail();
+        val password = requestDto.getPassword();
+        val getTokenByLoginDetailsResult = getTokenByLoginDetailsStep.runStep(
+                new GetTokenByLoginDetailsInput(email, password)
+        );
+        val success = getTokenByLoginDetailsResult.getSuccess();
+        val token = getTokenByLoginDetailsResult.getData();
+        val data = new LoginDataDto(token);
+        val metadata = new LoginMetadataDto();
+        return responseService.getObject().getResponse(success, data, metadata);
+    }
+}

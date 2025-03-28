@@ -1,13 +1,11 @@
 package com.jakubolejarczyk.vet_server.dto.response;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.ArrayList;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 public class ResponseDto<TData, TMetadata> {
     private Boolean success;
