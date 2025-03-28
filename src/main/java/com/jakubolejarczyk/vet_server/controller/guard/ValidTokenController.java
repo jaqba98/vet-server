@@ -6,7 +6,6 @@ import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.service.model.StepModel;
 import com.jakubolejarczyk.vet_server.service.step.check.CheckTokenStep;
 import com.jakubolejarczyk.vet_server.service.store.StepStore;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
