@@ -5,7 +5,6 @@ import com.jakubolejarczyk.vet_server.service.crud.independent.AccountService;
 import com.jakubolejarczyk.vet_server.service.input.create.CreateAccountInput;
 import com.jakubolejarczyk.vet_server.service.model.StepModel;
 import com.jakubolejarczyk.vet_server.service.model.StepOutput;
-import com.jakubolejarczyk.vet_server.service.output.create.CreateAccountOutput;
 import com.jakubolejarczyk.vet_server.service.security.PasswordService;
 import lombok.AllArgsConstructor;
 import lombok.val;
@@ -13,18 +12,19 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class CreateAccountStep implements StepModel<CreateAccountInput, CreateAccountOutput> {
+public class CreateAccountStep implements StepModel<CreateAccountInput, Account> {
     private final AccountService accountService;
     private final PasswordService passwordService;
 
     @Override
-    public StepOutput<CreateAccountOutput> runStep(CreateAccountInput input) {
+    public StepOutput<Account> runStep(CreateAccountInput input) {
         try {
             val email = input.email();
             val accountByEmail = accountService.findByEmail(email);
             if (accountByEmail.isPresent()) {
-                val output = new CreateAccountOutput(Account.builder().build());
-                return new StepOutput<>(false, "The email address is already taken!", output);
+                return StepOutput.<Account>builder()
+                        .success(false)
+                        .build();
             }
             val password = input.password();
             val firstName = input.firstName();
@@ -38,8 +38,10 @@ public class CreateAccountStep implements StepModel<CreateAccountInput, CreateAc
                     .isArchived(false)
                     .build();
             val newAccount = accountService.create(account);
-            val output = new CreateAccountOutput(newAccount);
-            return new StepOutput<>(false, "The account has been created successfully!", output);
+            return StepOutput.<Account>builder()
+                    .success(true)
+                    .output(newAccount)
+                    .build();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -1,12 +1,10 @@
 package com.jakubolejarczyk.vet_server.service.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
-@Getter
-@Setter
-@AllArgsConstructor
+@Data
+@SuperBuilder
 public class StepOutput<TOutput> {
     private Boolean success;
     private String message;

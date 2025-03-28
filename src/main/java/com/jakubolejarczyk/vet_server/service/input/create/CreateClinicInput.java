@@ -12,5 +12,4 @@ public record CreateClinicInput(
     String email,
     String phoneNumber,
     Long openingHoursId
-) {
-}
+) {}

@@ -2,8 +2,8 @@ package com.jakubolejarczyk.vet_server.service.step.get;
 
 import com.jakubolejarczyk.vet_server.service.crud.independent.AccountService;
 import com.jakubolejarczyk.vet_server.service.model.StepModel;
-import com.jakubolejarczyk.vet_server.service.model.StepOutput;
 import com.jakubolejarczyk.vet_server.service.input.get.GetTokenByLoginDetailsInput;
+import com.jakubolejarczyk.vet_server.service.model.StepOutput;
 import com.jakubolejarczyk.vet_server.service.security.PasswordService;
 import com.jakubolejarczyk.vet_server.service.security.TokenService;
 import lombok.AllArgsConstructor;
@@ -20,20 +20,21 @@ public class GetTokenByLoginDetailsStep implements StepModel<GetTokenByLoginDeta
     @Override
     public StepOutput<String> runStep(GetTokenByLoginDetailsInput input) {
         try {
-            val account = accountService.findByEmail(input.email());
+            val email = input.email();
+            val account = accountService.findByEmail(email);
             if (account.isPresent()) {
+                val password = input.password();
                 val encodedPassword = account.get().getPassword();
-                if (passwordService.match(input.password(), encodedPassword)) {
-                    val token = tokenService.generate(input.email());
+                if (passwordService.match(password, encodedPassword)) {
+                    val token = tokenService.generate(email);
                     return StepOutput.<String>builder()
                             .success(true)
-                            .data(token)
+                            .output(token)
                             .build();
                 }
             }
             return StepOutput.<String>builder()
                     .success(false)
-                    .message("Incorrect email or password!")
                     .build();
         } catch (Exception e) {
             throw new RuntimeException(e);
