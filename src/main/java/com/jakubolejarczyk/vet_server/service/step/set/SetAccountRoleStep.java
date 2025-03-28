@@ -57,7 +57,7 @@ public class SetAccountRoleStep implements StepModel {
         if (client.isPresent()) {
             return;
         }
-        Client newClient = Client.builder()
+        Client newClient = com.jakubolejarczyk.vet_server.model.dependent.Client.builder()
                 .accountId(accountId)
                 .isArchived(false)
                 .build();

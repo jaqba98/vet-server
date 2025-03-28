@@ -3,7 +3,6 @@ package com.jakubolejarczyk.vet_server.model.dependent;
 import com.jakubolejarczyk.vet_server.domain.dependent.VetServiceDomain;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
@@ -13,11 +12,13 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @SuperBuilder
-@NoArgsConstructor
 public class VetService implements VetServiceDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "is_archived", nullable = false)
+    private Boolean isArchived;
 
     @Column(nullable = false)
     private String name;
@@ -36,9 +37,6 @@ public class VetService implements VetServiceDomain {
 
     @Column(name = "is_available", nullable = false)
     private Boolean isAvailable;
-
-    @Column(name = "is_archived", nullable = false)
-    private Boolean isArchived;
 
     @Column(name = "clinic_id", nullable = false)
     private Long clinicId;

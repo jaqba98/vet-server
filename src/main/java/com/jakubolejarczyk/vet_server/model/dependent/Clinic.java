@@ -3,7 +3,6 @@ package com.jakubolejarczyk.vet_server.model.dependent;
 import com.jakubolejarczyk.vet_server.domain.dependent.ClinicDomain;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
@@ -11,11 +10,13 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder
-@NoArgsConstructor
 public class Clinic implements ClinicDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "is_archived", nullable = false)
+    Boolean isArchived;
 
     @Column(nullable = false, length = 150, unique = true)
     private String name;
@@ -46,9 +47,6 @@ public class Clinic implements ClinicDomain {
 
     @Column(name = "phone_number", nullable = false, length = 20)
     private String phoneNumber;
-
-    @Column(name = "is_archived", nullable = false)
-    Boolean isArchived;
 
     @Column(name = "opening_hours_id", nullable = false)
     private Long openingHoursId;
