@@ -1,7 +1,6 @@
 package com.jakubolejarczyk.vet_server.service.crud.dependent;
 
 import com.jakubolejarczyk.vet_server.model.dependent.Client;
-import com.jakubolejarczyk.vet_server.model.dependent.Vet;
 import com.jakubolejarczyk.vet_server.repository.dependent.ClientRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ public class ClientService {
         return repository.save(client);
     }
 
-    public Optional<Vet> findByAccountId(Long accountId) {
+    public Optional<Client> findByAccountId(Long accountId) {
         return repository.findByAccountId(accountId);
     }
 }

@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.repository.dependent;
 
-import com.jakubolejarczyk.vet_server.service.crud.dependent.VetService;
+import com.jakubolejarczyk.vet_server.model.dependent.VetService;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
