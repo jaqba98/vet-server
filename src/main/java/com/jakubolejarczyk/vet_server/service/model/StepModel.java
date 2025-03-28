@@ -3,5 +3,5 @@ package com.jakubolejarczyk.vet_server.service.model;
 import com.jakubolejarczyk.vet_server.service.store.StepStore;
 
 public interface StepModel {
-    StepOutput runStep(StepStore stepStore);
+    void runStep(StepStore stepStore);
 }
