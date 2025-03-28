@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class ValidTokenController extends BaseController<ValidTokenRequest, Null, Null> {
     private final CheckTokenStep checkTokenStep;
 
-    protected ValidTokenController(
+    public ValidTokenController(
             ObjectFactory<HandleValidationService> handleValidationService,
             ObjectFactory<ResponseService<Null, Null>> responseService,
             CheckTokenStep checkTokenStep

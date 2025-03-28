@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 public class LoginController extends BaseController<LoginRequest, LoginData, Null> {
     private final GetTokenByLoginDetailsStep getTokenByLoginDetailsStep;
 
-    protected LoginController(
+    public LoginController(
             ObjectFactory<HandleValidationService> handleValidationService,
             ObjectFactory<ResponseService<LoginData, Null>> responseService,
             GetTokenByLoginDetailsStep getTokenByLoginDetailsStep
