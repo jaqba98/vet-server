@@ -19,4 +19,8 @@ public class AccountService {
     public Optional<Account> findByEmail(String email) {
         return repository.findByEmail(email);
     }
+
+    public void updateRoleByEmail(String email, String role) {
+        repository.updateRoleByEmail(email, role);
+    }
 }

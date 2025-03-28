@@ -126,6 +126,7 @@ CREATE TABLE Vet (
     years_of_experience INTEGER NULL,
     account_id INTEGER NOT NULL,
     opening_hours_id INTEGER NOT NULL,
+    is_archived BOOLEAN NOT NULL,
     FOREIGN KEY (account_id) REFERENCES Account(id),
     FOREIGN KEY (opening_hours_id) REFERENCES OpeningHours(id)
 );
@@ -133,6 +134,7 @@ CREATE TABLE Vet (
 CREATE TABLE Client (
     id SERIAL PRIMARY KEY,
     account_id INTEGER NOT NULL,
+    is_archived BOOLEAN NOT NULL,
     FOREIGN KEY (account_id) REFERENCES Account(id)
 );
 
