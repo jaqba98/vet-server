@@ -17,8 +17,10 @@ public class CheckTokenStep implements StepModel<String, Null> {
     public StepOutput<Null> runStep(String token) {
         try {
             val success = tokenService.verify(token);
+            val message = success ? "The token is valid!" : "The token is invalid!";
             return StepOutput.<Null>builder()
                     .success(success)
+                    .message(message)
                     .output(null)
                     .build();
         } catch (Exception e) {

@@ -43,7 +43,7 @@ public class LoginController extends BaseController<LoginRequest, LoginData, Log
         val getTokenByLoginDetailsResponse = getTokenByLoginDetailsStep.runStep(getTokenByLoginDetailsInput);
         val success = getTokenByLoginDetailsResponse.getSuccess();
         val message = getTokenByLoginDetailsResponse.getMessage();
-        val token = getTokenByLoginDetailsResponse.getData();
+        val token = getTokenByLoginDetailsResponse.getOutput();
         val data = new LoginData(token);
         val metadata = new LoginMetadata();
         responseService.getObject().addMessage(message);
