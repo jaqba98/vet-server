@@ -5,8 +5,7 @@ import lombok.experimental.SuperBuilder;
 
 @Data
 @SuperBuilder
-public class StepOutput<TOutput> {
+public class StepOutput {
     private Boolean success;
     private String message;
-    private TOutput output;
 }

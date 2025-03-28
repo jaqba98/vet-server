@@ -1,5 +1,7 @@
 package com.jakubolejarczyk.vet_server.service.model;
 
-public interface StepModel<TInput, TOutput> {
-    StepOutput<TOutput> runStep(TInput input);
+import com.jakubolejarczyk.vet_server.service.store.StepStore;
+
+public interface StepModel {
+    StepOutput runStep(StepStore stepStore);
 }
