@@ -5,7 +5,6 @@ import com.jakubolejarczyk.vet_server.service.output.StepOutput;
 import com.jakubolejarczyk.vet_server.service.security.TokenService;
 import jakarta.validation.constraints.Null;
 import lombok.AllArgsConstructor;
-import lombok.val;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,9 +15,8 @@ public class CheckTokenStep implements StepModel<String, Null> {
     @Override
     public StepOutput<Null> runStep(String token) {
         try {
-            val isValid = tokenService.verify(token);
             return StepOutput.<Null>builder()
-                    .success(isValid)
+                    .success(tokenService.verify(token))
                     .build();
         } catch (Exception e) {
             throw new RuntimeException(e);
