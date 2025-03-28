@@ -34,13 +34,13 @@ public class LoginController extends BaseController<LoginRequest, LoginData, Nul
     public ResponseEntity<Response<LoginData, Null>>
     runController(@Valid @RequestBody LoginRequest requestDto) {
         responseService.getObject().cleanUp();
-        val getTokenByLoginDetailsResult = getTokenByLoginDetailsStep.runStep(new GetTokenByLoginDetailsInput(
+        val getTokenByLoginDetailsResponse = getTokenByLoginDetailsStep.runStep(new GetTokenByLoginDetailsInput(
                 requestDto.getEmail(),
                 requestDto.getPassword()
         ));
-        val success = getTokenByLoginDetailsResult.getSuccess();
-        val message = getTokenByLoginDetailsResult.getMessage();
-        val token = getTokenByLoginDetailsResult.getData();
+        val success = getTokenByLoginDetailsResponse.getSuccess();
+        val message = getTokenByLoginDetailsResponse.getMessage();
+        val token = getTokenByLoginDetailsResponse.getData();
         val data = new LoginData(token);
         responseService.getObject().addMessage(message);
         return responseService.getObject().getResponse(success, data, null);

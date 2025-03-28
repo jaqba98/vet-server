@@ -40,6 +40,7 @@ public class CreateAccountStep implements StepModel<CreateAccountInput, Account>
             val newAccount = accountService.create(account);
             return StepOutput.<Account>builder()
                     .success(true)
+                    .message("The account has been created successfully!")
                     .data(newAccount)
                     .build();
         } catch (Exception e) {

@@ -1,44 +1,52 @@
-//package com.jakubolejarczyk.vet_server.controller.common;
-//
-//import com.jakubolejarczyk.vet_server.dto.request.controller.RegistrationRequestDto;
-//import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
-//import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
-//import com.jakubolejarczyk.vet_server.service.step.create.CreateAccountStep;
-//import com.jakubolejarczyk.vet_server.service.step_old.ResponseStep;
-//import jakarta.validation.Valid;
-//import lombok.AllArgsConstructor;
-//import lombok.val;
-//import org.springframework.beans.factory.ObjectFactory;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.web.bind.MethodArgumentNotValidException;
-//import org.springframework.web.bind.annotation.*;
-//
-//@RestController
-//@RequestMapping("/api/v1")
-//@AllArgsConstructor
-//public class RegistrationController {
-//    private final ObjectFactory<HandleValidationService> handleValidationService;
-//    private final CreateAccountStep createAccountStep;
-//    private final ObjectFactory<ResponseStep> responseStep;
-//
-//    @PostMapping("registration")
-//    public ResponseEntity<ResponseDto> registration(@Valid @RequestBody RegistrationRequestDto requestDto) {
-//        // Clean response
-//        responseStep.getObject().getRidOfMessages();
-//        // Create account
-//        val email = requestDto.getEmail();
-//        val password = requestDto.getPassword();
-//        val firstName = requestDto.getFirstName();
-//        val lastName = requestDto.getLastName();
-//        createAccountStep.runStep(email, password, firstName, lastName);
-//        // Response
-//        responseStep.getObject().addMessage("The account has been created successfully!");
-//        return responseStep.getObject().getStep(true);
-//    }
-//
-//    @ExceptionHandler(MethodArgumentNotValidException.class)
-//    public ResponseEntity<ResponseDto> handleValidation(MethodArgumentNotValidException ex) {
-//        return handleValidationService.getObject().handle(ex);
-//    }
-//}
-//
+package com.jakubolejarczyk.vet_server.controller.common;
+
+import com.jakubolejarczyk.vet_server.controller.base.BaseController;
+import com.jakubolejarczyk.vet_server.dto.request.common.LoginRequest;
+import com.jakubolejarczyk.vet_server.dto.request.common.RegistrationRequest;
+import com.jakubolejarczyk.vet_server.dto.response.Response;
+import com.jakubolejarczyk.vet_server.dto.response.data.common.LoginData;
+import com.jakubolejarczyk.vet_server.service.input.create.CreateAccountInput;
+import com.jakubolejarczyk.vet_server.service.input.get.GetTokenByLoginDetailsInput;
+import com.jakubolejarczyk.vet_server.service.response.ResponseService;
+import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
+import com.jakubolejarczyk.vet_server.service.step.create.CreateAccountStep;
+import com.jakubolejarczyk.vet_server.service.step.get.GetTokenByLoginDetailsStep;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Null;
+import lombok.val;
+import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/v1")
+public class RegistrationController extends BaseController<RegistrationRequest, Null, Null> {
+    private final CreateAccountStep createAccountStep;
+
+    protected RegistrationController(
+            ObjectFactory<HandleValidationService> handleValidationService,
+            ObjectFactory<ResponseService<Null, Null>> responseService,
+            CreateAccountStep createAccountStep
+    ) {
+        super(handleValidationService, responseService);
+        this.createAccountStep = createAccountStep;
+    }
+
+    @Override
+    @PostMapping("registration")
+    public ResponseEntity<Response<Null, Null>>
+    runController(@Valid @RequestBody RegistrationRequest requestDto) {
+        responseService.getObject().cleanUp();
+        val createAccountResponse = createAccountStep.runStep(new CreateAccountInput(
+                requestDto.getEmail(),
+                requestDto.getPassword(),
+                requestDto.getFirstName(),
+                requestDto.getLastName()
+        ));
+        val success = createAccountResponse.getSuccess();
+        val message = createAccountResponse.getMessage();
+        responseService.getObject().addMessage(message);
+        return responseService.getObject().getResponse(success, null, null);
+    }
+}
+
