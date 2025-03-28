@@ -1,7 +1,7 @@
-package com.jakubolejarczyk.vet_server.service.step.check;
+package com.jakubolejarczyk.vet_server.step.check;
 
-import com.jakubolejarczyk.vet_server.service.model.StepModel;
-import com.jakubolejarczyk.vet_server.service.security.TokenService;
+import com.jakubolejarczyk.vet_server.security.TokenService;
+import com.jakubolejarczyk.vet_server.step.model.StepModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import lombok.AllArgsConstructor;
 import lombok.val;
@@ -14,6 +14,9 @@ public class CheckTokenStep implements StepModel {
 
     @Override
     public void runStep(StepStore stepStore) {
+        if (stepStore.hasNotItem("token")) {
+            throw new Error("CheckTokenStep requires a token in the store!");
+        }
         val token = (String) stepStore.getItem("token");
         val success = tokenService.verify(token);
         val message = success ? "The token is valid!" : "The token is invalid!";

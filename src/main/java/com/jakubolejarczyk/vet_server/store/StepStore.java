@@ -49,4 +49,12 @@ public class StepStore {
             throw new Error("The store does not contain key: " + key);
         }
     }
+
+    public Boolean hasItem(String key) {
+        return data.containsKey(key) || metadata.containsKey(key) || items.containsKey(key);
+    }
+
+    public Boolean hasNotItem(String key) {
+        return !hasItem(key);
+    }
 }

@@ -2,7 +2,7 @@
 //
 //import com.jakubolejarczyk.vet_server.model.dependent.Employment;
 //import com.jakubolejarczyk.vet_server.service.crud.dependent.EmploymentService;
-//import com.jakubolejarczyk.vet_server.service.model.StepModel;
+//import com.jakubolejarczyk.vet_server.step.model.StepModel;
 //import com.jakubolejarczyk.vet_server.service.model.StepOutput;
 //import lombok.AllArgsConstructor;
 //import lombok.val;

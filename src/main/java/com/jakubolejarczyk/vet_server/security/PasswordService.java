@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.service.security;
+package com.jakubolejarczyk.vet_server.security;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;

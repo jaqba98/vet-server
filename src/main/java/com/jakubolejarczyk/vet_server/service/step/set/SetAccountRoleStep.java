@@ -7,7 +7,7 @@ import com.jakubolejarczyk.vet_server.service.crud.dependent.ClientService;
 import com.jakubolejarczyk.vet_server.service.crud.dependent.VetService;
 import com.jakubolejarczyk.vet_server.service.crud.independent.AccountService;
 import com.jakubolejarczyk.vet_server.service.crud.independent.OpeningHoursService;
-import com.jakubolejarczyk.vet_server.service.model.StepModel;
+import com.jakubolejarczyk.vet_server.step.model.StepModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import lombok.AllArgsConstructor;
 import lombok.val;

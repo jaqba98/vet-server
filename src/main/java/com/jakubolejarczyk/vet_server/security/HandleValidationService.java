@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.service.security;
+package com.jakubolejarczyk.vet_server.security;
 
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.store.StepStore;

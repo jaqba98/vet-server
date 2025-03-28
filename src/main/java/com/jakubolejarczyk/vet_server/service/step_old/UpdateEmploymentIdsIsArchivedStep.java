@@ -1,7 +1,7 @@
 //package com.jakubolejarczyk.vet_server.service.step_old;
 //
 //import com.jakubolejarczyk.vet_server.service.crud.dependent.EmploymentService;
-//import com.jakubolejarczyk.vet_server.service.model.StepModel;
+//import com.jakubolejarczyk.vet_server.step.model.StepModel;
 //import lombok.AllArgsConstructor;
 //import org.springframework.stereotype.Service;
 //

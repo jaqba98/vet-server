@@ -1,8 +1,8 @@
-package com.jakubolejarczyk.vet_server.service.base;
+package com.jakubolejarczyk.vet_server.step.base;
 
 import com.jakubolejarczyk.vet_server.dto.response.Response;
-import com.jakubolejarczyk.vet_server.service.model.StepModel;
-import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
+import com.jakubolejarczyk.vet_server.security.HandleValidationService;
+import com.jakubolejarczyk.vet_server.step.model.StepModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.constraints.Null;
 import lombok.AllArgsConstructor;
@@ -19,33 +19,34 @@ import java.util.ArrayList;
 @Service
 @AllArgsConstructor
 public abstract class BaseController {
-    public final ObjectFactory<StepStore> stepStore;
+    private final ObjectFactory<StepStore> stepStoreObjectFactory;
     private final ObjectFactory<HandleValidationService> handleValidationService;
-    private final String[] dataKeys;
-    private final String[] metadataKeys;
-    protected final ArrayList<StepModel> steps;
 
-    public void initController() {
-        stepStore.getObject().reset();
-        stepStore.getObject().setDataKeys(dataKeys);
-        stepStore.getObject().setMetadataKeys(metadataKeys);
+    public void initController(String[] dataKeys, String[] metadataKeys) {
+        val stepStore = stepStoreObjectFactory.getObject();
+        stepStore.reset();
+        stepStore.setDataKeys(dataKeys);
+        stepStore.setMetadataKeys(metadataKeys);
     }
 
-    public ResponseEntity<Response<?, ?>> runController(ArrayList<StepModel> steps) {
+    protected ResponseEntity<Response<?, ?>> runController(ArrayList<StepModel> steps) {
+        val stepStore = stepStoreObjectFactory.getObject();
         for (val step : steps) {
-            step.runStep(stepStore.getObject());
-            if (stepStore.getObject().getFinish()) break;
+            step.runStep(stepStore);
+            val success = stepStore.getSuccess();
+            if (!success) break;
         }
-        val success = stepStore.getObject().getSuccess();
-        val messages = stepStore.getObject().getMessages();
-        val data = stepStore.getObject().getData();
-        val metadata = stepStore.getObject().getMetadata();
+        val success = stepStore.getSuccess();
+        val messages = stepStore.getMessages();
+        val data = stepStore.getData();
+        val metadata = stepStore.getMetadata();
         val response = new Response<>(success, messages, data, metadata);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Response<Null, Null>> handleValidation(MethodArgumentNotValidException ex) {
-        return handleValidationService.getObject().handle(stepStore.getObject(), ex);
+        val stepStore = stepStoreObjectFactory.getObject();
+        return handleValidationService.getObject().handle(stepStore, ex);
     }
 }

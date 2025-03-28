@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.service.security;
+package com.jakubolejarczyk.vet_server.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;

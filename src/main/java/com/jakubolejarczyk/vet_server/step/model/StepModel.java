@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.service.model;
+package com.jakubolejarczyk.vet_server.step.model;
 
 import com.jakubolejarczyk.vet_server.store.StepStore;
 

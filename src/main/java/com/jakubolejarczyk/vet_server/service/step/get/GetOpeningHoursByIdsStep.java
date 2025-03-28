@@ -2,7 +2,7 @@
 //
 //import com.jakubolejarczyk.vet_server.model.independent.OpeningHours;
 //import com.jakubolejarczyk.vet_server.service.crud.independent.OpeningHoursService;
-//import com.jakubolejarczyk.vet_server.service.model.StepModel;
+//import com.jakubolejarczyk.vet_server.step.model.StepModel;
 //import com.jakubolejarczyk.vet_server.service.model.StepOutput;
 //import lombok.AllArgsConstructor;
 //import lombok.val;
