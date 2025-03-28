@@ -4,6 +4,7 @@ import com.jakubolejarczyk.vet_server.controller.base.BaseController;
 import com.jakubolejarczyk.vet_server.dto.request.common.LoginRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.service.model.StepModel;
+import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.service.step.get.GetTokenByLoginDetailsStep;
 import com.jakubolejarczyk.vet_server.service.store.StepStore;
 import org.springframework.beans.factory.ObjectFactory;
@@ -22,9 +23,10 @@ public class LoginController extends BaseController {
 
     public LoginController(
             ObjectFactory<StepStore> stepStore,
-            GetTokenByLoginDetailsStep getTokenByLoginDetailsStep
+            GetTokenByLoginDetailsStep getTokenByLoginDetailsStep,
+            ObjectFactory<HandleValidationService> handleValidationService
     ) {
-        super(stepStore);
+        super(stepStore, handleValidationService);
         steps.add(getTokenByLoginDetailsStep);
     }
 

@@ -4,6 +4,7 @@ import com.jakubolejarczyk.vet_server.controller.base.BaseController;
 import com.jakubolejarczyk.vet_server.dto.request.base.TokenRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.service.model.StepModel;
+import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.service.step.check.CheckTokenStep;
 import com.jakubolejarczyk.vet_server.service.store.StepStore;
 import org.springframework.beans.factory.ObjectFactory;
@@ -22,9 +23,10 @@ public class ValidTokenController extends BaseController {
 
     public ValidTokenController(
             ObjectFactory<StepStore> stepStore,
+            ObjectFactory<HandleValidationService> handleValidationService,
             CheckTokenStep checkTokenStep
     ) {
-        super(stepStore);
+        super(stepStore, handleValidationService);
         steps.add(checkTokenStep);
     }
 

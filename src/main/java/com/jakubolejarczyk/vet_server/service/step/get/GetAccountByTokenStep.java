@@ -1,36 +1,32 @@
-//package com.jakubolejarczyk.vet_server.service.step.get;
-//
-//import com.jakubolejarczyk.vet_server.model.independent.Account;
-//import com.jakubolejarczyk.vet_server.service.crud.independent.AccountService;
-//import com.jakubolejarczyk.vet_server.service.model.StepModel;
-//import com.jakubolejarczyk.vet_server.service.model.StepOutput;
-//import com.jakubolejarczyk.vet_server.service.security.TokenService;
-//import lombok.AllArgsConstructor;
-//import lombok.val;
-//import org.springframework.stereotype.Service;
-//
-//@Service
-//@AllArgsConstructor
-//public class GetAccountByTokenStep implements StepModel<String, Account> {
-//    private final TokenService tokenService;
-//    private final AccountService accountService;
-//
-//    @Override
-//    public StepOutput<Account> runStep(String token) {
-//        try {
-//            val email = tokenService.decode(token);
-//            val account = accountService.findByEmail(email);
-//            if (account.isPresent()) {
-//                return StepOutput.<Account>builder()
-//                        .success(true)
-//                        .output(account.get())
-//                        .build();
-//            }
-//            return StepOutput.<Account>builder()
-//                    .success(false)
-//                    .build();
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-//}
+package com.jakubolejarczyk.vet_server.service.step.get;
+
+import com.jakubolejarczyk.vet_server.service.crud.independent.AccountService;
+import com.jakubolejarczyk.vet_server.service.model.StepModel;
+import com.jakubolejarczyk.vet_server.service.security.TokenService;
+import com.jakubolejarczyk.vet_server.service.store.StepStore;
+import lombok.AllArgsConstructor;
+import lombok.val;
+import org.springframework.stereotype.Service;
+
+@Service
+@AllArgsConstructor
+public class GetAccountByTokenStep implements StepModel {
+    private final AccountService accountService;
+    private final TokenService tokenService;
+
+    @Override
+    public void runStep(StepStore stepStore) {
+        val token = (String) stepStore.getItem("token");
+        val email = tokenService.decode(token);
+        val account = accountService.findByEmail(email);
+        if (account.isPresent()) {
+            stepStore.setData("email", account.get().getEmail());
+            stepStore.setData("firstName", account.get().getFirstName());
+            stepStore.setData("lastName", account.get().getLastName());
+            stepStore.setData("role", account.get().getRole());
+            stepStore.setData("pictureUrl", account.get().getPictureUrl());
+            return;
+        }
+        stepStore.setSuccess(false);
+    }
+}
