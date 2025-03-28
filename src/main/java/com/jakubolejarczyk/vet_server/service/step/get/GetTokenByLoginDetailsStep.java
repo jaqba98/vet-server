@@ -25,7 +25,7 @@ public class GetTokenByLoginDetailsStep implements StepModel {
             val encodedPassword = account.get().getPassword();
             if (passwordService.match(password, encodedPassword)) {
                 val token = tokenService.generate(email);
-                stepStore.setData("token", token);
+                stepStore.setItem("token", token);
                 stepStore.addMessage("You have logged in successfully");
                 return;
             }

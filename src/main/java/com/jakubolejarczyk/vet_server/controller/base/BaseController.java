@@ -21,6 +21,15 @@ import java.util.ArrayList;
 public abstract class BaseController {
     public final ObjectFactory<StepStore> stepStore;
     private final ObjectFactory<HandleValidationService> handleValidationService;
+    private final String[] dataKeys;
+    private final String[] metadataKeys;
+    protected final ArrayList<StepModel> steps;
+
+    public void initController() {
+        stepStore.getObject().reset();
+        stepStore.getObject().setDataKeys(dataKeys);
+        stepStore.getObject().setMetadataKeys(metadataKeys);
+    }
 
     public ResponseEntity<Response<?, ?>> runController(ArrayList<StepModel> steps) {
         for (val step : steps) {

@@ -4,10 +4,7 @@ import lombok.Data;
 import lombok.ToString;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @Data
@@ -18,7 +15,9 @@ public class StepStore {
     List<String> messages = new ArrayList<>();
     Map<String, Object> data = new HashMap<>();
     Map<String, Object> metadata = new HashMap<>();
-    Map<String, Object> items = new HashMap<>();
+    Map<String, Object> item = new HashMap<>();
+    String[] dataKeys = {};
+    String[] metadataKeys = {};
 
     public void reset() {
         finish = false;
@@ -26,28 +25,34 @@ public class StepStore {
         messages.clear();
         data.clear();
         metadata.clear();
-        items.clear();
+        item.clear();
     }
 
     public void addMessage(String message) {
         messages.addLast(message);
     }
 
-    public void setData(String key, Object value) {
-        data.put(key, value);
-    }
-
-    public void setMetadata(String key, Object value) {
-        metadata.put(key, value);
-    }
-
     public void setItem(String key, Object value) {
-        items.put(key, value);
+        if (Arrays.asList(dataKeys).contains(key)) {
+            data.put(key, value);
+            return;
+        }
+        if (Arrays.asList(metadataKeys).contains(key)) {
+            metadata.put(key, value);
+            return;
+        }
+        item.put(key, value);
     }
 
     public Object getItem(String key) {
-        if (items.containsKey(key)) {
-            return items.get(key);
+        if (Arrays.asList(dataKeys).contains(key) && data.containsKey(key)) {
+            return data.get(key);
+        }
+        if (Arrays.asList(metadataKeys).contains(key) && metadata.containsKey(key)) {
+            return metadata.get(key);
+        }
+        if (item.containsKey(key)) {
+            return item.get(key);
         }
         throw new Error("The store does not contain key: " + key);
     }
