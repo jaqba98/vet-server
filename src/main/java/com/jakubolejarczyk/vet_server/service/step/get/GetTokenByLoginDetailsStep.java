@@ -29,12 +29,14 @@ public class GetTokenByLoginDetailsStep implements StepModel<GetTokenByLoginDeta
                     val token = tokenService.generate(email);
                     return StepOutput.<String>builder()
                             .success(true)
+                            .message("You have logged in successfully")
                             .output(token)
                             .build();
                 }
             }
             return StepOutput.<String>builder()
                     .success(false)
+                    .message("Invalid email or password")
                     .build();
         } catch (Exception e) {
             throw new RuntimeException(e);
