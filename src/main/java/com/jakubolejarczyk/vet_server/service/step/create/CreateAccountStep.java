@@ -5,6 +5,7 @@ import com.jakubolejarczyk.vet_server.service.crud.independent.AccountService;
 import com.jakubolejarczyk.vet_server.service.input.create.CreateAccountInput;
 import com.jakubolejarczyk.vet_server.service.model.StepModel;
 import com.jakubolejarczyk.vet_server.service.model.StepOutput;
+import com.jakubolejarczyk.vet_server.service.output.create.CreateAccountOutput;
 import com.jakubolejarczyk.vet_server.service.security.PasswordService;
 import lombok.AllArgsConstructor;
 import lombok.val;
@@ -12,19 +13,18 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class CreateAccountStep implements StepModel<CreateAccountInput, Account> {
+public class CreateAccountStep implements StepModel<CreateAccountInput, CreateAccountOutput> {
     private final AccountService accountService;
     private final PasswordService passwordService;
 
     @Override
-    public StepOutput<Account> runStep(CreateAccountInput input) {
+    public StepOutput<CreateAccountOutput> runStep(CreateAccountInput input) {
         try {
-            val accountByEmail = accountService.findByEmail(input.email());
+            val email = input.email();
+            val accountByEmail = accountService.findByEmail(email);
             if (accountByEmail.isPresent()) {
-                return StepOutput.<Account>builder()
-                        .success(false)
-                        .message("The email address is already taken!")
-                        .build();
+                val output = new CreateAccountOutput(Account.builder().build());
+                return new StepOutput<>(false, "The email address is already taken!", output);
             }
             val password = input.password();
             val firstName = input.firstName();
@@ -38,11 +38,8 @@ public class CreateAccountStep implements StepModel<CreateAccountInput, Account>
                     .isArchived(false)
                     .build();
             val newAccount = accountService.create(account);
-            return StepOutput.<Account>builder()
-                    .success(true)
-                    .message("The account has been created successfully!")
-                    .data(newAccount)
-                    .build();
+            val output = new CreateAccountOutput(newAccount);
+            return new StepOutput<>(false, "The account has been created successfully!", output);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
