@@ -3,7 +3,7 @@ package com.jakubolejarczyk.vet_server.service.base;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.service.model.StepModel;
 import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.service.store.StepStore;
+import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.constraints.Null;
 import lombok.AllArgsConstructor;
 import lombok.val;

@@ -4,7 +4,7 @@ import com.jakubolejarczyk.vet_server.model.independent.Account;
 import com.jakubolejarczyk.vet_server.service.crud.independent.AccountService;
 import com.jakubolejarczyk.vet_server.service.model.StepModel;
 import com.jakubolejarczyk.vet_server.service.security.PasswordService;
-import com.jakubolejarczyk.vet_server.service.store.StepStore;
+import com.jakubolejarczyk.vet_server.store.StepStore;
 import lombok.AllArgsConstructor;
 import lombok.val;
 import org.springframework.stereotype.Service;

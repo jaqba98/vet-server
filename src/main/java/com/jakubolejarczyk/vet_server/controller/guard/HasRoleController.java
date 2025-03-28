@@ -6,7 +6,7 @@ import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.service.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.service.step.check.CheckAccountHasRoleStep;
 import com.jakubolejarczyk.vet_server.service.step.get.GetAccountByTokenStep;
-import com.jakubolejarczyk.vet_server.service.store.StepStore;
+import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.http.ResponseEntity;
