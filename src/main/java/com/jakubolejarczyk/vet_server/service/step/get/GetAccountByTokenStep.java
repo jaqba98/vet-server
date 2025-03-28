@@ -25,8 +25,10 @@ public class GetAccountByTokenStep implements StepModel {
             stepStore.setItem("lastName", account.get().getLastName());
             stepStore.setItem("role", account.get().getRole());
             stepStore.setItem("pictureUrl", account.get().getPictureUrl());
+            stepStore.addMessage("Account was loaded");
             return;
         }
+        stepStore.addMessage("Account was not loaded");
         stepStore.setSuccess(false);
     }
 }

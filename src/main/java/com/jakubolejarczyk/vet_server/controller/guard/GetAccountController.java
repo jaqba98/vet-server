@@ -31,7 +31,7 @@ public class GetAccountController extends BaseController {
                 new String[]{},
                 new ArrayList<>()
         );
-        steps.add(getAccountByTokenStep);
+        steps.addLast(getAccountByTokenStep);
     }
 
     @PostMapping("get-account")

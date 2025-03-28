@@ -31,7 +31,7 @@ public class LoginController extends BaseController {
                 new String[]{},
                 new ArrayList<>()
         );
-        steps.add(getTokenByLoginDetailsStep);
+        steps.addLast(getTokenByLoginDetailsStep);
     }
 
     @PostMapping("login")

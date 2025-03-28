@@ -29,7 +29,7 @@ public class StepStore {
     }
 
     public void addMessage(String message) {
-        messages.addLast(message);
+        messages.addFirst(message);
     }
 
     public void setItem(String key, Object value) {

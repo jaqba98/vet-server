@@ -31,7 +31,7 @@ public class ValidTokenController extends BaseController {
                 new String[]{},
                 new ArrayList<>()
         );
-        steps.add(checkTokenStep);
+        steps.addLast(checkTokenStep);
     }
 
     @PostMapping("valid-token")
