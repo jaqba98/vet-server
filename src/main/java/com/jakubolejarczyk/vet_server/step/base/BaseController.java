@@ -44,6 +44,10 @@ public abstract class BaseController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    protected StepStore getStepStore() {
+        return stepStoreObjectFactory.getObject();
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Response<Null, Null>> handleValidation(MethodArgumentNotValidException ex) {
         val stepStore = stepStoreObjectFactory.getObject();
