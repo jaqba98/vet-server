@@ -19,10 +19,10 @@ public class CheckTokenStep implements StepModel {
         }
         val token = (String) stepStore.getItem("token");
         val validToken = tokenService.verify(token);
-        val message = validToken
-                ? "The token is valid"
-                : "The token is invalid";
-        stepStore.setSuccess(validToken);
-        stepStore.addMessage(message);
+        if (validToken) {
+            return;
+        }
+        stepStore.setSuccess(false);
+        stepStore.addMessage("The token is invalid");
     }
 }
