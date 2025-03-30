@@ -43,10 +43,6 @@ System wykorzystuje wyłącznie **inteligentne usługi Azure**, takie jak:
 - **Azure Form Recognizer** – odczyt danych z formularzy lub wyników badań
 - **Azure OpenAI** – generowanie podsumowań wizyt lub sugestii leczenia (opcjonalnie)
 
-## 📞 Kontakt
-
-Projekt zespołowy realizowany w ramach [nazwa uczelni/kursu/projektu].
-
 ## 👨‍💻 Członkowie zespołu
 
 - Jakub Olejarczyk
