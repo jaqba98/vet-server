@@ -25,10 +25,10 @@ public class ValidTokenController extends BaseController {
 
     public ValidTokenController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
-            ObjectFactory<HandleValidationService> handleValidationService,
+            ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
             CheckTokenStep checkTokenStep
     ) {
-        super(stepStoreObjectFactory, handleValidationService);
+        super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.checkTokenStep = checkTokenStep;
     }
 
