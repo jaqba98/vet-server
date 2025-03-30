@@ -122,7 +122,7 @@ CREATE TABLE Vet (
     license_number VARCHAR(255) NULL,
     license_issue_date DATE NULL,
     license_expiry_date DATE NULL,
-    specializations VARCHAR(255) NULL,
+    specialization VARCHAR(255) NULL,
     years_of_experience INTEGER NULL,
     account_id INTEGER NOT NULL,
     opening_hours_id INTEGER NOT NULL,
