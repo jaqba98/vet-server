@@ -28,7 +28,7 @@ public class StepStore {
         messages.addFirst(message);
     }
 
-    public void setItem(String key, String value) {
+    public void setItem(String key, Object value) {
         if (Arrays.asList(dataKeys).contains(key)) {
             data.put(key, value);
         } else if (Arrays.asList(metadataKeys).contains(key)) {

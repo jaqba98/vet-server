@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.service.step.set;
+package com.jakubolejarczyk.vet_server.step.set;
 
 import com.jakubolejarczyk.vet_server.model.dependent.Client;
 import com.jakubolejarczyk.vet_server.model.dependent.Vet;
@@ -23,20 +23,23 @@ public class SetAccountRoleStep implements StepModel {
 
     @Override
     public void runStep(StepStore stepStore) {
-        val accountId = (Long) stepStore.getItem("accountId");
+        if (stepStore.hasNotItem("email")) throw new Error("The email is required!");
+        if (stepStore.hasNotItem("roleToSet")) throw new Error("The roleToSet is required!");
+        if (stepStore.hasNotItem("id")) throw new Error("The id is required!");
         val email = (String) stepStore.getItem("email");
-        val role = (String) stepStore.getItem("setRole");
-        if (role.equals("vet")) {
-            createVet(accountId);
+        val roleToSet = (String) stepStore.getItem("roleToSet");
+        val id = (Long) stepStore.getItem("id");
+        if (roleToSet.equals("vet")) {
+            createVet(id);
         }
-        else if (role.equals("client")) {
-            createClient(accountId);
+        else if (roleToSet.equals("client")) {
+            createClient(id);
         }
-        accountService.updateRoleByEmail(email, role);
+        accountService.updateRoleByEmail(email, roleToSet);
     }
 
-    private void createVet(Long accountId) {
-        val vet = vetService.findByAccountId(accountId);
+    private void createVet(Long id) {
+        val vet = vetService.findByAccountId(id);
         if (vet.isPresent()) {
             return;
         }
@@ -45,21 +48,21 @@ public class SetAccountRoleStep implements StepModel {
                 .build();
         OpeningHours newOpeningHours = openingHoursService.create(openingHours);
         Vet newVet = Vet.builder()
-                .accountId(accountId)
-                .openingHoursId(newOpeningHours.getId())
                 .isArchived(false)
+                .accountId(id)
+                .openingHoursId(newOpeningHours.getId())
                 .build();
         vetService.create(newVet);
     }
 
-    private void createClient(Long accountId) {
-        val client = clientService.findByAccountId(accountId);
+    private void createClient(Long id) {
+        val client = clientService.findByAccountId(id);
         if (client.isPresent()) {
             return;
         }
-        Client newClient = com.jakubolejarczyk.vet_server.model.dependent.Client.builder()
-                .accountId(accountId)
+        Client newClient = Client.builder()
                 .isArchived(false)
+                .accountId(id)
                 .build();
         clientService.create(newClient);
     }
