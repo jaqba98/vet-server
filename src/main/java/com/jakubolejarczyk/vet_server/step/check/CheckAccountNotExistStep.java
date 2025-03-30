@@ -14,9 +14,7 @@ public class CheckAccountNotExistStep implements StepModel {
 
     @Override
     public void runStep(StepStore stepStore) {
-        if (stepStore.hasNotItem("email")) {
-            throw new Error("The email is required in the CheckAccountNotExistStep step");
-        }
+        if (stepStore.hasNotItem("email")) throw new Error("The email is required!");
         val email = (String) stepStore.getItem("email");
         val account = accountService.findByEmail(email);
         if (account.isEmpty()) {

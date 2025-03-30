@@ -17,18 +17,10 @@ public class CreateAccountStep implements StepModel {
 
     @Override
     public void runStep(StepStore stepStore) {
-        if (stepStore.hasNotItem("email")) {
-            throw new Error("The email is required in the CreateAccountStep step");
-        }
-        if (stepStore.hasNotItem("password")) {
-            throw new Error("The password is required in the CreateAccountStep step");
-        }
-        if (stepStore.hasNotItem("firstName")) {
-            throw new Error("The firstName is required in the CreateAccountStep step");
-        }
-        if (stepStore.hasNotItem("lastName")) {
-            throw new Error("The lastName is required in the CreateAccountStep step");
-        }
+        if (stepStore.hasNotItem("email")) throw new Error("The email is required!");
+        if (stepStore.hasNotItem("password")) throw new Error("The password is required!");
+        if (stepStore.hasNotItem("firstName")) throw new Error("The firstName is required!");
+        if (stepStore.hasNotItem("lastName")) throw new Error("The lastName is required!");
         val email = (String) stepStore.getItem("email");
         val password = (String) stepStore.getItem("password");
         val firstName = (String) stepStore.getItem("firstName");

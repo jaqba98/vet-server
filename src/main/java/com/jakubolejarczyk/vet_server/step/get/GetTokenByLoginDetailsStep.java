@@ -18,12 +18,8 @@ public class GetTokenByLoginDetailsStep implements StepModel {
 
     @Override
     public void runStep(StepStore stepStore) {
-        if (stepStore.hasNotItem("email")) {
-            throw new Error("The email is required in the GetTokenByLoginDetailsStep step");
-        }
-        if (stepStore.hasNotItem("password")) {
-            throw new Error("The password is required in the GetTokenByLoginDetailsStep step");
-        }
+        if (stepStore.hasNotItem("email")) throw new Error("The email is required!");
+        if (stepStore.hasNotItem("password")) throw new Error("The password is required!");
         val email = (String) stepStore.getItem("email");
         val account = accountService.findByEmail(email);
         if (account.isPresent()) {
