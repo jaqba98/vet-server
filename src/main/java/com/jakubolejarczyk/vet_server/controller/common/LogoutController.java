@@ -1,24 +1,35 @@
-//package com.jakubolejarczyk.vet_server.controller.common;
-//
-//import com.jakubolejarczyk.vet_server.dto.request.controller.LogoutRequestDto;
-//import com.jakubolejarczyk.vet_server.dto.response.ResponseDto;
-//import com.jakubolejarczyk.vet_server.service.step_old.ResponseStep;
-//import lombok.AllArgsConstructor;
-//import org.springframework.beans.factory.ObjectFactory;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.web.bind.annotation.*;
-//
-//@RestController
-//@RequestMapping("/api/v1")
-//@AllArgsConstructor
-//public class LogoutController {
-//    private final ObjectFactory<ResponseStep> responseStep;
-//
-//    @PostMapping("logout")
-//    public ResponseEntity<ResponseDto> logout(@RequestBody LogoutRequestDto requestDto) {
-//        // Clean response
-//        responseStep.getObject().getRidOfMessages();
-//        // Response
-//        return responseStep.getObject().getStep(true);
-//    }
-//}
+package com.jakubolejarczyk.vet_server.controller.common;
+
+import com.jakubolejarczyk.vet_server.dto.response.Response;
+import com.jakubolejarczyk.vet_server.security.HandleValidationService;
+import com.jakubolejarczyk.vet_server.step.base.BaseController;
+import com.jakubolejarczyk.vet_server.step.model.StepModel;
+import com.jakubolejarczyk.vet_server.store.StepStore;
+import lombok.val;
+import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+
+@RestController
+@RequestMapping("/api/v1")
+public class LogoutController extends BaseController {
+    public LogoutController(
+            ObjectFactory<StepStore> stepStoreObjectFactory,
+            ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory
+    ) {
+        super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
+    }
+
+    @PostMapping("logout")
+    public ResponseEntity<Response<?, ?>> logout() {
+        val steps = new ArrayList<StepModel>();
+        String[] dataKeys = {};
+        String[] metadataKeys = {};
+        initController(dataKeys, metadataKeys);
+        return runController(steps);
+    }
+}
