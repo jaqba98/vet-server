@@ -39,7 +39,6 @@ public class ValidTokenController extends BaseController {
         String[] dataKeys = {};
         String[] metadataKeys = {};
         initController(dataKeys, metadataKeys);
-        System.out.println(request);
         getStepStore().setItem("token", request.getToken());
         return runController(steps);
     }
