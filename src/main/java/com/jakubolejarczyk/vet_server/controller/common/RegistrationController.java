@@ -44,6 +44,10 @@ public class RegistrationController extends BaseController {
         String[] dataKeys = {};
         String[] metadataKeys = {};
         initController(dataKeys, metadataKeys);
+        getStepStore().setItem("email", request.getEmail());
+        getStepStore().setItem("password", request.getPassword());
+        getStepStore().setItem("firstName", request.getFirstName());
+        getStepStore().setItem("lastName", request.getLastName());
         return runController(steps);
     }
 }

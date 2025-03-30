@@ -3,6 +3,7 @@ package com.jakubolejarczyk.vet_server.model.dependent;
 import com.jakubolejarczyk.vet_server.domain.dependent.ClinicDomain;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
@@ -10,6 +11,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder
+@NoArgsConstructor
 public class Clinic implements ClinicDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
