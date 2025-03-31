@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -14,6 +15,10 @@ public class MedicationService {
 
     public Medication create(Medication medication) {
         return repository.save(medication);
+    }
+
+    public Optional<Medication> findByClinicId(Long clinicId) {
+        return repository.findByClinicId(clinicId);
     }
 
     public List<Medication> findAllByClinicIds(List<Long> clinicIds) {

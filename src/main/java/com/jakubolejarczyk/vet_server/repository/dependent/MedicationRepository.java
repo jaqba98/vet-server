@@ -6,8 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MedicationRepository extends JpaRepository<Medication, Long> {
+    @Query("SELECT e FROM Medication e WHERE e.clinicId = :clinicId")
+    Optional<Medication> findByClinicId(@Param("clinicId") Long clinicId);
+
     @Query("SELECT e FROM Medication e WHERE e.clinicId IN :clinicIds")
-    List<Medication> findAllByClinicIds(@Param("accountId") List<Long> clinicIds);
+    List<Medication> findAllByClinicIds(@Param("clinicIds") List<Long> clinicIds);
 }

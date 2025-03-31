@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.controller.medication;
 
-import com.jakubolejarczyk.vet_server.dto.request.medication.MedicationRequest;
+import com.jakubolejarczyk.vet_server.dto.request.base.TokenRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.step.base.BaseController;
@@ -40,8 +40,8 @@ public class MedicationReadController extends BaseController {
         this.getMedicationsByEmploymentStep = getMedicationsByEmploymentStep;
     }
 
-    @PostMapping("medication-create")
-    public ResponseEntity<Response<?, ?>> medicationCreate(@Valid @RequestBody MedicationRequest request) {
+    @PostMapping("medication-read")
+    public ResponseEntity<Response<?, ?>> medicationRead(@Valid @RequestBody TokenRequest request) {
         val steps = new ArrayList<StepModel>();
         steps.addLast(getAccountByTokenStep);
         steps.addLast(getEmploymentsByAccountIdAndIsOwnerStep);
