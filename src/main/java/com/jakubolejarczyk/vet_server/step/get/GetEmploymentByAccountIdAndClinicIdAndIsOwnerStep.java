@@ -25,6 +25,9 @@ public class GetEmploymentByAccountIdAndClinicIdAndIsOwnerStep implements StepMo
         val employment = employmentService.findByAccountIdAndClinicIdAndIsOwner(accountId, clinicId);
         if (employment.isPresent()) {
             stepStore.setItem("employment", employment.get());
+            return;
         }
+        stepStore.setSuccess(false);
+        stepStore.addMessage("Failed to get employment!");
     }
 }

@@ -37,6 +37,5 @@ public class CreateClinicStep implements StepModel {
                 .build();
         val clinic = clinicService.create(newClinic);
         stepStore.setItem("clinic", clinic);
-        stepStore.addMessage("A new clinic has been created!");
     }
 }

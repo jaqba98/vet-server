@@ -21,6 +21,5 @@ public class UpdateClinicsIsArchivedStep implements StepModel {
                 .map(Employment::getClinicId)
                 .toList();
         clinicService.updateIsArchived(clinicsIds, true);
-        stepStore.addMessage("The clinics have been archived successfully!");
     }
 }

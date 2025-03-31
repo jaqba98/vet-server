@@ -21,6 +21,5 @@ public class UpdateEmploymentsIsArchivedStep implements StepModel {
                 .map(Employment::getId)
                 .toList();
         employmentService.updateIsArchived(employmentsIds, true);
-        stepStore.addMessage("The employments have been archived successfully!");
     }
 }

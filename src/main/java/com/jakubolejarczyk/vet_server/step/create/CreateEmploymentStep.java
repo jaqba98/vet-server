@@ -31,6 +31,5 @@ public class CreateEmploymentStep implements StepModel {
                 .build();
         val employment = employmentService.create(newEmployment);
         stepStore.setItem("employment", employment);
-        stepStore.addMessage("A new employment has been created!");
     }
 }

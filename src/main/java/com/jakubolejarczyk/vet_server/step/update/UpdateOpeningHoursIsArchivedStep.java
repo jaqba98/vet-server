@@ -25,6 +25,5 @@ public class UpdateOpeningHoursIsArchivedStep implements StepModel {
                 .map(OpeningHours::getId)
                 .toList();
         openingHoursService.updateIsArchived(openingHoursIds, true);
-        stepStore.addMessage("The opening hours have been archived successfully!");
     }
 }

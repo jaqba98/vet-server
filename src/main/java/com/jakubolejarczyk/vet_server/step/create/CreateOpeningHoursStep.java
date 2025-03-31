@@ -20,6 +20,5 @@ public class CreateOpeningHoursStep implements StepModel {
                 .build();
         val openingHoursToSave = openingHoursService.create(newOpeningHours);
         stepStore.setItem("openingHours", openingHoursToSave);
-        stepStore.addMessage("A new opening hours has been created!");
     }
 }

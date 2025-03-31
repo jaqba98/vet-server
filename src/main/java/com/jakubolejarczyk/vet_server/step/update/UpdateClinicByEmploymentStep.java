@@ -40,7 +40,9 @@ public class UpdateClinicByEmploymentStep implements StepModel {
                     .build();
             val updatedClinic = clinicService.create(clinic);
             stepStore.setItem("updatedClinic", updatedClinic);
-            stepStore.addMessage("The clinic has been updated successfully!");
+            return;
         }
+        stepStore.setSuccess(false);
+        stepStore.addMessage("Failed to update clinic!");
     }
 }
