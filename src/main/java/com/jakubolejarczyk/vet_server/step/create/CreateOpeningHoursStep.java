@@ -1,7 +1,7 @@
 package com.jakubolejarczyk.vet_server.step.create;
 
 import com.jakubolejarczyk.vet_server.model.independent.OpeningHours;
-import com.jakubolejarczyk.vet_server.service.crud.independent.OpeningHoursService;
+import com.jakubolejarczyk.vet_server.service.independent.OpeningHoursService;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import lombok.AllArgsConstructor;

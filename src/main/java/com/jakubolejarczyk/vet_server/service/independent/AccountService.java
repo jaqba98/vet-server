@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.service.crud.independent;
+package com.jakubolejarczyk.vet_server.service.independent;
 
 import com.jakubolejarczyk.vet_server.model.independent.Account;
 import com.jakubolejarczyk.vet_server.repository.independent.AccountRepository;

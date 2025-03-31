@@ -1,7 +1,7 @@
 package com.jakubolejarczyk.vet_server.step.update;
 
 import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
-import com.jakubolejarczyk.vet_server.service.crud.dependent.ClinicService;
+import com.jakubolejarczyk.vet_server.service.dependent.ClinicService;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import lombok.AllArgsConstructor;

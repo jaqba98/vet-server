@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.service.crud.dependent;
+package com.jakubolejarczyk.vet_server.service.dependent;
 
 import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
 import com.jakubolejarczyk.vet_server.repository.dependent.ClinicRepository;

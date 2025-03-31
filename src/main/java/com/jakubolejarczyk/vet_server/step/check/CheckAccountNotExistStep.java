@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.step.check;
 
-import com.jakubolejarczyk.vet_server.service.crud.independent.AccountService;
+import com.jakubolejarczyk.vet_server.service.independent.AccountService;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import lombok.AllArgsConstructor;

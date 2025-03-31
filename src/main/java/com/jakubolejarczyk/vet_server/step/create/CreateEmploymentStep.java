@@ -3,7 +3,7 @@ package com.jakubolejarczyk.vet_server.step.create;
 import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
 import com.jakubolejarczyk.vet_server.model.dependent.Employment;
 import com.jakubolejarczyk.vet_server.model.independent.Account;
-import com.jakubolejarczyk.vet_server.service.crud.dependent.EmploymentService;
+import com.jakubolejarczyk.vet_server.service.dependent.EmploymentService;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import lombok.AllArgsConstructor;
