@@ -24,4 +24,8 @@ public class ClinicService {
     public List<Clinic> findAllById(List<Long> ids) {
         return repository.findAllById(ids);
     }
+
+    public Optional<Clinic> findByName(String name) {
+        return repository.findByName(name);
+    }
 }

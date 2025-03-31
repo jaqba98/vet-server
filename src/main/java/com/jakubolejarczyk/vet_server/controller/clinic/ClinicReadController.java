@@ -40,7 +40,7 @@ public class ClinicReadController extends BaseController {
     }
 
     @PostMapping("clinic-read")
-    public ResponseEntity<Response<?, ?>> chooseRole(@RequestBody TokenRequest request) {
+    public ResponseEntity<Response<?, ?>> clinicRead(@RequestBody TokenRequest request) {
         val steps = new ArrayList<StepModel>();
         steps.addLast(getAccountByTokenStep);
         steps.addLast(getClinicIdsForAccountStep);

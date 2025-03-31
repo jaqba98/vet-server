@@ -76,29 +76,6 @@
 //        return responseStep.getStep(true);
 //    }
 //
-//    @PostMapping("clinic-read")
-//    public ResponseEntity<ResponseDataDto<ArrayList<Clinic>>> read(@Valid @RequestBody TokenRequestDto requestDto) {
-//        // Init
-//        val responseStep = this.responseStep.getObject();
-//        responseStep.getRidOfMessages();
-//        // Get Account By Token Step
-//        val accountResponse = getAccountByTokenStep.runStep(responseStep, requestDto.getToken());
-//        if (accountResponse.getError()) return responseStep.getStep(false, new ArrayList<>());
-//        val account = accountResponse.getData();
-//        // Get Clinic Ids For Account Step
-//        val accountId = account.getId();
-//        val clinicIdsResponse = getClinicIdsForAccountStep.runStep(responseStep, accountId);
-//        if (clinicIdsResponse.getError()) return responseStep.getStep(false, new ArrayList<>());
-//        val clinicIds = clinicIdsResponse.getData();
-//        // Get Clinic By Ids
-//        var clinicsResponse = getClinicsByIdsStep.runStep(responseStep, clinicIds);
-//        if (clinicsResponse.getError()) return responseStep.getStep(false, new ArrayList<>());
-//        val clinics = clinicsResponse.getData();
-//        // Return response
-//        responseStep.addMessage("The clinic has been read successfully!");
-//        return responseStep.getStep(true, clinics);
-//    }
-//
 //    @PostMapping("clinic-update")
 //    public ResponseEntity<ResponseDataDto<Clinic>> update(@Valid @RequestBody ClinicUpdateRequestDto requestDto) throws Exception {
 //        // Init
