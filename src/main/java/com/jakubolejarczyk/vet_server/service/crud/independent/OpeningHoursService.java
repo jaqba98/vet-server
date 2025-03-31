@@ -24,4 +24,8 @@ public class OpeningHoursService {
     public List<OpeningHours> findAllById(List<Long> ids) {
         return repository.findAllById(ids);
     }
+
+    public void updateIsArchived(List<Long> ids, Boolean isArchived) {
+        repository.updateIsArchived(ids, isArchived);
+    }
 }

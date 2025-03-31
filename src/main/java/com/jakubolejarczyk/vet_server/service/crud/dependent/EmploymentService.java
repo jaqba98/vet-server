@@ -28,4 +28,12 @@ public class EmploymentService {
     public Optional<Employment> findByClinicIdAndAccountIdAndIsOwner(Long clinicId, Long accountId) {
         return repository.findByClinicIdAndAccountIdAndIsOwner(clinicId, accountId);
     }
+
+    public List<Employment> findAllByAccountIdAndClinicIdsInAndIsOwner(Long accountId, List<Long> clinicIds) {
+        return repository.findAllByAccountIdAndClinicIdsInAndIsOwner(accountId, clinicIds);
+    }
+
+    public void updateIsArchived(List<Long> ids, Boolean isArchived) {
+        repository.updateIsArchived(ids, isArchived);
+    }
 }

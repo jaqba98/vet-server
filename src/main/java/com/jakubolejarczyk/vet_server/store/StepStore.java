@@ -65,11 +65,7 @@ public class StepStore {
         else if (value instanceof List<?> list) {
             List<T> result = new ArrayList<>();
             for (Object item : list) {
-                if (item instanceof Long) {
-                    result.add(type.cast(item));
-                } else {
-                    result.add(type.cast(String.valueOf(item)));
-                }
+                result.add(type.cast(item));
             }
             return result;
         }

@@ -28,4 +28,8 @@ public class ClinicService {
     public Optional<Clinic> findByName(String name) {
         return repository.findByName(name);
     }
+
+    public void updateIsArchived(List<Long> ids, Boolean isArchived) {
+        repository.updateIsArchived(ids, isArchived);
+    }
 }
