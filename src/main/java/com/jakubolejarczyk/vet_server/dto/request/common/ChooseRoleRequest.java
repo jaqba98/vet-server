@@ -12,6 +12,6 @@ import lombok.Setter;
 public class ChooseRoleRequest extends TokenRequest {
     @NotNull(message = "Role is requires!")
     @NotBlank(message = "Role cannot be empty!")
-    @Pattern(regexp = "^(vet|client)$", message = "Role must be either 'vet' or 'client'!")
+    @Pattern(regexp = "^(vet)$", message = "Role must be vet!")
     private String role;
 }

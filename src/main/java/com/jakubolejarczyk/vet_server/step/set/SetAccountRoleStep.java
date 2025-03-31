@@ -1,10 +1,8 @@
 package com.jakubolejarczyk.vet_server.step.set;
 
-import com.jakubolejarczyk.vet_server.model.dependent.Client;
 import com.jakubolejarczyk.vet_server.model.dependent.Vet;
 import com.jakubolejarczyk.vet_server.model.independent.Account;
 import com.jakubolejarczyk.vet_server.model.independent.OpeningHours;
-import com.jakubolejarczyk.vet_server.service.dependent.ClientService;
 import com.jakubolejarczyk.vet_server.service.dependent.VetService;
 import com.jakubolejarczyk.vet_server.service.independent.AccountService;
 import com.jakubolejarczyk.vet_server.service.independent.OpeningHoursService;
@@ -19,7 +17,6 @@ import org.springframework.stereotype.Service;
 public class SetAccountRoleStep implements StepModel {
     private final AccountService accountService;
     private final VetService vetService;
-    private final ClientService clientService;
     private final OpeningHoursService openingHoursService;
 
     @Override
@@ -32,9 +29,6 @@ public class SetAccountRoleStep implements StepModel {
         val account = stepStore.getItem("account", Account.class);
         if (roleToSet.equals("vet")) {
             createVet(account.getId());
-        }
-        else if (roleToSet.equals("client")) {
-            createClient(account.getId());
         }
         accountService.updateRoleByEmail(email, roleToSet);
     }
@@ -54,17 +48,5 @@ public class SetAccountRoleStep implements StepModel {
                 .openingHoursId(newOpeningHours.getId())
                 .build();
         vetService.create(newVet);
-    }
-
-    private void createClient(Long accountId) {
-        val client = clientService.findByAccountId(accountId);
-        if (client.isPresent()) {
-            return;
-        }
-        Client newClient = Client.builder()
-                .isArchived(false)
-                .accountId(accountId)
-                .build();
-        clientService.create(newClient);
     }
 }
