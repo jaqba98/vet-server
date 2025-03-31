@@ -57,7 +57,7 @@ public class ClinicOpeningHoursUpdateController extends BaseController {
                 .mondayFrom(request.getMondayFrom())
                 .mondayTo(request.getMondayTo())
                 .tuesdayFrom(request.getTuesdayFrom())
-                .thursdayTo(request.getTuesdayTo())
+                .tuesdayTo(request.getTuesdayTo())
                 .wednesdayFrom(request.getWednesdayFrom())
                 .wednesdayTo(request.getWednesdayTo())
                 .thursdayFrom(request.getThursdayFrom())
