@@ -10,6 +10,7 @@ import lombok.experimental.SuperBuilder;
 import java.math.BigDecimal;
 
 @Entity
+@Table(name = "vetservice")
 @Getter
 @Setter
 @SuperBuilder
