@@ -52,8 +52,8 @@ public class ClinicDeleteController extends BaseController {
         this.successDeleteClinicStep = successDeleteClinicStep;
     }
 
-    @PostMapping("clinic-create")
-    public ResponseEntity<Response<?, ?>> clinicCreate(@Valid @RequestBody DeleteRequest request) {
+    @PostMapping("clinic-delete")
+    public ResponseEntity<Response<?, ?>> clinicDelete(@Valid @RequestBody DeleteRequest request) {
         val steps = new ArrayList<StepModel>();
         steps.addLast(getAccountByTokenStep);
         steps.addLast(getEmploymentsByAccountIdAndClinicIdsAndIsOwnerStep);
