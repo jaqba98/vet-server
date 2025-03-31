@@ -20,6 +20,9 @@ public interface EmploymentRepository extends JpaRepository<Employment, Long> {
     @Query("SELECT e FROM Employment e WHERE e.clinicId = :clinicId AND e.accountId = :accountId AND e.isOwner = true AND e.isArchived = false")
     Optional<Employment> findByClinicIdAndAccountIdAndIsOwner(@Param("clinicId") Long clinicId, @Param("accountId") Long accountId);
 
+    @Query("SELECT e FROM Employment e WHERE e.accountId = :accountId AND e.isOwner = true AND e.isArchived = false")
+    List<Employment> findAllByAccountIdAndIsOwner(@Param("accountId") Long accountId);
+
     @Query("SELECT e FROM Employment e WHERE e.accountId = :accountId AND e.clinicId IN :clinicIds AND e.isOwner = true AND e.isArchived = false")
     List<Employment> findAllByAccountIdAndClinicIdsAndIsOwner(@Param("accountId") Long accountId, @Param("clinicIds") List<Long> clinicIds);
 
