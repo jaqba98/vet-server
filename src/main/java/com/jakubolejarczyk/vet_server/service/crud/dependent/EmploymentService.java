@@ -19,4 +19,8 @@ public class EmploymentService {
     public List<Employment> findAllById(List<Long> ids) {
         return repository.findAllById(ids);
     }
+
+    public List<Employment> findAllByAccountId(Long accountId) {
+        return repository.findAllByAccountId(accountId);
+    }
 }

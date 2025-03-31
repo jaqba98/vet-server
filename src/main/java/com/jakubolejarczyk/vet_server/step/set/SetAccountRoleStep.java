@@ -25,21 +25,21 @@ public class SetAccountRoleStep implements StepModel {
     public void runStep(StepStore stepStore) {
         if (stepStore.hasNotItem("email")) throw new Error("The email is required!");
         if (stepStore.hasNotItem("roleToSet")) throw new Error("The roleToSet is required!");
-        if (stepStore.hasNotItem("id")) throw new Error("The id is required!");
+        if (stepStore.hasNotItem("accountId")) throw new Error("The accountId is required!");
         val email = (String) stepStore.getItem("email");
         val roleToSet = (String) stepStore.getItem("roleToSet");
-        val id = (Long) stepStore.getItem("id");
+        val accountId = (Long) stepStore.getItem("accountId");
         if (roleToSet.equals("vet")) {
-            createVet(id);
+            createVet(accountId);
         }
         else if (roleToSet.equals("client")) {
-            createClient(id);
+            createClient(accountId);
         }
         accountService.updateRoleByEmail(email, roleToSet);
     }
 
-    private void createVet(Long id) {
-        val vet = vetService.findByAccountId(id);
+    private void createVet(Long accountId) {
+        val vet = vetService.findByAccountId(accountId);
         if (vet.isPresent()) {
             return;
         }
@@ -49,20 +49,20 @@ public class SetAccountRoleStep implements StepModel {
         OpeningHours newOpeningHours = openingHoursService.create(openingHours);
         Vet newVet = Vet.builder()
                 .isArchived(false)
-                .accountId(id)
+                .accountId(accountId)
                 .openingHoursId(newOpeningHours.getId())
                 .build();
         vetService.create(newVet);
     }
 
-    private void createClient(Long id) {
-        val client = clientService.findByAccountId(id);
+    private void createClient(Long accountId) {
+        val client = clientService.findByAccountId(accountId);
         if (client.isPresent()) {
             return;
         }
         Client newClient = Client.builder()
                 .isArchived(false)
-                .accountId(id)
+                .accountId(accountId)
                 .build();
         clientService.create(newClient);
     }

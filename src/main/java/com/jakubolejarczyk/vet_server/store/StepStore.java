@@ -8,13 +8,13 @@ import java.util.*;
 @Service
 @Data
 public class StepStore {
-    Boolean success = true;
-    List<String> messages = new ArrayList<>();
-    Map<String, Object> data = new HashMap<>();
-    Map<String, Object> metadata = new HashMap<>();
-    Map<String, Object> items = new HashMap<>();
-    String[] dataKeys = {};
-    String[] metadataKeys = {};
+    private Boolean success = true;
+    private List<String> messages = new ArrayList<>();
+    private Map<String, Object> data = new HashMap<>();
+    private Map<String, Object> metadata = new HashMap<>();
+    private Map<String, Object> items = new HashMap<>();
+    private String[] dataKeys = {};
+    private String[] metadataKeys = {};
 
     public void reset() {
         success = true;
@@ -46,7 +46,30 @@ public class StepStore {
         } else if (items.containsKey(key)) {
             return items.get(key);
         } else {
-            throw new Error("The store does not contain key: " + key);
+            throw new NoSuchElementException("The store does not contain key: " + key);
+        }
+    }
+
+    public <T> List<T> getItemAsArray(String key, Class<T> type) {
+        Object value = getItem(key);
+        if (value instanceof Object[] array) {
+            return Arrays.stream(array)
+                    .map(type::cast)
+                    .toList();
+        }
+        else if (value instanceof List<?> list) {
+            List<T> result = new ArrayList<>();
+            for (Object item : list) {
+                if (item instanceof Long) {
+                    result.add(type.cast(item));
+                } else {
+                    result.add(type.cast(String.valueOf(item)));
+                }
+            }
+            return result;
+        }
+        else {
+            return List.of(type.cast(value));
         }
     }
 

@@ -1,0 +1,24 @@
+package com.jakubolejarczyk.vet_server.step.get;
+
+import com.jakubolejarczyk.vet_server.service.crud.dependent.ClinicService;
+import com.jakubolejarczyk.vet_server.step.model.StepModel;
+import com.jakubolejarczyk.vet_server.store.StepStore;
+import lombok.AllArgsConstructor;
+import lombok.val;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+
+@Service
+@AllArgsConstructor
+public class GetClinicByIdsStep implements StepModel {
+    private final ClinicService clinicService;
+
+    @Override
+    public void runStep(StepStore stepStore) {
+        if (stepStore.hasNotItem("clinicIds")) throw new Error("The clinicIds is required!");
+        val clinicIds = stepStore.getItemAsArray("clinicIds", Long.class);
+        val clinics = new ArrayList<>(clinicService.findAllById(clinicIds));
+        stepStore.setItem("clinics", clinics);
+    }
+}
