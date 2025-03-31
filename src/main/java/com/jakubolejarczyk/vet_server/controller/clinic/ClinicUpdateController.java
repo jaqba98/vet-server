@@ -51,7 +51,7 @@ public class ClinicUpdateController extends BaseController {
         steps.addLast(getEmploymentByAccountIdAndClinicIdAndIsOwnerStep);
         steps.addLast(updateClinicByEmploymentStep);
         steps.addLast(successUpdateClinicStep);
-        String[] dataKeys = {"clinic"};
+        String[] dataKeys = {"updatedClinic"};
         String[] metadataKeys = {};
         initController(dataKeys, metadataKeys);
         getStepStore().setItem("token", request.getToken());
