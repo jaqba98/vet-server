@@ -14,7 +14,7 @@ public interface MedicationRepository extends JpaRepository<Medication, Long> {
     @Query("SELECT e FROM Medication e WHERE e.clinicId = :clinicId")
     Optional<Medication> findByClinicId(@Param("clinicId") Long clinicId);
 
-    @Query("SELECT e FROM Medication e WHERE e.clinicId IN :clinicIds")
+    @Query("SELECT e FROM Medication e WHERE e.clinicId IN :clinicIds AND e.isArchived = false")
     List<Medication> findAllByClinicIds(@Param("clinicIds") List<Long> clinicIds);
 
     @Transactional

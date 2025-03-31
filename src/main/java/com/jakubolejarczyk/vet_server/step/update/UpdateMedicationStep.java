@@ -17,10 +17,9 @@ public class UpdateMedicationStep implements StepModel {
     @Override
     public void runStep(StepStore stepStore) {
         if (stepStore.hasNotItem("requestMedication")) throw new Error("The requestMedication is required!");
-        if (stepStore.hasNotItem("clinicId")) throw new Error("The clinicId is required!");
         val requestMedication = stepStore.getItem("requestMedication", Medication.class);
-        val clinicId = stepStore.getItem("clinicId", Long.class);
-        val currentMedication = medicationService.findByClinicId(clinicId);
+        val medicationId = requestMedication.getId();
+        val currentMedication = medicationService.findById(medicationId);
         if (currentMedication.isPresent()) {
             val newMedication = Medication.builder()
                     .id(currentMedication.get().getId())
@@ -39,6 +38,7 @@ public class UpdateMedicationStep implements StepModel {
             stepStore.setItem("medication", medication);
             return;
         }
-        stepStore.addMessage("Failed to update an opening hours.");
+        stepStore.setSuccess(false);
+        stepStore.addMessage("Failed to update a medication.");
     }
 }

@@ -17,8 +17,8 @@ public class MedicationService {
         return repository.save(medication);
     }
 
-    public Optional<Medication> findByClinicId(Long clinicId) {
-        return repository.findByClinicId(clinicId);
+    public Optional<Medication> findById(Long id) {
+        return repository.findById(id);
     }
 
     public List<Medication> findAllByClinicIds(List<Long> clinicIds) {
