@@ -20,21 +20,23 @@ public class CreateClinicStep implements StepModel {
         if (stepStore.hasNotItem("clinic")) throw new Error("The clinic is required!");
         val openingHours = stepStore.getItem("openingHours", OpeningHours.class);
         val openingHoursId = openingHours.getId();
-        val clinic = stepStore.getItem("clinic", Clinic.class);
-        val newClinic = Clinic.builder()
-                .name(clinic.getName())
-                .street(clinic.getStreet())
-                .buildingNumber(clinic.getBuildingNumber())
-                .apartmentNumber(clinic.getApartmentNumber())
-                .postalCode(clinic.getPostalCode())
-                .city(clinic.getCity())
-                .province(clinic.getProvince())
-                .country(clinic.getCountry())
-                .email(clinic.getEmail())
-                .phoneNumber(clinic.getPhoneNumber())
+        val currentClinic = stepStore.getItem("clinic", Clinic.class);
+        val clinic = Clinic.builder()
+                .name(currentClinic.getName())
+                .street(currentClinic.getStreet())
+                .buildingNumber(currentClinic.getBuildingNumber())
+                .apartmentNumber(currentClinic.getApartmentNumber())
+                .postalCode(currentClinic.getPostalCode())
+                .city(currentClinic.getCity())
+                .province(currentClinic.getProvince())
+                .country(currentClinic.getCountry())
+                .email(currentClinic.getEmail())
+                .phoneNumber(currentClinic.getPhoneNumber())
                 .isArchived(false)
                 .openingHoursId(openingHoursId)
                 .build();
+        val newClinic = clinicService.create(clinic);
+        stepStore.setItem("clinic", newClinic);
         stepStore.addMessage("A new clinic has been created!");
     }
 }
