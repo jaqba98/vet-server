@@ -10,6 +10,7 @@ import com.jakubolejarczyk.vet_server.step.create.CreateEmploymentStep;
 import com.jakubolejarczyk.vet_server.step.create.CreateOpeningHoursStep;
 import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
+import com.jakubolejarczyk.vet_server.step.success.SuccessCreateClinicStep;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.Valid;
 import lombok.val;
@@ -29,6 +30,7 @@ public class ClinicCreateController extends BaseController {
     private final CreateOpeningHoursStep createOpeningHoursStep;
     private final CreateClinicStep createClinicStep;
     private final CreateEmploymentStep createEmploymentStep;
+    private final SuccessCreateClinicStep successCreateClinicStep;
 
     public ClinicCreateController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
@@ -36,13 +38,15 @@ public class ClinicCreateController extends BaseController {
             GetAccountByTokenStep getAccountByTokenStep,
             CreateOpeningHoursStep createOpeningHoursStep,
             CreateClinicStep createClinicStep,
-            CreateEmploymentStep createEmploymentStep
+            CreateEmploymentStep createEmploymentStep,
+            SuccessCreateClinicStep successCreateClinicStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.getAccountByTokenStep = getAccountByTokenStep;
         this.createOpeningHoursStep = createOpeningHoursStep;
         this.createClinicStep = createClinicStep;
         this.createEmploymentStep = createEmploymentStep;
+        this.successCreateClinicStep = successCreateClinicStep;
     }
 
     @PostMapping("clinic-create")
@@ -52,13 +56,13 @@ public class ClinicCreateController extends BaseController {
         steps.addLast(createOpeningHoursStep);
         steps.addLast(createClinicStep);
         steps.addLast(createEmploymentStep);
-        String[] dataKeys = {};
+        steps.addLast(successCreateClinicStep);
+        String[] dataKeys = {"token"};
         String[] metadataKeys = {};
         initController(dataKeys, metadataKeys);
         getStepStore().setItem("token", request.getToken());
-        val clinic = Clinic.builder()
+        val requestClinic = Clinic.builder()
                 .id(request.getId())
-                .isArchived(false)
                 .name(request.getName())
                 .street(request.getStreet())
                 .buildingNumber(request.getBuildingNumber())
@@ -70,7 +74,7 @@ public class ClinicCreateController extends BaseController {
                 .email(request.getEmail())
                 .phoneNumber(request.getPhoneNumber())
                 .build();
-        getStepStore().setItem("clinic", clinic);
+        getStepStore().setItem("requestClinic", requestClinic);
         return runController(steps);
     }
 }

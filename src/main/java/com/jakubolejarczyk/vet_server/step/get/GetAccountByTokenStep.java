@@ -22,6 +22,7 @@ public class GetAccountByTokenStep implements StepModel {
         val account = accountService.findByEmail(email);
         if (account.isPresent()) {
             stepStore.setItem("account", account.get());
+            // todo: Remove it
             stepStore.setItem("email", account.get().getEmail());
             stepStore.setItem("firstName", account.get().getFirstName());
             stepStore.setItem("lastName", account.get().getLastName());

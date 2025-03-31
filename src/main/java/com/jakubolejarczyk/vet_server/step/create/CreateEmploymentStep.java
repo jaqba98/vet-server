@@ -21,13 +21,16 @@ public class CreateEmploymentStep implements StepModel {
         if (stepStore.hasNotItem("clinic")) throw new Error("The clinic is required!");
         val account = stepStore.getItem("account", Account.class);
         val clinic = stepStore.getItem("clinic", Clinic.class);
-        val employment = Employment.builder()
-                .isOwner(true)
+        val accountId = account.getId();
+        val clinicId = clinic.getId();
+        val newEmployment = Employment.builder()
                 .isArchived(false)
-                .accountId(account.getId())
-                .clinicId(clinic.getId())
+                .isOwner(true)
+                .accountId(accountId)
+                .clinicId(clinicId)
                 .build();
-        val newEmployment = employmentService.create(employment);
-        stepStore.setItem("employment", newEmployment);
+        val employment = employmentService.create(newEmployment);
+        stepStore.setItem("employment", employment);
+        stepStore.addMessage("A new employment has been created!");
     }
 }

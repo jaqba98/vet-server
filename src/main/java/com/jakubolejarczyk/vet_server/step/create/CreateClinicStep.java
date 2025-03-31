@@ -17,26 +17,26 @@ public class CreateClinicStep implements StepModel {
     @Override
     public void runStep(StepStore stepStore) {
         if (stepStore.hasNotItem("openingHours")) throw new Error("The openingHours is required!");
-        if (stepStore.hasNotItem("clinic")) throw new Error("The clinic is required!");
+        if (stepStore.hasNotItem("requestClinic")) throw new Error("The requestClinic is required!");
         val openingHours = stepStore.getItem("openingHours", OpeningHours.class);
+        val requestClinic = stepStore.getItem("requestClinic", Clinic.class);
         val openingHoursId = openingHours.getId();
-        val currentClinic = stepStore.getItem("clinic", Clinic.class);
-        val clinic = Clinic.builder()
-                .name(currentClinic.getName())
-                .street(currentClinic.getStreet())
-                .buildingNumber(currentClinic.getBuildingNumber())
-                .apartmentNumber(currentClinic.getApartmentNumber())
-                .postalCode(currentClinic.getPostalCode())
-                .city(currentClinic.getCity())
-                .province(currentClinic.getProvince())
-                .country(currentClinic.getCountry())
-                .email(currentClinic.getEmail())
-                .phoneNumber(currentClinic.getPhoneNumber())
+        val newClinic = Clinic.builder()
                 .isArchived(false)
+                .name(requestClinic.getName())
+                .street(requestClinic.getStreet())
+                .buildingNumber(requestClinic.getBuildingNumber())
+                .apartmentNumber(requestClinic.getApartmentNumber())
+                .postalCode(requestClinic.getPostalCode())
+                .city(requestClinic.getCity())
+                .province(requestClinic.getProvince())
+                .country(requestClinic.getCountry())
+                .email(requestClinic.getEmail())
+                .phoneNumber(requestClinic.getPhoneNumber())
                 .openingHoursId(openingHoursId)
                 .build();
-        val newClinic = clinicService.create(clinic);
-        stepStore.setItem("clinic", newClinic);
+        val clinic = clinicService.create(newClinic);
+        stepStore.setItem("clinic", clinic);
         stepStore.addMessage("A new clinic has been created!");
     }
 }
