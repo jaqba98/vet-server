@@ -7,6 +7,8 @@ import com.jakubolejarczyk.vet_server.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.step.base.BaseController;
 import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
+import com.jakubolejarczyk.vet_server.step.success.SuccessUpdateOpeningHoursStep;
+import com.jakubolejarczyk.vet_server.step.update.UpdateOpeningHoursStep;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.Valid;
 import lombok.val;
@@ -23,30 +25,39 @@ import java.util.ArrayList;
 @RequestMapping("/api/v1")
 public class ClinicOpeningHoursUpdateController extends BaseController {
     private final GetAccountByTokenStep getAccountByTokenStep;
+    private final UpdateOpeningHoursStep updateOpeningHoursStep;
+    private final SuccessUpdateOpeningHoursStep successUpdateOpeningHoursStep;
 
     public ClinicOpeningHoursUpdateController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-            GetAccountByTokenStep getAccountByTokenStep
+            GetAccountByTokenStep getAccountByTokenStep,
+            UpdateOpeningHoursStep updateOpeningHoursStep,
+            SuccessUpdateOpeningHoursStep successUpdateOpeningHoursStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.getAccountByTokenStep = getAccountByTokenStep;
+        this.updateOpeningHoursStep = updateOpeningHoursStep;
+        this.successUpdateOpeningHoursStep = successUpdateOpeningHoursStep;
     }
 
     @PostMapping("clinic-opening-hours-update")
-    public ResponseEntity<Response<?, ?>> clinicCreate(@Valid @RequestBody OpeningHoursRequest request) {
+    public ResponseEntity<Response<?, ?>> clinicOpeningHoursUpdate(@Valid @RequestBody OpeningHoursRequest request) {
         val steps = new ArrayList<StepModel>();
         steps.addLast(getAccountByTokenStep);
-        String[] dataKeys = {"newOpeningHours"};
+        steps.addLast(updateOpeningHoursStep);
+        steps.addLast(successUpdateOpeningHoursStep);
+        String[] dataKeys = {"openingHours"};
         String[] metadataKeys = {};
         initController(dataKeys, metadataKeys);
         getStepStore().setItem("token", request.getToken());
-        val newOpeningHours = OpeningHours.builder()
+        val requestOpeningHours = OpeningHours.builder()
+                .id(request.getId())
                 .isArchived(request.getIsArchived())
                 .mondayFrom(request.getMondayFrom())
                 .mondayTo(request.getMondayTo())
                 .tuesdayFrom(request.getTuesdayFrom())
-                .tuesdayFrom(request.getTuesdayTo())
+                .thursdayTo(request.getTuesdayTo())
                 .wednesdayFrom(request.getWednesdayFrom())
                 .wednesdayTo(request.getWednesdayTo())
                 .thursdayFrom(request.getThursdayFrom())
@@ -58,7 +69,7 @@ public class ClinicOpeningHoursUpdateController extends BaseController {
                 .sundayFrom(request.getSundayFrom())
                 .sundayTo(request.getSundayTo())
                 .build();
-        getStepStore().setItem("newOpeningHours", newOpeningHours);
+        getStepStore().setItem("requestOpeningHours", requestOpeningHours);
         return runController(steps);
     }
 }
