@@ -25,6 +25,10 @@ public class EmploymentService {
         return repository.findAllByAccountId(accountId);
     }
 
+    public List<Employment> findAllByOwnerAccountId(Long accountId) {
+        return repository.findAllByOwnerAccountId(accountId);
+    }
+
     public Optional<Employment> findByClinicIdAndAccountIdAndIsOwner(Long clinicId, Long accountId) {
         return repository.findByClinicIdAndAccountIdAndIsOwner(clinicId, accountId);
     }
