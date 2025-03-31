@@ -2,6 +2,7 @@ package com.jakubolejarczyk.vet_server.step.create;
 
 import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
 import com.jakubolejarczyk.vet_server.model.dependent.Employment;
+import com.jakubolejarczyk.vet_server.model.independent.Account;
 import com.jakubolejarczyk.vet_server.service.crud.dependent.EmploymentService;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
@@ -16,14 +17,14 @@ public class CreateEmploymentStep implements StepModel {
 
     @Override
     public void runStep(StepStore stepStore) {
-        if (stepStore.hasNotItem("accountId")) throw new Error("The accountId is required!");
+        if (stepStore.hasNotItem("account")) throw new Error("The account is required!");
         if (stepStore.hasNotItem("clinic")) throw new Error("The clinic is required!");
-        val accountId = stepStore.getItem("accountId", Long.class);
+        val account = stepStore.getItem("account", Account.class);
         val clinic = stepStore.getItem("clinic", Clinic.class);
         val employment = Employment.builder()
                 .isOwner(true)
                 .isArchived(false)
-                .accountId(accountId)
+                .accountId(account.getId())
                 .clinicId(clinic.getId())
                 .build();
         val newEmployment = employmentService.create(employment);

@@ -2,6 +2,7 @@ package com.jakubolejarczyk.vet_server.step.set;
 
 import com.jakubolejarczyk.vet_server.model.dependent.Client;
 import com.jakubolejarczyk.vet_server.model.dependent.Vet;
+import com.jakubolejarczyk.vet_server.model.independent.Account;
 import com.jakubolejarczyk.vet_server.model.independent.OpeningHours;
 import com.jakubolejarczyk.vet_server.service.crud.dependent.ClientService;
 import com.jakubolejarczyk.vet_server.service.crud.dependent.VetService;
@@ -25,15 +26,15 @@ public class SetAccountRoleStep implements StepModel {
     public void runStep(StepStore stepStore) {
         if (stepStore.hasNotItem("email")) throw new Error("The email is required!");
         if (stepStore.hasNotItem("roleToSet")) throw new Error("The roleToSet is required!");
-        if (stepStore.hasNotItem("accountId")) throw new Error("The accountId is required!");
+        if (stepStore.hasNotItem("account")) throw new Error("The account is required!");
         val email = stepStore.getItem("email", String.class);
         val roleToSet = stepStore.getItem("roleToSet", String.class);
-        val accountId = stepStore.getItem("accountId", Long.class);
+        val account = stepStore.getItem("account", Account.class);
         if (roleToSet.equals("vet")) {
-            createVet(accountId);
+            createVet(account.getId());
         }
         else if (roleToSet.equals("client")) {
-            createClient(accountId);
+            createClient(account.getId());
         }
         accountService.updateRoleByEmail(email, roleToSet);
     }

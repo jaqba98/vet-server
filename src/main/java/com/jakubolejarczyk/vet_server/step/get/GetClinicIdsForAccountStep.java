@@ -1,6 +1,7 @@
 package com.jakubolejarczyk.vet_server.step.get;
 
 import com.jakubolejarczyk.vet_server.model.dependent.Employment;
+import com.jakubolejarczyk.vet_server.model.independent.Account;
 import com.jakubolejarczyk.vet_server.service.crud.dependent.EmploymentService;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
@@ -15,8 +16,9 @@ public class GetClinicIdsForAccountStep implements StepModel {
 
     @Override
     public void runStep(StepStore stepStore) {
-        if (stepStore.hasNotItem("accountId")) throw new Error("The accountId is required!");
-        val accountId = stepStore.getItem("accountId", Long.class);
+        if (stepStore.hasNotItem("account")) throw new Error("The account is required!");
+        val account = stepStore.getItem("account", Account.class);
+        val accountId = account.getId();
         val clinicIds = employmentService.findAllByAccountId(accountId).stream()
                 .map(Employment::getClinicId)
                 .toList();

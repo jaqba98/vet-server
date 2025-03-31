@@ -11,6 +11,7 @@ import com.jakubolejarczyk.vet_server.step.create.CreateOpeningHoursStep;
 import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
+import jakarta.validation.Valid;
 import lombok.val;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.http.ResponseEntity;
@@ -45,7 +46,7 @@ public class ClinicCreateController extends BaseController {
     }
 
     @PostMapping("clinic-create")
-    public ResponseEntity<Response<?, ?>> clinicCreate(@RequestBody ClinicCreateRequest request) {
+    public ResponseEntity<Response<?, ?>> clinicCreate(@Valid @RequestBody ClinicCreateRequest request) {
         val steps = new ArrayList<StepModel>();
         steps.addLast(getAccountByTokenStep);
         steps.addLast(createOpeningHoursStep);
