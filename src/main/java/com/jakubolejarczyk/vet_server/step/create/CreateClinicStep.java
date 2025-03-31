@@ -17,43 +17,24 @@ public class CreateClinicStep implements StepModel {
     @Override
     public void runStep(StepStore stepStore) {
         if (stepStore.hasNotItem("openingHours")) throw new Error("The openingHours is required!");
-        if (stepStore.hasNotItem("name")) throw new Error("The name is required!");
-        if (stepStore.hasNotItem("street")) throw new Error("The street is required!");
-        if (stepStore.hasNotItem("buildingNumber")) throw new Error("The buildingNumber is required!");
-        if (stepStore.hasNotItem("apartmentNumber")) throw new Error("The apartmentNumber is required!");
-        if (stepStore.hasNotItem("postalCode")) throw new Error("The postalCode is required!");
-        if (stepStore.hasNotItem("city")) throw new Error("The city is required!");
-        if (stepStore.hasNotItem("province")) throw new Error("The province is required!");
-        if (stepStore.hasNotItem("country")) throw new Error("The country is required!");
-        if (stepStore.hasNotItem("email")) throw new Error("The email is required!");
-        if (stepStore.hasNotItem("phoneNumber")) throw new Error("The phoneNumber is required!");
+        if (stepStore.hasNotItem("clinic")) throw new Error("The clinic is required!");
         val openingHours = stepStore.getItem("openingHours", OpeningHours.class);
         val openingHoursId = openingHours.getId();
-        val name = stepStore.getItem("name", String.class);
-        val street = stepStore.getItem("street", String.class);
-        val buildingNumber = stepStore.getItem("buildingNumber", String.class);
-        val apartmentNumber = stepStore.getItem("apartmentNumber", String.class);
-        val postalCode = stepStore.getItem("postalCode", String.class);
-        val city = stepStore.getItem("city", String.class);
-        val province = stepStore.getItem("province", String.class);
-        val country = stepStore.getItem("country", String.class);
-        val email = stepStore.getItem("email", String.class);
-        val phoneNumber = stepStore.getItem("phoneNumber", String.class);
-        val clinic = Clinic.builder()
-                .name(name)
-                .street(street)
-                .buildingNumber(buildingNumber)
-                .apartmentNumber(apartmentNumber)
-                .postalCode(postalCode)
-                .city(city)
-                .province(province)
-                .country(country)
-                .email(email)
-                .phoneNumber(phoneNumber)
+        val clinic = stepStore.getItem("clinic", Clinic.class);
+        val newClinic = Clinic.builder()
+                .name(clinic.getName())
+                .street(clinic.getStreet())
+                .buildingNumber(clinic.getBuildingNumber())
+                .apartmentNumber(clinic.getApartmentNumber())
+                .postalCode(clinic.getPostalCode())
+                .city(clinic.getCity())
+                .province(clinic.getProvince())
+                .country(clinic.getCountry())
+                .email(clinic.getEmail())
+                .phoneNumber(clinic.getPhoneNumber())
                 .isArchived(false)
                 .openingHoursId(openingHoursId)
                 .build();
-        val newClinic = clinicService.create(clinic);
-        stepStore.setItem("clinic", newClinic);
+        stepStore.addMessage("A new clinic has been created!");
     }
 }

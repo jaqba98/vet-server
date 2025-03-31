@@ -2,6 +2,7 @@ package com.jakubolejarczyk.vet_server.controller.clinic;
 
 import com.jakubolejarczyk.vet_server.dto.request.clinic.ClinicCreateRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
+import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.step.base.BaseController;
 import com.jakubolejarczyk.vet_server.step.create.CreateClinicStep;
@@ -54,16 +55,20 @@ public class ClinicCreateController extends BaseController {
         String[] metadataKeys = {};
         initController(dataKeys, metadataKeys);
         getStepStore().setItem("token", request.getToken());
-        getStepStore().setItem("name", request.getName());
-        getStepStore().setItem("street", request.getStreet());
-        getStepStore().setItem("buildingNumber", request.getBuildingNumber());
-        getStepStore().setItem("apartmentNumber", request.getApartmentNumber());
-        getStepStore().setItem("postalCode", request.getPostalCode());
-        getStepStore().setItem("city", request.getCity());
-        getStepStore().setItem("province", request.getProvince());
-        getStepStore().setItem("country", request.getCountry());
-        getStepStore().setItem("email", request.getEmail());
-        getStepStore().setItem("phoneNumber", request.getPhoneNumber());
+        val clinic = Clinic.builder()
+                .isArchived(false)
+                .name(request.getName())
+                .street(request.getStreet())
+                .buildingNumber(request.getBuildingNumber())
+                .apartmentNumber(request.getApartmentNumber())
+                .postalCode(request.getPostalCode())
+                .city(request.getCity())
+                .province(request.getProvince())
+                .country(request.getCountry())
+                .email(request.getEmail())
+                .phoneNumber(request.getPhoneNumber())
+                .build();
+        getStepStore().setItem("clinic", clinic);
         return runController(steps);
     }
 }

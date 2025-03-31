@@ -49,33 +49,6 @@
 //    private final UpdateOpeningHoursIdsIsArchivedStep updateOpeningHoursIdsIsArchivedStep;
 //    private final GetClinicByIdStep getClinicByIdStep;
 //
-//    @PostMapping("clinic-create")
-//    public ResponseEntity<ResponseDto> create(@Valid @RequestBody ClinicCreateRequestDto requestDto) {
-//        // Init
-//        val responseStep = this.responseStep.getObject();
-//        responseStep.getRidOfMessages();
-//        val isArchived = requestDto.getIsArchived();
-//        // Get Account By Token Step
-//        val accountResponse = getAccountByTokenStep.runStep(responseStep, requestDto.getToken());
-//        if (accountResponse.getError()) return responseStep.getStep(false);
-//        val account = accountResponse.getData();
-//        // Create Opening Hours Step
-//        val openingHoursResponse = createOpeningHoursStep.runStep(responseStep, isArchived);
-//        if (openingHoursResponse.getError()) return responseStep.getStep(false);
-//        val openingHours = openingHoursResponse.getData();
-//        // Create Clinic Step
-//        val clinicResponse = createClinicStep.runStep(responseStep, requestDto, openingHours.getId());
-//        if (clinicResponse.getError()) return responseStep.getStep(false);
-//        val clinic = clinicResponse.getData();
-//        // Create Employment Step
-//        val accountId = account.getId();
-//        val employmentResponse = createEmploymentStep.runStep(responseStep, true, accountId, clinic);
-//        if (employmentResponse.getError()) return responseStep.getStep(false);
-//        // Return response
-//        responseStep.addMessage("The clinic has been created successfully!");
-//        return responseStep.getStep(true);
-//    }
-//
 //    @PostMapping("clinic-update")
 //    public ResponseEntity<ResponseDataDto<Clinic>> update(@Valid @RequestBody ClinicUpdateRequestDto requestDto) throws Exception {
 //        // Init

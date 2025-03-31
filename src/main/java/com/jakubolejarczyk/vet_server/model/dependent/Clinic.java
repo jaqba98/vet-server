@@ -18,7 +18,7 @@ public class Clinic implements ClinicDomain {
     private Long id;
 
     @Column(name = "is_archived", nullable = false)
-    Boolean isArchived;
+    private Boolean isArchived;
 
     @Column(nullable = false, length = 150, unique = true)
     private String name;
