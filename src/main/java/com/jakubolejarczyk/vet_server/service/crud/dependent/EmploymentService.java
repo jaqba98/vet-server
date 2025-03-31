@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -22,5 +23,9 @@ public class EmploymentService {
 
     public List<Employment> findAllByAccountId(Long accountId) {
         return repository.findAllByAccountId(accountId);
+    }
+
+    public Optional<Employment> findByClinicIdAndAccountIdAndIsOwner(Long clinicId, Long accountId) {
+        return repository.findByClinicIdAndAccountIdAndIsOwner(clinicId, accountId);
     }
 }

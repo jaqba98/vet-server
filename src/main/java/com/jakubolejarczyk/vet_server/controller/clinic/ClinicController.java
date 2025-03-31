@@ -49,37 +49,6 @@
 //    private final UpdateOpeningHoursIdsIsArchivedStep updateOpeningHoursIdsIsArchivedStep;
 //    private final GetClinicByIdStep getClinicByIdStep;
 //
-//    @PostMapping("clinic-update")
-//    public ResponseEntity<ResponseDataDto<Clinic>> update(@Valid @RequestBody ClinicUpdateRequestDto requestDto) throws Exception {
-//        // Init
-//        val responseStep = this.responseStep.getObject();
-//        responseStep.getRidOfMessages();
-//        val clinicId = requestDto.getId();
-//        // Get Account By Token Step
-//        val accountResponse = getAccountByTokenStep.runStep(responseStep, requestDto.getToken());
-//        if (accountResponse.getError()) return responseStep.getStep(false, com.jakubolejarczyk.vet_server.model.dependent.Clinic.builder().build());
-//        val account = accountResponse.getData();
-//        // Get Clinic Ids For Owner Account Step
-//        val accountId = account.getId();
-//        val clinicIdsResponse = getClinicIdsForOwnerAccountStep.runStep(responseStep, accountId);
-//        if (clinicIdsResponse.getError()) return responseStep.getStep(false, com.jakubolejarczyk.vet_server.model.dependent.Clinic.builder().build());
-//        val clinicIds = clinicIdsResponse.getData();
-//        // Check Permission Step
-//        val permissionResponse = checkPermissionStep.runStep(responseStep, clinicIds, clinicId);
-//        if (permissionResponse.getError()) return responseStep.getStep(false, com.jakubolejarczyk.vet_server.model.dependent.Clinic.builder().build());
-//        // Get Current Clinic By Id
-//        val currentClinicResponse = getClinicByIdStep.runStep(responseStep, clinicId);
-//        if (currentClinicResponse.getError()) return responseStep.getStep(false, com.jakubolejarczyk.vet_server.model.dependent.Clinic.builder().build());
-//        val currentClinic = currentClinicResponse.getData();
-//        // Update Clinic Step
-//        val updateResponse = updateClinicStep.runStep(responseStep, requestDto, currentClinic);
-//        if (updateResponse.getError()) return responseStep.getStep(false, com.jakubolejarczyk.vet_server.model.dependent.Clinic.builder().build());
-//        val clinic = updateResponse.getData();
-//        // Return response
-//        responseStep.addMessage("The clinic have been updated successfully!");
-//        return responseStep.getStep(true, clinic);
-//    }
-//
 //    @PostMapping("clinic-delete")
 //    public ResponseEntity<ResponseDto> delete(@Valid @RequestBody DeleteRequestDto requestDto) {
 //        // Init
