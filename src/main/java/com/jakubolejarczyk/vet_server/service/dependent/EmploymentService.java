@@ -33,8 +33,8 @@ public class EmploymentService {
         return repository.findByClinicIdAndAccountIdAndIsOwner(clinicId, accountId);
     }
 
-    public List<Employment> findAllByAccountIdAndClinicIdsInAndIsOwner(Long accountId, List<Long> clinicIds) {
-        return repository.findAllByAccountIdAndClinicIdsInAndIsOwner(accountId, clinicIds);
+    public List<Employment> findAllByAccountIdAndClinicIdsAndIsOwner(Long accountId, List<Long> clinicIds) {
+        return repository.findAllByAccountIdAndClinicIdsAndIsOwner(accountId, clinicIds);
     }
 
     public void updateIsArchived(List<Long> ids, Boolean isArchived) {

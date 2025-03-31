@@ -16,9 +16,10 @@ public class UpdateEmploymentsIsArchivedStep implements StepModel {
     @Override
     public void runStep(StepStore stepStore) {
         if (stepStore.hasNotItem("employments")) throw new Error("The employments is required!");
-        val employmentsIds = stepStore.getItemAsArray("employments", Employment.class).stream()
-                        .map(Employment::getId)
-                        .toList();
+        val employments = stepStore.getItemAsArray("employments", Employment.class);
+        val employmentsIds = employments.stream()
+                .map(Employment::getId)
+                .toList();
         employmentService.updateIsArchived(employmentsIds, true);
         stepStore.addMessage("The employments have been archived successfully!");
     }

@@ -10,17 +10,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class GetEmploymentsByAccountIdAndClinicIdsInAndIsOwnerStep implements StepModel {
+public class GetEmploymentsByAccountIdAndClinicIdsAndIsOwnerStep implements StepModel {
     private final EmploymentService employmentService;
 
     @Override
     public void runStep(StepStore stepStore) {
         if (stepStore.hasNotItem("account")) throw new Error("The account is required!");
-        if (stepStore.hasNotItem("ids")) throw new Error("The ids is required!");
+        if (stepStore.hasNotItem("clinicIds")) throw new Error("The clinicIds is required!");
         val account = stepStore.getItem("account", Account.class);
+        val clinicIds = stepStore.getItemAsArray("clinicIds", Long.class);
         val accountId = account.getId();
-        val ids = stepStore.getItemAsArray("ids", Long.class);
-        val employments = employmentService.findAllByAccountIdAndClinicIdsInAndIsOwner(accountId, ids);
+        val employments = employmentService.findAllByAccountIdAndClinicIdsAndIsOwner(accountId, clinicIds);
         stepStore.setItem("employments", employments);
     }
 }

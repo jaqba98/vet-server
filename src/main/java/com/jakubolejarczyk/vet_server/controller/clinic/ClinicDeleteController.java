@@ -5,8 +5,9 @@ import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.step.base.BaseController;
 import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
-import com.jakubolejarczyk.vet_server.step.get.GetEmploymentsByAccountIdAndClinicIdsInAndIsOwnerStep;
+import com.jakubolejarczyk.vet_server.step.get.GetEmploymentsByAccountIdAndClinicIdsAndIsOwnerStep;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
+import com.jakubolejarczyk.vet_server.step.success.SuccessDeleteClinicStep;
 import com.jakubolejarczyk.vet_server.step.update.UpdateClinicsIsArchivedStep;
 import com.jakubolejarczyk.vet_server.step.update.UpdateEmploymentsIsArchivedStep;
 import com.jakubolejarczyk.vet_server.step.update.UpdateOpeningHoursIsArchivedStep;
@@ -26,41 +27,45 @@ import java.util.ArrayList;
 @RequestMapping("/api/v1")
 public class ClinicDeleteController extends BaseController {
     private final GetAccountByTokenStep getAccountByTokenStep;
-    private final GetEmploymentsByAccountIdAndClinicIdsInAndIsOwnerStep getEmploymentsByAccountIdAndClinicIdsInAndIsOwnerStep;
+    private final GetEmploymentsByAccountIdAndClinicIdsAndIsOwnerStep getEmploymentsByAccountIdAndClinicIdsAndIsOwnerStep;
     private final UpdateEmploymentsIsArchivedStep updateEmploymentsIsArchivedStep;
     private final UpdateClinicsIsArchivedStep updateClinicsIsArchivedStep;
     private final UpdateOpeningHoursIsArchivedStep updateOpeningHoursIsArchivedStep;
+    private final SuccessDeleteClinicStep successDeleteClinicStep;
 
     public ClinicDeleteController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
             GetAccountByTokenStep getAccountByTokenStep,
-            GetEmploymentsByAccountIdAndClinicIdsInAndIsOwnerStep getEmploymentsByAccountIdAndClinicIdsInAndIsOwnerStep,
+            GetEmploymentsByAccountIdAndClinicIdsAndIsOwnerStep getEmploymentsByAccountIdAndClinicIdsAndIsOwnerStep,
             UpdateEmploymentsIsArchivedStep updateEmploymentsIsArchivedStep,
             UpdateClinicsIsArchivedStep updateClinicsIsArchivedStep,
-            UpdateOpeningHoursIsArchivedStep updateOpeningHoursIsArchivedStep
+            UpdateOpeningHoursIsArchivedStep updateOpeningHoursIsArchivedStep,
+            SuccessDeleteClinicStep successDeleteClinicStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.getAccountByTokenStep = getAccountByTokenStep;
-        this.getEmploymentsByAccountIdAndClinicIdsInAndIsOwnerStep = getEmploymentsByAccountIdAndClinicIdsInAndIsOwnerStep;
+        this.getEmploymentsByAccountIdAndClinicIdsAndIsOwnerStep = getEmploymentsByAccountIdAndClinicIdsAndIsOwnerStep;
         this.updateEmploymentsIsArchivedStep = updateEmploymentsIsArchivedStep;
         this.updateClinicsIsArchivedStep = updateClinicsIsArchivedStep;
         this.updateOpeningHoursIsArchivedStep = updateOpeningHoursIsArchivedStep;
+        this.successDeleteClinicStep = successDeleteClinicStep;
     }
 
-    @PostMapping("clinic-delete")
-    public ResponseEntity<Response<?, ?>> clinicDelete(@Valid @RequestBody DeleteRequest request) {
+    @PostMapping("clinic-create")
+    public ResponseEntity<Response<?, ?>> clinicCreate(@Valid @RequestBody DeleteRequest request) {
         val steps = new ArrayList<StepModel>();
         steps.addLast(getAccountByTokenStep);
-        steps.addLast(getEmploymentsByAccountIdAndClinicIdsInAndIsOwnerStep);
+        steps.addLast(getEmploymentsByAccountIdAndClinicIdsAndIsOwnerStep);
         steps.addLast(updateEmploymentsIsArchivedStep);
         steps.addLast(updateClinicsIsArchivedStep);
         steps.addLast(updateOpeningHoursIsArchivedStep);
+        steps.addLast(successDeleteClinicStep);
         String[] dataKeys = {};
         String[] metadataKeys = {};
         initController(dataKeys, metadataKeys);
         getStepStore().setItem("token", request.getToken());
-        getStepStore().setItem("ids", request.getIds());
+        getStepStore().setItem("clinicIds", request.getIds());
         return runController(steps);
     }
 }

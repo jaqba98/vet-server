@@ -1,8 +1,7 @@
 package com.jakubolejarczyk.vet_server.step.update;
 
-import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
 import com.jakubolejarczyk.vet_server.model.dependent.Employment;
-import com.jakubolejarczyk.vet_server.service.dependent.ClinicService;
+import com.jakubolejarczyk.vet_server.model.independent.OpeningHours;
 import com.jakubolejarczyk.vet_server.service.independent.OpeningHoursService;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
@@ -13,17 +12,17 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class UpdateOpeningHoursIsArchivedStep implements StepModel {
-    private final ClinicService clinicService;
     private final OpeningHoursService openingHoursService;
 
     @Override
     public void runStep(StepStore stepStore) {
         if (stepStore.hasNotItem("employments")) throw new Error("The employments is required!");
-        val clinicIds = stepStore.getItemAsArray("employments", Employment.class).stream()
+        val employments = stepStore.getItemAsArray("employments", Employment.class);
+        val clinicsIds = employments.stream()
                 .map(Employment::getClinicId)
                 .toList();
-        val openingHoursIds = clinicService.findAllById(clinicIds).stream()
-                .map(Clinic::getOpeningHoursId)
+        val openingHoursIds = openingHoursService.findAllById(clinicsIds).stream()
+                .map(OpeningHours::getId)
                 .toList();
         openingHoursService.updateIsArchived(openingHoursIds, true);
         stepStore.addMessage("The opening hours have been archived successfully!");

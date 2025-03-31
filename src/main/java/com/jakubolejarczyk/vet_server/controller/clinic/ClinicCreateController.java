@@ -57,7 +57,7 @@ public class ClinicCreateController extends BaseController {
         steps.addLast(createClinicStep);
         steps.addLast(createEmploymentStep);
         steps.addLast(successCreateClinicStep);
-        String[] dataKeys = {"token"};
+        String[] dataKeys = {};
         String[] metadataKeys = {};
         initController(dataKeys, metadataKeys);
         getStepStore().setItem("token", request.getToken());

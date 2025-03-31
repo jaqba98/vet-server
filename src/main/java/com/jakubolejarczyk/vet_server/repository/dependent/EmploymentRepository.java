@@ -21,7 +21,7 @@ public interface EmploymentRepository extends JpaRepository<Employment, Long> {
     Optional<Employment> findByClinicIdAndAccountIdAndIsOwner(@Param("clinicId") Long clinicId, @Param("accountId") Long accountId);
 
     @Query("SELECT e FROM Employment e WHERE e.accountId = :accountId AND e.clinicId IN :clinicIds AND e.isOwner = true AND e.isArchived = false")
-    List<Employment> findAllByAccountIdAndClinicIdsInAndIsOwner(@Param("accountId") Long accountId, @Param("clinicIds") List<Long> clinicIds);
+    List<Employment> findAllByAccountIdAndClinicIdsAndIsOwner(@Param("accountId") Long accountId, @Param("clinicIds") List<Long> clinicIds);
 
     @Transactional
     @Modifying
