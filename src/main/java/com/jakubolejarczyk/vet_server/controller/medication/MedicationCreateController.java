@@ -9,6 +9,7 @@ import com.jakubolejarczyk.vet_server.step.check.CheckAccountPermissionToClinicS
 import com.jakubolejarczyk.vet_server.step.create.CreateMedicationStep;
 import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
+import com.jakubolejarczyk.vet_server.step.success.SuccessCreateMedicationStep;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.Valid;
 import lombok.val;
@@ -27,18 +28,21 @@ public class MedicationCreateController extends BaseController {
     private final GetAccountByTokenStep getAccountByTokenStep;
     private final CheckAccountPermissionToClinicStep checkAccountPermissionToClinicStep;
     private final CreateMedicationStep createMedicationStep;
+    private final SuccessCreateMedicationStep successCreateMedicationStep;
 
     public MedicationCreateController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
             GetAccountByTokenStep getAccountByTokenStep,
             CheckAccountPermissionToClinicStep checkAccountPermissionToClinicStep,
-            CreateMedicationStep createMedicationStep
+            CreateMedicationStep createMedicationStep,
+            SuccessCreateMedicationStep successCreateMedicationStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.getAccountByTokenStep = getAccountByTokenStep;
         this.checkAccountPermissionToClinicStep = checkAccountPermissionToClinicStep;
         this.createMedicationStep = createMedicationStep;
+        this.successCreateMedicationStep = successCreateMedicationStep;
     }
 
     @PostMapping("medication-create")
@@ -47,6 +51,7 @@ public class MedicationCreateController extends BaseController {
         steps.addLast(getAccountByTokenStep);
         steps.addLast(checkAccountPermissionToClinicStep);
         steps.addLast(createMedicationStep);
+        steps.addLast(successCreateMedicationStep);
         String[] dataKeys = {};
         String[] metadataKeys = {};
         initController(dataKeys, metadataKeys);
