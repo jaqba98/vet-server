@@ -6,10 +6,10 @@ import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.step.base.BaseController;
 import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
-import com.jakubolejarczyk.vet_server.step.check.CheckAccountPermissionToClinicStep;
-import com.jakubolejarczyk.vet_server.step.get.GetClinicStep;
+import com.jakubolejarczyk.vet_server.step.get.GetEmploymentByAccountIdAndClinicIdAndIsOwnerStep;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
-import com.jakubolejarczyk.vet_server.step.update.UpdateClinicStep;
+import com.jakubolejarczyk.vet_server.step.success.SuccessUpdateClinicStep;
+import com.jakubolejarczyk.vet_server.step.update.UpdateClinicByEmploymentStep;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import lombok.val;
 import org.springframework.beans.factory.ObjectFactory;
@@ -25,39 +25,38 @@ import java.util.ArrayList;
 @RequestMapping("/api/v1")
 public class ClinicUpdateController extends BaseController {
     private final GetAccountByTokenStep getAccountByTokenStep;
-    private final CheckAccountPermissionToClinicStep checkAccountPermissionToClinicStep;
-    private final GetClinicStep getClinicStep;
-    private final UpdateClinicStep updateClinicStep;
+    private final GetEmploymentByAccountIdAndClinicIdAndIsOwnerStep getEmploymentByAccountIdAndClinicIdAndIsOwnerStep;
+    private final UpdateClinicByEmploymentStep updateClinicByEmploymentStep;
+    private final SuccessUpdateClinicStep successUpdateClinicStep;
 
     public ClinicUpdateController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
             GetAccountByTokenStep getAccountByTokenStep,
-            CheckAccountPermissionToClinicStep checkAccountPermissionToClinicStep,
-            GetClinicStep getClinicStep,
-            UpdateClinicStep updateClinicStep
+            GetEmploymentByAccountIdAndClinicIdAndIsOwnerStep getEmploymentByAccountIdAndClinicIdAndIsOwnerStep,
+            UpdateClinicByEmploymentStep updateClinicByEmploymentStep,
+            SuccessUpdateClinicStep successUpdateClinicStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.getAccountByTokenStep = getAccountByTokenStep;
-        this.checkAccountPermissionToClinicStep = checkAccountPermissionToClinicStep;
-        this.getClinicStep = getClinicStep;
-        this.updateClinicStep = updateClinicStep;
+        this.getEmploymentByAccountIdAndClinicIdAndIsOwnerStep = getEmploymentByAccountIdAndClinicIdAndIsOwnerStep;
+        this.updateClinicByEmploymentStep = updateClinicByEmploymentStep;
+        this.successUpdateClinicStep = successUpdateClinicStep;
     }
 
     @PostMapping("clinic-update")
     public ResponseEntity<Response<?, ?>> clinicRead(@RequestBody ClinicUpdateRequest request) {
         val steps = new ArrayList<StepModel>();
         steps.addLast(getAccountByTokenStep);
-        steps.addLast(checkAccountPermissionToClinicStep);
-        steps.addLast(getClinicStep);
-        steps.addLast(updateClinicStep);
+        steps.addLast(getEmploymentByAccountIdAndClinicIdAndIsOwnerStep);
+        steps.addLast(updateClinicByEmploymentStep);
+        steps.addLast(successUpdateClinicStep);
         String[] dataKeys = {"clinic"};
         String[] metadataKeys = {};
         initController(dataKeys, metadataKeys);
         getStepStore().setItem("token", request.getToken());
-        val newClinic = Clinic.builder()
+        val requestClinic = Clinic.builder()
                 .id(request.getId())
-                .isArchived(request.getIsArchived())
                 .name(request.getName())
                 .street(request.getStreet())
                 .buildingNumber(request.getBuildingNumber())
@@ -68,10 +67,8 @@ public class ClinicUpdateController extends BaseController {
                 .country(request.getCountry())
                 .email(request.getEmail())
                 .phoneNumber(request.getPhoneNumber())
-                .openingHoursId(null)
                 .build();
-        getStepStore().setItem("newClinic", newClinic);
-        getStepStore().setItem("clinicId", newClinic.getId());
+        getStepStore().setItem("requestClinic", requestClinic);
         return runController(steps);
     }
 }
