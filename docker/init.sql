@@ -79,6 +79,7 @@ CREATE TABLE Invoice (
 -- ## Create tables with foreign keys. ##
 CREATE TABLE Clinic (
     id SERIAL PRIMARY KEY,
+    is_archived BOOLEAN NOT NULL,
     name VARCHAR(150) NOT NULL UNIQUE,
     street VARCHAR(100) NOT NULL,
     building_number VARCHAR(10) NOT NULL,
@@ -89,7 +90,6 @@ CREATE TABLE Clinic (
     country VARCHAR(56) NOT NULL,
     email VARCHAR(255) NOT NULL,
     phone_number VARCHAR(20) NOT NULL,
-    is_archived BOOLEAN NOT NULL,
     opening_hours_id INTEGER NOT NULL,
     FOREIGN KEY (opening_hours_id) REFERENCES OpeningHours(id)
 );
@@ -140,10 +140,11 @@ CREATE TABLE Client (
 
 CREATE TABLE Medication (
     id SERIAL PRIMARY KEY,
+    is_archived BOOLEAN NOT NULL,
     name VARCHAR(255) NOT NULL,
-    description TEXT NOT NULL,
+    description VARCHAR(255) NOT NULL,
     manufacturer VARCHAR(255) NOT NULL,
-    dose TEXT NOT NULL,
+    dose VARCHAR(255) NOT NULL,
     quantity_in_stock INTEGER NOT NULL,
     expiration_date DATE NOT NULL,
     price DECIMAL(10, 2) NOT NULL,

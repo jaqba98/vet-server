@@ -1,6 +1,5 @@
 package com.jakubolejarczyk.vet_server.step.check;
 
-import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
 import com.jakubolejarczyk.vet_server.model.independent.Account;
 import com.jakubolejarczyk.vet_server.service.dependent.EmploymentService;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
@@ -16,13 +15,12 @@ public class CheckAccountPermissionToClinicStep implements StepModel {
 
     @Override
     public void runStep(StepStore stepStore) {
-        if (stepStore.hasNotItem("newClinic")) throw new Error("The newClinic is required!");
+        if (stepStore.hasNotItem("clinicId")) throw new Error("The clinicId is required!");
         if (stepStore.hasNotItem("account")) throw new Error("The account is required!");
-        val newClinic = stepStore.getItem("newClinic", Clinic.class);
+        val clinicId = stepStore.getItem("clinicId", Long.class);
         val account = stepStore.getItem("account", Account.class);
-        val newClinicId = newClinic.getId();
         val accountId = account.getId();
-        val employment = employmentService.findByClinicIdAndAccountIdAndIsOwner(newClinicId, accountId);
+        val employment = employmentService.findByClinicIdAndAccountIdAndIsOwner(clinicId, accountId);
         if (employment.isPresent()) {
             return;
         }
