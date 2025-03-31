@@ -2,7 +2,6 @@ package com.jakubolejarczyk.vet_server.controller.clinic;
 
 import com.jakubolejarczyk.vet_server.dto.request.base.TokenRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
-import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.step.base.BaseController;
 import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
