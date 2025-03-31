@@ -38,20 +38,25 @@ public class StepStore {
         }
     }
 
-    public Object getItem(String key) {
+    public <T> T getItem(String key, Class<T> type) {
+        Object item;
         if (data.containsKey(key)) {
-            return data.get(key);
+            item = data.get(key);
         } else if (metadata.containsKey(key)) {
-            return metadata.get(key);
+            item = metadata.get(key);
         } else if (items.containsKey(key)) {
-            return items.get(key);
+            item = items.get(key);
         } else {
             throw new NoSuchElementException("The store does not contain key: " + key);
         }
+        if (type.isInstance(item)) {
+            return type.cast(item);
+        }
+        throw new ClassCastException("The item is not of the expected type: " + type.getName() + " it should be: "  + item.getClass().getName());
     }
 
     public <T> List<T> getItemAsArray(String key, Class<T> type) {
-        Object value = getItem(key);
+        Object value = getItem(key, Object.class);
         if (value instanceof Object[] array) {
             return Arrays.stream(array)
                     .map(type::cast)

@@ -20,10 +20,10 @@ public class GetTokenByLoginDetailsStep implements StepModel {
     public void runStep(StepStore stepStore) {
         if (stepStore.hasNotItem("email")) throw new Error("The email is required!");
         if (stepStore.hasNotItem("password")) throw new Error("The password is required!");
-        val email = (String) stepStore.getItem("email");
+        val email = stepStore.getItem("email", String.class);
         val account = accountService.findByEmail(email);
         if (account.isPresent()) {
-            val password = (String) stepStore.getItem("password");
+            val password = stepStore.getItem("password", String.class);
             val encodedPassword = account.get().getPassword();
             if (passwordService.match(password, encodedPassword)) {
                 val token = tokenService.generate(email);

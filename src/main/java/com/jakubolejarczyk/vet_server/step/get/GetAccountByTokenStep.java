@@ -17,7 +17,7 @@ public class GetAccountByTokenStep implements StepModel {
     @Override
     public void runStep(StepStore stepStore) {
         if (stepStore.hasNotItem("token")) throw new Error("The token is required!");
-        val token = (String) stepStore.getItem("token");
+        val token = stepStore.getItem("token", String.class);
         val email = tokenService.decode(token);
         val account = accountService.findByEmail(email);
         if (account.isPresent()) {

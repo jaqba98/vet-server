@@ -16,7 +16,7 @@ public class CheckTokenStep implements StepModel {
     public void runStep(StepStore stepStore) {
         System.out.println(stepStore);
         if (stepStore.hasNotItem("token")) throw new Error("The token is required!");
-        val token = (String) stepStore.getItem("token");
+        val token = stepStore.getItem("token", String.class);
         val validToken = tokenService.verify(token);
         if (validToken) {
             return;

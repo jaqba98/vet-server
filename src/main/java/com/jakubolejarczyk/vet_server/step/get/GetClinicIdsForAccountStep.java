@@ -16,7 +16,7 @@ public class GetClinicIdsForAccountStep implements StepModel {
     @Override
     public void runStep(StepStore stepStore) {
         if (stepStore.hasNotItem("accountId")) throw new Error("The accountId is required!");
-        val accountId = (Long) stepStore.getItem("accountId");
+        val accountId = stepStore.getItem("accountId", Long.class);
         val clinicIds = employmentService.findAllByAccountId(accountId).stream()
                 .map(Employment::getClinicId)
                 .toList();

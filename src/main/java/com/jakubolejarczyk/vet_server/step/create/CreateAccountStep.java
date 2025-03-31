@@ -21,10 +21,10 @@ public class CreateAccountStep implements StepModel {
         if (stepStore.hasNotItem("password")) throw new Error("The password is required!");
         if (stepStore.hasNotItem("firstName")) throw new Error("The firstName is required!");
         if (stepStore.hasNotItem("lastName")) throw new Error("The lastName is required!");
-        val email = (String) stepStore.getItem("email");
-        val password = (String) stepStore.getItem("password");
-        val firstName = (String) stepStore.getItem("firstName");
-        val lastName = (String) stepStore.getItem("lastName");
+        val email = stepStore.getItem("email", String.class);
+        val password = stepStore.getItem("password", String.class);
+        val firstName = stepStore.getItem("firstName", String.class);
+        val lastName = stepStore.getItem("lastName", String.class);
         val hashPassword = passwordService.encode(password);
         val account = Account.builder()
                 .isArchived(false)

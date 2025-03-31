@@ -26,9 +26,9 @@ public class SetAccountRoleStep implements StepModel {
         if (stepStore.hasNotItem("email")) throw new Error("The email is required!");
         if (stepStore.hasNotItem("roleToSet")) throw new Error("The roleToSet is required!");
         if (stepStore.hasNotItem("accountId")) throw new Error("The accountId is required!");
-        val email = (String) stepStore.getItem("email");
-        val roleToSet = (String) stepStore.getItem("roleToSet");
-        val accountId = (Long) stepStore.getItem("accountId");
+        val email = stepStore.getItem("email", String.class);
+        val roleToSet = stepStore.getItem("roleToSet", String.class);
+        val accountId = stepStore.getItem("accountId", Long.class);
         if (roleToSet.equals("vet")) {
             createVet(accountId);
         }

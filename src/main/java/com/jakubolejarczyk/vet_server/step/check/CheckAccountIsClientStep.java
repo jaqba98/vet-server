@@ -12,7 +12,7 @@ public class CheckAccountIsClientStep implements StepModel {
     @Override
     public void runStep(StepStore stepStore) {
         if (stepStore.hasNotItem("role")) throw new Error("The role is required!");
-        val role = (String) stepStore.getItem("role");
+        val role = stepStore.getItem("role", String.class);
         if (role.equals("client")) {
             return;
         }
