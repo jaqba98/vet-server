@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -14,6 +15,10 @@ public class InvoiceService {
 
     public Invoice create(Invoice invoice) {
         return repository.save(invoice);
+    }
+
+    public Optional<Invoice> findById(Long id) {
+        return repository.findById(id);
     }
 
     public List<Invoice> findAllById(List<Long> ids) {
