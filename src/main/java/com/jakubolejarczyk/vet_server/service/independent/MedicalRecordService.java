@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -14,6 +15,14 @@ public class MedicalRecordService {
 
     public MedicalRecord create(MedicalRecord medicalRecord) {
         return repository.save(medicalRecord);
+    }
+
+    public Optional<MedicalRecord> findById(Long id) {
+        return repository.findById(id);
+    }
+
+    public List<MedicalRecord> findAllById(List<Long> ids) {
+        return repository.findAllById(ids);
     }
 
     public void updateIsArchived(List<Long> ids, Boolean isArchived) {
