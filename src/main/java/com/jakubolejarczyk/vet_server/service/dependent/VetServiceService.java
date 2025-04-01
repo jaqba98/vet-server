@@ -24,4 +24,8 @@ public class VetServiceService {
     public List<VetService> findAllByClinicIds(List<Long> clinicIds) {
         return repository.findAllByClinicIds(clinicIds);
     }
+
+    public void updateIsArchived(List<Long> ids, Boolean isArchived) {
+        repository.updateIsArchived(ids, isArchived);
+    }
 }
