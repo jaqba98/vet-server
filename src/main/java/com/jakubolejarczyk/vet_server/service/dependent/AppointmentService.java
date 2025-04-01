@@ -5,6 +5,8 @@ import com.jakubolejarczyk.vet_server.repository.dependent.AppointmentRepository
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class AppointmentService {
@@ -12,5 +14,9 @@ public class AppointmentService {
 
     public Appointment create(Appointment appointment) {
         return repository.save(appointment);
+    }
+
+    public List<Appointment> findAllByClinicIds(List<Long> clinicIds) {
+        return repository.findAllByClinicIds(clinicIds);
     }
 }
