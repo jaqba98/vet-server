@@ -45,14 +45,14 @@ public class AppointmentUpdateController extends BaseController {
         this.successUpdateAppointmentStep = successUpdateAppointmentStep;
     }
 
-    @PostMapping("appointment-create")
-    public ResponseEntity<Response<?, ?>> appointmentCreate(@Valid @RequestBody AppointmentRequest request) {
+    @PostMapping("appointment-update")
+    public ResponseEntity<Response<?, ?>> appointmentUpdate(@Valid @RequestBody AppointmentRequest request) {
         val steps = new ArrayList<StepModel>();
         steps.addLast(getAccountByTokenStep);
         steps.addLast(checkAccountPermissionToClinicStep);
         steps.addLast(updateAppointmentStep);
         steps.addLast(successUpdateAppointmentStep);
-        String[] dataKeys = {};
+        String[] dataKeys = {"appointment"};
         String[] metadataKeys = {};
         initController(dataKeys, metadataKeys);
         getStepStore().setItem("token", request.getToken());

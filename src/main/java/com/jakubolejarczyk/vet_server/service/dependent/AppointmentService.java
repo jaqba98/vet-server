@@ -17,11 +17,19 @@ public class AppointmentService {
         return repository.save(appointment);
     }
 
+    public List<Appointment> findAllById(List<Long> clinicIds) {
+        return repository.findAllById(clinicIds);
+    }
+
     public List<Appointment> findAllByClinicIds(List<Long> clinicIds) {
         return repository.findAllByClinicIds(clinicIds);
     }
 
     public Optional<Appointment> findById(Long id) {
         return repository.findById(id);
+    }
+
+    public void updateIsArchived(List<Long> ids, Boolean isArchived) {
+        repository.updateIsArchived(ids, isArchived);
     }
 }

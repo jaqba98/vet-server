@@ -5,6 +5,8 @@ import com.jakubolejarczyk.vet_server.repository.independent.InvoiceRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class InvoiceService {
@@ -12,5 +14,13 @@ public class InvoiceService {
 
     public Invoice create(Invoice invoice) {
         return repository.save(invoice);
+    }
+
+    public List<Invoice> findAllById(List<Long> ids) {
+        return repository.findAllById(ids);
+    }
+
+    public void updateIsArchived(List<Long> ids, Boolean isArchived) {
+        repository.updateIsArchived(ids, isArchived);
     }
 }

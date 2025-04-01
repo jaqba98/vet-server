@@ -5,6 +5,8 @@ import com.jakubolejarczyk.vet_server.repository.independent.MedicalRecordReposi
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class MedicalRecordService {
@@ -12,5 +14,9 @@ public class MedicalRecordService {
 
     public MedicalRecord create(MedicalRecord medicalRecord) {
         return repository.save(medicalRecord);
+    }
+
+    public void updateIsArchived(List<Long> ids, Boolean isArchived) {
+        repository.updateIsArchived(ids, isArchived);
     }
 }
