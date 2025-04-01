@@ -1,0 +1,57 @@
+package com.jakubolejarczyk.vet_server.model.dependent;
+
+import com.jakubolejarczyk.vet_server.domain.dependent.PetDomain;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+
+import java.math.BigDecimal;
+import java.sql.Date;
+
+@Entity
+@Getter
+@Setter
+@SuperBuilder
+@NoArgsConstructor
+public class Pet implements PetDomain {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "is_archived", nullable = false)
+    private Boolean isArchived;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column
+    private String species;
+
+    @Column
+    private String breed;
+
+    @Column(name = "date_of_birth")
+    private Date dateOfBirth;
+
+    @Column(name = "weight_kg")
+    private BigDecimal weightKg;
+
+    @Column
+    private String color;
+
+    private Boolean sterilized;
+
+    @Column(nullable = false)
+    private String pictureUrl;
+
+    @Column(name = "microchip_number")
+    private String microchipNumber;
+
+    @Column(name = "medical_notes")
+    private String medicalNotes;
+
+    @Column(name = "client_id", nullable = false)
+    private Long clientId;
+}

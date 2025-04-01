@@ -40,8 +40,20 @@ CREATE TABLE Account (
     is_archived BOOLEAN NOT NULL
 );
 
+CREATE TABLE Client (
+    id SERIAL PRIMARY KEY,
+    is_archived BOOLEAN NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone_number VARCHAR(255) NOT NULL,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    clinic_id INTEGER NOT NULL,
+    FOREIGN KEY (clinic_id) REFERENCES Clinic(id)
+);
+
 CREATE TABLE Pet (
     id SERIAL PRIMARY KEY,
+    is_archived BOOLEAN NOT NULL,
     name VARCHAR(255) NOT NULL,
     species VARCHAR(255) NULL,
     breed VARCHAR(255) NULL,
@@ -52,6 +64,8 @@ CREATE TABLE Pet (
     picture_url VARCHAR(255) NOT NULL,
     microchip_number VARCHAR(255) NULL,
     medical_notes VARCHAR(255) NULL
+    client_id INTEGER NOT NULL,
+    FOREIGN KEY (client_id) REFERENCES Client(id)
 );
 
 CREATE TABLE MedicalRecord (
@@ -131,13 +145,6 @@ CREATE TABLE Vet (
     FOREIGN KEY (opening_hours_id) REFERENCES OpeningHours(id)
 );
 
-CREATE TABLE Client (
-    id SERIAL PRIMARY KEY,
-    account_id INTEGER NOT NULL,
-    is_archived BOOLEAN NOT NULL,
-    FOREIGN KEY (account_id) REFERENCES Account(id)
-);
-
 CREATE TABLE Medication (
     id SERIAL PRIMARY KEY,
     is_archived BOOLEAN NOT NULL,
@@ -187,14 +194,6 @@ CREATE TABLE Owner (
     account_id INTEGER NOT NULL,
     FOREIGN KEY (clinic_id) REFERENCES Clinic(id),
     FOREIGN KEY (account_id) REFERENCES Account(id)
-);
-
-CREATE TABLE Client_Pet (
-    id SERIAL PRIMARY KEY,
-    client_id INTEGER NOT NULL,
-    pet_id INTEGER NOT NULL,
-    FOREIGN KEY (client_id) REFERENCES Client(id),
-    FOREIGN KEY (pet_id) REFERENCES Pet(id)
 );
 
 CREATE TABLE MedicalRecord_Medication (
