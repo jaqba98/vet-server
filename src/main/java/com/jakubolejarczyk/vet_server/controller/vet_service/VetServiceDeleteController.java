@@ -1,17 +1,12 @@
 package com.jakubolejarczyk.vet_server.controller.vet_service;
 
 import com.jakubolejarczyk.vet_server.dto.request.common.DeleteRequest;
-import com.jakubolejarczyk.vet_server.dto.request.vet_service.VetServiceRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
-import com.jakubolejarczyk.vet_server.model.dependent.VetService;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.step.base.BaseController;
-import com.jakubolejarczyk.vet_server.step.check.CheckAccountPermissionToClinicStep;
 import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
-import com.jakubolejarczyk.vet_server.step.success.SuccessUpdateVetServiceStep;
 import com.jakubolejarczyk.vet_server.step.success.SuccessVetServicesMedicationStep;
-import com.jakubolejarczyk.vet_server.step.update.UpdateVetServiceStep;
 import com.jakubolejarczyk.vet_server.step.update.UpdateVetServicesIsArchivedStep;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.Valid;

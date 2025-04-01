@@ -1,6 +1,5 @@
 package com.jakubolejarczyk.vet_server.controller.vet_service;
 
-import com.jakubolejarczyk.vet_server.controller.medication.MedicationUpdateController;
 import com.jakubolejarczyk.vet_server.dto.request.vet_service.VetServiceRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.model.dependent.VetService;

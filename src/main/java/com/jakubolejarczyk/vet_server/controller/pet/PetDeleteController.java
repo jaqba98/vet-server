@@ -1,18 +1,10 @@
 package com.jakubolejarczyk.vet_server.controller.pet;
 
-import com.jakubolejarczyk.vet_server.dto.request.base.TokenRequest;
 import com.jakubolejarczyk.vet_server.dto.request.common.DeleteRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.step.base.BaseController;
-import com.jakubolejarczyk.vet_server.step.check.CheckClientExistStep;
-import com.jakubolejarczyk.vet_server.step.create.CreatePetStep;
-import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
-import com.jakubolejarczyk.vet_server.step.get.GetClientsByEmploymentStep;
-import com.jakubolejarczyk.vet_server.step.get.GetEmploymentsByAccountIdAndIsOwnerStep;
-import com.jakubolejarczyk.vet_server.step.get.GetPetsByClientsStep;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
-import com.jakubolejarczyk.vet_server.step.success.SuccessCreatePetStep;
 import com.jakubolejarczyk.vet_server.step.success.SuccessDeletePetStep;
 import com.jakubolejarczyk.vet_server.step.update.UpdatePetIsArchivedStep;
 import com.jakubolejarczyk.vet_server.store.StepStore;
