@@ -42,16 +42,18 @@ CREATE TABLE Account (
 
 CREATE TABLE MedicalRecord (
     id SERIAL PRIMARY KEY,
-    diagnosis TEXT NOT NULL,
-    treatment TEXT NOT NULL,
-    procedures TEXT NOT NULL,
+    is_archived BOOLEAN NOT NULL,
+    diagnosis VARCHAR(255) NOT NULL,
+    treatment VARCHAR(255) NOT NULL,
+    procedures VARCHAR(255) NOT NULL,
     next_appointment DATE NOT NULL,
-    status VARCHAR(11) NOT NULL,
-    notes TEXT NOT NULL
+    status VARCHAR(255) NOT NULL,
+    notes VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Invoice (
     id SERIAL PRIMARY KEY,
+    is_archived BOOLEAN NOT NULL,
     invoice_date DATE NOT NULL,
     due_date DATE NOT NULL,
     total_amount DECIMAL(10, 2) NOT NULL,
@@ -162,11 +164,12 @@ CREATE TABLE Medication (
 
 CREATE TABLE Appointment (
     id SERIAL PRIMARY KEY,
+    is_archived BOOLEAN NOT NULL,
     date_and_hour TIMESTAMP NOT NULL,
     type VARCHAR(255) NOT NULL,
-    status VARCHAR(11) NOT NULL,
-    reason TEXT NOT NULL,
-    notes TEXT NOT NULL,
+    status VARCHAR(255) NOT NULL,
+    reason VARCHAR(255) NOT NULL,
+    notes VARCHAR(255) NOT NULL,
     clinic_id INTEGER NOT NULL,
     vet_id INTEGER NOT NULL,
     pet_id INTEGER NOT NULL,
