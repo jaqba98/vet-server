@@ -21,6 +21,14 @@ public class ClientService {
         return repository.findById(id);
     }
 
+    public Optional<Client> findByEmail(String email) {
+        return repository.findByEmail(email);
+    }
+
+    public Optional<Client> findByPhoneNumber(String phoneNumber) {
+        return repository.findByPhoneNumber(phoneNumber);
+    }
+
     public List<Client> findAllByClinicIds(List<Long> clinicIds) {
         return repository.findAllByClinicIds(clinicIds);
     }

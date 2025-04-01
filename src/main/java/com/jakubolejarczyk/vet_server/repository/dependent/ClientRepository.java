@@ -8,8 +8,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ClientRepository extends JpaRepository<Client, Long> {
+    Optional<Client> findByEmail(@Param("email") String email);
+
+    Optional<Client> findByPhoneNumber(@Param("phoneNumber") String phoneNumber);
+
     @Query("SELECT e FROM Client e WHERE e.clinicId IN :clinicIds AND e.isArchived = false")
     List<Client> findAllByClinicIds(@Param("clinicIds") List<Long> clinicIds);
 

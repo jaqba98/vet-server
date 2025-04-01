@@ -34,19 +34,27 @@ public class SetAccountRoleStep implements StepModel {
     }
 
     private void createVet(Long accountId) {
-        val vet = vetService.findByAccountId(accountId);
-        if (vet.isPresent()) {
-            return;
+        try {
+            System.out.println(1);
+            val vet = vetService.findByAccountId(accountId);
+            System.out.println(2);
+            if (vet.isPresent()) {
+                return;
+            }
+            System.out.println(3);
+            OpeningHours openingHours = OpeningHours.builder()
+                    .isArchived(false)
+                    .build();
+            System.out.println(4);
+            OpeningHours newOpeningHours = openingHoursService.create(openingHours);
+            Vet newVet = Vet.builder()
+                    .isArchived(false)
+                    .accountId(accountId)
+                    .openingHoursId(newOpeningHours.getId())
+                    .build();
+            vetService.create(newVet);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to create vet: " + e.getMessage());
         }
-        OpeningHours openingHours = OpeningHours.builder()
-                .isArchived(false)
-                .build();
-        OpeningHours newOpeningHours = openingHoursService.create(openingHours);
-        Vet newVet = Vet.builder()
-                .isArchived(false)
-                .accountId(accountId)
-                .openingHoursId(newOpeningHours.getId())
-                .build();
-        vetService.create(newVet);
     }
 }

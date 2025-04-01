@@ -40,34 +40,6 @@ CREATE TABLE Account (
     is_archived BOOLEAN NOT NULL
 );
 
-CREATE TABLE Client (
-    id SERIAL PRIMARY KEY,
-    is_archived BOOLEAN NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    phone_number VARCHAR(255) NOT NULL,
-    first_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NOT NULL,
-    clinic_id INTEGER NOT NULL,
-    FOREIGN KEY (clinic_id) REFERENCES Clinic(id)
-);
-
-CREATE TABLE Pet (
-    id SERIAL PRIMARY KEY,
-    is_archived BOOLEAN NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    species VARCHAR(255) NULL,
-    breed VARCHAR(255) NULL,
-    date_of_birth DATE NULL,
-    weight_kg DECIMAL(10, 2) NULL,
-    color VARCHAR(255) NULL,
-    sterilized BOOLEAN NULL,
-    picture_url VARCHAR(255) NOT NULL,
-    microchip_number VARCHAR(255) NULL,
-    medical_notes VARCHAR(255) NULL
-    client_id INTEGER NOT NULL,
-    FOREIGN KEY (client_id) REFERENCES Client(id)
-);
-
 CREATE TABLE MedicalRecord (
     id SERIAL PRIMARY KEY,
     diagnosis TEXT NOT NULL,
@@ -106,6 +78,34 @@ CREATE TABLE Clinic (
     phone_number VARCHAR(20) NOT NULL,
     opening_hours_id INTEGER NOT NULL,
     FOREIGN KEY (opening_hours_id) REFERENCES OpeningHours(id)
+);
+
+CREATE TABLE Client (
+    id SERIAL PRIMARY KEY,
+    is_archived BOOLEAN NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone_number VARCHAR(255) NOT NULL,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    clinic_id INTEGER NOT NULL,
+    FOREIGN KEY (clinic_id) REFERENCES Clinic(id)
+);
+
+CREATE TABLE Pet (
+    id SERIAL PRIMARY KEY,
+    is_archived BOOLEAN NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    species VARCHAR(255) NULL,
+    breed VARCHAR(255) NULL,
+    date_of_birth DATE NULL,
+    weight_kg DECIMAL(10, 2) NULL,
+    color VARCHAR(255) NULL,
+    sterilized BOOLEAN NULL,
+    picture_url VARCHAR(255) NOT NULL,
+    microchip_number VARCHAR(255) NULL,
+    medical_notes VARCHAR(255) NULL,
+    client_id INTEGER NOT NULL,
+    FOREIGN KEY (client_id) REFERENCES Client(id)
 );
 
 CREATE TABLE Employment (
