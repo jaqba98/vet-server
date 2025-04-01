@@ -5,6 +5,8 @@ import com.jakubolejarczyk.vet_server.repository.dependent.VetServiceRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class VetServiceService {
@@ -12,5 +14,9 @@ public class VetServiceService {
 
     public VetService create(VetService vetService) {
         return repository.save(vetService);
+    }
+
+    public List<VetService> findAllByClinicIds(List<Long> clinicIds) {
+        return repository.findAllByClinicIds(clinicIds);
     }
 }
