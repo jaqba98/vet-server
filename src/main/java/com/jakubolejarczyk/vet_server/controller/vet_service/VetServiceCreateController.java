@@ -1,8 +1,8 @@
 package com.jakubolejarczyk.vet_server.controller.vet_service;
 
-import com.jakubolejarczyk.vet_server.dto.request.vet_service.ServiceRequest;
+import com.jakubolejarczyk.vet_server.dto.request.vet_service.ServiceClinicRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
-import com.jakubolejarczyk.vet_server.model.dependent.Service;
+import com.jakubolejarczyk.vet_server.model.dependent.ServiceClinic;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.step.base.BaseController;
 import com.jakubolejarczyk.vet_server.step.check.CheckAccountPermissionToClinicStep;
@@ -46,7 +46,7 @@ public class VetServiceCreateController extends BaseController {
     }
 
     @PostMapping("vet-service-create")
-    public ResponseEntity<Response<?, ?>> vetServiceCreate(@Valid @RequestBody ServiceRequest request) {
+    public ResponseEntity<Response<?, ?>> vetServiceCreate(@Valid @RequestBody ServiceClinicRequest request) {
         val steps = new ArrayList<StepModel>();
         steps.addLast(getAccountByTokenStep);
         steps.addLast(checkAccountPermissionToClinicStep);
@@ -56,7 +56,7 @@ public class VetServiceCreateController extends BaseController {
         String[] metadataKeys = {};
         initController(dataKeys, metadataKeys);
         getStepStore().setItem("token", request.getToken());
-        val requestVetService = Service.builder()
+        val requestVetService = ServiceClinic.builder()
                 .id(request.getId())
                 .isArchived(request.getIsArchived())
                 .entityName(request.getEntityName())

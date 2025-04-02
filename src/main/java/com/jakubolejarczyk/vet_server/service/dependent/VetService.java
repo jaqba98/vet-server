@@ -2,25 +2,12 @@ package com.jakubolejarczyk.vet_server.service.dependent;
 
 import com.jakubolejarczyk.vet_server.model.dependent.Vet;
 import com.jakubolejarczyk.vet_server.repository.dependent.VetRepository;
-import lombok.AllArgsConstructor;
+import com.jakubolejarczyk.vet_server.service.base.BaseService;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
-@AllArgsConstructor
-public class VetService {
-    private final VetRepository repository;
-
-    public Vet create(Vet vet) {
-        return repository.save(vet);
-    }
-
-    public Optional<Vet> findById(Long id) {
-        return repository.findById(id);
-    }
-
-    public Optional<Vet> findByAccountId(Long accountId) {
-        return repository.findByAccountId(accountId);
+public class VetService extends BaseService<Vet> {
+    public VetService(VetRepository repository) {
+        super(repository);
     }
 }

@@ -1,7 +1,7 @@
 package com.jakubolejarczyk.vet_server.step.update;
 
 import com.jakubolejarczyk.vet_server.model.dependent.Vet;
-import com.jakubolejarczyk.vet_server.service.dependent.VetService;
+import com.jakubolejarczyk.vet_server.service.dependent.ServiceClinicService;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import lombok.AllArgsConstructor;
@@ -11,14 +11,14 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class UpdateVetStep implements StepModel {
-    private final VetService vetService;
+    private final ServiceClinicService serviceClinicService;
 
     @Override
     public void runStep(StepStore stepStore) {
         if (stepStore.hasNotItem("requestVet")) throw new Error("The requestVet is required!");
         val requestVet = stepStore.getItem("requestVet", Vet.class);
         val vetId = requestVet.getId();
-        val currentVet = vetService.findById(vetId);
+        val currentVet = serviceClinicService.findById(vetId);
         if (currentVet.isPresent()) {
             val newVet = Vet.builder()
                     .id(currentVet.get().getId())
@@ -31,7 +31,7 @@ public class UpdateVetStep implements StepModel {
                     .accountId(currentVet.get().getAccountId())
                     .openingHourId(currentVet.get().getOpeningHourId())
                     .build();
-            val vet = vetService.create(newVet);
+            val vet = serviceClinicService.create(newVet);
             stepStore.setItem("vet", vet);
             return;
         }

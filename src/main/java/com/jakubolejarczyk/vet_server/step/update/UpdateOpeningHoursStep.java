@@ -1,7 +1,7 @@
 package com.jakubolejarczyk.vet_server.step.update;
 
 import com.jakubolejarczyk.vet_server.model.independent.OpeningHour;
-import com.jakubolejarczyk.vet_server.service.independent.OpeningHoursService;
+import com.jakubolejarczyk.vet_server.service.independent.OpeningHourService;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import lombok.AllArgsConstructor;
@@ -11,14 +11,14 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class UpdateOpeningHoursStep implements StepModel {
-    private final OpeningHoursService openingHoursService;
+    private final OpeningHourService openingHourService;
 
     @Override
     public void runStep(StepStore stepStore) {
         if (stepStore.hasNotItem("requestOpeningHours")) throw new Error("The requestOpeningHours is required!");
         val requestOpeningHours = stepStore.getItem("requestOpeningHours", OpeningHour.class);
         val openingHoursId = requestOpeningHours.getId();
-        val currentOpeningHours = openingHoursService.findById(openingHoursId);
+        val currentOpeningHours = openingHourService.findById(openingHoursId);
         if (currentOpeningHours.isPresent()) {
             val newOpeningHours = OpeningHour.builder()
                     .id(openingHoursId)
@@ -38,7 +38,7 @@ public class UpdateOpeningHoursStep implements StepModel {
                     .sundayFrom(requestOpeningHours.getSundayFrom())
                     .sundayTo(requestOpeningHours.getSundayTo())
                     .build();
-            val openingHours = openingHoursService.create(newOpeningHours);
+            val openingHours = openingHourService.create(newOpeningHours);
             stepStore.setItem("openingHours", openingHours);
             return;
         }

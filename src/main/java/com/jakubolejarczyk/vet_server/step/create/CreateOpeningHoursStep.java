@@ -1,7 +1,7 @@
 package com.jakubolejarczyk.vet_server.step.create;
 
 import com.jakubolejarczyk.vet_server.model.independent.OpeningHour;
-import com.jakubolejarczyk.vet_server.service.independent.OpeningHoursService;
+import com.jakubolejarczyk.vet_server.service.independent.OpeningHourService;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import lombok.AllArgsConstructor;
@@ -11,14 +11,14 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class CreateOpeningHoursStep implements StepModel {
-    private final OpeningHoursService openingHoursService;
+    private final OpeningHourService openingHourService;
 
     @Override
     public void runStep(StepStore stepStore) {
         val newOpeningHours = OpeningHour.builder()
                 .isArchived(false)
                 .build();
-        val openingHoursToSave = openingHoursService.create(newOpeningHours);
+        val openingHoursToSave = openingHourService.create(newOpeningHours);
         stepStore.setItem("openingHours", openingHoursToSave);
     }
 }

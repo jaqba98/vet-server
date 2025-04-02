@@ -1,7 +1,7 @@
 package com.jakubolejarczyk.vet_server.step.get;
 
 import com.jakubolejarczyk.vet_server.model.dependent.Employment;
-import com.jakubolejarczyk.vet_server.service.dependent.VetServiceService;
+import com.jakubolejarczyk.vet_server.service.dependent.VetService;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class GetVetServicesByEmploymentStep implements StepModel {
-    private final VetServiceService vetServiceService;
+    private final VetService vetService;
 
     @Override
     public void runStep(StepStore stepStore) {
@@ -20,7 +20,7 @@ public class GetVetServicesByEmploymentStep implements StepModel {
         val clinicsIds = employments.stream()
                 .map(Employment::getClinicId)
                 .toList();
-        val vetServices = vetServiceService.findAllByClinicIds(clinicsIds);
+        val vetServices = vetService.findAllByClinicIds(clinicsIds);
         stepStore.setItem("vetServices", vetServices);
     }
 }

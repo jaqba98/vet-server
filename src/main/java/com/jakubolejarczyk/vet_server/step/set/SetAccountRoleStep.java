@@ -3,9 +3,9 @@ package com.jakubolejarczyk.vet_server.step.set;
 import com.jakubolejarczyk.vet_server.model.dependent.Vet;
 import com.jakubolejarczyk.vet_server.model.independent.Account;
 import com.jakubolejarczyk.vet_server.model.independent.OpeningHour;
-import com.jakubolejarczyk.vet_server.service.dependent.VetService;
+import com.jakubolejarczyk.vet_server.service.dependent.ServiceClinicService;
 import com.jakubolejarczyk.vet_server.service.independent.AccountService;
-import com.jakubolejarczyk.vet_server.service.independent.OpeningHoursService;
+import com.jakubolejarczyk.vet_server.service.independent.OpeningHourService;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import lombok.AllArgsConstructor;
@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class SetAccountRoleStep implements StepModel {
     private final AccountService accountService;
-    private final VetService vetService;
-    private final OpeningHoursService openingHoursService;
+    private final ServiceClinicService serviceClinicService;
+    private final OpeningHourService openingHourService;
 
     @Override
     public void runStep(StepStore stepStore) {
@@ -36,7 +36,7 @@ public class SetAccountRoleStep implements StepModel {
     private void createVet(Long accountId) {
         try {
             System.out.println(1);
-            val vet = vetService.findByAccountId(accountId);
+            val vet = serviceClinicService.findByAccountId(accountId);
             System.out.println(2);
             if (vet.isPresent()) {
                 return;
@@ -46,13 +46,13 @@ public class SetAccountRoleStep implements StepModel {
                     .isArchived(false)
                     .build();
             System.out.println(4);
-            OpeningHour newOpeningHours = openingHoursService.create(openingHours);
+            OpeningHour newOpeningHours = openingHourService.create(openingHours);
             Vet newVet = Vet.builder()
                     .isArchived(false)
                     .accountId(accountId)
                     .openingHourId(newOpeningHours.getId())
                     .build();
-            vetService.create(newVet);
+            serviceClinicService.create(newVet);
         } catch (Exception e) {
             throw new RuntimeException("Failed to create vet: " + e.getMessage());
         }

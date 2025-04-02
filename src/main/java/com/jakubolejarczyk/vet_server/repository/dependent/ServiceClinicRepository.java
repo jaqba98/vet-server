@@ -1,8 +1,8 @@
 package com.jakubolejarczyk.vet_server.repository.dependent;
 
-import com.jakubolejarczyk.vet_server.model.dependent.Pet;
+import com.jakubolejarczyk.vet_server.model.dependent.ServiceClinic;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PetRepository extends JpaRepository<Pet, Long> {}
+public interface ServiceClinicRepository extends JpaRepository<ServiceClinic, Long> {}

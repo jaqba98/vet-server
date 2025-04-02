@@ -2,7 +2,7 @@ package com.jakubolejarczyk.vet_server.step.get;
 
 import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
 import com.jakubolejarczyk.vet_server.service.dependent.ClinicService;
-import com.jakubolejarczyk.vet_server.service.independent.OpeningHoursService;
+import com.jakubolejarczyk.vet_server.service.independent.OpeningHourService;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class GetOpeningHoursForClinicIdsStep implements StepModel {
     private final ClinicService clinicService;
-    private final OpeningHoursService openingHoursService;
+    private final OpeningHourService openingHourService;
 
     @Override
     public void runStep(StepStore stepStore) {
@@ -22,7 +22,7 @@ public class GetOpeningHoursForClinicIdsStep implements StepModel {
         val openingHoursIds = clinicService.findAllById(clinicIds).stream()
                 .map(Clinic::getOpeningHourId)
                 .toList();
-        val openingHours = openingHoursService.findAllById(openingHoursIds);
+        val openingHours = openingHourService.findAllById(openingHoursIds);
         stepStore.setItem("openingHours", openingHours);
     }
 }

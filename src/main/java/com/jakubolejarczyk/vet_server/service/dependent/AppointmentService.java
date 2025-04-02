@@ -2,34 +2,12 @@ package com.jakubolejarczyk.vet_server.service.dependent;
 
 import com.jakubolejarczyk.vet_server.model.dependent.Appointment;
 import com.jakubolejarczyk.vet_server.repository.dependent.AppointmentRepository;
-import lombok.AllArgsConstructor;
+import com.jakubolejarczyk.vet_server.service.base.BaseService;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-
 @Service
-@AllArgsConstructor
-public class AppointmentService {
-    private final AppointmentRepository repository;
-
-    public Appointment create(Appointment appointment) {
-        return repository.save(appointment);
-    }
-
-    public List<Appointment> findAllById(List<Long> clinicIds) {
-        return repository.findAllById(clinicIds);
-    }
-
-    public List<Appointment> findAllByClinicIds(List<Long> clinicIds) {
-        return repository.findAllByClinicIds(clinicIds);
-    }
-
-    public Optional<Appointment> findById(Long id) {
-        return repository.findById(id);
-    }
-
-    public void updateIsArchived(List<Long> ids, Boolean isArchived) {
-        repository.updateIsArchived(ids, isArchived);
+public class AppointmentService extends BaseService<Appointment> {
+    public AppointmentService(AppointmentRepository repository) {
+        super(repository);
     }
 }

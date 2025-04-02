@@ -2,7 +2,7 @@ package com.jakubolejarczyk.vet_server.step.update;
 
 import com.jakubolejarczyk.vet_server.model.dependent.Employment;
 import com.jakubolejarczyk.vet_server.model.independent.OpeningHour;
-import com.jakubolejarczyk.vet_server.service.independent.OpeningHoursService;
+import com.jakubolejarczyk.vet_server.service.independent.OpeningHourService;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import lombok.AllArgsConstructor;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class UpdateOpeningHoursIsArchivedStep implements StepModel {
-    private final OpeningHoursService openingHoursService;
+    private final OpeningHourService openingHourService;
 
     @Override
     public void runStep(StepStore stepStore) {
@@ -21,9 +21,9 @@ public class UpdateOpeningHoursIsArchivedStep implements StepModel {
         val clinicsIds = employments.stream()
                 .map(Employment::getClinicId)
                 .toList();
-        val openingHoursIds = openingHoursService.findAllById(clinicsIds).stream()
+        val openingHoursIds = openingHourService.findAllById(clinicsIds).stream()
                 .map(OpeningHour::getId)
                 .toList();
-        openingHoursService.updateIsArchived(openingHoursIds, true);
+        openingHourService.updateIsArchived(openingHoursIds, true);
     }
 }

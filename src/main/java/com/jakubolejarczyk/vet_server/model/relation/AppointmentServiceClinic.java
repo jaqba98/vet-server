@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.model.relation;
 
-import com.jakubolejarczyk.vet_server.domain.relation.AppointmentServiceDomain;
+import com.jakubolejarczyk.vet_server.domain.relation.AppointmentServiceClinicDomain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @SuperBuilder
 @NoArgsConstructor
-public class AppointmentService implements AppointmentServiceDomain {
+public class AppointmentServiceClinic implements AppointmentServiceClinicDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,6 +23,6 @@ public class AppointmentService implements AppointmentServiceDomain {
     @Column(name = "appointment_id", nullable = false)
     private Long appointmentId;
 
-    @Column(name = "service_id", nullable = false)
-    private Long serviceId;
+    @Column(name = "service_clinic_id", nullable = false)
+    private Long serviceClinicId;
 }

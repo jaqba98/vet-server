@@ -115,7 +115,7 @@ CREATE TABLE Employment (
     FOREIGN KEY (clinic_id) REFERENCES Clinic(id)
 );
 
-CREATE TABLE Service (
+CREATE TABLE ServiceClinic (
     id BIGSERIAL PRIMARY KEY,
     is_archived BOOLEAN NOT NULL,
     entity_name VARCHAR(255) NOT NULL,
@@ -179,13 +179,13 @@ CREATE TABLE Appointment (
 
 -- ## Create tables with relations between them. ##
 
-CREATE TABLE Appointment_Services (
+CREATE TABLE Appointment_ServiceClinic (
     id BIGSERIAL PRIMARY KEY,
     is_archived BOOLEAN NOT NULL,
     appointment_id BIGINT NOT NULL,
-    service_id BIGINT NOT NULL,
+    service_clinic_id BIGINT NOT NULL,
     FOREIGN KEY (appointment_id) REFERENCES Appointment(id),
-    FOREIGN KEY (service_id) REFERENCES Service(id)
+    FOREIGN KEY (service_clinic_id) REFERENCES ServiceClinic(id)
 );
 
 CREATE TABLE Appointment_Medication (

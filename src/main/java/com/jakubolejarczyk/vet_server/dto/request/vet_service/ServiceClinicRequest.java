@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.dto.request.vet_service;
 
-import com.jakubolejarczyk.vet_server.domain.dependent.ServiceDomain;
+import com.jakubolejarczyk.vet_server.domain.dependent.ServiceClinicDomain;
 import com.jakubolejarczyk.vet_server.dto.request.base.TokenRequest;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
-public class ServiceRequest extends TokenRequest implements ServiceDomain {
+public class ServiceClinicRequest extends TokenRequest implements ServiceClinicDomain {
     private Long id;
 
     @NotNull(message = "Name is required!")
