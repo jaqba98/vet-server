@@ -10,7 +10,7 @@ public interface MedicationDomain extends BaseDomain {
     String getDescription();
     String getManufacturer();
     String getDose();
-    Integer getQuantityInStock();
+    Long getQuantityInStock();
     LocalDate getExpirationDate();
     BigDecimal getPrice();
     Boolean getIsAvailable();

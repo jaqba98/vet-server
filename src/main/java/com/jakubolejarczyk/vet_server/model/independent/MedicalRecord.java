@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "medicalrecord")
@@ -23,21 +23,21 @@ public class MedicalRecord implements MedicalRecordDomain {
     @Column(name = "is_archived", nullable = false)
     private Boolean isArchived;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String diagnosis;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String treatment;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String procedures;
 
     @Column(name = "next_appointment", nullable = false)
-    private Date nextAppointment;
+    private LocalDate nextAppointment;
 
     @Column(nullable = false)
     private String status;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String notes;
 }

@@ -1,6 +1,5 @@
 package com.jakubolejarczyk.vet_server.step.update;
 
-import com.jakubolejarczyk.vet_server.model.independent.Invoice;
 import com.jakubolejarczyk.vet_server.model.independent.MedicalRecord;
 import com.jakubolejarczyk.vet_server.service.independent.MedicalRecordService;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -26,20 +26,20 @@ public class Vet implements VetDomain {
     private String licenseNumber;
 
     @Column(name = "license_issue_date")
-    private Date licenseIssueDate;
+    private LocalDate licenseIssueDate;
 
     @Column(name = "license_expiry_date")
-    private Date licenseExpiryDate;
+    private LocalDate licenseExpiryDate;
 
     @Column
     private String specialization;
 
     @Column(name = "years_of_experience")
-    private Integer yearsOfExperience;
+    private Long yearsOfExperience;
 
     @Column(name = "account_id", nullable = false)
     private Long accountId;
 
-    @Column(name = "opening_hours_id", nullable = false)
-    private Long openingHoursId;
+    @Column(name = "opening_hour_id", nullable = false)
+    private Long openingHourId;
 }

@@ -23,8 +23,8 @@ public class Pet implements PetDomain {
     @Column(name = "is_archived", nullable = false)
     private Boolean isArchived;
 
-    @Column(nullable = false)
-    private String name;
+    @Column(name = "entity_name", nullable = false)
+    private String entityName;
 
     @Column
     private String species;
@@ -41,15 +41,16 @@ public class Pet implements PetDomain {
     @Column
     private String color;
 
+    @Column
     private Boolean sterilized;
 
-    @Column(nullable = false)
+    @Column
     private String pictureUrl;
 
     @Column(name = "microchip_number")
     private String microchipNumber;
 
-    @Column(name = "medical_notes")
+    @Column(name = "medical_notes", columnDefinition = "TEXT")
     private String medicalNotes;
 
     @Column(name = "client_id", nullable = false)

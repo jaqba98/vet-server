@@ -8,7 +8,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -24,10 +24,10 @@ public class Invoice implements InvoiceDomain {
     private Boolean isArchived;
 
     @Column(name = "invoice_date", nullable = false)
-    private Date invoiceDate;
+    private LocalDate invoiceDate;
 
     @Column(name = "due_date", nullable = false)
-    private Date dueDate;
+    private LocalDate dueDate;
 
     @Column(name = "total_amount", nullable = false)
     private BigDecimal totalAmount;
@@ -38,12 +38,12 @@ public class Invoice implements InvoiceDomain {
     @Column(name = "outstanding_amount", nullable = false)
     private BigDecimal outstandingAmount;
 
-    @Column(name = "payment_status", nullable = false)
+    @Column(name = "payment_status", nullable = false, length = 9)
     private String paymentStatus;
 
-    @Column(name = "payment_method", nullable = false)
+    @Column(name = "payment_method", nullable = false, length = 14)
     private String paymentMethod;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String notes;
 }

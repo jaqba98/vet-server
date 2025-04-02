@@ -10,7 +10,6 @@ import lombok.experimental.SuperBuilder;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "vetservice")
 @Getter
 @Setter
 @SuperBuilder
@@ -23,17 +22,17 @@ public class Service implements ServiceDomain {
     @Column(name = "is_archived", nullable = false)
     private Boolean isArchived;
 
-    @Column(nullable = false)
-    private String name;
+    @Column(name = "entity_name", nullable = false)
+    private String entityName;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 
     @Column(nullable = false)
     private String category;
 
     @Column(name = "duration_minutes", nullable = false)
-    private Integer durationMinutes;
+    private Long durationMinutes;
 
     @Column(precision = 10, scale = 2, nullable = false)
     private BigDecimal price;

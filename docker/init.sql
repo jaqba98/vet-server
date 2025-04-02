@@ -5,7 +5,7 @@
 -- ## Create tables without foreign keys. ##
 
 CREATE TABLE OpeningHour (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     is_archived BOOLEAN NOT NULL,
     monday_from TIME NULL,
     monday_to TIME NULL,
@@ -24,7 +24,7 @@ CREATE TABLE OpeningHour (
 );
 
 CREATE TABLE Account (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     is_archived BOOLEAN NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE Account (
 );
 
 CREATE TABLE MedicalRecord (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     is_archived BOOLEAN NOT NULL,
     diagnosis TEXT NOT NULL,
     treatment TEXT NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE MedicalRecord (
 );
 
 CREATE TABLE Invoice (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     is_archived BOOLEAN NOT NULL,
     invoice_date DATE NOT NULL,
     due_date DATE NOT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE Invoice (
 -- ## Create tables with foreign keys. ##
 
 CREATE TABLE Clinic (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     is_archived BOOLEAN NOT NULL,
     entity_name VARCHAR(150) NOT NULL UNIQUE,
     street VARCHAR(100) NOT NULL,
@@ -73,23 +73,23 @@ CREATE TABLE Clinic (
     country VARCHAR(56) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     phone_number VARCHAR(20) NOT NULL,
-    opening_hour_id INTEGER NOT NULL,
+    opening_hour_id BIGINT NOT NULL,
     FOREIGN KEY (opening_hour_id) REFERENCES OpeningHour(id)
 );
 
 CREATE TABLE Client (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     is_archived BOOLEAN NOT NULL,
     email VARCHAR(255) NOT NULL,
     phone_number VARCHAR(20) NOT NULL,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
-    clinic_id INTEGER NOT NULL,
+    clinic_id BIGINT NOT NULL,
     FOREIGN KEY (clinic_id) REFERENCES Clinic(id)
 );
 
 CREATE TABLE Pet (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     is_archived BOOLEAN NOT NULL,
     entity_name VARCHAR(255) NOT NULL,
     species VARCHAR(255) NULL,
@@ -101,75 +101,75 @@ CREATE TABLE Pet (
     picture_url VARCHAR(255) NULL,
     microchip_number VARCHAR(255) NULL,
     medical_notes TEXT NULL,
-    client_id INTEGER NOT NULL,
+    client_id BIGINT NOT NULL,
     FOREIGN KEY (client_id) REFERENCES Client(id)
 );
 
 CREATE TABLE Employment (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     is_archived BOOLEAN NOT NULL,
     is_owner BOOLEAN NOT NULL,
-    account_id INTEGER NOT NULL,
-    clinic_id INTEGER NOT NULL,
+    account_id BIGINT NOT NULL,
+    clinic_id BIGINT NOT NULL,
     FOREIGN KEY (account_id) REFERENCES Account(id),
     FOREIGN KEY (clinic_id) REFERENCES Clinic(id)
 );
 
 CREATE TABLE Service (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     is_archived BOOLEAN NOT NULL,
     entity_name VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     category VARCHAR(255) NOT NULL,
-    duration_minutes INTEGER NOT NULL,
+    duration_minutes BIGINT NOT NULL,
     price DECIMAL(10,2) NOT NULL,
     is_available BOOLEAN NOT NULL,
-    clinic_id INTEGER NOT NULL,
+    clinic_id BIGINT NOT NULL,
     FOREIGN KEY (clinic_id) REFERENCES Clinic(id)
 );
 
 CREATE TABLE Vet (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     is_archived BOOLEAN NOT NULL,
     license_number VARCHAR(255) NULL,
     license_issue_date DATE NULL,
     license_expiry_date DATE NULL,
     specialization VARCHAR(255) NULL,
-    years_of_experience INTEGER NULL,
-    account_id INTEGER NOT NULL,
-    opening_hour_id INTEGER NOT NULL,
+    years_of_experience BIGINT NULL,
+    account_id BIGINT NOT NULL,
+    opening_hour_id BIGINT NOT NULL,
     FOREIGN KEY (account_id) REFERENCES Account(id),
     FOREIGN KEY (opening_hour_id) REFERENCES OpeningHour(id)
 );
 
 CREATE TABLE Medication (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     is_archived BOOLEAN NOT NULL,
     entity_name VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     manufacturer VARCHAR(255) NOT NULL,
     dose VARCHAR(255) NOT NULL,
-    quantity_in_stock INTEGER NOT NULL,
+    quantity_in_stock BIGINT NOT NULL,
     expiration_date DATE NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
     is_available BOOLEAN NOT NULL,
-    clinic_id INTEGER NOT NULL,
+    clinic_id BIGINT NOT NULL,
     FOREIGN KEY (clinic_id) REFERENCES Clinic(id)
 );
 
 CREATE TABLE Appointment (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     is_archived BOOLEAN NOT NULL,
     date_and_hour TIMESTAMP NOT NULL,
     type VARCHAR(255) NOT NULL,
     status VARCHAR(255) NOT NULL,
     reason TEXT NOT NULL,
     notes TEXT NOT NULL,
-    clinic_id INTEGER NOT NULL,
-    vet_id INTEGER NOT NULL,
-    pet_id INTEGER NOT NULL,
-    invoice_id INTEGER NOT NULL,
-    medical_record_id INTEGER NOT NULL,
+    clinic_id BIGINT NOT NULL,
+    vet_id BIGINT NOT NULL,
+    pet_id BIGINT NOT NULL,
+    invoice_id BIGINT NOT NULL,
+    medical_record_id BIGINT NOT NULL,
     FOREIGN KEY (clinic_id) REFERENCES Clinic(id),
     FOREIGN KEY (vet_id) REFERENCES Vet(id),
     FOREIGN KEY (pet_id) REFERENCES Pet(id),
@@ -180,19 +180,19 @@ CREATE TABLE Appointment (
 -- ## Create tables with relations between them. ##
 
 CREATE TABLE Appointment_Services (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     is_archived BOOLEAN NOT NULL,
-    appointment_id INTEGER NOT NULL,
-    service_id INTEGER NOT NULL,
+    appointment_id BIGINT NOT NULL,
+    service_id BIGINT NOT NULL,
     FOREIGN KEY (appointment_id) REFERENCES Appointment(id),
     FOREIGN KEY (service_id) REFERENCES Service(id)
 );
 
 CREATE TABLE Appointment_Medication (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     is_archived BOOLEAN NOT NULL,
-    appointment_id INTEGER NOT NULL,
-    medication_id INTEGER NOT NULL,
+    appointment_id BIGINT NOT NULL,
+    medication_id BIGINT NOT NULL,
     FOREIGN KEY (appointment_id) REFERENCES Appointment(id),
     FOREIGN KEY (medication_id) REFERENCES Medication(id)
 );

@@ -20,8 +20,8 @@ public class Clinic implements ClinicDomain {
     @Column(name = "is_archived", nullable = false)
     private Boolean isArchived;
 
-    @Column(nullable = false, length = 150, unique = true)
-    private String name;
+    @Column(name = "entity_name", nullable = false, unique = true, length = 150)
+    private String entityName;
 
     @Column(nullable = false, length = 100)
     private String street;
@@ -44,12 +44,12 @@ public class Clinic implements ClinicDomain {
     @Column(nullable = false, length = 56)
     private String country;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(name = "phone_number", nullable = false, length = 20)
     private String phoneNumber;
 
-    @Column(name = "opening_hours_id", nullable = false)
-    private Long openingHoursId;
+    @Column(name = "opening_hour_id", nullable = false)
+    private Long openingHourId;
 }

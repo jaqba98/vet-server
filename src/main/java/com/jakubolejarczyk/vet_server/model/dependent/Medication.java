@@ -23,10 +23,10 @@ public class Medication implements MedicationDomain {
     @Column(name = "is_archived", nullable = false)
     private Boolean isArchived;
 
-    @Column(nullable = false)
-    private String name;
+    @Column(name = "entity_name", nullable = false)
+    private String entityName;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 
     @Column(nullable = false)
@@ -36,7 +36,7 @@ public class Medication implements MedicationDomain {
     private String dose;
 
     @Column(name = "quantity_in_stock", nullable = false)
-    private Integer quantityInStock;
+    private Long quantityInStock;
 
     @Column(name = "expiration_date", nullable = false)
     private Date expirationDate;
@@ -44,9 +44,9 @@ public class Medication implements MedicationDomain {
     @Column(nullable = false)
     private BigDecimal price;
 
-    @Column(nullable = false)
+    @Column(name = "is_available", nullable = false)
     private Boolean isAvailable;
 
-    @Column(nullable = false)
+    @Column(name = "clinic_id", nullable = false)
     private Long clinicId;
 }

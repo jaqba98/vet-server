@@ -31,10 +31,10 @@ public class Appointment implements AppointmentDomain {
     @Column(nullable = false)
     private String status;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String reason;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String notes;
 
     @Column(name = "clinic_id", nullable = false)
