@@ -41,8 +41,8 @@ public class VetUpdateController extends BaseController {
         this.successUpdateAccountStep = successUpdateAccountStep;
     }
 
-    @PostMapping("vet-read")
-    public ResponseEntity<Response<?, ?>> vetRead(@Valid @RequestBody VetRequest request) {
+    @PostMapping("vet-update")
+    public ResponseEntity<Response<?, ?>> vetUpdate(@Valid @RequestBody VetRequest request) {
         val steps = new ArrayList<StepModel>();
         steps.addLast(getAccountByTokenStep);
         steps.addLast(updateVetStep);
