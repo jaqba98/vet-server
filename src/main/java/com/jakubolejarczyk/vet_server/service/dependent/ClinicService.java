@@ -26,7 +26,7 @@ public class ClinicService {
     }
 
     public Optional<Clinic> findByName(String name) {
-        return repository.findByName(name);
+        return repository.findByEntityName(name);
     }
 
     public void updateIsArchived(List<Long> ids, Boolean isArchived) {

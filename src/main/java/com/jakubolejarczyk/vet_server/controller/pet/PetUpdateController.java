@@ -54,7 +54,7 @@ public class PetUpdateController extends BaseController {
         val requestPet = Pet.builder()
                 .id(request.getId())
                 .isArchived(request.getIsArchived())
-                .name(request.getName())
+                .entityName(request.getEntityName())
                 .species(request.getSpecies())
                 .breed(request.getBreed())
                 .dateOfBirth(request.getDateOfBirth())

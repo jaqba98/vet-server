@@ -60,7 +60,7 @@ public class VetUpdateController extends BaseController {
                 .specialization(request.getSpecialization())
                 .yearsOfExperience(request.getYearsOfExperience())
                 .accountId(request.getAccountId())
-                .openingHoursId(request.getOpeningHoursId())
+                .openingHourId(request.getOpeningHourId())
                 .build();
         getStepStore().setItem("requestVet", requestVet);
         return runController(steps);

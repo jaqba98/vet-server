@@ -9,6 +9,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -39,7 +40,7 @@ public class Medication implements MedicationDomain {
     private Long quantityInStock;
 
     @Column(name = "expiration_date", nullable = false)
-    private Date expirationDate;
+    private LocalDate expirationDate;
 
     @Column(nullable = false)
     private BigDecimal price;

@@ -1,7 +1,7 @@
 package com.jakubolejarczyk.vet_server.service.dependent;
 
 import com.jakubolejarczyk.vet_server.model.dependent.Service;
-import com.jakubolejarczyk.vet_server.repository.dependent.VetServiceRepository;
+import com.jakubolejarczyk.vet_server.repository.dependent.ServiceRepository;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.Optional;
 @org.springframework.stereotype.Service
 @AllArgsConstructor
 public class VetServiceService {
-    private final VetServiceRepository repository;
+    private final ServiceRepository repository;
 
     public Service create(Service vetService) {
         return repository.save(vetService);

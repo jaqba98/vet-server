@@ -59,7 +59,7 @@ public class MedicationUpdateController extends BaseController {
         val requestMedication = Medication.builder()
                 .id(request.getId())
                 .isArchived(false)
-                .name(request.getName())
+                .entityName(request.getEntityName())
                 .description(request.getDescription())
                 .manufacturer(request.getManufacturer())
                 .dose(request.getDose())

@@ -57,7 +57,7 @@ public class ClinicUpdateController extends BaseController {
         getStepStore().setItem("token", request.getToken());
         val requestClinic = Clinic.builder()
                 .id(request.getId())
-                .name(request.getName())
+                .entityName(request.getEntityName())
                 .street(request.getStreet())
                 .buildingNumber(request.getBuildingNumber())
                 .apartmentNumber(request.getApartmentNumber())

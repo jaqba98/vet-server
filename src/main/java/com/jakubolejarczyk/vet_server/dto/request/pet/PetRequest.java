@@ -10,6 +10,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -22,7 +23,7 @@ public class PetRequest extends TokenRequest implements PetDomain {
     @NotNull(message = "Name is required!")
     @NotBlank(message = "Name cannot be empty!")
     @Size(max = 255, message = "Name cannot be longer than 255 characters!")
-    private String name;
+    private String entityName;
 
     @Size(max = 255, message = "Species cannot be longer than 255 characters!")
     private String species;
@@ -30,7 +31,7 @@ public class PetRequest extends TokenRequest implements PetDomain {
     @Size(max = 255, message = "Breed cannot be longer than 255 characters!")
     private String breed;
 
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
     private BigDecimal weightKg;
 

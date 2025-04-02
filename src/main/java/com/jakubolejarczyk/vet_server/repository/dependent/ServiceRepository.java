@@ -11,12 +11,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface VetServiceRepository extends JpaRepository<Service, Long> {
-    @Query("SELECT e FROM VetService e WHERE e.clinicId IN :clinicIds AND e.isArchived = false")
+public interface ServiceRepository extends JpaRepository<Service, Long> {
+    @Query("SELECT e FROM Service e WHERE e.clinicId IN :clinicIds AND e.isArchived = false")
     List<Service> findAllByClinicIds(@Param("clinicIds") List<Long> clinicIds);
 
     @Transactional
     @Modifying
-    @Query("UPDATE VetService e SET e.isArchived = :isArchived WHERE e.id IN :ids")
+    @Query("UPDATE Service e SET e.isArchived = :isArchived WHERE e.id IN :ids")
     void updateIsArchived(@Param("ids") List<Long> ids, @Param("isArchived") Boolean isArchived);
 }

@@ -9,6 +9,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -33,7 +34,7 @@ public class Pet implements PetDomain {
     private String breed;
 
     @Column(name = "date_of_birth")
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @Column(name = "weight_kg")
     private BigDecimal weightKg;

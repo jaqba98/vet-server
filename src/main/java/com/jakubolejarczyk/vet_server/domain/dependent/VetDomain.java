@@ -9,7 +9,7 @@ public interface VetDomain extends BaseDomain {
     LocalDate getLicenseIssueDate();
     LocalDate getLicenseExpiryDate();
     String getSpecialization();
-    Integer getYearsOfExperience();
+    Long getYearsOfExperience();
     Long getAccountId();
     Long getOpeningHourId();
 }

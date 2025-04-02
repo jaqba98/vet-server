@@ -26,7 +26,7 @@ public class UpdateClinicByEmploymentStep implements StepModel {
             val clinic = Clinic.builder()
                     .id(currentClinic.get().getId())
                     .isArchived(currentClinic.get().getIsArchived())
-                    .name(requestClinic.getName())
+                    .entityName(requestClinic.getEntityName())
                     .street(requestClinic.getStreet())
                     .buildingNumber(requestClinic.getBuildingNumber())
                     .apartmentNumber(requestClinic.getApartmentNumber())
@@ -36,7 +36,7 @@ public class UpdateClinicByEmploymentStep implements StepModel {
                     .country(requestClinic.getCountry())
                     .email(requestClinic.getEmail())
                     .phoneNumber(requestClinic.getPhoneNumber())
-                    .openingHoursId(currentClinic.get().getOpeningHoursId())
+                    .openingHourId(currentClinic.get().getOpeningHourId())
                     .build();
             val updatedClinic = clinicService.create(clinic);
             stepStore.setItem("updatedClinic", updatedClinic);

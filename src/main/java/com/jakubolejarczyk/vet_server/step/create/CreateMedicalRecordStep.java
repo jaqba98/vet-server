@@ -19,7 +19,7 @@ public class CreateMedicalRecordStep implements StepModel {
     @Override
     public void runStep(StepStore stepStore) {
         val localDate = LocalDate.now();
-        val now = Date.valueOf(localDate);
+        val now = Date.valueOf(localDate).toLocalDate();
         val newMedicalRecord = MedicalRecord.builder()
                 .isArchived(false)
                 .diagnosis("")

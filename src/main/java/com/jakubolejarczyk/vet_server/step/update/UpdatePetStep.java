@@ -23,7 +23,7 @@ public class UpdatePetStep implements StepModel {
             val newPet = Pet.builder()
                     .id(currentPet.get().getId())
                     .isArchived(currentPet.get().getIsArchived())
-                    .name(requestPet.getName())
+                    .entityName(requestPet.getEntityName())
                     .species(requestPet.getSpecies())
                     .breed(requestPet.getBreed())
                     .dateOfBirth(requestPet.getDateOfBirth())

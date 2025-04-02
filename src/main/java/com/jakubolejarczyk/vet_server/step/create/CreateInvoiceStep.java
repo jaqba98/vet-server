@@ -21,7 +21,7 @@ public class CreateInvoiceStep implements StepModel {
     @Override
     public void runStep(StepStore stepStore) {
         val localDate = LocalDate.now();
-        val now = Date.valueOf(localDate);
+        val now = Date.valueOf(localDate).toLocalDate();
         val newInvoice = Invoice.builder()
                 .isArchived(false)
                 .invoiceDate(now)

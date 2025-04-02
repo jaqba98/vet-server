@@ -14,6 +14,6 @@ import java.util.List;
 public interface OpeningHoursRepository extends JpaRepository<OpeningHour, Long> {
     @Transactional
     @Modifying
-    @Query("UPDATE OpeningHours e SET e.isArchived = :isArchived WHERE e.id IN :ids")
+    @Query("UPDATE OpeningHour e SET e.isArchived = :isArchived WHERE e.id IN :ids")
     void updateIsArchived(@Param("ids") List<Long> ids, @Param("isArchived") Boolean isArchived);
 }

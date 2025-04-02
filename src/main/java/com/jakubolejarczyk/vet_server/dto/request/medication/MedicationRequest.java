@@ -10,6 +10,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -22,7 +23,7 @@ public class MedicationRequest extends TokenRequest implements MedicationDomain 
     @NotNull(message = "Name is required!")
     @NotBlank(message = "Name cannot be empty!")
     @Size(max = 255, message = "Name cannot be longer than 255 characters!")
-    private String name;
+    private String entityName;
 
     @NotNull(message = "Description is required!")
     @NotBlank(message = "Description cannot be empty!")
@@ -40,10 +41,10 @@ public class MedicationRequest extends TokenRequest implements MedicationDomain 
     private String dose;
 
     @NotNull(message = "Quantity in stock is required!")
-    private Integer quantityInStock;
+    private Long quantityInStock;
 
     @NotNull(message = "Expiration date is required!")
-    private Date expirationDate;
+    private LocalDate expirationDate;
 
     @NotNull(message = "Price is required!")
     private BigDecimal price;

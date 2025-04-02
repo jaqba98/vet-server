@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ClinicRepository extends JpaRepository<Clinic, Long> {
-    Optional<Clinic> findByName(@Param("name") String name);
+    Optional<Clinic> findByEntityName(@Param("entityName") String entityName);
 
     @Transactional
     @Modifying

@@ -10,6 +10,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -20,10 +21,10 @@ public class InvoiceRequest extends TokenRequest implements InvoiceDomain {
     private Boolean isArchived;
 
     @NotNull(message = "Invoice Date is required!")
-    private Date invoiceDate;
+    private LocalDate invoiceDate;
 
     @NotNull(message = "Due Date is required!")
-    private Date dueDate;
+    private LocalDate dueDate;
 
     @NotNull(message = "Total Amount is required!")
     private BigDecimal totalAmount;

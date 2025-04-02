@@ -29,7 +29,7 @@ public class UpdateVetStep implements StepModel {
                     .specialization(requestVet.getSpecialization())
                     .yearsOfExperience(requestVet.getYearsOfExperience())
                     .accountId(currentVet.get().getAccountId())
-                    .openingHoursId(currentVet.get().getOpeningHoursId())
+                    .openingHourId(currentVet.get().getOpeningHourId())
                     .build();
             val vet = vetService.create(newVet);
             stepStore.setItem("vet", vet);

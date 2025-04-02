@@ -20,7 +20,7 @@ public class CreateVetServiceStep implements StepModel {
         val clinicId = stepStore.getItem("clinicId", Long.class);
         val vetService = Service.builder()
                 .isArchived(false)
-                .name(requestVetService.getName())
+                .entityName(requestVetService.getEntityName())
                 .description(requestVetService.getDescription())
                 .category(requestVetService.getCategory())
                 .durationMinutes(requestVetService.getDurationMinutes())

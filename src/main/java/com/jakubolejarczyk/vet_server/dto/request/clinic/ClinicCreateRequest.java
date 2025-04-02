@@ -18,7 +18,7 @@ public class ClinicCreateRequest extends TokenRequest implements ClinicDomain {
     @NotBlank(message = "Name cannot be empty!")
     @Size(max = 150, message = "Name cannot be longer than 150 characters!")
     @Unique(message = "There is a clinic with the given name!", table = "clinic", column = "name")
-    private String name;
+    private String entityName;
 
     @NotNull(message = "Street is required!")
     @NotBlank(message = "Street cannot be empty!")
@@ -66,5 +66,5 @@ public class ClinicCreateRequest extends TokenRequest implements ClinicDomain {
 
     private Boolean isArchived;
 
-    private Long openingHoursId;
+    private Long openingHourId;
 }

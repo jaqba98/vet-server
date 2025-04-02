@@ -21,7 +21,7 @@ public class CreateMedicationStep implements StepModel {
         val clinicId = stepStore.getItem("clinicId", Long.class);
         val medication = Medication.builder()
                 .isArchived(false)
-                .name(requestMedication.getName())
+                .entityName(requestMedication.getEntityName())
                 .description(requestMedication.getDescription())
                 .manufacturer(requestMedication.getManufacturer())
                 .dose(requestMedication.getDose())

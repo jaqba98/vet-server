@@ -22,7 +22,7 @@ public class UpdateVetServiceStep implements StepModel {
             val newVetService = Service.builder()
                     .id(currentVetService.get().getId())
                     .isArchived(currentVetService.get().getIsArchived())
-                    .name(requestVetService.getName())
+                    .entityName(requestVetService.getEntityName())
                     .description(requestVetService.getDescription())
                     .category(requestVetService.getCategory())
                     .durationMinutes(requestVetService.getDurationMinutes())

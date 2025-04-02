@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -34,7 +35,7 @@ public class MedicalRecordRequest extends TokenRequest implements MedicalRecordD
     private String procedures;
 
     @NotNull(message = "Next Appointment is required!")
-    private Date nextAppointment;
+    private LocalDate nextAppointment;
 
     @NotNull(message = "Status is required!")
     @NotBlank(message = "Status cannot be empty!")

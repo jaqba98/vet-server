@@ -50,7 +50,7 @@ public class SetAccountRoleStep implements StepModel {
             Vet newVet = Vet.builder()
                     .isArchived(false)
                     .accountId(accountId)
-                    .openingHoursId(newOpeningHours.getId())
+                    .openingHourId(newOpeningHours.getId())
                     .build();
             vetService.create(newVet);
         } catch (Exception e) {

@@ -18,7 +18,7 @@ public class GetOpeningHoursByClinicsStep implements StepModel {
         if (stepStore.hasNotItem("clinics")) throw new Error("The clinics is required!");
         val clinics = stepStore.getItemAsArray("clinics", Clinic.class);
         val openingHoursId = clinics.stream()
-                .map(Clinic::getOpeningHoursId)
+                .map(Clinic::getOpeningHourId)
                 .toList();
         val openingHours = openingHoursService.findAllById(openingHoursId);
         stepStore.setItem("openingHours", openingHours);

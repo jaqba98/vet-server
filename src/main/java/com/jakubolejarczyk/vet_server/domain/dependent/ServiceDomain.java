@@ -8,7 +8,7 @@ public interface ServiceDomain extends BaseDomain {
     String getEntityName();
     String getDescription();
     String getCategory();
-    Integer getDurationMinutes();
+    Long getDurationMinutes();
     BigDecimal getPrice();
     Boolean getIsAvailable();
     Long getClinicId();

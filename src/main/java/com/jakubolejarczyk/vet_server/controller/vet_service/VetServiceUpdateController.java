@@ -59,7 +59,7 @@ public class VetServiceUpdateController extends BaseController {
         val requestVetService = Service.builder()
                 .id(request.getId())
                 .isArchived(request.getIsArchived())
-                .name(request.getName())
+                .entityName(request.getEntityName())
                 .description(request.getDescription())
                 .category(request.getCategory())
                 .durationMinutes(request.getDurationMinutes())

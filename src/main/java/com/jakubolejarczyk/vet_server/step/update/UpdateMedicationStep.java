@@ -23,7 +23,7 @@ public class UpdateMedicationStep implements StepModel {
             val newMedication = Medication.builder()
                     .id(currentMedication.get().getId())
                     .isArchived(currentMedication.get().getIsArchived())
-                    .name(requestMedication.getName())
+                    .entityName(requestMedication.getEntityName())
                     .description(requestMedication.getDescription())
                     .manufacturer(requestMedication.getManufacturer())
                     .dose(requestMedication.getDose())

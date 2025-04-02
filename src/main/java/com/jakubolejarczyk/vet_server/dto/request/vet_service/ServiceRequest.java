@@ -18,7 +18,7 @@ public class ServiceRequest extends TokenRequest implements ServiceDomain {
     @NotNull(message = "Name is required!")
     @NotBlank(message = "Name cannot be empty!")
     @Size(max = 255, message = "Name cannot be longer than 255 characters!")
-    private String name;
+    private String entityName;
 
     @NotNull(message = "Description is required!")
     @NotBlank(message = "Description cannot be empty!")
@@ -31,7 +31,7 @@ public class ServiceRequest extends TokenRequest implements ServiceDomain {
     private String category;
 
     @NotNull(message = "Duration minutes is required!")
-    private Integer durationMinutes;
+    private Long durationMinutes;
 
     @NotNull(message = "Price is required!")
     private BigDecimal price;

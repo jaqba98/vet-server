@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -20,18 +21,18 @@ public class VetRequest extends TokenRequest implements VetDomain {
     @Size(max = 255, message = "License Number cannot be longer than 255 characters!")
     private String licenseNumber;
 
-    private Date licenseIssueDate;
+    private LocalDate licenseIssueDate;
 
-    private Date licenseExpiryDate;
+    private LocalDate licenseExpiryDate;
 
     @Size(max = 255, message = "Specialization cannot be longer than 255 characters!")
     private String specialization;
 
-    private Integer yearsOfExperience;
+    private Long yearsOfExperience;
 
     @NotNull(message = "Account id is required!")
     private Long accountId;
 
     @NotNull(message = "Opening hours id id is required!")
-    private Long openingHoursId;
+    private Long openingHourId;
 }
