@@ -16,6 +16,10 @@ public class VetService {
         return repository.save(vet);
     }
 
+    public Optional<Vet> findById(Long id) {
+        return repository.findById(id);
+    }
+
     public Optional<Vet> findByAccountId(Long accountId) {
         return repository.findByAccountId(accountId);
     }
