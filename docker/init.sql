@@ -63,7 +63,7 @@ CREATE TABLE Invoice (
 CREATE TABLE Clinic (
     id SERIAL PRIMARY KEY,
     is_archived BOOLEAN NOT NULL,
-    name VARCHAR(150) NOT NULL UNIQUE,
+    entity_name VARCHAR(150) NOT NULL UNIQUE,
     street VARCHAR(100) NOT NULL,
     building_number VARCHAR(10) NOT NULL,
     apartment_number VARCHAR(10) NULL,
@@ -91,7 +91,7 @@ CREATE TABLE Client (
 CREATE TABLE Pet (
     id SERIAL PRIMARY KEY,
     is_archived BOOLEAN NOT NULL,
-    name VARCHAR(255) NOT NULL,
+    entity_name VARCHAR(255) NOT NULL,
     species VARCHAR(255) NULL,
     breed VARCHAR(255) NULL,
     date_of_birth DATE NULL,
@@ -118,7 +118,7 @@ CREATE TABLE Employment (
 CREATE TABLE Service (
     id SERIAL PRIMARY KEY,
     is_archived BOOLEAN NOT NULL,
-    name VARCHAR(255) NOT NULL,
+    entity_name VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     category VARCHAR(255) NOT NULL,
     duration_minutes INTEGER NOT NULL,
@@ -145,7 +145,7 @@ CREATE TABLE Vet (
 CREATE TABLE Medication (
     id SERIAL PRIMARY KEY,
     is_archived BOOLEAN NOT NULL,
-    name VARCHAR(255) NOT NULL,
+    entity_name VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     manufacturer VARCHAR(255) NOT NULL,
     dose VARCHAR(255) NOT NULL,
