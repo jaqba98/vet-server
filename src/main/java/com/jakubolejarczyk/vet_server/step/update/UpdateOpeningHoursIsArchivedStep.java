@@ -1,7 +1,7 @@
 package com.jakubolejarczyk.vet_server.step.update;
 
 import com.jakubolejarczyk.vet_server.model.dependent.Employment;
-import com.jakubolejarczyk.vet_server.model.independent.OpeningHours;
+import com.jakubolejarczyk.vet_server.model.independent.OpeningHour;
 import com.jakubolejarczyk.vet_server.service.independent.OpeningHoursService;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
@@ -22,7 +22,7 @@ public class UpdateOpeningHoursIsArchivedStep implements StepModel {
                 .map(Employment::getClinicId)
                 .toList();
         val openingHoursIds = openingHoursService.findAllById(clinicsIds).stream()
-                .map(OpeningHours::getId)
+                .map(OpeningHour::getId)
                 .toList();
         openingHoursService.updateIsArchived(openingHoursIds, true);
     }

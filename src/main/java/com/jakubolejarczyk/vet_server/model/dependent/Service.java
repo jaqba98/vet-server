@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.model.dependent;
 
-import com.jakubolejarczyk.vet_server.domain.dependent.VetServiceDomain;
+import com.jakubolejarczyk.vet_server.domain.dependent.ServiceDomain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @Setter
 @SuperBuilder
 @NoArgsConstructor
-public class VetService implements VetServiceDomain {
+public class Service implements ServiceDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.step.update;
 
-import com.jakubolejarczyk.vet_server.model.independent.OpeningHours;
+import com.jakubolejarczyk.vet_server.model.independent.OpeningHour;
 import com.jakubolejarczyk.vet_server.service.independent.OpeningHoursService;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
@@ -16,11 +16,11 @@ public class UpdateOpeningHoursStep implements StepModel {
     @Override
     public void runStep(StepStore stepStore) {
         if (stepStore.hasNotItem("requestOpeningHours")) throw new Error("The requestOpeningHours is required!");
-        val requestOpeningHours = stepStore.getItem("requestOpeningHours", OpeningHours.class);
+        val requestOpeningHours = stepStore.getItem("requestOpeningHours", OpeningHour.class);
         val openingHoursId = requestOpeningHours.getId();
         val currentOpeningHours = openingHoursService.findById(openingHoursId);
         if (currentOpeningHours.isPresent()) {
-            val newOpeningHours = OpeningHours.builder()
+            val newOpeningHours = OpeningHour.builder()
                     .id(openingHoursId)
                     .isArchived(currentOpeningHours.get().getIsArchived())
                     .mondayFrom(requestOpeningHours.getMondayFrom())

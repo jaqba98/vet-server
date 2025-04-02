@@ -1,7 +1,7 @@
 package com.jakubolejarczyk.vet_server.step.create;
 
 import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
-import com.jakubolejarczyk.vet_server.model.independent.OpeningHours;
+import com.jakubolejarczyk.vet_server.model.independent.OpeningHour;
 import com.jakubolejarczyk.vet_server.service.dependent.ClinicService;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
@@ -18,7 +18,7 @@ public class CreateClinicStep implements StepModel {
     public void runStep(StepStore stepStore) {
         if (stepStore.hasNotItem("openingHours")) throw new Error("The openingHours is required!");
         if (stepStore.hasNotItem("requestClinic")) throw new Error("The requestClinic is required!");
-        val openingHours = stepStore.getItem("openingHours", OpeningHours.class);
+        val openingHours = stepStore.getItem("openingHours", OpeningHour.class);
         val requestClinic = stepStore.getItem("requestClinic", Clinic.class);
         val openingHoursId = openingHours.getId();
         val newClinic = Clinic.builder()

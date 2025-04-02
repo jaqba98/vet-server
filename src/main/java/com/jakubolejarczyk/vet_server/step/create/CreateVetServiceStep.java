@@ -1,15 +1,13 @@
 package com.jakubolejarczyk.vet_server.step.create;
 
-import com.jakubolejarczyk.vet_server.model.dependent.Medication;
-import com.jakubolejarczyk.vet_server.model.dependent.VetService;
+import com.jakubolejarczyk.vet_server.model.dependent.Service;
 import com.jakubolejarczyk.vet_server.service.dependent.VetServiceService;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import lombok.AllArgsConstructor;
 import lombok.val;
-import org.springframework.stereotype.Service;
 
-@Service
+@org.springframework.stereotype.Service
 @AllArgsConstructor
 public class CreateVetServiceStep implements StepModel {
     private final VetServiceService vetServiceService;
@@ -18,9 +16,9 @@ public class CreateVetServiceStep implements StepModel {
     public void runStep(StepStore stepStore) {
         if (stepStore.hasNotItem("requestVetService")) throw new Error("The requestVetService is required!");
         if (stepStore.hasNotItem("clinicId")) throw new Error("The clinicId is required!");
-        val requestVetService = stepStore.getItem("requestVetService", VetService.class);
+        val requestVetService = stepStore.getItem("requestVetService", Service.class);
         val clinicId = stepStore.getItem("clinicId", Long.class);
-        val vetService = VetService.builder()
+        val vetService = Service.builder()
                 .isArchived(false)
                 .name(requestVetService.getName())
                 .description(requestVetService.getDescription())

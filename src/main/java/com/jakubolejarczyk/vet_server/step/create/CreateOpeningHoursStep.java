@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.step.create;
 
-import com.jakubolejarczyk.vet_server.model.independent.OpeningHours;
+import com.jakubolejarczyk.vet_server.model.independent.OpeningHour;
 import com.jakubolejarczyk.vet_server.service.independent.OpeningHoursService;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
@@ -15,7 +15,7 @@ public class CreateOpeningHoursStep implements StepModel {
 
     @Override
     public void runStep(StepStore stepStore) {
-        val newOpeningHours = OpeningHours.builder()
+        val newOpeningHours = OpeningHour.builder()
                 .isArchived(false)
                 .build();
         val openingHoursToSave = openingHoursService.create(newOpeningHours);

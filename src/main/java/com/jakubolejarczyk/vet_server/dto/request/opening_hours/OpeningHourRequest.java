@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.dto.request.opening_hours;
 
-import com.jakubolejarczyk.vet_server.domain.independent.OpeningHoursDomain;
+import com.jakubolejarczyk.vet_server.domain.independent.OpeningHourDomain;
 import com.jakubolejarczyk.vet_server.dto.request.base.TokenRequest;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import java.time.LocalTime;
 
 @Getter
 @Setter
-public class OpeningHoursRequest extends TokenRequest implements OpeningHoursDomain {
+public class OpeningHourRequest extends TokenRequest implements OpeningHourDomain {
     private Long id;
 
     private LocalTime mondayFrom;

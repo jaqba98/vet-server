@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.model.independent;
 
-import com.jakubolejarczyk.vet_server.domain.independent.OpeningHoursDomain;
+import com.jakubolejarczyk.vet_server.domain.independent.OpeningHourDomain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +15,7 @@ import java.time.LocalTime;
 @Setter
 @SuperBuilder
 @NoArgsConstructor
-public class OpeningHours implements OpeningHoursDomain {
+public class OpeningHour implements OpeningHourDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

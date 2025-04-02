@@ -3,11 +3,11 @@ package com.jakubolejarczyk.vet_server.domain.independent;
 import com.jakubolejarczyk.vet_server.domain.base.BaseDomain;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.time.LocalDate;
 
 public interface InvoiceDomain extends BaseDomain {
-    Date getInvoiceDate();
-    Date getDueDate();
+    LocalDate getInvoiceDate();
+    LocalDate getDueDate();
     BigDecimal getTotalAmount();
     BigDecimal getAmountPaid();
     BigDecimal getOutstandingAmount();

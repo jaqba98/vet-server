@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.service.independent;
 
-import com.jakubolejarczyk.vet_server.model.independent.OpeningHours;
+import com.jakubolejarczyk.vet_server.model.independent.OpeningHour;
 import com.jakubolejarczyk.vet_server.repository.independent.OpeningHoursRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,15 +13,15 @@ import java.util.Optional;
 public class OpeningHoursService {
     private final OpeningHoursRepository repository;
 
-    public OpeningHours create(OpeningHours openingHours) {
+    public OpeningHour create(OpeningHour openingHours) {
         return repository.save(openingHours);
     }
 
-    public Optional<OpeningHours> findById(Long id) {
+    public Optional<OpeningHour> findById(Long id) {
         return repository.findById(id);
     }
 
-    public List<OpeningHours> findAllById(List<Long> ids) {
+    public List<OpeningHour> findAllById(List<Long> ids) {
         return repository.findAllById(ids);
     }
 

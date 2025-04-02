@@ -4,7 +4,7 @@ import com.jakubolejarczyk.vet_server.domain.base.BaseDomain;
 
 import java.time.LocalTime;
 
-public interface OpeningHoursDomain extends BaseDomain {
+public interface OpeningHourDomain extends BaseDomain {
     LocalTime getMondayFrom();
     LocalTime getMondayTo();
     LocalTime getTuesdayFrom();

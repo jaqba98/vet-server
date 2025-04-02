@@ -1,8 +1,8 @@
 package com.jakubolejarczyk.vet_server.controller.clinic_opening_hours;
 
-import com.jakubolejarczyk.vet_server.dto.request.opening_hours.OpeningHoursRequest;
+import com.jakubolejarczyk.vet_server.dto.request.opening_hours.OpeningHourRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
-import com.jakubolejarczyk.vet_server.model.independent.OpeningHours;
+import com.jakubolejarczyk.vet_server.model.independent.OpeningHour;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.step.base.BaseController;
 import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
@@ -42,7 +42,7 @@ public class ClinicOpeningHoursUpdateController extends BaseController {
     }
 
     @PostMapping("clinic-opening-hours-update")
-    public ResponseEntity<Response<?, ?>> clinicOpeningHoursUpdate(@Valid @RequestBody OpeningHoursRequest request) {
+    public ResponseEntity<Response<?, ?>> clinicOpeningHoursUpdate(@Valid @RequestBody OpeningHourRequest request) {
         val steps = new ArrayList<StepModel>();
         steps.addLast(getAccountByTokenStep);
         steps.addLast(updateOpeningHoursStep);
@@ -51,7 +51,7 @@ public class ClinicOpeningHoursUpdateController extends BaseController {
         String[] metadataKeys = {};
         initController(dataKeys, metadataKeys);
         getStepStore().setItem("token", request.getToken());
-        val requestOpeningHours = OpeningHours.builder()
+        val requestOpeningHours = OpeningHour.builder()
                 .id(request.getId())
                 .isArchived(request.getIsArchived())
                 .mondayFrom(request.getMondayFrom())

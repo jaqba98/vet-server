@@ -2,7 +2,7 @@ package com.jakubolejarczyk.vet_server.step.set;
 
 import com.jakubolejarczyk.vet_server.model.dependent.Vet;
 import com.jakubolejarczyk.vet_server.model.independent.Account;
-import com.jakubolejarczyk.vet_server.model.independent.OpeningHours;
+import com.jakubolejarczyk.vet_server.model.independent.OpeningHour;
 import com.jakubolejarczyk.vet_server.service.dependent.VetService;
 import com.jakubolejarczyk.vet_server.service.independent.AccountService;
 import com.jakubolejarczyk.vet_server.service.independent.OpeningHoursService;
@@ -42,11 +42,11 @@ public class SetAccountRoleStep implements StepModel {
                 return;
             }
             System.out.println(3);
-            OpeningHours openingHours = OpeningHours.builder()
+            OpeningHour openingHours = OpeningHour.builder()
                     .isArchived(false)
                     .build();
             System.out.println(4);
-            OpeningHours newOpeningHours = openingHoursService.create(openingHours);
+            OpeningHour newOpeningHours = openingHoursService.create(openingHours);
             Vet newVet = Vet.builder()
                     .isArchived(false)
                     .accountId(accountId)
