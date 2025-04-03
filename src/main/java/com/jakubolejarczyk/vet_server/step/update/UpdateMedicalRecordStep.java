@@ -22,7 +22,6 @@ public class UpdateMedicalRecordStep implements StepModel {
         if (currentMedicalRecord.isPresent()) {
             val newMedicalRecord = MedicalRecord.builder()
                     .id(currentMedicalRecord.get().getId())
-                    .isArchived(currentMedicalRecord.get().getIsArchived())
                     .diagnosis(requestMedicalRecord.getDiagnosis())
                     .treatment(requestMedicalRecord.getTreatment())
                     .procedures(requestMedicalRecord.getProcedures())
@@ -30,7 +29,7 @@ public class UpdateMedicalRecordStep implements StepModel {
                     .status(requestMedicalRecord.getStatus())
                     .notes(requestMedicalRecord.getNotes())
                     .build();
-            val medicalRecord = medicalRecordService.create(newMedicalRecord);
+            val medicalRecord = medicalRecordService.save(newMedicalRecord);
             stepStore.setItem("medicalRecord", medicalRecord);
             return;
         }

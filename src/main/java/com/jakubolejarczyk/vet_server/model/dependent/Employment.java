@@ -17,9 +17,6 @@ public class Employment implements EmploymentDomain {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "is_archived", nullable = false)
-    private Boolean isArchived;
-
     @Column(name = "is_owner", nullable = false)
     private Boolean isOwner;
 

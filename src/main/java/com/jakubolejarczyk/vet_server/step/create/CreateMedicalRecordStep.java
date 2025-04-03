@@ -21,7 +21,6 @@ public class CreateMedicalRecordStep implements StepModel {
         val localDate = LocalDate.now();
         val now = Date.valueOf(localDate).toLocalDate();
         val newMedicalRecord = MedicalRecord.builder()
-                .isArchived(false)
                 .diagnosis("")
                 .treatment("")
                 .procedures("")
@@ -29,7 +28,7 @@ public class CreateMedicalRecordStep implements StepModel {
                 .status("")
                 .notes("")
                 .build();
-        val medicalRecord = medicalRecordService.create(newMedicalRecord);
+        val medicalRecord = medicalRecordService.save(newMedicalRecord);
         stepStore.setItem("medicalRecord", medicalRecord);
     }
 }

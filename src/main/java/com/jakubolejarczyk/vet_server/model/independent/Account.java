@@ -17,9 +17,6 @@ public class Account implements AccountDomain {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "is_archived", nullable = false)
-    private Boolean isArchived;
-
     @Column(nullable = false, unique = true)
     private String email;
 

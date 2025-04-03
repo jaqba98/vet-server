@@ -2,6 +2,7 @@ package com.jakubolejarczyk.vet_server.step.update;
 
 import com.jakubolejarczyk.vet_server.model.dependent.Vet;
 import com.jakubolejarczyk.vet_server.service.dependent.ServiceClinicService;
+import com.jakubolejarczyk.vet_server.service.dependent.VetService;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import lombok.AllArgsConstructor;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class UpdateVetStep implements StepModel {
-    private final ServiceClinicService serviceClinicService;
+    private final VetService serviceClinicService;
 
     @Override
     public void runStep(StepStore stepStore) {
@@ -22,7 +23,6 @@ public class UpdateVetStep implements StepModel {
         if (currentVet.isPresent()) {
             val newVet = Vet.builder()
                     .id(currentVet.get().getId())
-                    .isArchived(currentVet.get().getIsArchived())
                     .licenseNumber(requestVet.getLicenseNumber())
                     .licenseIssueDate(requestVet.getLicenseIssueDate())
                     .licenseExpiryDate(requestVet.getLicenseExpiryDate())
@@ -31,7 +31,7 @@ public class UpdateVetStep implements StepModel {
                     .accountId(currentVet.get().getAccountId())
                     .openingHourId(currentVet.get().getOpeningHourId())
                     .build();
-            val vet = serviceClinicService.create(newVet);
+            val vet = serviceClinicService.save(newVet);
             stepStore.setItem("vet", vet);
             return;
         }

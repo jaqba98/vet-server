@@ -20,7 +20,7 @@ public class GetPetsByClientsStep implements StepModel {
         val clientsIds = clients.stream()
                 .map(Client::getId)
                 .toList();
-        val pets = petService.findAllByClientIds(clientsIds);
+        val pets = petService.findAllByClientIdIn(clientsIds);
         stepStore.setItem("pets", pets);
     }
 }

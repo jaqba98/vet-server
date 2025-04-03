@@ -29,13 +29,16 @@ public class UniqueValidator implements ConstraintValidator<Unique, String> {
     @Override
     public boolean isValid(String value, ConstraintValidatorContext constraintValidatorContext) {
         if (table.equals("clinic") && column.equals("name")) {
-            return clinicService.findByName(value).isEmpty();
+//            return clinicService.findByName(value).isEmpty();
+            return true;
         }
         if (table.equals("client") && column.equals("email")) {
-            return clientService.findByEmail(value).isEmpty();
+//            return clientService.findByEmail(value).isEmpty();
+            return true;
         }
         if (table.equals("client") && column.equals("phoneNumber")) {
-            return clientService.findByPhoneNumber(value).isEmpty();
+//            return clientService.findByPhoneNumber(value).isEmpty();
+            return true;
         }
         throw new Error("Unsupported table or column!");
     }

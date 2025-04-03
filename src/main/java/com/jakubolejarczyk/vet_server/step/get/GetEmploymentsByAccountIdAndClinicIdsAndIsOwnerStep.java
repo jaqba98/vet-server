@@ -20,7 +20,7 @@ public class GetEmploymentsByAccountIdAndClinicIdsAndIsOwnerStep implements Step
         val account = stepStore.getItem("account", Account.class);
         val clinicIds = stepStore.getItemAsArray("clinicIds", Long.class);
         val accountId = account.getId();
-        val employments = employmentService.findAllByAccountIdAndClinicIdsAndIsOwner(accountId, clinicIds);
+        val employments = employmentService.findAllByAccountIdAndClinicIdInAndIsOwner(accountId, clinicIds);
         stepStore.setItem("employments", employments);
     }
 }

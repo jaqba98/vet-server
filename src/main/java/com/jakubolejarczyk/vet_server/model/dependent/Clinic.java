@@ -17,9 +17,6 @@ public class Clinic implements ClinicDomain {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "is_archived", nullable = false)
-    private Boolean isArchived;
-
     @Column(name = "entity_name", nullable = false, unique = true, length = 150)
     private String entityName;
 

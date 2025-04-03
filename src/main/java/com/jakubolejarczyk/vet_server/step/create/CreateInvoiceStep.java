@@ -23,7 +23,6 @@ public class CreateInvoiceStep implements StepModel {
         val localDate = LocalDate.now();
         val now = Date.valueOf(localDate).toLocalDate();
         val newInvoice = Invoice.builder()
-                .isArchived(false)
                 .invoiceDate(now)
                 .dueDate(now)
                 .totalAmount(BigDecimal.valueOf(10))
@@ -33,7 +32,7 @@ public class CreateInvoiceStep implements StepModel {
                 .paymentMethod("bbb")
                 .notes("abc")
                 .build();
-        val invoice = invoiceService.create(newInvoice);
+        val invoice = invoiceService.save(newInvoice);
         stepStore.setItem("invoice", invoice);
     }
 }

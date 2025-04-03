@@ -24,8 +24,8 @@ public class UpdateAppointmentIsArchivedStep implements StepModel {
         val appointments = appointmentService.findAllById(appointmentsIds);
         val invoiceIds = appointments.stream().map(Appointment::getInvoiceId).toList();
         val medicalResourceIds = appointments.stream().map(Appointment::getMedicalRecordId).toList();
-        appointmentService.updateIsArchived(appointmentsIds, true);
-        invoiceService.updateIsArchived(invoiceIds, true);
-        medicalRecordService.updateIsArchived(medicalResourceIds, true);
+        appointmentService.deleteAllById(appointmentsIds);
+        invoiceService.deleteAllById(invoiceIds);
+        medicalRecordService.deleteAllById(medicalResourceIds);
     }
 }

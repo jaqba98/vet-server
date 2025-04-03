@@ -52,7 +52,6 @@ public class InvoiceUpdateController extends BaseController {
         getStepStore().setItem("token", request.getToken());
         val requestInvoice = Invoice.builder()
                 .id(request.getId())
-                .isArchived(request.getIsArchived())
                 .invoiceDate(request.getInvoiceDate())
                 .dueDate(request.getDueDate())
                 .totalAmount(request.getTotalAmount())

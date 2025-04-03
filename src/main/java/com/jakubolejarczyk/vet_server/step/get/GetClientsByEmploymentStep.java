@@ -20,7 +20,7 @@ public class GetClientsByEmploymentStep implements StepModel {
         val clinicsIds = employments.stream()
                 .map(Employment::getClinicId)
                 .toList();
-        val clients = clientService.findAllByClinicIds(clinicsIds);
+        val clients = clientService.findAllByClinicIdIn(clinicsIds);
         stepStore.setItem("clients", clients);
     }
 }

@@ -30,7 +30,6 @@ public class CreateAppointmentStep implements StepModel {
         val clinicId = stepStore.getItem("clinicId", Long.class);
         val timestamp = new Timestamp(System.currentTimeMillis());
         val newAppointment = Appointment.builder()
-                .isArchived(false)
                 .dateAndHour(timestamp)
                 .type(requestAppointment.getType())
                 .status(requestAppointment.getStatus())
@@ -42,7 +41,7 @@ public class CreateAppointmentStep implements StepModel {
                 .invoiceId(invoice.getId())
                 .medicalRecordId(medicalRecord.getId())
                 .build();
-        val appointment = appointmentService.create(newAppointment);
+        val appointment = appointmentService.save(newAppointment);
         stepStore.setItem("appointment", appointment);
     }
 }

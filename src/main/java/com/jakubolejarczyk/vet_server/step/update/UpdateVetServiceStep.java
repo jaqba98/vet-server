@@ -1,6 +1,7 @@
 package com.jakubolejarczyk.vet_server.step.update;
 
 import com.jakubolejarczyk.vet_server.model.dependent.ServiceClinic;
+import com.jakubolejarczyk.vet_server.service.dependent.ServiceClinicService;
 import com.jakubolejarczyk.vet_server.service.dependent.VetService;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
@@ -10,7 +11,7 @@ import lombok.val;
 @org.springframework.stereotype.Service
 @AllArgsConstructor
 public class UpdateVetServiceStep implements StepModel {
-    private final VetService vetService;
+    private final ServiceClinicService vetService;
 
     @Override
     public void runStep(StepStore stepStore) {
@@ -21,7 +22,6 @@ public class UpdateVetServiceStep implements StepModel {
         if (currentVetService.isPresent()) {
             val newVetService = ServiceClinic.builder()
                     .id(currentVetService.get().getId())
-                    .isArchived(currentVetService.get().getIsArchived())
                     .entityName(requestVetService.getEntityName())
                     .description(requestVetService.getDescription())
                     .category(requestVetService.getCategory())
@@ -30,7 +30,7 @@ public class UpdateVetServiceStep implements StepModel {
                     .isAvailable(requestVetService.getIsAvailable())
                     .clinicId(currentVetService.get().getClinicId())
                     .build();
-            val vetService = this.vetService.create(newVetService);
+            val vetService = this.vetService.save(newVetService);
             stepStore.setItem("vetService", vetService);
             return;
         }

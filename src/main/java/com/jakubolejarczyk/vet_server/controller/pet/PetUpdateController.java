@@ -53,7 +53,6 @@ public class PetUpdateController extends BaseController {
         getStepStore().setItem("token", request.getToken());
         val requestPet = Pet.builder()
                 .id(request.getId())
-                .isArchived(request.getIsArchived())
                 .entityName(request.getEntityName())
                 .species(request.getSpecies())
                 .breed(request.getBreed())

@@ -20,13 +20,12 @@ public class CreateClientStep implements StepModel {
         val requestClient = stepStore.getItem("requestClient", Client.class);
         val clinicId = stepStore.getItem("clinicId", Long.class);
         val client = Client.builder()
-                .isArchived(false)
                 .email(requestClient.getEmail())
                 .phoneNumber(requestClient.getPhoneNumber())
                 .firstName(requestClient.getFirstName())
                 .lastName(requestClient.getLastName())
                 .clinicId(clinicId)
                 .build();
-        clientService.create(client);
+        clientService.save(client);
     }
 }

@@ -20,7 +20,7 @@ public class GetVetServicesByEmploymentStep implements StepModel {
         val clinicsIds = employments.stream()
                 .map(Employment::getClinicId)
                 .toList();
-        val vetServices = vetService.findAllByClinicIds(clinicsIds);
+        val vetServices = vetService.findAllByClinicIdIn(clinicsIds);
         stepStore.setItem("vetServices", vetServices);
     }
 }

@@ -22,7 +22,6 @@ public class UpdateInvoiceStep implements StepModel {
         if (currentInvoice.isPresent()) {
             val newInvoice = Invoice.builder()
                     .id(currentInvoice.get().getId())
-                    .isArchived(currentInvoice.get().getIsArchived())
                     .invoiceDate(requestInvoice.getInvoiceDate())
                     .dueDate(requestInvoice.getDueDate())
                     .totalAmount(requestInvoice.getTotalAmount())
@@ -32,7 +31,7 @@ public class UpdateInvoiceStep implements StepModel {
                     .paymentMethod(requestInvoice.getPaymentMethod())
                     .notes(requestInvoice.getNotes())
                     .build();
-            val invoice = invoiceService.create(newInvoice);
+            val invoice = invoiceService.save(newInvoice);
             stepStore.setItem("invoice", invoice);
             return;
         }

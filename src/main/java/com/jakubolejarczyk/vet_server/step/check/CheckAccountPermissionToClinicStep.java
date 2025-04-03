@@ -20,7 +20,7 @@ public class CheckAccountPermissionToClinicStep implements StepModel {
         val clinicId = stepStore.getItem("clinicId", Long.class);
         val account = stepStore.getItem("account", Account.class);
         val accountId = account.getId();
-        val employment = employmentService.findByClinicIdAndAccountIdAndIsOwner(clinicId, accountId);
+        val employment = employmentService.findByAccountIdAndClinicIdAndIsOwner(accountId, clinicId);
         if (employment.isPresent()) {
             return;
         }

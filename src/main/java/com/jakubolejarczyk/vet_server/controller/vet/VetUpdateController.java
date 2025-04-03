@@ -53,7 +53,6 @@ public class VetUpdateController extends BaseController {
         getStepStore().setItem("token", request.getToken());
         val requestVet = Vet.builder()
                 .id(request.getId())
-                .isArchived(request.getIsArchived())
                 .licenseNumber(request.getLicenseNumber())
                 .licenseIssueDate(request.getLicenseIssueDate())
                 .licenseExpiryDate(request.getLicenseExpiryDate())

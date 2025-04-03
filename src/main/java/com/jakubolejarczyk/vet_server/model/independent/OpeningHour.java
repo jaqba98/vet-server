@@ -20,9 +20,6 @@ public class OpeningHour implements OpeningHourDomain {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "is_archived", nullable = false)
-    private Boolean isArchived;
-
     @Column(name = "monday_from")
     private LocalTime mondayFrom;
 

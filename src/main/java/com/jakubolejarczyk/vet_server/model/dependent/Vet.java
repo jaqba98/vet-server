@@ -19,9 +19,6 @@ public class Vet implements VetDomain {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "is_archived", nullable = false)
-    private Boolean isArchived;
-
     @Column(name = "license_number")
     private String licenseNumber;
 

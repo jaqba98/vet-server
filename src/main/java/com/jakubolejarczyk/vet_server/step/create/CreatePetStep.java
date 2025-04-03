@@ -18,7 +18,6 @@ public class CreatePetStep implements StepModel {
         if (stepStore.hasNotItem("requestPet")) throw new Error("The requestPet is required!");
         val requestPet = stepStore.getItem("requestPet", Pet.class);
         val pet = Pet.builder()
-                .isArchived(false)
                 .entityName(requestPet.getEntityName())
                 .species(requestPet.getSpecies())
                 .breed(requestPet.getBreed())
@@ -31,6 +30,6 @@ public class CreatePetStep implements StepModel {
                 .medicalNotes(requestPet.getMedicalNotes())
                 .clientId(requestPet.getClientId())
                 .build();
-        petService.create(pet);
+        petService.save(pet);
     }
 }

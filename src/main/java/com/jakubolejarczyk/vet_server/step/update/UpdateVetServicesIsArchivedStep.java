@@ -16,6 +16,6 @@ public class UpdateVetServicesIsArchivedStep implements StepModel {
     public void runStep(StepStore stepStore) {
         if (stepStore.hasNotItem("vetServicesIds")) throw new Error("The vetServicesIds is required!");
         val vetServicesIds = stepStore.getItemAsArray("vetServicesIds", Long.class);
-        vetService.updateIsArchived(vetServicesIds, true);
+        vetService.deleteAllById(vetServicesIds);
     }
 }

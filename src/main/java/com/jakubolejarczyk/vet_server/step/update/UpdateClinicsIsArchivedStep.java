@@ -20,6 +20,6 @@ public class UpdateClinicsIsArchivedStep implements StepModel {
         val clinicsIds = employments.stream()
                 .map(Employment::getClinicId)
                 .toList();
-        clinicService.updateIsArchived(clinicsIds, true);
+        clinicService.deleteAllById(clinicsIds);
     }
 }

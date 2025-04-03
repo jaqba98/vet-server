@@ -27,7 +27,6 @@ public class CreateAccountStep implements StepModel {
         val lastName = stepStore.getItem("lastName", String.class);
         val hashPassword = passwordService.encode(password);
         val account = Account.builder()
-                .isArchived(false)
                 .email(email)
                 .password(hashPassword)
                 .firstName(firstName)
@@ -35,7 +34,7 @@ public class CreateAccountStep implements StepModel {
                 .role(null)
                 .pictureUrl(null)
                 .build();
-        accountService.create(account);
+        accountService.save(account);
         stepStore.addMessage("Registration was successful!");
     }
 }

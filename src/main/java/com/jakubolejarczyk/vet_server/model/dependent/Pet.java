@@ -20,9 +20,6 @@ public class Pet implements PetDomain {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "is_archived", nullable = false)
-    private Boolean isArchived;
-
     @Column(name = "entity_name", nullable = false)
     private String entityName;
 

@@ -22,7 +22,6 @@ public class CreateClinicStep implements StepModel {
         val requestClinic = stepStore.getItem("requestClinic", Clinic.class);
         val openingHoursId = openingHours.getId();
         val newClinic = Clinic.builder()
-                .isArchived(false)
                 .entityName(requestClinic.getEntityName())
                 .street(requestClinic.getStreet())
                 .buildingNumber(requestClinic.getBuildingNumber())
@@ -35,7 +34,7 @@ public class CreateClinicStep implements StepModel {
                 .phoneNumber(requestClinic.getPhoneNumber())
                 .openingHourId(openingHoursId)
                 .build();
-        val clinic = clinicService.create(newClinic);
+        val clinic = clinicService.save(newClinic);
         stepStore.setItem("clinic", clinic);
     }
 }

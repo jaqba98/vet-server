@@ -22,7 +22,6 @@ public class UpdateOpeningHoursStep implements StepModel {
         if (currentOpeningHours.isPresent()) {
             val newOpeningHours = OpeningHour.builder()
                     .id(openingHoursId)
-                    .isArchived(currentOpeningHours.get().getIsArchived())
                     .mondayFrom(requestOpeningHours.getMondayFrom())
                     .mondayTo(requestOpeningHours.getMondayTo())
                     .tuesdayFrom(requestOpeningHours.getTuesdayFrom())
@@ -38,7 +37,7 @@ public class UpdateOpeningHoursStep implements StepModel {
                     .sundayFrom(requestOpeningHours.getSundayFrom())
                     .sundayTo(requestOpeningHours.getSundayTo())
                     .build();
-            val openingHours = openingHourService.create(newOpeningHours);
+            val openingHours = openingHourService.save(newOpeningHours);
             stepStore.setItem("openingHours", openingHours);
             return;
         }

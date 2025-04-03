@@ -22,14 +22,13 @@ public class UpdateClientStep implements StepModel {
         if (currentClient.isPresent()) {
             val newClient = Client.builder()
                     .id(currentClient.get().getId())
-                    .isArchived(currentClient.get().getIsArchived())
                     .email(requestClient.getEmail())
                     .phoneNumber(requestClient.getPhoneNumber())
                     .firstName(requestClient.getFirstName())
                     .lastName(requestClient.getLastName())
                     .clinicId(requestClient.getClinicId())
                     .build();
-            val client = clientService.create(newClient);
+            val client = clientService.save(newClient);
             stepStore.setItem("client", client);
             return;
         }

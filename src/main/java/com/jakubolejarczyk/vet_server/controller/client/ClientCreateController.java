@@ -58,7 +58,6 @@ public class ClientCreateController extends BaseController {
         getStepStore().setItem("token", request.getToken());
         val requestClient = Client.builder()
                 .id(request.getId())
-                .isArchived(request.getIsArchived())
                 .email(request.getEmail())
                 .phoneNumber(request.getPhoneNumber())
                 .firstName(request.getFirstName())

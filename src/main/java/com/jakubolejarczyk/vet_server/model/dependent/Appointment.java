@@ -19,9 +19,6 @@ public class Appointment implements AppointmentDomain {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "is_archived", nullable = false)
-    private Boolean isArchived;
-
     @Column(name = "date_and_hour", nullable = false)
     private Timestamp dateAndHour;
 

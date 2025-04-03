@@ -1,6 +1,7 @@
 package com.jakubolejarczyk.vet_server.step.create;
 
 import com.jakubolejarczyk.vet_server.model.dependent.ServiceClinic;
+import com.jakubolejarczyk.vet_server.service.dependent.ServiceClinicService;
 import com.jakubolejarczyk.vet_server.service.dependent.VetService;
 import com.jakubolejarczyk.vet_server.step.model.StepModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
@@ -10,7 +11,7 @@ import lombok.val;
 @org.springframework.stereotype.Service
 @AllArgsConstructor
 public class CreateVetServiceStep implements StepModel {
-    private final VetService vetService;
+    private final ServiceClinicService vetService;
 
     @Override
     public void runStep(StepStore stepStore) {
@@ -19,7 +20,6 @@ public class CreateVetServiceStep implements StepModel {
         val requestVetService = stepStore.getItem("requestVetService", ServiceClinic.class);
         val clinicId = stepStore.getItem("clinicId", Long.class);
         val vetService = ServiceClinic.builder()
-                .isArchived(false)
                 .entityName(requestVetService.getEntityName())
                 .description(requestVetService.getDescription())
                 .category(requestVetService.getCategory())
@@ -28,6 +28,6 @@ public class CreateVetServiceStep implements StepModel {
                 .isAvailable(requestVetService.getIsAvailable())
                 .clinicId(clinicId)
                 .build();
-        this.vetService.create(vetService);
+        this.vetService.save(vetService);
     }
 }

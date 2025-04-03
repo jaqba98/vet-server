@@ -16,7 +16,7 @@ public class GetAppointmentsByClinicIdsStep implements StepModel {
     public void runStep(StepStore stepStore) {
         if (stepStore.hasNotItem("clinicIds")) throw new Error("The clinicIds is required!");
         val clinicIds = stepStore.getItemAsArray("clinicIds", Long.class);
-        val appointments = appointmentService.findAllByClinicIds(clinicIds);
+        val appointments = appointmentService.findAllByClinicIdIn(clinicIds);
         stepStore.setItem("appointments", appointments);
     }
 }

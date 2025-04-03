@@ -48,7 +48,6 @@ public class MedicalRecordUpdateController extends BaseController {
         getStepStore().setItem("token", request.getToken());
         val requestMedicalRecord = MedicalRecord.builder()
                 .id(request.getId())
-                .isArchived(request.getIsArchived())
                 .diagnosis(request.getDiagnosis())
                 .treatment(request.getTreatment())
                 .procedures(request.getProcedures())

@@ -20,9 +20,6 @@ public class MedicalRecord implements MedicalRecordDomain {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "is_archived", nullable = false)
-    private Boolean isArchived;
-
     @Column(nullable = false, columnDefinition = "TEXT")
     private String diagnosis;
 

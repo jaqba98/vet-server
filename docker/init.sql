@@ -6,7 +6,6 @@
 
 CREATE TABLE OpeningHour (
     id BIGSERIAL PRIMARY KEY,
-    is_archived BOOLEAN NOT NULL,
     monday_from TIME NULL,
     monday_to TIME NULL,
     tuesday_from TIME NULL,
@@ -25,7 +24,6 @@ CREATE TABLE OpeningHour (
 
 CREATE TABLE Account (
     id BIGSERIAL PRIMARY KEY,
-    is_archived BOOLEAN NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     first_name VARCHAR(50) NOT NULL,
@@ -36,7 +34,6 @@ CREATE TABLE Account (
 
 CREATE TABLE MedicalRecord (
     id BIGSERIAL PRIMARY KEY,
-    is_archived BOOLEAN NOT NULL,
     diagnosis TEXT NOT NULL,
     treatment TEXT NOT NULL,
     procedures TEXT NOT NULL,
@@ -47,7 +44,6 @@ CREATE TABLE MedicalRecord (
 
 CREATE TABLE Invoice (
     id BIGSERIAL PRIMARY KEY,
-    is_archived BOOLEAN NOT NULL,
     invoice_date DATE NOT NULL,
     due_date DATE NOT NULL,
     total_amount DECIMAL(10, 2) NOT NULL,
@@ -62,7 +58,6 @@ CREATE TABLE Invoice (
 
 CREATE TABLE Clinic (
     id BIGSERIAL PRIMARY KEY,
-    is_archived BOOLEAN NOT NULL,
     entity_name VARCHAR(150) NOT NULL UNIQUE,
     street VARCHAR(100) NOT NULL,
     building_number VARCHAR(10) NOT NULL,
@@ -79,7 +74,6 @@ CREATE TABLE Clinic (
 
 CREATE TABLE Client (
     id BIGSERIAL PRIMARY KEY,
-    is_archived BOOLEAN NOT NULL,
     email VARCHAR(255) NOT NULL,
     phone_number VARCHAR(20) NOT NULL,
     first_name VARCHAR(50) NOT NULL,
@@ -90,7 +84,6 @@ CREATE TABLE Client (
 
 CREATE TABLE Pet (
     id BIGSERIAL PRIMARY KEY,
-    is_archived BOOLEAN NOT NULL,
     entity_name VARCHAR(255) NOT NULL,
     species VARCHAR(255) NULL,
     breed VARCHAR(255) NULL,
@@ -107,7 +100,6 @@ CREATE TABLE Pet (
 
 CREATE TABLE Employment (
     id BIGSERIAL PRIMARY KEY,
-    is_archived BOOLEAN NOT NULL,
     is_owner BOOLEAN NOT NULL,
     account_id BIGINT NOT NULL,
     clinic_id BIGINT NOT NULL,
@@ -117,7 +109,6 @@ CREATE TABLE Employment (
 
 CREATE TABLE ServiceClinic (
     id BIGSERIAL PRIMARY KEY,
-    is_archived BOOLEAN NOT NULL,
     entity_name VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     category VARCHAR(255) NOT NULL,
@@ -130,7 +121,6 @@ CREATE TABLE ServiceClinic (
 
 CREATE TABLE Vet (
     id BIGSERIAL PRIMARY KEY,
-    is_archived BOOLEAN NOT NULL,
     license_number VARCHAR(255) NULL,
     license_issue_date DATE NULL,
     license_expiry_date DATE NULL,
@@ -144,7 +134,6 @@ CREATE TABLE Vet (
 
 CREATE TABLE Medication (
     id BIGSERIAL PRIMARY KEY,
-    is_archived BOOLEAN NOT NULL,
     entity_name VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     manufacturer VARCHAR(255) NOT NULL,
@@ -159,7 +148,6 @@ CREATE TABLE Medication (
 
 CREATE TABLE Appointment (
     id BIGSERIAL PRIMARY KEY,
-    is_archived BOOLEAN NOT NULL,
     date_and_hour TIMESTAMP NOT NULL,
     type VARCHAR(255) NOT NULL,
     status VARCHAR(255) NOT NULL,
@@ -181,7 +169,6 @@ CREATE TABLE Appointment (
 
 CREATE TABLE Appointment_ServiceClinic (
     id BIGSERIAL PRIMARY KEY,
-    is_archived BOOLEAN NOT NULL,
     appointment_id BIGINT NOT NULL,
     service_clinic_id BIGINT NOT NULL,
     FOREIGN KEY (appointment_id) REFERENCES Appointment(id),
@@ -190,7 +177,6 @@ CREATE TABLE Appointment_ServiceClinic (
 
 CREATE TABLE Appointment_Medication (
     id BIGSERIAL PRIMARY KEY,
-    is_archived BOOLEAN NOT NULL,
     appointment_id BIGINT NOT NULL,
     medication_id BIGINT NOT NULL,
     FOREIGN KEY (appointment_id) REFERENCES Appointment(id),

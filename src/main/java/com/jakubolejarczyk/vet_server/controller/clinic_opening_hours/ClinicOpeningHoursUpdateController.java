@@ -53,7 +53,6 @@ public class ClinicOpeningHoursUpdateController extends BaseController {
         getStepStore().setItem("token", request.getToken());
         val requestOpeningHours = OpeningHour.builder()
                 .id(request.getId())
-                .isArchived(request.getIsArchived())
                 .mondayFrom(request.getMondayFrom())
                 .mondayTo(request.getMondayTo())
                 .tuesdayFrom(request.getTuesdayFrom())

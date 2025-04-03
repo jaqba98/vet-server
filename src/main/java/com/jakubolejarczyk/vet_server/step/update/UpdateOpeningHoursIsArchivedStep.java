@@ -24,6 +24,6 @@ public class UpdateOpeningHoursIsArchivedStep implements StepModel {
         val openingHoursIds = openingHourService.findAllById(clinicsIds).stream()
                 .map(OpeningHour::getId)
                 .toList();
-        openingHourService.updateIsArchived(openingHoursIds, true);
+        openingHourService.deleteAllById(openingHoursIds);
     }
 }

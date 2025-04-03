@@ -24,12 +24,11 @@ public class CreateEmploymentStep implements StepModel {
         val accountId = account.getId();
         val clinicId = clinic.getId();
         val newEmployment = Employment.builder()
-                .isArchived(false)
                 .isOwner(true)
                 .accountId(accountId)
                 .clinicId(clinicId)
                 .build();
-        val employment = employmentService.create(newEmployment);
+        val employment = employmentService.save(newEmployment);
         stepStore.setItem("employment", employment);
     }
 }

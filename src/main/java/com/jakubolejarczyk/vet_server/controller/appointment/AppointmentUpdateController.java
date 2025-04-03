@@ -58,7 +58,6 @@ public class AppointmentUpdateController extends BaseController {
         getStepStore().setItem("token", request.getToken());
         val requestAppointment = Appointment.builder()
                 .id(request.getId())
-                .isArchived(request.getIsArchived())
                 .dateAndHour(request.getDateAndHour())
                 .type(request.getType())
                 .status(request.getStatus())

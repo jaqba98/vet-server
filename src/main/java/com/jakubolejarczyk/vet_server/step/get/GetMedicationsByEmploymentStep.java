@@ -20,7 +20,7 @@ public class GetMedicationsByEmploymentStep implements StepModel {
         val clinicsIds = employments.stream()
                 .map(Employment::getClinicId)
                 .toList();
-        val medications = medicationService.findAllByClinicIds(clinicsIds);
+        val medications = medicationService.findAllByClinicIdIn(clinicsIds);
         stepStore.setItem("medications", medications);
     }
 }

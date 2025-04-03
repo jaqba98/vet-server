@@ -58,7 +58,6 @@ public class VetServiceCreateController extends BaseController {
         getStepStore().setItem("token", request.getToken());
         val requestVetService = ServiceClinic.builder()
                 .id(request.getId())
-                .isArchived(request.getIsArchived())
                 .entityName(request.getEntityName())
                 .description(request.getDescription())
                 .category(request.getCategory())

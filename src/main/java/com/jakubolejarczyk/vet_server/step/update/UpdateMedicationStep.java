@@ -22,7 +22,6 @@ public class UpdateMedicationStep implements StepModel {
         if (currentMedication.isPresent()) {
             val newMedication = Medication.builder()
                     .id(currentMedication.get().getId())
-                    .isArchived(currentMedication.get().getIsArchived())
                     .entityName(requestMedication.getEntityName())
                     .description(requestMedication.getDescription())
                     .manufacturer(requestMedication.getManufacturer())
@@ -33,7 +32,7 @@ public class UpdateMedicationStep implements StepModel {
                     .isAvailable(requestMedication.getIsAvailable())
                     .clinicId(currentMedication.get().getClinicId())
                     .build();
-            val medication = medicationService.create(newMedication);
+            val medication = medicationService.save(newMedication);
             stepStore.setItem("medication", medication);
             return;
         }

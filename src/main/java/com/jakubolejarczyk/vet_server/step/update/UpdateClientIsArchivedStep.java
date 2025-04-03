@@ -16,6 +16,6 @@ public class UpdateClientIsArchivedStep implements StepModel {
     public void runStep(StepStore stepStore) {
         if (stepStore.hasNotItem("clientIds")) throw new Error("The clientIds is required!");
         val clientIds = stepStore.getItemAsArray("clientIds", Long.class);
-        clientService.updateIsArchived(clientIds, true);
+        clientService.deleteAllById(clientIds);
     }
 }

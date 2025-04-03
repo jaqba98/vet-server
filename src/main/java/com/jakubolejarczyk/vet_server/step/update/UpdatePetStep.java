@@ -22,7 +22,6 @@ public class UpdatePetStep implements StepModel {
         if (currentPet.isPresent()) {
             val newPet = Pet.builder()
                     .id(currentPet.get().getId())
-                    .isArchived(currentPet.get().getIsArchived())
                     .entityName(requestPet.getEntityName())
                     .species(requestPet.getSpecies())
                     .breed(requestPet.getBreed())
@@ -35,7 +34,7 @@ public class UpdatePetStep implements StepModel {
                     .medicalNotes(requestPet.getMedicalNotes())
                     .clientId(requestPet.getClientId())
                     .build();
-            val pet = petService.create(newPet);
+            val pet = petService.save(newPet);
             stepStore.setItem("pet", pet);
             return;
         }

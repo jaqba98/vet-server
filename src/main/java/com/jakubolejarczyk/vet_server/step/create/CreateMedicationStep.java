@@ -20,7 +20,6 @@ public class CreateMedicationStep implements StepModel {
         val requestMedication = stepStore.getItem("requestMedication", Medication.class);
         val clinicId = stepStore.getItem("clinicId", Long.class);
         val medication = Medication.builder()
-                .isArchived(false)
                 .entityName(requestMedication.getEntityName())
                 .description(requestMedication.getDescription())
                 .manufacturer(requestMedication.getManufacturer())
@@ -31,7 +30,7 @@ public class CreateMedicationStep implements StepModel {
                 .isAvailable(requestMedication.getIsAvailable())
                 .clinicId(clinicId)
                 .build();
-        medicationService.create(medication);
+        medicationService.save(medication);
         stepStore.addMessage("Medication was created!");
     }
 }

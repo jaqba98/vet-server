@@ -22,7 +22,6 @@ public class UpdateAppointmentStep implements StepModel {
         if (currentAppointment.isPresent()) {
             val newAppointment = Appointment.builder()
                     .id(currentAppointment.get().getId())
-                    .isArchived(currentAppointment.get().getIsArchived())
                     .dateAndHour(requestAppointment.getDateAndHour())
                     .type(requestAppointment.getType())
                     .status(requestAppointment.getStatus())
@@ -34,7 +33,7 @@ public class UpdateAppointmentStep implements StepModel {
                     .invoiceId(requestAppointment.getInvoiceId())
                     .medicalRecordId(requestAppointment.getMedicalRecordId())
                     .build();
-            val appointment = appointmentService.create(newAppointment);
+            val appointment = appointmentService.save(newAppointment);
             stepStore.setItem("appointment", appointment);
             return;
         }

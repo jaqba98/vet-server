@@ -58,7 +58,6 @@ public class MedicationCreateController extends BaseController {
         getStepStore().setItem("token", request.getToken());
         val requestMedication = Medication.builder()
                 .id(request.getId())
-                .isArchived(false)
                 .entityName(request.getEntityName())
                 .description(request.getDescription())
                 .manufacturer(request.getManufacturer())

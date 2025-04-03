@@ -16,9 +16,8 @@ public class CreateOpeningHoursStep implements StepModel {
     @Override
     public void runStep(StepStore stepStore) {
         val newOpeningHours = OpeningHour.builder()
-                .isArchived(false)
                 .build();
-        val openingHoursToSave = openingHourService.create(newOpeningHours);
+        val openingHoursToSave = openingHourService.save(newOpeningHours);
         stepStore.setItem("openingHours", openingHoursToSave);
     }
 }
