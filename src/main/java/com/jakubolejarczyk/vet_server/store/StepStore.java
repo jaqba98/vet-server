@@ -22,6 +22,8 @@ public class StepStore {
         data.clear();
         metadata.clear();
         items.clear();
+        dataKeys  = new String[]{};
+        metadataKeys = new String[]{};
     }
 
     public void addMessage(String message) {
