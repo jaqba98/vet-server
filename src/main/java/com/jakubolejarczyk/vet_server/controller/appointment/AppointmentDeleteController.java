@@ -3,10 +3,10 @@ package com.jakubolejarczyk.vet_server.controller.appointment;
 import com.jakubolejarczyk.vet_server.dto.request.common.DeleteRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.step.base.BaseController;
-import com.jakubolejarczyk.vet_server.step.model.StepModel;
-import com.jakubolejarczyk.vet_server.step.success.SuccessDeleteAppointmentStep;
-import com.jakubolejarczyk.vet_server.step.update.UpdateAppointmentIsArchivedStep;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
+import com.jakubolejarczyk.vet_server.step.success.SuccessDeleteAppointmentStepRunner;
+import com.jakubolejarczyk.vet_server.step.update.UpdateAppointmentIsArchivedStepRunner;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.Valid;
 import lombok.val;
@@ -21,15 +21,15 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
-public class AppointmentDeleteController extends BaseController {
-    private final UpdateAppointmentIsArchivedStep updateAppointmentIsArchivedStep;
-    private final SuccessDeleteAppointmentStep successDeleteAppointmentStep;
+public class AppointmentDeleteController extends StepRunnerController {
+    private final UpdateAppointmentIsArchivedStepRunner updateAppointmentIsArchivedStep;
+    private final SuccessDeleteAppointmentStepRunner successDeleteAppointmentStep;
 
     public AppointmentDeleteController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-            UpdateAppointmentIsArchivedStep updateAppointmentIsArchivedStep,
-            SuccessDeleteAppointmentStep successDeleteAppointmentStep
+            UpdateAppointmentIsArchivedStepRunner updateAppointmentIsArchivedStep,
+            SuccessDeleteAppointmentStepRunner successDeleteAppointmentStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.updateAppointmentIsArchivedStep = updateAppointmentIsArchivedStep;
@@ -38,7 +38,7 @@ public class AppointmentDeleteController extends BaseController {
 
     @PostMapping("appointment-delete")
     public ResponseEntity<Response<?, ?>> appointmentDelete(@Valid @RequestBody DeleteRequest request) {
-        val steps = new ArrayList<StepModel>();
+        val steps = new ArrayList<StepRunnerModel>();
         steps.addLast(updateAppointmentIsArchivedStep);
         steps.addLast(successDeleteAppointmentStep);
         String[] dataKeys = {};

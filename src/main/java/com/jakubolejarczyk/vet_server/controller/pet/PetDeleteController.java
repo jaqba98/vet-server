@@ -3,10 +3,10 @@ package com.jakubolejarczyk.vet_server.controller.pet;
 import com.jakubolejarczyk.vet_server.dto.request.common.DeleteRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.step.base.BaseController;
-import com.jakubolejarczyk.vet_server.step.model.StepModel;
-import com.jakubolejarczyk.vet_server.step.success.SuccessDeletePetStep;
-import com.jakubolejarczyk.vet_server.step.update.UpdatePetIsArchivedStep;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
+import com.jakubolejarczyk.vet_server.step.success.SuccessDeletePetStepRunner;
+import com.jakubolejarczyk.vet_server.step.update.UpdatePetIsArchivedStepRunner;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.Valid;
 import lombok.val;
@@ -21,15 +21,15 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
-public class PetDeleteController extends BaseController {
-    private final UpdatePetIsArchivedStep updatePetIsArchivedStep;
-    private final SuccessDeletePetStep successDeletePetStep;
+public class PetDeleteController extends StepRunnerController {
+    private final UpdatePetIsArchivedStepRunner updatePetIsArchivedStep;
+    private final SuccessDeletePetStepRunner successDeletePetStep;
 
     public PetDeleteController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-            UpdatePetIsArchivedStep updatePetIsArchivedStep,
-            SuccessDeletePetStep successDeletePetStep
+            UpdatePetIsArchivedStepRunner updatePetIsArchivedStep,
+            SuccessDeletePetStepRunner successDeletePetStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.updatePetIsArchivedStep = updatePetIsArchivedStep;
@@ -38,7 +38,7 @@ public class PetDeleteController extends BaseController {
 
     @PostMapping("pet-delete")
     public ResponseEntity<Response<?, ?>> petDelete(@Valid @RequestBody DeleteRequest request) {
-        val steps = new ArrayList<StepModel>();
+        val steps = new ArrayList<StepRunnerModel>();
         steps.addLast(updatePetIsArchivedStep);
         steps.addLast(successDeletePetStep);
         String[] dataKeys = {};

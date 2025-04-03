@@ -4,11 +4,11 @@ import com.jakubolejarczyk.vet_server.dto.request.opening_hours.OpeningHourReque
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.model.independent.OpeningHour;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.step.base.BaseController;
-import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
-import com.jakubolejarczyk.vet_server.step.model.StepModel;
-import com.jakubolejarczyk.vet_server.step.success.SuccessUpdateOpeningHoursStep;
-import com.jakubolejarczyk.vet_server.step.update.UpdateOpeningHoursStep;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
+import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStepRunner;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
+import com.jakubolejarczyk.vet_server.step.success.SuccessUpdateOpeningHoursStepRunner;
+import com.jakubolejarczyk.vet_server.step.update.UpdateOpeningHoursStepRunner;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.Valid;
 import lombok.val;
@@ -23,17 +23,17 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
-public class ClinicOpeningHoursUpdateController extends BaseController {
-    private final GetAccountByTokenStep getAccountByTokenStep;
-    private final UpdateOpeningHoursStep updateOpeningHoursStep;
-    private final SuccessUpdateOpeningHoursStep successUpdateOpeningHoursStep;
+public class ClinicOpeningHoursUpdateController extends StepRunnerController {
+    private final GetAccountByTokenStepRunner getAccountByTokenStep;
+    private final UpdateOpeningHoursStepRunner updateOpeningHoursStep;
+    private final SuccessUpdateOpeningHoursStepRunner successUpdateOpeningHoursStep;
 
     public ClinicOpeningHoursUpdateController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-            GetAccountByTokenStep getAccountByTokenStep,
-            UpdateOpeningHoursStep updateOpeningHoursStep,
-            SuccessUpdateOpeningHoursStep successUpdateOpeningHoursStep
+            GetAccountByTokenStepRunner getAccountByTokenStep,
+            UpdateOpeningHoursStepRunner updateOpeningHoursStep,
+            SuccessUpdateOpeningHoursStepRunner successUpdateOpeningHoursStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.getAccountByTokenStep = getAccountByTokenStep;
@@ -43,7 +43,7 @@ public class ClinicOpeningHoursUpdateController extends BaseController {
 
     @PostMapping("clinic-opening-hours-update")
     public ResponseEntity<Response<?, ?>> clinicOpeningHoursUpdate(@Valid @RequestBody OpeningHourRequest request) {
-        val steps = new ArrayList<StepModel>();
+        val steps = new ArrayList<StepRunnerModel>();
         steps.addLast(getAccountByTokenStep);
         steps.addLast(updateOpeningHoursStep);
         steps.addLast(successUpdateOpeningHoursStep);

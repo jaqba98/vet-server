@@ -4,12 +4,12 @@ import com.jakubolejarczyk.vet_server.dto.request.invoice.InvoiceRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.model.independent.Invoice;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.step.base.BaseController;
-import com.jakubolejarczyk.vet_server.step.check.CheckAccountPermissionToClinicStep;
-import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
-import com.jakubolejarczyk.vet_server.step.model.StepModel;
-import com.jakubolejarczyk.vet_server.step.success.SuccessUpdateInvoiceStep;
-import com.jakubolejarczyk.vet_server.step.update.UpdateInvoiceStep;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
+import com.jakubolejarczyk.vet_server.step.check.CheckAccountPermissionToClinicStepRunner;
+import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStepRunner;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
+import com.jakubolejarczyk.vet_server.step.success.SuccessUpdateInvoiceStepRunner;
+import com.jakubolejarczyk.vet_server.step.update.UpdateInvoiceStepRunner;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.Valid;
 import lombok.val;
@@ -24,17 +24,17 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
-public class InvoiceUpdateController extends BaseController {
-    private final UpdateInvoiceStep updateInvoiceStep;
-    private final SuccessUpdateInvoiceStep successUpdateInvoiceStep;
+public class InvoiceUpdateController extends StepRunnerController {
+    private final UpdateInvoiceStepRunner updateInvoiceStep;
+    private final SuccessUpdateInvoiceStepRunner successUpdateInvoiceStep;
 
     public InvoiceUpdateController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-            GetAccountByTokenStep getAccountByTokenStep,
-            CheckAccountPermissionToClinicStep checkAccountPermissionToClinicStep,
-            UpdateInvoiceStep updateInvoiceStep,
-            SuccessUpdateInvoiceStep successUpdateInvoiceStep
+            GetAccountByTokenStepRunner getAccountByTokenStep,
+            CheckAccountPermissionToClinicStepRunner checkAccountPermissionToClinicStep,
+            UpdateInvoiceStepRunner updateInvoiceStep,
+            SuccessUpdateInvoiceStepRunner successUpdateInvoiceStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.updateInvoiceStep = updateInvoiceStep;
@@ -43,7 +43,7 @@ public class InvoiceUpdateController extends BaseController {
 
     @PostMapping("invoice-update")
     public ResponseEntity<Response<?, ?>> invoiceUpdate(@Valid @RequestBody InvoiceRequest request) {
-        val steps = new ArrayList<StepModel>();
+        val steps = new ArrayList<StepRunnerModel>();
         steps.addLast(updateInvoiceStep);
         steps.addLast(successUpdateInvoiceStep);
         String[] dataKeys = {"invoice"};

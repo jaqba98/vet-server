@@ -2,8 +2,8 @@ package com.jakubolejarczyk.vet_server.controller.common;
 
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.step.base.BaseController;
-import com.jakubolejarczyk.vet_server.step.model.StepModel;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import lombok.val;
 import org.springframework.beans.factory.ObjectFactory;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
-public class LogoutController extends BaseController {
+public class LogoutController extends StepRunnerController {
     public LogoutController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory
@@ -26,7 +26,7 @@ public class LogoutController extends BaseController {
 
     @PostMapping("logout")
     public ResponseEntity<Response<?, ?>> logout() {
-        val steps = new ArrayList<StepModel>();
+        val steps = new ArrayList<StepRunnerModel>();
         String[] dataKeys = {};
         String[] metadataKeys = {};
         initController(dataKeys, metadataKeys);

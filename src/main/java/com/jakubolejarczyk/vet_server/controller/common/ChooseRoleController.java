@@ -3,10 +3,10 @@ package com.jakubolejarczyk.vet_server.controller.common;
 import com.jakubolejarczyk.vet_server.dto.request.common.ChooseRoleRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.step.base.BaseController;
-import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
-import com.jakubolejarczyk.vet_server.step.model.StepModel;
-import com.jakubolejarczyk.vet_server.step.set.SetAccountRoleStep;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
+import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStepRunner;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
+import com.jakubolejarczyk.vet_server.step.set.SetAccountRoleStepRunner;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import lombok.val;
 import org.springframework.beans.factory.ObjectFactory;
@@ -20,15 +20,15 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
-public class ChooseRoleController extends BaseController {
-    private final GetAccountByTokenStep getAccountByTokenStep;
-    private final SetAccountRoleStep setAccountRoleStep;
+public class ChooseRoleController extends StepRunnerController {
+    private final GetAccountByTokenStepRunner getAccountByTokenStep;
+    private final SetAccountRoleStepRunner setAccountRoleStep;
 
     public ChooseRoleController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-            GetAccountByTokenStep getAccountByTokenStep,
-            SetAccountRoleStep setAccountRoleStep
+            GetAccountByTokenStepRunner getAccountByTokenStep,
+            SetAccountRoleStepRunner setAccountRoleStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.getAccountByTokenStep = getAccountByTokenStep;
@@ -37,7 +37,7 @@ public class ChooseRoleController extends BaseController {
 
     @PostMapping("choose-role")
     public ResponseEntity<Response<?, ?>> chooseRole(@RequestBody ChooseRoleRequest request) {
-        val steps = new ArrayList<StepModel>();
+        val steps = new ArrayList<StepRunnerModel>();
         steps.addLast(getAccountByTokenStep);
         steps.addLast(setAccountRoleStep);
         String[] dataKeys = {};

@@ -3,12 +3,12 @@ package com.jakubolejarczyk.vet_server.controller.pet;
 import com.jakubolejarczyk.vet_server.dto.request.base.TokenRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.step.base.BaseController;
-import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
-import com.jakubolejarczyk.vet_server.step.get.GetClientsByEmploymentStep;
-import com.jakubolejarczyk.vet_server.step.get.GetEmploymentsByAccountIdAndIsOwnerStep;
-import com.jakubolejarczyk.vet_server.step.get.GetPetsByClientsStep;
-import com.jakubolejarczyk.vet_server.step.model.StepModel;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
+import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStepRunner;
+import com.jakubolejarczyk.vet_server.step.get.GetClientsByEmploymentStepRunner;
+import com.jakubolejarczyk.vet_server.step.get.GetEmploymentsByAccountIdAndIsOwnerStepRunner;
+import com.jakubolejarczyk.vet_server.step.get.GetPetsByClientsStepRunner;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.Valid;
 import lombok.val;
@@ -23,19 +23,19 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
-public class PetReadController extends BaseController {
-    private final GetAccountByTokenStep getAccountByTokenStep;
-    private final GetEmploymentsByAccountIdAndIsOwnerStep getEmploymentsByAccountIdAndIsOwnerStep;
-    private final GetClientsByEmploymentStep getClientsByEmploymentStep;
-    private final GetPetsByClientsStep getPetsByClientsStep;
+public class PetReadController extends StepRunnerController {
+    private final GetAccountByTokenStepRunner getAccountByTokenStep;
+    private final GetEmploymentsByAccountIdAndIsOwnerStepRunner getEmploymentsByAccountIdAndIsOwnerStep;
+    private final GetClientsByEmploymentStepRunner getClientsByEmploymentStep;
+    private final GetPetsByClientsStepRunner getPetsByClientsStep;
 
     public PetReadController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-            GetAccountByTokenStep getAccountByTokenStep,
-            GetEmploymentsByAccountIdAndIsOwnerStep getEmploymentsByAccountIdAndIsOwnerStep,
-            GetClientsByEmploymentStep getClientsByEmploymentStep,
-            GetPetsByClientsStep getPetsByClientsStep
+            GetAccountByTokenStepRunner getAccountByTokenStep,
+            GetEmploymentsByAccountIdAndIsOwnerStepRunner getEmploymentsByAccountIdAndIsOwnerStep,
+            GetClientsByEmploymentStepRunner getClientsByEmploymentStep,
+            GetPetsByClientsStepRunner getPetsByClientsStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.getAccountByTokenStep = getAccountByTokenStep;
@@ -46,7 +46,7 @@ public class PetReadController extends BaseController {
 
     @PostMapping("pet-read")
     public ResponseEntity<Response<?, ?>> petRead(@Valid @RequestBody TokenRequest request) {
-        val steps = new ArrayList<StepModel>();
+        val steps = new ArrayList<StepRunnerModel>();
         steps.addLast(getAccountByTokenStep);
         steps.addLast(getEmploymentsByAccountIdAndIsOwnerStep);
         steps.addLast(getClientsByEmploymentStep);

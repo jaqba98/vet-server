@@ -3,9 +3,9 @@ package com.jakubolejarczyk.vet_server.controller.common;
 import com.jakubolejarczyk.vet_server.dto.request.common.LoginRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.step.base.BaseController;
-import com.jakubolejarczyk.vet_server.step.get.GetTokenByLoginDetailsStep;
-import com.jakubolejarczyk.vet_server.step.model.StepModel;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
+import com.jakubolejarczyk.vet_server.step.get.GetTokenByLoginDetailsStepRunner;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import lombok.val;
 import org.springframework.beans.factory.ObjectFactory;
@@ -19,13 +19,13 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
-public class LoginController extends BaseController {
-    private final GetTokenByLoginDetailsStep getTokenByLoginDetailsStep;
+public class LoginController extends StepRunnerController {
+    private final GetTokenByLoginDetailsStepRunner getTokenByLoginDetailsStep;
 
     public LoginController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-            GetTokenByLoginDetailsStep getTokenByLoginDetailsStep
+            GetTokenByLoginDetailsStepRunner getTokenByLoginDetailsStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.getTokenByLoginDetailsStep = getTokenByLoginDetailsStep;
@@ -33,7 +33,7 @@ public class LoginController extends BaseController {
 
     @PostMapping("login")
     public ResponseEntity<Response<?, ?>> login(@RequestBody LoginRequest request) {
-        val steps = new ArrayList<StepModel>();
+        val steps = new ArrayList<StepRunnerModel>();
         steps.addLast(getTokenByLoginDetailsStep);
         String[] dataKeys = {"token"};
         String[] metadataKeys = {};

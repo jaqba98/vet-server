@@ -4,10 +4,10 @@ import com.jakubolejarczyk.vet_server.dto.request.medical_record.MedicalRecordRe
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.model.independent.MedicalRecord;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.step.base.BaseController;
-import com.jakubolejarczyk.vet_server.step.model.StepModel;
-import com.jakubolejarczyk.vet_server.step.success.SuccessUpdateInvoiceStep;
-import com.jakubolejarczyk.vet_server.step.update.UpdateMedicalRecordStep;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
+import com.jakubolejarczyk.vet_server.step.success.SuccessUpdateInvoiceStepRunner;
+import com.jakubolejarczyk.vet_server.step.update.UpdateMedicalRecordStepRunner;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.Valid;
 import lombok.val;
@@ -22,15 +22,15 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
-public class MedicalRecordUpdateController extends BaseController {
-    private final UpdateMedicalRecordStep updateMedicalRecordStep;
-    private final SuccessUpdateInvoiceStep successUpdateInvoiceStep;
+public class MedicalRecordUpdateController extends StepRunnerController {
+    private final UpdateMedicalRecordStepRunner updateMedicalRecordStep;
+    private final SuccessUpdateInvoiceStepRunner successUpdateInvoiceStep;
 
     public MedicalRecordUpdateController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-            UpdateMedicalRecordStep updateMedicalRecordStep,
-            SuccessUpdateInvoiceStep successUpdateInvoiceStep
+            UpdateMedicalRecordStepRunner updateMedicalRecordStep,
+            SuccessUpdateInvoiceStepRunner successUpdateInvoiceStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.updateMedicalRecordStep = updateMedicalRecordStep;
@@ -39,7 +39,7 @@ public class MedicalRecordUpdateController extends BaseController {
 
     @PostMapping("medical-record-update")
     public ResponseEntity<Response<?, ?>> medicalRecordUpdate(@Valid @RequestBody MedicalRecordRequest request) {
-        val steps = new ArrayList<StepModel>();
+        val steps = new ArrayList<StepRunnerModel>();
         steps.addLast(updateMedicalRecordStep);
         steps.addLast(successUpdateInvoiceStep);
         String[] dataKeys = {"medicalRecord"};

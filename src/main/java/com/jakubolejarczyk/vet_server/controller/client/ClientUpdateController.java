@@ -4,12 +4,12 @@ import com.jakubolejarczyk.vet_server.dto.request.client.ClientRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.model.dependent.Client;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.step.base.BaseController;
-import com.jakubolejarczyk.vet_server.step.check.CheckAccountPermissionToClinicStep;
-import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
-import com.jakubolejarczyk.vet_server.step.model.StepModel;
-import com.jakubolejarczyk.vet_server.step.success.SuccessUpdateClientStep;
-import com.jakubolejarczyk.vet_server.step.update.UpdateClientStep;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
+import com.jakubolejarczyk.vet_server.step.check.CheckAccountPermissionToClinicStepRunner;
+import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStepRunner;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
+import com.jakubolejarczyk.vet_server.step.success.SuccessUpdateClientStepRunner;
+import com.jakubolejarczyk.vet_server.step.update.UpdateClientStepRunner;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.Valid;
 import lombok.val;
@@ -24,19 +24,19 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
-public class ClientUpdateController extends BaseController {
-    private final GetAccountByTokenStep getAccountByTokenStep;
-    private final CheckAccountPermissionToClinicStep checkAccountPermissionToClinicStep;
-    private final UpdateClientStep updateClientStep;
-    private final SuccessUpdateClientStep successUpdateClientStep;
+public class ClientUpdateController extends StepRunnerController {
+    private final GetAccountByTokenStepRunner getAccountByTokenStep;
+    private final CheckAccountPermissionToClinicStepRunner checkAccountPermissionToClinicStep;
+    private final UpdateClientStepRunner updateClientStep;
+    private final SuccessUpdateClientStepRunner successUpdateClientStep;
 
     public ClientUpdateController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-            GetAccountByTokenStep getAccountByTokenStep,
-            CheckAccountPermissionToClinicStep checkAccountPermissionToClinicStep,
-            UpdateClientStep updateClientStep,
-            SuccessUpdateClientStep successUpdateClientStep
+            GetAccountByTokenStepRunner getAccountByTokenStep,
+            CheckAccountPermissionToClinicStepRunner checkAccountPermissionToClinicStep,
+            UpdateClientStepRunner updateClientStep,
+            SuccessUpdateClientStepRunner successUpdateClientStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.getAccountByTokenStep = getAccountByTokenStep;
@@ -47,7 +47,7 @@ public class ClientUpdateController extends BaseController {
 
     @PostMapping("client-update")
     public ResponseEntity<Response<?, ?>> clientUpdate(@Valid @RequestBody ClientRequest request) {
-        val steps = new ArrayList<StepModel>();
+        val steps = new ArrayList<StepRunnerModel>();
         steps.addLast(getAccountByTokenStep);
         steps.addLast(checkAccountPermissionToClinicStep);
         steps.addLast(updateClientStep);

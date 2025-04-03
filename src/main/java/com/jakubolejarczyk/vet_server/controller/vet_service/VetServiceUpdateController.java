@@ -4,12 +4,12 @@ import com.jakubolejarczyk.vet_server.dto.request.vet_service.ServiceClinicReque
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.model.dependent.ServiceClinic;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.step.base.BaseController;
-import com.jakubolejarczyk.vet_server.step.check.CheckAccountPermissionToClinicStep;
-import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
-import com.jakubolejarczyk.vet_server.step.model.StepModel;
-import com.jakubolejarczyk.vet_server.step.success.SuccessUpdateVetServiceStep;
-import com.jakubolejarczyk.vet_server.step.update.UpdateVetServiceStep;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
+import com.jakubolejarczyk.vet_server.step.check.CheckAccountPermissionToClinicStepRunner;
+import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStepRunner;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
+import com.jakubolejarczyk.vet_server.step.success.SuccessUpdateVetServiceStepRunner;
+import com.jakubolejarczyk.vet_server.step.update.UpdateVetServiceStepRunner;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.Valid;
 import lombok.val;
@@ -24,19 +24,19 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
-public class VetServiceUpdateController extends BaseController {
-    private final GetAccountByTokenStep getAccountByTokenStep;
-    private final CheckAccountPermissionToClinicStep checkAccountPermissionToClinicStep;
-    private final UpdateVetServiceStep updateVetServiceStep;
-    private final SuccessUpdateVetServiceStep successUpdateVetServiceStep;
+public class VetServiceUpdateController extends StepRunnerController {
+    private final GetAccountByTokenStepRunner getAccountByTokenStep;
+    private final CheckAccountPermissionToClinicStepRunner checkAccountPermissionToClinicStep;
+    private final UpdateVetServiceStepRunner updateVetServiceStep;
+    private final SuccessUpdateVetServiceStepRunner successUpdateVetServiceStep;
 
     public VetServiceUpdateController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-            GetAccountByTokenStep getAccountByTokenStep,
-            CheckAccountPermissionToClinicStep checkAccountPermissionToClinicStep,
-            UpdateVetServiceStep updateVetServiceStep,
-            SuccessUpdateVetServiceStep successUpdateVetServiceStep
+            GetAccountByTokenStepRunner getAccountByTokenStep,
+            CheckAccountPermissionToClinicStepRunner checkAccountPermissionToClinicStep,
+            UpdateVetServiceStepRunner updateVetServiceStep,
+            SuccessUpdateVetServiceStepRunner successUpdateVetServiceStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.getAccountByTokenStep = getAccountByTokenStep;
@@ -47,7 +47,7 @@ public class VetServiceUpdateController extends BaseController {
 
     @PostMapping("vet-service-update")
     public ResponseEntity<Response<?, ?>> vetServiceUpdate(@Valid @RequestBody ServiceClinicRequest request) {
-        val steps = new ArrayList<StepModel>();
+        val steps = new ArrayList<StepRunnerModel>();
         steps.addLast(getAccountByTokenStep);
         steps.addLast(checkAccountPermissionToClinicStep);
         steps.addLast(updateVetServiceStep);

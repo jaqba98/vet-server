@@ -4,12 +4,12 @@ import com.jakubolejarczyk.vet_server.dto.request.appointment.AppointmentRequest
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.model.dependent.Appointment;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.step.base.BaseController;
-import com.jakubolejarczyk.vet_server.step.check.CheckAccountPermissionToClinicStep;
-import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
-import com.jakubolejarczyk.vet_server.step.model.StepModel;
-import com.jakubolejarczyk.vet_server.step.success.SuccessUpdateAppointmentStep;
-import com.jakubolejarczyk.vet_server.step.update.UpdateAppointmentStep;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
+import com.jakubolejarczyk.vet_server.step.check.CheckAccountPermissionToClinicStepRunner;
+import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStepRunner;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
+import com.jakubolejarczyk.vet_server.step.success.SuccessUpdateAppointmentStepRunner;
+import com.jakubolejarczyk.vet_server.step.update.UpdateAppointmentStepRunner;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.Valid;
 import lombok.val;
@@ -24,19 +24,19 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
-public class AppointmentUpdateController extends BaseController {
-    private final GetAccountByTokenStep getAccountByTokenStep;
-    private final CheckAccountPermissionToClinicStep checkAccountPermissionToClinicStep;
-    private final UpdateAppointmentStep updateAppointmentStep;
-    private final SuccessUpdateAppointmentStep successUpdateAppointmentStep;
+public class AppointmentUpdateController extends StepRunnerController {
+    private final GetAccountByTokenStepRunner getAccountByTokenStep;
+    private final CheckAccountPermissionToClinicStepRunner checkAccountPermissionToClinicStep;
+    private final UpdateAppointmentStepRunner updateAppointmentStep;
+    private final SuccessUpdateAppointmentStepRunner successUpdateAppointmentStep;
 
     public AppointmentUpdateController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-            GetAccountByTokenStep getAccountByTokenStep,
-            CheckAccountPermissionToClinicStep checkAccountPermissionToClinicStep,
-            UpdateAppointmentStep updateAppointmentStep,
-            SuccessUpdateAppointmentStep successUpdateAppointmentStep
+            GetAccountByTokenStepRunner getAccountByTokenStep,
+            CheckAccountPermissionToClinicStepRunner checkAccountPermissionToClinicStep,
+            UpdateAppointmentStepRunner updateAppointmentStep,
+            SuccessUpdateAppointmentStepRunner successUpdateAppointmentStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.getAccountByTokenStep = getAccountByTokenStep;
@@ -47,7 +47,7 @@ public class AppointmentUpdateController extends BaseController {
 
     @PostMapping("appointment-update")
     public ResponseEntity<Response<?, ?>> appointmentUpdate(@Valid @RequestBody AppointmentRequest request) {
-        val steps = new ArrayList<StepModel>();
+        val steps = new ArrayList<StepRunnerModel>();
         steps.addLast(getAccountByTokenStep);
         steps.addLast(checkAccountPermissionToClinicStep);
         steps.addLast(updateAppointmentStep);

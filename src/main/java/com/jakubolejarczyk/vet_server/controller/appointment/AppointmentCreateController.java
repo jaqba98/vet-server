@@ -4,14 +4,14 @@ import com.jakubolejarczyk.vet_server.dto.request.appointment.AppointmentRequest
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.model.dependent.Appointment;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.step.base.BaseController;
-import com.jakubolejarczyk.vet_server.step.check.CheckAccountPermissionToClinicStep;
-import com.jakubolejarczyk.vet_server.step.create.CreateAppointmentStep;
-import com.jakubolejarczyk.vet_server.step.create.CreateInvoiceStep;
-import com.jakubolejarczyk.vet_server.step.create.CreateMedicalRecordStep;
-import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
-import com.jakubolejarczyk.vet_server.step.model.StepModel;
-import com.jakubolejarczyk.vet_server.step.success.SuccessCreateAppointmentStep;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
+import com.jakubolejarczyk.vet_server.step.check.CheckAccountPermissionToClinicStepRunner;
+import com.jakubolejarczyk.vet_server.step.create.CreateAppointmentStepRunner;
+import com.jakubolejarczyk.vet_server.step.create.CreateInvoiceStepRunner;
+import com.jakubolejarczyk.vet_server.step.create.CreateMedicalRecordStepRunner;
+import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStepRunner;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
+import com.jakubolejarczyk.vet_server.step.success.SuccessCreateAppointmentStepRunner;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.Valid;
 import lombok.val;
@@ -26,23 +26,23 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
-public class AppointmentCreateController extends BaseController {
-    private final GetAccountByTokenStep getAccountByTokenStep;
-    private final CheckAccountPermissionToClinicStep checkAccountPermissionToClinicStep;
-    private final CreateInvoiceStep createInvoiceStep;
-    private final CreateMedicalRecordStep createMedicalRecordStep;
-    private final CreateAppointmentStep createAppointmentStep;
-    private final SuccessCreateAppointmentStep successCreateAppointmentStep;
+public class AppointmentCreateController extends StepRunnerController {
+    private final GetAccountByTokenStepRunner getAccountByTokenStep;
+    private final CheckAccountPermissionToClinicStepRunner checkAccountPermissionToClinicStep;
+    private final CreateInvoiceStepRunner createInvoiceStep;
+    private final CreateMedicalRecordStepRunner createMedicalRecordStep;
+    private final CreateAppointmentStepRunner createAppointmentStep;
+    private final SuccessCreateAppointmentStepRunner successCreateAppointmentStep;
 
     public AppointmentCreateController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-            GetAccountByTokenStep getAccountByTokenStep,
-            CheckAccountPermissionToClinicStep checkAccountPermissionToClinicStep,
-            CreateInvoiceStep createInvoiceStep,
-            CreateMedicalRecordStep createMedicalRecordStep,
-            CreateAppointmentStep createAppointmentStep,
-            SuccessCreateAppointmentStep successCreateAppointmentStep
+            GetAccountByTokenStepRunner getAccountByTokenStep,
+            CheckAccountPermissionToClinicStepRunner checkAccountPermissionToClinicStep,
+            CreateInvoiceStepRunner createInvoiceStep,
+            CreateMedicalRecordStepRunner createMedicalRecordStep,
+            CreateAppointmentStepRunner createAppointmentStep,
+            SuccessCreateAppointmentStepRunner successCreateAppointmentStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.getAccountByTokenStep = getAccountByTokenStep;
@@ -55,7 +55,7 @@ public class AppointmentCreateController extends BaseController {
 
     @PostMapping("appointment-create")
     public ResponseEntity<Response<?, ?>> appointmentCreate(@Valid @RequestBody AppointmentRequest request) {
-        val steps = new ArrayList<StepModel>();
+        val steps = new ArrayList<StepRunnerModel>();
         steps.addLast(getAccountByTokenStep);
         steps.addLast(checkAccountPermissionToClinicStep);
         steps.addLast(createInvoiceStep);

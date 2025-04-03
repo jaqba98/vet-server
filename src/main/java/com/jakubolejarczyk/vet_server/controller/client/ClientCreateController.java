@@ -4,12 +4,12 @@ import com.jakubolejarczyk.vet_server.dto.request.client.ClientRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.model.dependent.Client;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.step.base.BaseController;
-import com.jakubolejarczyk.vet_server.step.check.CheckAccountPermissionToClinicStep;
-import com.jakubolejarczyk.vet_server.step.create.CreateClientStep;
-import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
-import com.jakubolejarczyk.vet_server.step.model.StepModel;
-import com.jakubolejarczyk.vet_server.step.success.SuccessCreateClientStep;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
+import com.jakubolejarczyk.vet_server.step.check.CheckAccountPermissionToClinicStepRunner;
+import com.jakubolejarczyk.vet_server.step.create.CreateClientStepRunner;
+import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStepRunner;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
+import com.jakubolejarczyk.vet_server.step.success.SuccessCreateClientStepRunner;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.Valid;
 import lombok.val;
@@ -24,19 +24,19 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
-public class ClientCreateController extends BaseController {
-    private final GetAccountByTokenStep getAccountByTokenStep;
-    private final CheckAccountPermissionToClinicStep checkAccountPermissionToClinicStep;
-    private final CreateClientStep createClientStep;
-    private final SuccessCreateClientStep successCreateClientStep;
+public class ClientCreateController extends StepRunnerController {
+    private final GetAccountByTokenStepRunner getAccountByTokenStep;
+    private final CheckAccountPermissionToClinicStepRunner checkAccountPermissionToClinicStep;
+    private final CreateClientStepRunner createClientStep;
+    private final SuccessCreateClientStepRunner successCreateClientStep;
 
     public ClientCreateController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-            GetAccountByTokenStep getAccountByTokenStep,
-            CheckAccountPermissionToClinicStep checkAccountPermissionToClinicStep,
-            CreateClientStep createClientStep,
-            SuccessCreateClientStep successCreateClientStep
+            GetAccountByTokenStepRunner getAccountByTokenStep,
+            CheckAccountPermissionToClinicStepRunner checkAccountPermissionToClinicStep,
+            CreateClientStepRunner createClientStep,
+            SuccessCreateClientStepRunner successCreateClientStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.getAccountByTokenStep = getAccountByTokenStep;
@@ -47,7 +47,7 @@ public class ClientCreateController extends BaseController {
 
     @PostMapping("client-create")
     public ResponseEntity<Response<?, ?>> clientCreate(@Valid @RequestBody ClientRequest request) {
-        val steps = new ArrayList<StepModel>();
+        val steps = new ArrayList<StepRunnerModel>();
         steps.addLast(getAccountByTokenStep);
         steps.addLast(checkAccountPermissionToClinicStep);
         steps.addLast(createClientStep);

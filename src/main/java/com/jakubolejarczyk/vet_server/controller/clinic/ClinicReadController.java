@@ -3,11 +3,11 @@ package com.jakubolejarczyk.vet_server.controller.clinic;
 import com.jakubolejarczyk.vet_server.dto.request.base.TokenRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.step.base.BaseController;
-import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
-import com.jakubolejarczyk.vet_server.step.get.GetClinicsByEmploymentStep;
-import com.jakubolejarczyk.vet_server.step.get.GetEmploymentsByAccountIdAndIsOwnerStep;
-import com.jakubolejarczyk.vet_server.step.model.StepModel;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
+import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStepRunner;
+import com.jakubolejarczyk.vet_server.step.get.GetClinicsByEmploymentStepRunner;
+import com.jakubolejarczyk.vet_server.step.get.GetEmploymentsByAccountIdAndIsOwnerStepRunner;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.Valid;
 import lombok.val;
@@ -22,17 +22,17 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
-public class ClinicReadController extends BaseController {
-    private final GetAccountByTokenStep getAccountByTokenStep;
-    private final GetEmploymentsByAccountIdAndIsOwnerStep getEmploymentsByAccountIdAndIsOwnerStep;
-    private final GetClinicsByEmploymentStep getClinicsByEmploymentStep;
+public class ClinicReadController extends StepRunnerController {
+    private final GetAccountByTokenStepRunner getAccountByTokenStep;
+    private final GetEmploymentsByAccountIdAndIsOwnerStepRunner getEmploymentsByAccountIdAndIsOwnerStep;
+    private final GetClinicsByEmploymentStepRunner getClinicsByEmploymentStep;
 
     public ClinicReadController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-            GetAccountByTokenStep getAccountByTokenStep,
-            GetEmploymentsByAccountIdAndIsOwnerStep getEmploymentsByAccountIdAndIsOwnerStep,
-            GetClinicsByEmploymentStep getClinicsByEmploymentStep
+            GetAccountByTokenStepRunner getAccountByTokenStep,
+            GetEmploymentsByAccountIdAndIsOwnerStepRunner getEmploymentsByAccountIdAndIsOwnerStep,
+            GetClinicsByEmploymentStepRunner getClinicsByEmploymentStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.getAccountByTokenStep = getAccountByTokenStep;
@@ -42,7 +42,7 @@ public class ClinicReadController extends BaseController {
 
     @PostMapping("clinic-read")
     public ResponseEntity<Response<?, ?>> clinicRead(@Valid @RequestBody TokenRequest request) {
-        val steps = new ArrayList<StepModel>();
+        val steps = new ArrayList<StepRunnerModel>();
         steps.addLast(getAccountByTokenStep);
         steps.addLast(getEmploymentsByAccountIdAndIsOwnerStep);
         steps.addLast(getClinicsByEmploymentStep);

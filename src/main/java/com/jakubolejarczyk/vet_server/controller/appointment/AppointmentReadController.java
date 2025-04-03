@@ -3,11 +3,11 @@ package com.jakubolejarczyk.vet_server.controller.appointment;
 import com.jakubolejarczyk.vet_server.dto.request.base.TokenRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.step.base.BaseController;
-import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
-import com.jakubolejarczyk.vet_server.step.get.GetAppointmentsByClinicIdsStep;
-import com.jakubolejarczyk.vet_server.step.get.GetClinicIdsForAccountStep;
-import com.jakubolejarczyk.vet_server.step.model.StepModel;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
+import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStepRunner;
+import com.jakubolejarczyk.vet_server.step.get.GetAppointmentsByClinicIdsStepRunner;
+import com.jakubolejarczyk.vet_server.step.get.GetClinicIdsForAccountStepRunner;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.Valid;
 import lombok.val;
@@ -22,17 +22,17 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
-public class AppointmentReadController extends BaseController {
-    private final GetAccountByTokenStep getAccountByTokenStep;
-    private final GetClinicIdsForAccountStep getClinicIdsForAccountStep;
-    private final GetAppointmentsByClinicIdsStep getAppointmentsByClinicIdsStep;
+public class AppointmentReadController extends StepRunnerController {
+    private final GetAccountByTokenStepRunner getAccountByTokenStep;
+    private final GetClinicIdsForAccountStepRunner getClinicIdsForAccountStep;
+    private final GetAppointmentsByClinicIdsStepRunner getAppointmentsByClinicIdsStep;
 
     public AppointmentReadController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-            GetAccountByTokenStep getAccountByTokenStep,
-            GetClinicIdsForAccountStep getClinicIdsForAccountStep,
-            GetAppointmentsByClinicIdsStep getAppointmentsByClinicIdsStep
+            GetAccountByTokenStepRunner getAccountByTokenStep,
+            GetClinicIdsForAccountStepRunner getClinicIdsForAccountStep,
+            GetAppointmentsByClinicIdsStepRunner getAppointmentsByClinicIdsStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.getAccountByTokenStep = getAccountByTokenStep;
@@ -42,7 +42,7 @@ public class AppointmentReadController extends BaseController {
 
     @PostMapping("appointment-read")
     public ResponseEntity<Response<?, ?>> appointmentRead(@Valid @RequestBody TokenRequest request) {
-        val steps = new ArrayList<StepModel>();
+        val steps = new ArrayList<StepRunnerModel>();
         steps.addLast(getAccountByTokenStep);
         steps.addLast(getClinicIdsForAccountStep);
         steps.addLast(getAppointmentsByClinicIdsStep);

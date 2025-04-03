@@ -3,12 +3,12 @@ package com.jakubolejarczyk.vet_server.controller.clinic_opening_hours;
 import com.jakubolejarczyk.vet_server.dto.request.base.TokenRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.step.base.BaseController;
-import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
-import com.jakubolejarczyk.vet_server.step.get.GetClinicsByEmploymentStep;
-import com.jakubolejarczyk.vet_server.step.get.GetEmploymentsByAccountIdAndIsOwnerStep;
-import com.jakubolejarczyk.vet_server.step.get.GetOpeningHoursByClinicsStep;
-import com.jakubolejarczyk.vet_server.step.model.StepModel;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
+import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStepRunner;
+import com.jakubolejarczyk.vet_server.step.get.GetClinicsByEmploymentStepRunner;
+import com.jakubolejarczyk.vet_server.step.get.GetEmploymentsByAccountIdAndIsOwnerStepRunner;
+import com.jakubolejarczyk.vet_server.step.get.GetOpeningHoursByClinicsStepRunner;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.Valid;
 import lombok.val;
@@ -23,19 +23,19 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
-public class ClinicOpeningHoursReadController extends BaseController {
-    private final GetAccountByTokenStep getAccountByTokenStep;
-    private final GetEmploymentsByAccountIdAndIsOwnerStep getEmploymentsByAccountIdAndIsOwnerStep;
-    private final GetClinicsByEmploymentStep getClinicsByEmploymentStep;
-    private final GetOpeningHoursByClinicsStep getOpeningHoursByClinicsStep;
+public class ClinicOpeningHoursReadController extends StepRunnerController {
+    private final GetAccountByTokenStepRunner getAccountByTokenStep;
+    private final GetEmploymentsByAccountIdAndIsOwnerStepRunner getEmploymentsByAccountIdAndIsOwnerStep;
+    private final GetClinicsByEmploymentStepRunner getClinicsByEmploymentStep;
+    private final GetOpeningHoursByClinicsStepRunner getOpeningHoursByClinicsStep;
 
     public ClinicOpeningHoursReadController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-            GetAccountByTokenStep getAccountByTokenStep,
-            GetEmploymentsByAccountIdAndIsOwnerStep getEmploymentsByAccountIdAndIsOwnerStep,
-            GetClinicsByEmploymentStep getClinicsByEmploymentStep,
-            GetOpeningHoursByClinicsStep getOpeningHoursByClinicsStep
+            GetAccountByTokenStepRunner getAccountByTokenStep,
+            GetEmploymentsByAccountIdAndIsOwnerStepRunner getEmploymentsByAccountIdAndIsOwnerStep,
+            GetClinicsByEmploymentStepRunner getClinicsByEmploymentStep,
+            GetOpeningHoursByClinicsStepRunner getOpeningHoursByClinicsStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.getAccountByTokenStep = getAccountByTokenStep;
@@ -46,7 +46,7 @@ public class ClinicOpeningHoursReadController extends BaseController {
 
     @PostMapping("clinic-opening-hours-read")
     public ResponseEntity<Response<?, ?>> clinicOpeningHoursRead(@Valid @RequestBody TokenRequest request) {
-        val steps = new ArrayList<StepModel>();
+        val steps = new ArrayList<StepRunnerModel>();
         steps.addLast(getAccountByTokenStep);
         steps.addLast(getEmploymentsByAccountIdAndIsOwnerStep);
         steps.addLast(getClinicsByEmploymentStep);

@@ -4,11 +4,11 @@ import com.jakubolejarczyk.vet_server.dto.request.pet.PetRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.model.dependent.Pet;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.step.base.BaseController;
-import com.jakubolejarczyk.vet_server.step.check.CheckClientExistStep;
-import com.jakubolejarczyk.vet_server.step.model.StepModel;
-import com.jakubolejarczyk.vet_server.step.success.SuccessUpdatePetStep;
-import com.jakubolejarczyk.vet_server.step.update.UpdatePetStep;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
+import com.jakubolejarczyk.vet_server.step.check.CheckClientExistStepRunner;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
+import com.jakubolejarczyk.vet_server.step.success.SuccessUpdatePetStepRunner;
+import com.jakubolejarczyk.vet_server.step.update.UpdatePetStepRunner;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.Valid;
 import lombok.val;
@@ -23,17 +23,17 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
-public class PetUpdateController extends BaseController {
-    private final CheckClientExistStep checkClientExistStep;
-    private final UpdatePetStep updatePetStep;
-    private final SuccessUpdatePetStep successUpdatePetStep;
+public class PetUpdateController extends StepRunnerController {
+    private final CheckClientExistStepRunner checkClientExistStep;
+    private final UpdatePetStepRunner updatePetStep;
+    private final SuccessUpdatePetStepRunner successUpdatePetStep;
 
     public PetUpdateController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-            CheckClientExistStep checkClientExistStep,
-            UpdatePetStep updatePetStep,
-            SuccessUpdatePetStep successUpdatePetStep
+            CheckClientExistStepRunner checkClientExistStep,
+            UpdatePetStepRunner updatePetStep,
+            SuccessUpdatePetStepRunner successUpdatePetStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.checkClientExistStep = checkClientExistStep;
@@ -43,7 +43,7 @@ public class PetUpdateController extends BaseController {
 
     @PostMapping("pet-update")
     public ResponseEntity<Response<?, ?>> petUpdate(@Valid @RequestBody PetRequest request) {
-        val steps = new ArrayList<StepModel>();
+        val steps = new ArrayList<StepRunnerModel>();
         steps.addLast(checkClientExistStep);
         steps.addLast(updatePetStep);
         steps.addLast(successUpdatePetStep);

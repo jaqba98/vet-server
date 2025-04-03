@@ -3,10 +3,10 @@ package com.jakubolejarczyk.vet_server.controller.common;
 import com.jakubolejarczyk.vet_server.dto.request.common.RegistrationRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.step.base.BaseController;
-import com.jakubolejarczyk.vet_server.step.check.CheckAccountNotExistStep;
-import com.jakubolejarczyk.vet_server.step.create.CreateAccountStep;
-import com.jakubolejarczyk.vet_server.step.model.StepModel;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
+import com.jakubolejarczyk.vet_server.step.check.CheckAccountNotExistStepRunner;
+import com.jakubolejarczyk.vet_server.step.create.CreateAccountStepRunner;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.Valid;
 import lombok.val;
@@ -21,15 +21,15 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
-public class RegistrationController extends BaseController {
-    private final CheckAccountNotExistStep checkAccountNotExistStep;
-    private final CreateAccountStep createAccountStep;
+public class RegistrationController extends StepRunnerController {
+    private final CheckAccountNotExistStepRunner checkAccountNotExistStep;
+    private final CreateAccountStepRunner createAccountStep;
 
     public RegistrationController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-            CheckAccountNotExistStep checkAccountNotExistStep,
-            CreateAccountStep createAccountStep
+            CheckAccountNotExistStepRunner checkAccountNotExistStep,
+            CreateAccountStepRunner createAccountStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.checkAccountNotExistStep = checkAccountNotExistStep;
@@ -38,7 +38,7 @@ public class RegistrationController extends BaseController {
 
     @PostMapping("registration")
     public ResponseEntity<Response<?, ?>> registration(@Valid @RequestBody RegistrationRequest request) {
-        val steps = new ArrayList<StepModel>();
+        val steps = new ArrayList<StepRunnerModel>();
         steps.addLast(checkAccountNotExistStep);
         steps.addLast(createAccountStep);
         String[] dataKeys = {};

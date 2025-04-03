@@ -3,9 +3,9 @@ package com.jakubolejarczyk.vet_server.controller.medical_record;
 import com.jakubolejarczyk.vet_server.dto.request.base.TokenRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.step.base.BaseController;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
 import com.jakubolejarczyk.vet_server.step.get.*;
-import com.jakubolejarczyk.vet_server.step.model.StepModel;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.Valid;
 import lombok.val;
@@ -20,19 +20,19 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
-public class MedicalRecordReadController extends BaseController {
-    private final GetAccountByTokenStep getAccountByTokenStep;
-    private final GetClinicIdsForAccountStep getClinicIdsForAccountStep;
-    private final GetAppointmentsByClinicIdsStep getAppointmentsByClinicIdsStep;
-    private final GetMedicalRecordsByAppointmentsStep getMedicalRecordsByAppointmentsStep;
+public class MedicalRecordReadController extends StepRunnerController {
+    private final GetAccountByTokenStepRunner getAccountByTokenStep;
+    private final GetClinicIdsForAccountStepRunner getClinicIdsForAccountStep;
+    private final GetAppointmentsByClinicIdsStepRunner getAppointmentsByClinicIdsStep;
+    private final GetMedicalRecordsByAppointmentsStepRunner getMedicalRecordsByAppointmentsStep;
 
     public MedicalRecordReadController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-            GetAccountByTokenStep getAccountByTokenStep,
-            GetClinicIdsForAccountStep getClinicIdsForAccountStep,
-            GetAppointmentsByClinicIdsStep getAppointmentsByClinicIdsStep,
-            GetMedicalRecordsByAppointmentsStep getMedicalRecordsByAppointmentsStep
+            GetAccountByTokenStepRunner getAccountByTokenStep,
+            GetClinicIdsForAccountStepRunner getClinicIdsForAccountStep,
+            GetAppointmentsByClinicIdsStepRunner getAppointmentsByClinicIdsStep,
+            GetMedicalRecordsByAppointmentsStepRunner getMedicalRecordsByAppointmentsStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.getAccountByTokenStep = getAccountByTokenStep;
@@ -43,7 +43,7 @@ public class MedicalRecordReadController extends BaseController {
 
     @PostMapping("medical-record-read")
     public ResponseEntity<Response<?, ?>> medicalRecordRead(@Valid @RequestBody TokenRequest request) {
-        val steps = new ArrayList<StepModel>();
+        val steps = new ArrayList<StepRunnerModel>();
         steps.addLast(getAccountByTokenStep);
         steps.addLast(getClinicIdsForAccountStep);
         steps.addLast(getAppointmentsByClinicIdsStep);

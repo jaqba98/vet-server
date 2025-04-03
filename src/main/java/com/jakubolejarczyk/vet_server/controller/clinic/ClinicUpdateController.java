@@ -4,12 +4,12 @@ import com.jakubolejarczyk.vet_server.dto.request.clinic.ClinicUpdateRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.step.base.BaseController;
-import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
-import com.jakubolejarczyk.vet_server.step.get.GetEmploymentByAccountIdAndClinicIdAndIsOwnerStep;
-import com.jakubolejarczyk.vet_server.step.model.StepModel;
-import com.jakubolejarczyk.vet_server.step.success.SuccessUpdateClinicStep;
-import com.jakubolejarczyk.vet_server.step.update.UpdateClinicByEmploymentStep;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
+import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStepRunner;
+import com.jakubolejarczyk.vet_server.step.get.GetEmploymentByAccountIdAndClinicIdAndIsOwnerStepRunner;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
+import com.jakubolejarczyk.vet_server.step.success.SuccessUpdateClinicStepRunner;
+import com.jakubolejarczyk.vet_server.step.update.UpdateClinicByEmploymentStepRunner;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import lombok.val;
 import org.springframework.beans.factory.ObjectFactory;
@@ -23,19 +23,19 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
-public class ClinicUpdateController extends BaseController {
-    private final GetAccountByTokenStep getAccountByTokenStep;
-    private final GetEmploymentByAccountIdAndClinicIdAndIsOwnerStep getEmploymentByAccountIdAndClinicIdAndIsOwnerStep;
-    private final UpdateClinicByEmploymentStep updateClinicByEmploymentStep;
-    private final SuccessUpdateClinicStep successUpdateClinicStep;
+public class ClinicUpdateController extends StepRunnerController {
+    private final GetAccountByTokenStepRunner getAccountByTokenStep;
+    private final GetEmploymentByAccountIdAndClinicIdAndIsOwnerStepRunner getEmploymentByAccountIdAndClinicIdAndIsOwnerStep;
+    private final UpdateClinicByEmploymentStepRunner updateClinicByEmploymentStep;
+    private final SuccessUpdateClinicStepRunner successUpdateClinicStep;
 
     public ClinicUpdateController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-            GetAccountByTokenStep getAccountByTokenStep,
-            GetEmploymentByAccountIdAndClinicIdAndIsOwnerStep getEmploymentByAccountIdAndClinicIdAndIsOwnerStep,
-            UpdateClinicByEmploymentStep updateClinicByEmploymentStep,
-            SuccessUpdateClinicStep successUpdateClinicStep
+            GetAccountByTokenStepRunner getAccountByTokenStep,
+            GetEmploymentByAccountIdAndClinicIdAndIsOwnerStepRunner getEmploymentByAccountIdAndClinicIdAndIsOwnerStep,
+            UpdateClinicByEmploymentStepRunner updateClinicByEmploymentStep,
+            SuccessUpdateClinicStepRunner successUpdateClinicStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.getAccountByTokenStep = getAccountByTokenStep;
@@ -46,7 +46,7 @@ public class ClinicUpdateController extends BaseController {
 
     @PostMapping("clinic-update")
     public ResponseEntity<Response<?, ?>> clinicRead(@RequestBody ClinicUpdateRequest request) {
-        val steps = new ArrayList<StepModel>();
+        val steps = new ArrayList<StepRunnerModel>();
         steps.addLast(getAccountByTokenStep);
         steps.addLast(getEmploymentByAccountIdAndClinicIdAndIsOwnerStep);
         steps.addLast(updateClinicByEmploymentStep);

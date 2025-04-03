@@ -4,13 +4,13 @@ import com.jakubolejarczyk.vet_server.dto.request.clinic.ClinicCreateRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.step.base.BaseController;
-import com.jakubolejarczyk.vet_server.step.create.CreateClinicStep;
-import com.jakubolejarczyk.vet_server.step.create.CreateEmploymentStep;
-import com.jakubolejarczyk.vet_server.step.create.CreateOpeningHoursStep;
-import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
-import com.jakubolejarczyk.vet_server.step.model.StepModel;
-import com.jakubolejarczyk.vet_server.step.success.SuccessCreateClinicStep;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
+import com.jakubolejarczyk.vet_server.step.create.CreateClinicStepRunner;
+import com.jakubolejarczyk.vet_server.step.create.CreateEmploymentStepRunner;
+import com.jakubolejarczyk.vet_server.step.create.CreateOpeningHoursStepRunner;
+import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStepRunner;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
+import com.jakubolejarczyk.vet_server.step.success.SuccessCreateClinicStepRunner;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.Valid;
 import lombok.val;
@@ -25,21 +25,21 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
-public class ClinicCreateController extends BaseController {
-    private final GetAccountByTokenStep getAccountByTokenStep;
-    private final CreateOpeningHoursStep createOpeningHoursStep;
-    private final CreateClinicStep createClinicStep;
-    private final CreateEmploymentStep createEmploymentStep;
-    private final SuccessCreateClinicStep successCreateClinicStep;
+public class ClinicCreateController extends StepRunnerController {
+    private final GetAccountByTokenStepRunner getAccountByTokenStep;
+    private final CreateOpeningHoursStepRunner createOpeningHoursStep;
+    private final CreateClinicStepRunner createClinicStep;
+    private final CreateEmploymentStepRunner createEmploymentStep;
+    private final SuccessCreateClinicStepRunner successCreateClinicStep;
 
     public ClinicCreateController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-            GetAccountByTokenStep getAccountByTokenStep,
-            CreateOpeningHoursStep createOpeningHoursStep,
-            CreateClinicStep createClinicStep,
-            CreateEmploymentStep createEmploymentStep,
-            SuccessCreateClinicStep successCreateClinicStep
+            GetAccountByTokenStepRunner getAccountByTokenStep,
+            CreateOpeningHoursStepRunner createOpeningHoursStep,
+            CreateClinicStepRunner createClinicStep,
+            CreateEmploymentStepRunner createEmploymentStep,
+            SuccessCreateClinicStepRunner successCreateClinicStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.getAccountByTokenStep = getAccountByTokenStep;
@@ -51,7 +51,7 @@ public class ClinicCreateController extends BaseController {
 
     @PostMapping("clinic-create")
     public ResponseEntity<Response<?, ?>> clinicCreate(@Valid @RequestBody ClinicCreateRequest request) {
-        val steps = new ArrayList<StepModel>();
+        val steps = new ArrayList<StepRunnerModel>();
         steps.addLast(getAccountByTokenStep);
         steps.addLast(createOpeningHoursStep);
         steps.addLast(createClinicStep);

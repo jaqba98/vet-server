@@ -3,9 +3,9 @@ package com.jakubolejarczyk.vet_server.controller.guard;
 import com.jakubolejarczyk.vet_server.dto.request.base.TokenRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.step.base.BaseController;
-import com.jakubolejarczyk.vet_server.step.check.CheckTokenStep;
-import com.jakubolejarczyk.vet_server.step.model.StepModel;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
+import com.jakubolejarczyk.vet_server.step.check.CheckTokenStepRunner;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.Valid;
 import lombok.val;
@@ -20,13 +20,13 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
-public class ValidTokenController extends BaseController {
-    private final CheckTokenStep checkTokenStep;
+public class ValidTokenController extends StepRunnerController {
+    private final CheckTokenStepRunner checkTokenStep;
 
     public ValidTokenController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-            CheckTokenStep checkTokenStep
+            CheckTokenStepRunner checkTokenStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.checkTokenStep = checkTokenStep;
@@ -34,7 +34,7 @@ public class ValidTokenController extends BaseController {
 
     @PostMapping("valid-token")
     public ResponseEntity<Response<?, ?>> validToken(@Valid @RequestBody TokenRequest request) {
-        val steps = new ArrayList<StepModel>();
+        val steps = new ArrayList<StepRunnerModel>();
         steps.addLast(checkTokenStep);
         String[] dataKeys = {};
         String[] metadataKeys = {};

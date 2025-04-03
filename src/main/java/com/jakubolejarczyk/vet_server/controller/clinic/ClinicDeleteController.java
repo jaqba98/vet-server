@@ -3,14 +3,14 @@ package com.jakubolejarczyk.vet_server.controller.clinic;
 import com.jakubolejarczyk.vet_server.dto.request.common.DeleteRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.step.base.BaseController;
-import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
-import com.jakubolejarczyk.vet_server.step.get.GetEmploymentsByAccountIdAndClinicIdsAndIsOwnerStep;
-import com.jakubolejarczyk.vet_server.step.model.StepModel;
-import com.jakubolejarczyk.vet_server.step.success.SuccessDeleteClinicStep;
-import com.jakubolejarczyk.vet_server.step.update.UpdateClinicsIsArchivedStep;
-import com.jakubolejarczyk.vet_server.step.update.UpdateEmploymentsIsArchivedStep;
-import com.jakubolejarczyk.vet_server.step.update.UpdateOpeningHoursIsArchivedStep;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
+import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStepRunner;
+import com.jakubolejarczyk.vet_server.step.get.GetEmploymentsByAccountIdAndClinicIdsAndIsOwnerStepRunner;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
+import com.jakubolejarczyk.vet_server.step.success.SuccessDeleteClinicStepRunner;
+import com.jakubolejarczyk.vet_server.step.update.UpdateClinicsIsArchivedStepRunner;
+import com.jakubolejarczyk.vet_server.step.update.UpdateEmploymentsIsArchivedStepRunner;
+import com.jakubolejarczyk.vet_server.step.update.UpdateOpeningHoursIsArchivedStepRunner;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.Valid;
 import lombok.val;
@@ -25,23 +25,23 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
-public class ClinicDeleteController extends BaseController {
-    private final GetAccountByTokenStep getAccountByTokenStep;
-    private final GetEmploymentsByAccountIdAndClinicIdsAndIsOwnerStep getEmploymentsByAccountIdAndClinicIdsAndIsOwnerStep;
-    private final UpdateEmploymentsIsArchivedStep updateEmploymentsIsArchivedStep;
-    private final UpdateClinicsIsArchivedStep updateClinicsIsArchivedStep;
-    private final UpdateOpeningHoursIsArchivedStep updateOpeningHoursIsArchivedStep;
-    private final SuccessDeleteClinicStep successDeleteClinicStep;
+public class ClinicDeleteController extends StepRunnerController {
+    private final GetAccountByTokenStepRunner getAccountByTokenStep;
+    private final GetEmploymentsByAccountIdAndClinicIdsAndIsOwnerStepRunner getEmploymentsByAccountIdAndClinicIdsAndIsOwnerStep;
+    private final UpdateEmploymentsIsArchivedStepRunner updateEmploymentsIsArchivedStep;
+    private final UpdateClinicsIsArchivedStepRunner updateClinicsIsArchivedStep;
+    private final UpdateOpeningHoursIsArchivedStepRunner updateOpeningHoursIsArchivedStep;
+    private final SuccessDeleteClinicStepRunner successDeleteClinicStep;
 
     public ClinicDeleteController(
             ObjectFactory<StepStore> stepStoreObjectFactory,
             ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-            GetAccountByTokenStep getAccountByTokenStep,
-            GetEmploymentsByAccountIdAndClinicIdsAndIsOwnerStep getEmploymentsByAccountIdAndClinicIdsAndIsOwnerStep,
-            UpdateEmploymentsIsArchivedStep updateEmploymentsIsArchivedStep,
-            UpdateClinicsIsArchivedStep updateClinicsIsArchivedStep,
-            UpdateOpeningHoursIsArchivedStep updateOpeningHoursIsArchivedStep,
-            SuccessDeleteClinicStep successDeleteClinicStep
+            GetAccountByTokenStepRunner getAccountByTokenStep,
+            GetEmploymentsByAccountIdAndClinicIdsAndIsOwnerStepRunner getEmploymentsByAccountIdAndClinicIdsAndIsOwnerStep,
+            UpdateEmploymentsIsArchivedStepRunner updateEmploymentsIsArchivedStep,
+            UpdateClinicsIsArchivedStepRunner updateClinicsIsArchivedStep,
+            UpdateOpeningHoursIsArchivedStepRunner updateOpeningHoursIsArchivedStep,
+            SuccessDeleteClinicStepRunner successDeleteClinicStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.getAccountByTokenStep = getAccountByTokenStep;
@@ -54,7 +54,7 @@ public class ClinicDeleteController extends BaseController {
 
     @PostMapping("clinic-delete")
     public ResponseEntity<Response<?, ?>> clinicDelete(@Valid @RequestBody DeleteRequest request) {
-        val steps = new ArrayList<StepModel>();
+        val steps = new ArrayList<StepRunnerModel>();
         steps.addLast(getAccountByTokenStep);
         steps.addLast(getEmploymentsByAccountIdAndClinicIdsAndIsOwnerStep);
         steps.addLast(updateEmploymentsIsArchivedStep);
