@@ -17,14 +17,14 @@ public class GetAccountResponseStep implements StepRunnerModel<GetAccountData, G
         if (stepStore.getSuccess()) {
             if (stepStore.hasNotItem("account")) throw new Error("The account is required!");
             val account = stepStore.getItem("account", Account.class);
-            val data = GetAccountData.builder()
-                .email(account.getEmail())
-                .firstName(account.getFirstName())
-                .lastName(account.getLastName())
-                .role(account.getRole())
-                .pictureUrl(account.getPictureUrl())
-                .build();
-            val metadata = GetAccountMetadata.builder().build();
+            val data = new GetAccountData(
+                account.getEmail(),
+                account.getFirstName(),
+                account.getLastName(),
+                account.getRole(),
+                account.getPictureUrl()
+            );
+            val metadata = new GetAccountMetadata();
             stepStore.addMessage("Account details were downloaded successfully");
             stepStore.setData(data);
             stepStore.setMetadata(metadata);

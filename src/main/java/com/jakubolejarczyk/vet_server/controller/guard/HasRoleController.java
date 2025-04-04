@@ -54,30 +54,3 @@ public class HasRoleController extends StepRunnerController<HasRoleData, HasRole
         return runController(steps, hasRoleResponseStep);
     }
 }
-
-//    private final GetAccountByTokenStepRunner getAccountByTokenStep;
-//    private final CheckAccountHasRoleStepRunner checkAccountHasRoleStep;
-//
-//    public HasRoleController(
-//            ObjectFactory<StepStore> stepStoreObjectFactory,
-//            ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-//            GetAccountByTokenStepRunner getAccountByTokenStep,
-//            CheckAccountHasRoleStepRunner checkAccountHasRoleStep
-//    ) {
-//        super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
-//        this.getAccountByTokenStep = getAccountByTokenStep;
-//        this.checkAccountHasRoleStep = checkAccountHasRoleStep;
-//    }
-//
-//    @PostMapping("has-role")
-//    public ResponseEntity<Response<?, ?>> hasRole(@Valid @RequestBody TokenRequest request) {
-//        val steps = new ArrayList<StepRunnerModel>();
-//        steps.addLast(getAccountByTokenStep);
-//        steps.addLast(checkAccountHasRoleStep);
-//        String[] dataKeys = {};
-//        String[] metadataKeys = {};
-//        initController(dataKeys, metadataKeys);
-//        getStepStore().setItem("token", request.getToken());
-//        return runController(steps);
-//    }
-//}

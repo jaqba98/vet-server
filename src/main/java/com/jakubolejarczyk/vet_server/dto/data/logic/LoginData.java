@@ -1,10 +1,10 @@
 package com.jakubolejarczyk.vet_server.dto.data.logic;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.experimental.SuperBuilder;
 
 @Data
-@SuperBuilder
+@AllArgsConstructor
 public class LoginData {
     private String token;
 }

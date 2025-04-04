@@ -14,8 +14,8 @@ public class RegistrationResponseStep implements StepRunnerModel<RegistrationDat
     @Override
     public void runStep(StepStore<RegistrationData, RegistrationMetadata> stepStore) {
         if (stepStore.getSuccess()) {
-            val data = RegistrationData.builder().build();
-            val metadata = RegistrationMetadata.builder().build();
+            val data = new RegistrationData();
+            val metadata = new RegistrationMetadata();
             stepStore.addMessage("Registration was successful!");
             stepStore.setData(data);
             stepStore.setMetadata(metadata);

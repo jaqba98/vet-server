@@ -16,10 +16,8 @@ public class LoginResponseStep implements StepRunnerModel<LoginData, LoginMetada
         if (stepStore.getSuccess()) {
             if (stepStore.hasNotItem("token")) throw new Error("The token is required!");
             val token = stepStore.getItem("token", String.class);
-            val data = LoginData.builder()
-                .token(token)
-                .build();
-            val metadata = LoginMetadata.builder().build();
+            val data = new LoginData(token);
+            val metadata = new LoginMetadata();
             stepStore.addMessage("You have logged in successfully!");
             stepStore.setData(data);
             stepStore.setMetadata(metadata);

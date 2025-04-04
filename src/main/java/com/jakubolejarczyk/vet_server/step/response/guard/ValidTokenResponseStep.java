@@ -14,8 +14,8 @@ public class ValidTokenResponseStep implements StepRunnerModel<ValidTokenData, V
     @Override
     public void runStep(StepStore<ValidTokenData, ValidTokenMetadata> stepStore) {
         if (stepStore.getSuccess()) {
-            val data = ValidTokenData.builder().build();
-            val metadata = ValidTokenMetadata.builder().build();
+            val data = new ValidTokenData();
+            val metadata = new ValidTokenMetadata();
             stepStore.addMessage("Token is valid!");
             stepStore.setData(data);
             stepStore.setMetadata(metadata);

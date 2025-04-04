@@ -1,10 +1,10 @@
 package com.jakubolejarczyk.vet_server.dto.data.guard;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.experimental.SuperBuilder;
 
 @Data
-@SuperBuilder
+@AllArgsConstructor
 public class GetAccountData {
     private String email;
     private String firstName;
