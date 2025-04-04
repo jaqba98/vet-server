@@ -6,7 +6,7 @@ import com.jakubolejarczyk.vet_server.dto.request.base.TokenRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.step.check.CheckTokenStep;
-import com.jakubolejarczyk.vet_server.step.response.EmptyResponseStep;
+import com.jakubolejarczyk.vet_server.step.response.guard.ValidTokenResponseStep;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
@@ -25,17 +25,17 @@ import java.util.ArrayList;
 @RequestMapping("/api/v1")
 public class ValidTokenController extends StepRunnerController<GuardData, GuardMetadata> {
     private final CheckTokenStep<GuardData, GuardMetadata> checkTokenStep;
-    private final EmptyResponseStep<GuardData, GuardMetadata> emptyResponseStep;
+    private final ValidTokenResponseStep<GuardData, GuardMetadata> validTokenResponseStep;
 
     public ValidTokenController(
         ObjectFactory<StepStore<GuardData, GuardMetadata>> stepStoreObjectFactory,
         ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
         CheckTokenStep<GuardData, GuardMetadata> checkTokenStep,
-        EmptyResponseStep<GuardData, GuardMetadata> emptyResponseStep
+        ValidTokenResponseStep<GuardData, GuardMetadata> validTokenResponseStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.checkTokenStep = checkTokenStep;
-        this.emptyResponseStep = emptyResponseStep;
+        this.validTokenResponseStep = validTokenResponseStep;
     }
 
     @PostMapping("valid-token")
@@ -44,6 +44,6 @@ public class ValidTokenController extends StepRunnerController<GuardData, GuardM
         steps.addLast(checkTokenStep);
         initController();
         getStepStore().setItem("token", request.getToken());
-        return runController(steps, emptyResponseStep);
+        return runController(steps, validTokenResponseStep);
     }
 }

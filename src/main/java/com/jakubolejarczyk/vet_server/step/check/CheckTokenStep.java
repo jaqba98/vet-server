@@ -19,6 +19,5 @@ public class CheckTokenStep<TData, TMetadata> implements StepRunnerModel<TData, 
         val isValidToken = tokenService.verify(token);
         if (isValidToken) return;
         stepStore.setSuccess(false);
-        stepStore.addMessage("Token is invalid!");
     }
 }

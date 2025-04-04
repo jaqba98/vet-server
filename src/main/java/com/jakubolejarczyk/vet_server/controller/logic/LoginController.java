@@ -6,7 +6,7 @@ import com.jakubolejarczyk.vet_server.dto.request.logic.LoginRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.step.get.GetTokenByLoginDetailsStep;
-import com.jakubolejarczyk.vet_server.step.response.LoginResponseStep;
+import com.jakubolejarczyk.vet_server.step.response.logic.LoginResponseStep;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;

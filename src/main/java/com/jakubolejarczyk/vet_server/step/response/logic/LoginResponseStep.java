@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.step.response;
+package com.jakubolejarczyk.vet_server.step.response.logic;
 
 import com.jakubolejarczyk.vet_server.dto.data.logic.LoginData;
 import com.jakubolejarczyk.vet_server.dto.metadata.logic.LoginMetadata;
