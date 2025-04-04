@@ -1,29 +1,27 @@
 package com.jakubolejarczyk.vet_server.store;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
-@Data
-public class StepStore {
+@Getter
+@Setter
+public class StepStore<TData, TMetadata> {
     private Boolean success = true;
     private List<String> messages = new ArrayList<>();
-    private Map<String, Object> data = new HashMap<>();
-    private Map<String, Object> metadata = new HashMap<>();
     private Map<String, Object> items = new HashMap<>();
-    private String[] dataKeys = {};
-    private String[] metadataKeys = {};
+    private TData data;
+    private TMetadata metadata;
 
     public void reset() {
         success = true;
         messages.clear();
-        data.clear();
-        metadata.clear();
         items.clear();
-        dataKeys  = new String[]{};
-        metadataKeys = new String[]{};
+        data = null;
+        metadata = null;
     }
 
     public void addMessage(String message) {
@@ -31,26 +29,14 @@ public class StepStore {
     }
 
     public void setItem(String key, Object value) {
-        if (Arrays.asList(dataKeys).contains(key)) {
-            data.put(key, value);
-        } else if (Arrays.asList(metadataKeys).contains(key)) {
-            metadata.put(key, value);
-        } else {
-            items.put(key, value);
-        }
+        items.put(key, value);
     }
 
     public <T> T getItem(String key, Class<T> type) {
-        Object item;
-        if (data.containsKey(key)) {
-            item = data.get(key);
-        } else if (metadata.containsKey(key)) {
-            item = metadata.get(key);
-        } else if (items.containsKey(key)) {
-            item = items.get(key);
-        } else {
+        if (!items.containsKey(key)) {
             throw new NoSuchElementException("The store does not contain key: " + key);
         }
+        Object item = items.get(key);
         if (type.isInstance(item)) {
             return type.cast(item);
         }
@@ -77,7 +63,7 @@ public class StepStore {
     }
 
     public Boolean hasItem(String key) {
-        return data.containsKey(key) || metadata.containsKey(key) || items.containsKey(key);
+        return items.containsKey(key);
     }
 
     public Boolean hasNotItem(String key) {

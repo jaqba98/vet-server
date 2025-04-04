@@ -17,18 +17,16 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class StepRunnerController {
-    private final ObjectFactory<StepStore> stepStoreObjectFactory;
+public class StepRunnerController<TData, TMetadata> {
+    private final ObjectFactory<StepStore<TData, TMetadata>> stepStoreObjectFactory;
     private final ObjectFactory<HandleValidationService> handleValidationService;
 
-    public void initController(String[] dataKeys, String[] metadataKeys) {
+    public void initController() {
         val stepStore = stepStoreObjectFactory.getObject();
         stepStore.reset();
-        stepStore.setDataKeys(dataKeys);
-        stepStore.setMetadataKeys(metadataKeys);
     }
 
-    protected ResponseEntity<Response<?, ?>> runController(List<StepRunnerModel> steps) {
+    protected ResponseEntity<Response<TData, TMetadata>> runController(List<StepRunnerModel> steps) {
         val stepStore = stepStoreObjectFactory.getObject();
         for (val step : steps) {
             step.runStep(stepStore);
@@ -42,7 +40,7 @@ public class StepRunnerController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    protected StepStore getStepStore() {
+    protected StepStore<TData, TMetadata> getStepStore() {
         return stepStoreObjectFactory.getObject();
     }
 

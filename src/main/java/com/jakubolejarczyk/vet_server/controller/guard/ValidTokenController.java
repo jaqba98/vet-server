@@ -1,10 +1,11 @@
-package com.jakubolejarczyk.vet_server.controller.old.guard;
+package com.jakubolejarczyk.vet_server.controller.guard;
 
+import com.jakubolejarczyk.vet_server.dto.data.guard.GuardData;
+import com.jakubolejarczyk.vet_server.dto.metadata.guard.GuardMetadata;
 import com.jakubolejarczyk.vet_server.dto.request.base.TokenRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
-import com.jakubolejarczyk.vet_server.step.check.CheckTokenStepRunner;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import jakarta.validation.Valid;
@@ -20,25 +21,18 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
-public class ValidTokenController extends StepRunnerController {
-    private final CheckTokenStepRunner checkTokenStep;
-
+public class ValidTokenController extends StepRunnerController<GuardData, GuardMetadata> {
     public ValidTokenController(
-            ObjectFactory<StepStore> stepStoreObjectFactory,
-            ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-            CheckTokenStepRunner checkTokenStep
+        ObjectFactory<StepStore<GuardData, GuardMetadata>> stepStoreObjectFactory,
+        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
-        this.checkTokenStep = checkTokenStep;
     }
 
     @PostMapping("valid-token")
-    public ResponseEntity<Response<?, ?>> validToken(@Valid @RequestBody TokenRequest request) {
+    public ResponseEntity<Response<GuardData, GuardMetadata>> validToken(@Valid @RequestBody TokenRequest request) {
         val steps = new ArrayList<StepRunnerModel>();
-        steps.addLast(checkTokenStep);
-        String[] dataKeys = {};
-        String[] metadataKeys = {};
-        initController(dataKeys, metadataKeys);
+        initController();
         getStepStore().setItem("token", request.getToken());
         return runController(steps);
     }
