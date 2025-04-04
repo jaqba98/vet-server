@@ -1,7 +1,11 @@
 package com.jakubolejarczyk.vet_server.dto.data.logic;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
-@AllArgsConstructor
+@Data
+@SuperBuilder
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class RegistrationData {
 }

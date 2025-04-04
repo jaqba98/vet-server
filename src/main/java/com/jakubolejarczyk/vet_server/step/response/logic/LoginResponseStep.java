@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 public class LoginResponseStep implements StepRunnerModel<LoginData, LoginMetadata> {
     @Override
     public void runStep(StepStore<LoginData, LoginMetadata> stepStore) {
+        System.out.println(stepStore);
         if (stepStore.hasItem("token")) {
             val token = stepStore.getItem("token", String.class);
             val data = LoginData.builder().token(token).build();
