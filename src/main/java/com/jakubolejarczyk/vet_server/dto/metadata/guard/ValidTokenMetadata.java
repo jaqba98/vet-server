@@ -7,5 +7,5 @@ import lombok.experimental.SuperBuilder;
 @Data
 @SuperBuilder
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class GuardMetadata {
+public class ValidTokenMetadata {
 }

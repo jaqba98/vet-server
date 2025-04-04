@@ -1,7 +1,7 @@
 package com.jakubolejarczyk.vet_server.controller.guard;
 
-import com.jakubolejarczyk.vet_server.dto.data.guard.GuardData;
-import com.jakubolejarczyk.vet_server.dto.metadata.guard.GuardMetadata;
+import com.jakubolejarczyk.vet_server.dto.data.guard.ValidTokenData;
+import com.jakubolejarczyk.vet_server.dto.metadata.guard.ValidTokenMetadata;
 import com.jakubolejarczyk.vet_server.dto.request.base.TokenRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
@@ -23,14 +23,14 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
-public class ValidTokenController extends StepRunnerController<GuardData, GuardMetadata> {
-    private final CheckTokenStep<GuardData, GuardMetadata> checkTokenStep;
+public class ValidTokenController extends StepRunnerController<ValidTokenData, ValidTokenMetadata> {
+    private final CheckTokenStep<ValidTokenData, ValidTokenMetadata> checkTokenStep;
     private final ValidTokenResponseStep validTokenResponseStep;
 
     public ValidTokenController(
-        ObjectFactory<StepStore<GuardData, GuardMetadata>> stepStoreObjectFactory,
+        ObjectFactory<StepStore<ValidTokenData, ValidTokenMetadata>> stepStoreObjectFactory,
         ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-        CheckTokenStep<GuardData, GuardMetadata> checkTokenStep,
+        CheckTokenStep<ValidTokenData, ValidTokenMetadata> checkTokenStep,
         ValidTokenResponseStep validTokenResponseStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
@@ -39,8 +39,8 @@ public class ValidTokenController extends StepRunnerController<GuardData, GuardM
     }
 
     @PostMapping("valid-token")
-    public ResponseEntity<Response<GuardData, GuardMetadata>> validToken(@Valid @RequestBody TokenRequest request) {
-        val steps = new ArrayList<StepRunnerModel<GuardData, GuardMetadata>>();
+    public ResponseEntity<Response<ValidTokenData, ValidTokenMetadata>> validToken(@Valid @RequestBody TokenRequest request) {
+        val steps = new ArrayList<StepRunnerModel<ValidTokenData, ValidTokenMetadata>>();
         steps.addLast(checkTokenStep);
         initController();
         getStepStore().setItem("token", request.getToken());
