@@ -5,6 +5,7 @@ import com.jakubolejarczyk.vet_server.dto.metadata.guard.GuardMetadata;
 import com.jakubolejarczyk.vet_server.dto.request.base.TokenRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
+import com.jakubolejarczyk.vet_server.step.check.CheckTokenStep;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
@@ -22,16 +23,21 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("/api/v1")
 public class ValidTokenController extends StepRunnerController<GuardData, GuardMetadata> {
+    private final CheckTokenStep<GuardData, GuardMetadata> checkTokenStep;
+
     public ValidTokenController(
         ObjectFactory<StepStore<GuardData, GuardMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory
+        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        CheckTokenStep<GuardData, GuardMetadata> checkTokenStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
+        this.checkTokenStep = checkTokenStep;
     }
 
     @PostMapping("valid-token")
     public ResponseEntity<Response<GuardData, GuardMetadata>> validToken(@Valid @RequestBody TokenRequest request) {
-        val steps = new ArrayList<StepRunnerModel>();
+        val steps = new ArrayList<StepRunnerModel<GuardData, GuardMetadata>>();
+        steps.addLast(checkTokenStep);
         initController();
         getStepStore().setItem("token", request.getToken());
         return runController(steps);

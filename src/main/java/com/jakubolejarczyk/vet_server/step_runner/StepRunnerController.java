@@ -26,7 +26,7 @@ public class StepRunnerController<TData, TMetadata> {
         stepStore.reset();
     }
 
-    protected ResponseEntity<Response<TData, TMetadata>> runController(List<StepRunnerModel> steps) {
+    protected ResponseEntity<Response<TData, TMetadata>> runController(List<StepRunnerModel<TData, TMetadata>> steps) {
         val stepStore = stepStoreObjectFactory.getObject();
         for (val step : steps) {
             step.runStep(stepStore);

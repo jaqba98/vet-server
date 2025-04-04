@@ -20,8 +20,6 @@ public class StepStore<TData, TMetadata> {
         success = true;
         messages.clear();
         items.clear();
-        data = null;
-        metadata = null;
     }
 
     public void addMessage(String message) {
@@ -40,7 +38,7 @@ public class StepStore<TData, TMetadata> {
         if (type.isInstance(item)) {
             return type.cast(item);
         }
-        throw new ClassCastException("The item is not of the expected type: " + type.getName() + " it should be: "  + item.getClass().getName());
+        return null;
     }
 
     public <T> List<T> getItemAsArray(String key, Class<T> type) {
