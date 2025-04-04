@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.controller.medication;
 
-import com.jakubolejarczyk.vet_server.dto.request.medication.MedicationRequest;
+import com.jakubolejarczyk.vet_server.dto.request.dependent.MedicationRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.model.dependent.Medication;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
@@ -58,7 +58,7 @@ public class MedicationCreateController extends StepRunnerController {
         getStepStore().setItem("token", request.getToken());
         val requestMedication = Medication.builder()
                 .id(request.getId())
-                .entityName(request.getEntityName())
+                .fullName(request.getFullName())
                 .description(request.getDescription())
                 .manufacturer(request.getManufacturer())
                 .dose(request.getDose())

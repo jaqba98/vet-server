@@ -5,7 +5,7 @@ import com.jakubolejarczyk.vet_server.domain.base.BaseDomain;
 import java.math.BigDecimal;
 
 public interface ServiceClinicDomain extends BaseDomain {
-    String getEntityName();
+    String getFullName();
     String getDescription();
     String getCategory();
     Long getDurationMinutes();

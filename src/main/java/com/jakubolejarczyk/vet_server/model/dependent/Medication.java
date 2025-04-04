@@ -20,8 +20,8 @@ public class Medication implements MedicationDomain {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "entity_name", nullable = false)
-    private String entityName;
+    @Column(name = "full_name", nullable = false)
+    private String fullName;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String description;

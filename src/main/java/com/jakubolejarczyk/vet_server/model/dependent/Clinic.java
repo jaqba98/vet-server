@@ -17,8 +17,8 @@ public class Clinic implements ClinicDomain {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "entity_name", nullable = false, unique = true, length = 150)
-    private String entityName;
+    @Column(name = "full_name", nullable = false, unique = true, length = 150)
+    private String fullName;
 
     @Column(nullable = false, length = 100)
     private String street;

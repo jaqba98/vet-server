@@ -18,7 +18,7 @@ public class CreatePetStepRunner implements StepRunnerModel {
         if (stepStore.hasNotItem("requestPet")) throw new Error("The requestPet is required!");
         val requestPet = stepStore.getItem("requestPet", Pet.class);
         val pet = Pet.builder()
-                .entityName(requestPet.getEntityName())
+                .fullName(requestPet.getFullName())
                 .species(requestPet.getSpecies())
                 .breed(requestPet.getBreed())
                 .dateOfBirth(requestPet.getDateOfBirth())

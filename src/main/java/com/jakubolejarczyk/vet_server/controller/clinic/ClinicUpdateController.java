@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.controller.clinic;
 
-import com.jakubolejarczyk.vet_server.dto.request.clinic.ClinicUpdateRequest;
+import com.jakubolejarczyk.vet_server.dto.request.dependent.ClinicRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
@@ -45,7 +45,7 @@ public class ClinicUpdateController extends StepRunnerController {
     }
 
     @PostMapping("clinic-update")
-    public ResponseEntity<Response<?, ?>> clinicRead(@RequestBody ClinicUpdateRequest request) {
+    public ResponseEntity<Response<?, ?>> clinicRead(@RequestBody ClinicRequest request) {
         val steps = new ArrayList<StepRunnerModel>();
         steps.addLast(getAccountByTokenStep);
         steps.addLast(getEmploymentByAccountIdAndClinicIdAndIsOwnerStep);
@@ -57,7 +57,7 @@ public class ClinicUpdateController extends StepRunnerController {
         getStepStore().setItem("token", request.getToken());
         val requestClinic = Clinic.builder()
                 .id(request.getId())
-                .entityName(request.getEntityName())
+                .fullName(request.getFullName())
                 .street(request.getStreet())
                 .buildingNumber(request.getBuildingNumber())
                 .apartmentNumber(request.getApartmentNumber())

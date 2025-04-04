@@ -21,7 +21,7 @@ public class UpdateVetServiceStepRunner implements StepRunnerModel {
         if (currentVetService.isPresent()) {
             val newVetService = ServiceClinic.builder()
                     .id(currentVetService.get().getId())
-                    .entityName(requestVetService.getEntityName())
+                    .fullName(requestVetService.getFullName())
                     .description(requestVetService.getDescription())
                     .category(requestVetService.getCategory())
                     .durationMinutes(requestVetService.getDurationMinutes())

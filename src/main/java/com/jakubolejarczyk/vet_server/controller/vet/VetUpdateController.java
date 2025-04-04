@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.controller.vet;
 
-import com.jakubolejarczyk.vet_server.dto.request.vet.VetRequest;
+import com.jakubolejarczyk.vet_server.dto.request.dependent.VetRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.model.dependent.Vet;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;

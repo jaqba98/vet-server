@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.controller.invoice;
 
-import com.jakubolejarczyk.vet_server.dto.request.invoice.InvoiceRequest;
+import com.jakubolejarczyk.vet_server.dto.request.independent.InvoiceRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.model.independent.Invoice;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;

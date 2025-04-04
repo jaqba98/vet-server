@@ -19,7 +19,7 @@ public class CreateVetServiceStepRunner implements StepRunnerModel {
         val requestVetService = stepStore.getItem("requestVetService", ServiceClinic.class);
         val clinicId = stepStore.getItem("clinicId", Long.class);
         val vetService = ServiceClinic.builder()
-                .entityName(requestVetService.getEntityName())
+                .fullName(requestVetService.getFullName())
                 .description(requestVetService.getDescription())
                 .category(requestVetService.getCategory())
                 .durationMinutes(requestVetService.getDurationMinutes())

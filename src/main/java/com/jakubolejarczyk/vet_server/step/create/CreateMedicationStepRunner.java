@@ -20,7 +20,7 @@ public class CreateMedicationStepRunner implements StepRunnerModel {
         val requestMedication = stepStore.getItem("requestMedication", Medication.class);
         val clinicId = stepStore.getItem("clinicId", Long.class);
         val medication = Medication.builder()
-                .entityName(requestMedication.getEntityName())
+                .fullName(requestMedication.getFullName())
                 .description(requestMedication.getDescription())
                 .manufacturer(requestMedication.getManufacturer())
                 .dose(requestMedication.getDose())

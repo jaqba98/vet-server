@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.controller.clinic_opening_hours;
 
-import com.jakubolejarczyk.vet_server.dto.request.opening_hours.OpeningHourRequest;
+import com.jakubolejarczyk.vet_server.dto.request.independent.OpeningHourRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.model.independent.OpeningHour;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;

@@ -3,7 +3,7 @@ package com.jakubolejarczyk.vet_server.domain.dependent;
 import com.jakubolejarczyk.vet_server.domain.base.BaseDomain;
 
 public interface ClinicDomain extends BaseDomain {
-    String getEntityName();
+    String getFullName();
     String getStreet();
     String getBuildingNumber();
     String getApartmentNumber();

@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.controller.pet;
 
-import com.jakubolejarczyk.vet_server.dto.request.pet.PetRequest;
+import com.jakubolejarczyk.vet_server.dto.request.dependent.PetRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.model.dependent.Pet;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
@@ -53,7 +53,7 @@ public class PetCreateController extends StepRunnerController {
         getStepStore().setItem("token", request.getToken());
         val requestPet = Pet.builder()
                 .id(request.getId())
-                .entityName(request.getEntityName())
+                .fullName(request.getFullName())
                 .species(request.getSpecies())
                 .breed(request.getBreed())
                 .dateOfBirth(request.getDateOfBirth())

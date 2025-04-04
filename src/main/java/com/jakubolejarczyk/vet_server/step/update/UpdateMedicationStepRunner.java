@@ -22,7 +22,7 @@ public class UpdateMedicationStepRunner implements StepRunnerModel {
         if (currentMedication.isPresent()) {
             val newMedication = Medication.builder()
                     .id(currentMedication.get().getId())
-                    .entityName(requestMedication.getEntityName())
+                    .fullName(requestMedication.getFullName())
                     .description(requestMedication.getDescription())
                     .manufacturer(requestMedication.getManufacturer())
                     .dose(requestMedication.getDose())

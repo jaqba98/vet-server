@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.controller.vet_service;
 
-import com.jakubolejarczyk.vet_server.dto.request.vet_service.ServiceClinicRequest;
+import com.jakubolejarczyk.vet_server.dto.request.dependent.ServiceClinicRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.model.dependent.ServiceClinic;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
@@ -58,7 +58,7 @@ public class VetServiceCreateController extends StepRunnerController {
         getStepStore().setItem("token", request.getToken());
         val requestVetService = ServiceClinic.builder()
                 .id(request.getId())
-                .entityName(request.getEntityName())
+                .fullName(request.getFullName())
                 .description(request.getDescription())
                 .category(request.getCategory())
                 .durationMinutes(request.getDurationMinutes())

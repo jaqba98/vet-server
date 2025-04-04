@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.controller.clinic;
 
-import com.jakubolejarczyk.vet_server.dto.request.clinic.ClinicCreateRequest;
+import com.jakubolejarczyk.vet_server.dto.request.dependent.ClinicRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
@@ -50,7 +50,7 @@ public class ClinicCreateController extends StepRunnerController {
     }
 
     @PostMapping("clinic-create")
-    public ResponseEntity<Response<?, ?>> clinicCreate(@Valid @RequestBody ClinicCreateRequest request) {
+    public ResponseEntity<Response<?, ?>> clinicCreate(@Valid @RequestBody ClinicRequest request) {
         val steps = new ArrayList<StepRunnerModel>();
         steps.addLast(getAccountByTokenStep);
         steps.addLast(createOpeningHoursStep);
@@ -63,7 +63,7 @@ public class ClinicCreateController extends StepRunnerController {
         getStepStore().setItem("token", request.getToken());
         val requestClinic = Clinic.builder()
                 .id(request.getId())
-                .entityName(request.getEntityName())
+                .fullName(request.getFullName())
                 .street(request.getStreet())
                 .buildingNumber(request.getBuildingNumber())
                 .apartmentNumber(request.getApartmentNumber())

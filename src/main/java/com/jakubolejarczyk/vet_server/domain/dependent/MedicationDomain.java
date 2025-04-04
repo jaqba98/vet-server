@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public interface MedicationDomain extends BaseDomain {
-    String getEntityName();
+    String getFullName();
     String getDescription();
     String getManufacturer();
     String getDose();

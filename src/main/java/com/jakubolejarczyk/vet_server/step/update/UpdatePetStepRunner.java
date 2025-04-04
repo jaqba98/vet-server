@@ -22,7 +22,7 @@ public class UpdatePetStepRunner implements StepRunnerModel {
         if (currentPet.isPresent()) {
             val newPet = Pet.builder()
                     .id(currentPet.get().getId())
-                    .entityName(requestPet.getEntityName())
+                    .fullName(requestPet.getFullName())
                     .species(requestPet.getSpecies())
                     .breed(requestPet.getBreed())
                     .dateOfBirth(requestPet.getDateOfBirth())

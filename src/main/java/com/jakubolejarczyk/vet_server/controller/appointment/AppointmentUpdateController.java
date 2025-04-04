@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.controller.appointment;
 
-import com.jakubolejarczyk.vet_server.dto.request.AppointmentRequest;
+import com.jakubolejarczyk.vet_server.dto.request.dependent.AppointmentRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.model.dependent.Appointment;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;

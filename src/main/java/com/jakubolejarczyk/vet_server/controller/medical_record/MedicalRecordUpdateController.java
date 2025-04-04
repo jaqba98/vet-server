@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.controller.medical_record;
 
-import com.jakubolejarczyk.vet_server.dto.request.medical_record.MedicalRecordRequest;
+import com.jakubolejarczyk.vet_server.dto.request.independent.MedicalRecordRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.model.independent.MedicalRecord;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;

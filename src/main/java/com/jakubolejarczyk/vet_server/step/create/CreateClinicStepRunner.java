@@ -22,7 +22,7 @@ public class CreateClinicStepRunner implements StepRunnerModel {
         val requestClinic = stepStore.getItem("requestClinic", Clinic.class);
         val openingHoursId = openingHours.getId();
         val newClinic = Clinic.builder()
-                .entityName(requestClinic.getEntityName())
+                .fullName(requestClinic.getFullName())
                 .street(requestClinic.getStreet())
                 .buildingNumber(requestClinic.getBuildingNumber())
                 .apartmentNumber(requestClinic.getApartmentNumber())

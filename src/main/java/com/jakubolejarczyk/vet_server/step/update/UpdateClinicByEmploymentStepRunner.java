@@ -25,7 +25,7 @@ public class UpdateClinicByEmploymentStepRunner implements StepRunnerModel {
         if (currentClinic.isPresent()) {
             val clinic = Clinic.builder()
                     .id(currentClinic.get().getId())
-                    .entityName(requestClinic.getEntityName())
+                    .fullName(requestClinic.getFullName())
                     .street(requestClinic.getStreet())
                     .buildingNumber(requestClinic.getBuildingNumber())
                     .apartmentNumber(requestClinic.getApartmentNumber())

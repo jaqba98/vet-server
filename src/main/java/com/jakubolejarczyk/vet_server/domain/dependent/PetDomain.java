@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public interface PetDomain extends BaseDomain {
-    String getEntityName();
+    String getFullName();
     String getSpecies();
     String getBreed();
     LocalDate getDateOfBirth();

@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.controller.client;
 
-import com.jakubolejarczyk.vet_server.dto.request.common.DeleteRequest;
+import com.jakubolejarczyk.vet_server.dto.request.logic.DeleteRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
