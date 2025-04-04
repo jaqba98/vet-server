@@ -1,14 +1,12 @@
 package com.jakubolejarczyk.vet_server.store;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+@Data
 @Service
-@Getter
-@Setter
 public class StepStore<TData, TMetadata> {
     private Boolean success = true;
     private List<String> messages = new ArrayList<>();
@@ -20,6 +18,8 @@ public class StepStore<TData, TMetadata> {
         success = true;
         messages.clear();
         items.clear();
+        data = null;
+        metadata = null;
     }
 
     public void addMessage(String message) {
