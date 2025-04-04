@@ -13,12 +13,12 @@ import org.springframework.stereotype.Service;
 public class RegistrationResponseStep implements StepRunnerModel<RegistrationData, RegistrationMetadata> {
     @Override
     public void runStep(StepStore<RegistrationData, RegistrationMetadata> stepStore) {
+        val data = RegistrationData.builder().build();
+        val metadata = RegistrationMetadata.builder().build();
         if (stepStore.getSuccess()) {
-            val data = RegistrationData.builder().build();
-            val metadata = RegistrationMetadata.builder().build();
-            stepStore.setData(data);
-            stepStore.setMetadata(metadata);
             stepStore.addMessage("Registration was successful!");
         }
+        stepStore.setData(data);
+        stepStore.setMetadata(metadata);
     }
 }

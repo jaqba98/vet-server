@@ -13,16 +13,14 @@ import org.springframework.stereotype.Service;
 public class LoginResponseStep implements StepRunnerModel<LoginData, LoginMetadata> {
     @Override
     public void runStep(StepStore<LoginData, LoginMetadata> stepStore) {
-        System.out.println(stepStore);
-        if (stepStore.hasItem("token")) {
-            val token = stepStore.getItem("token", String.class);
-            val data = LoginData.builder().token(token).build();
-            val metadata = LoginMetadata.builder().build();
-            stepStore.setData(data);
-            stepStore.setMetadata(metadata);
-            stepStore.addMessage("You have logged in successfully!");
-            return;
-        }
-        stepStore.addMessage("Incorrect login or password!");
+        val token = stepStore.getItem("token", String.class);
+        val message = stepStore.getSuccess() ? "You have logged in successfully!" : "Incorrect login or password!";
+        val data = LoginData.builder()
+            .token(token)
+            .build();
+        val metadata = LoginMetadata.builder().build();
+        stepStore.addMessage(message);
+        stepStore.setData(data);
+        stepStore.setMetadata(metadata);
     }
 }
