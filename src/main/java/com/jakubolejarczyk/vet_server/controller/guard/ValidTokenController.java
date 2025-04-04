@@ -25,13 +25,13 @@ import java.util.ArrayList;
 @RequestMapping("/api/v1")
 public class ValidTokenController extends StepRunnerController<GuardData, GuardMetadata> {
     private final CheckTokenStep<GuardData, GuardMetadata> checkTokenStep;
-    private final ValidTokenResponseStep<GuardData, GuardMetadata> validTokenResponseStep;
+    private final ValidTokenResponseStep validTokenResponseStep;
 
     public ValidTokenController(
         ObjectFactory<StepStore<GuardData, GuardMetadata>> stepStoreObjectFactory,
         ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
         CheckTokenStep<GuardData, GuardMetadata> checkTokenStep,
-        ValidTokenResponseStep<GuardData, GuardMetadata> validTokenResponseStep
+        ValidTokenResponseStep validTokenResponseStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.checkTokenStep = checkTokenStep;
