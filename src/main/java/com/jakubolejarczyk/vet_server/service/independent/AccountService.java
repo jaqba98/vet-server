@@ -15,6 +15,10 @@ public class AccountService extends BaseService<Account, AccountRepository> {
     }
 
     public Optional<Account> findByEmail(String email) {
-        return this.repository.findByEmail(email);
+        return repository.findByEmail(email);
+    }
+
+    public void updateRoleByEmail(String email, String role) {
+        repository.updateRoleByEmail(email, role);
     }
 }
