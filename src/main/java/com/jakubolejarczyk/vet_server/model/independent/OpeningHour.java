@@ -10,7 +10,7 @@ import lombok.experimental.SuperBuilder;
 import java.time.LocalTime;
 
 @Entity
-@Table(name = "openinghours")
+@Table(name = "openinghour")
 @Getter
 @Setter
 @SuperBuilder

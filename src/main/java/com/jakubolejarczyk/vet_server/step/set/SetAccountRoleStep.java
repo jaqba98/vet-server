@@ -34,11 +34,11 @@ public class SetAccountRoleStep<TData, TMetadata> implements StepRunnerModel<TDa
     private void createVet(Long accountId) {
         val vet = vetService.findByAccountId(accountId);
         if (vet.isPresent()) return;
-        OpeningHour openingHours = OpeningHour.builder().build();
-        OpeningHour newOpeningHours = openingHourService.save(openingHours);
+        OpeningHour openingHour = OpeningHour.builder().build();
+        OpeningHour newOpeningHour = openingHourService.save(openingHour);
         Vet newVet = Vet.builder()
             .accountId(accountId)
-            .openingHourId(newOpeningHours.getId())
+            .openingHourId(newOpeningHour.getId())
             .build();
         vetService.save(newVet);
     }
