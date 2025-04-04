@@ -28,8 +28,8 @@ public class GetTokenByLoginDetailsStep<TData, TMetadata> implements StepRunnerM
             if (passwordService.match(password, encodedPassword)) {
                 val token = tokenService.generate(email);
                 stepStore.setItem("token", token);
+                return;
             }
-            return;
         }
         stepStore.setSuccess(false);
     }

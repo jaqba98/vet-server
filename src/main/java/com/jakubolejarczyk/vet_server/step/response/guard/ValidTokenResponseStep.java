@@ -13,11 +13,13 @@ import org.springframework.stereotype.Service;
 public class ValidTokenResponseStep implements StepRunnerModel<ValidTokenData, ValidTokenMetadata> {
     @Override
     public void runStep(StepStore<ValidTokenData, ValidTokenMetadata> stepStore) {
-        val message = stepStore.getSuccess() ? "Token is valid!" : "Token is invalid!";
-        val data = ValidTokenData.builder().build();
-        val metadata = ValidTokenMetadata.builder().build();
-        stepStore.addMessage(message);
-        stepStore.setData(data);
-        stepStore.setMetadata(metadata);
+        if (stepStore.getSuccess()) {
+            val data = ValidTokenData.builder().build();
+            val metadata = ValidTokenMetadata.builder().build();
+            stepStore.addMessage("Token is valid!");
+            stepStore.setData(data);
+            stepStore.setMetadata(metadata);
+        }
+        stepStore.addMessage("Token is invalid!");
     }
 }

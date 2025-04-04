@@ -18,11 +18,13 @@ public class GetAccountByTokenStep<TData, TMetadata> implements StepRunnerModel<
     public void runStep(StepStore<TData, TMetadata> stepStore) {
         if (stepStore.hasNotItem("token")) throw new Error("The token is required!");
         val token = stepStore.getItem("token", String.class);
-        val email = tokenService.decode(token);
-        val account = accountService.findByEmail(email);
-        if (account.isPresent()) {
-            stepStore.setItem("account", account.get());
-            return;
+        if (token != null) {
+            val email = tokenService.decode(token);
+            val account = accountService.findByEmail(email);
+            if (account.isPresent()) {
+                stepStore.setItem("account", account.get());
+                return;
+            }
         }
         stepStore.setSuccess(false);
         stepStore.addMessage("Failed to read account details. Account does not exist!");

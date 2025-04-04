@@ -14,9 +14,9 @@ import org.springframework.stereotype.Service;
 public class GetAccountResponseStep implements StepRunnerModel<GetAccountData, GetAccountMetadata> {
     @Override
     public void runStep(StepStore<GetAccountData, GetAccountMetadata> stepStore) {
-        if (stepStore.hasNotItem("account")) throw new Error("The account is required!");
-        val account = stepStore.getItem("account", Account.class);
         if (stepStore.getSuccess()) {
+            if (stepStore.hasNotItem("account")) throw new Error("The account is required!");
+            val account = stepStore.getItem("account", Account.class);
             val data = GetAccountData.builder()
                 .email(account.getEmail())
                 .firstName(account.getFirstName())
