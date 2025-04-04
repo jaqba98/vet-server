@@ -21,16 +21,14 @@ public class SetAccountRoleStep<TData, TMetadata> implements StepRunnerModel<TDa
 
     @Override
     public void runStep(StepStore<TData, TMetadata> stepStore) {
-        if (stepStore.hasNotItem("email")) throw new Error("The email is required!");
         if (stepStore.hasNotItem("role")) throw new Error("The role is required!");
         if (stepStore.hasNotItem("account")) throw new Error("The account is required!");
-        val email = stepStore.getItem("email", String.class);
         val role = stepStore.getItem("role", String.class);
         val account = stepStore.getItem("account", Account.class);
         if (role.equals("vet")) {
             createVet(account.getId());
         }
-        accountService.updateRoleByEmail(email, role);
+        accountService.updateRoleByEmail(account.getEmail(), role);
     }
 
     private void createVet(Long accountId) {
