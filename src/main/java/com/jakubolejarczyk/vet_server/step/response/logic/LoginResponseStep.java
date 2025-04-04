@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 public class LoginResponseStep implements StepRunnerModel<LoginData, LoginMetadata> {
     @Override
     public void runStep(StepStore<LoginData, LoginMetadata> stepStore) {
-        if (stepStore.hasNotItem("token")) throw new Error("The token is required!");
         val token = stepStore.getItem("token", String.class);
         val message = stepStore.getSuccess() ? "You have logged in successfully!" : "Incorrect login or password!";
         val data = LoginData.builder()
