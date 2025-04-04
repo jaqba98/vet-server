@@ -1,7 +1,8 @@
 package com.jakubolejarczyk.vet_server.dto.data.logic;
 
-import lombok.AllArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
-@AllArgsConstructor
+@SuperBuilder
 public class LoginData {
+    private String token;
 }

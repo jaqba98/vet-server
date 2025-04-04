@@ -26,12 +26,16 @@ public class StepRunnerController<TData, TMetadata> {
         stepStore.reset();
     }
 
-    protected ResponseEntity<Response<TData, TMetadata>> runController(List<StepRunnerModel<TData, TMetadata>> steps) {
+    protected ResponseEntity<Response<TData, TMetadata>> runController(
+        List<StepRunnerModel<TData, TMetadata>> steps,
+        StepRunnerModel<TData, TMetadata> responseStep
+    ) {
         val stepStore = stepStoreObjectFactory.getObject();
         for (val step : steps) {
             step.runStep(stepStore);
             if (!stepStore.getSuccess()) break;
         }
+        responseStep.runStep(stepStore);
         val success = stepStore.getSuccess();
         val messages = stepStore.getMessages();
         val data = stepStore.getData();
