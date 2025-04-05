@@ -31,4 +31,8 @@ public class Client implements ClientDomain {
 
     @Column(name = "clinic_id", nullable = false)
     private Long clinicId;
+
+    public String getFullName() {
+        return getFirstName() + " " + getLastName();
+    }
 }

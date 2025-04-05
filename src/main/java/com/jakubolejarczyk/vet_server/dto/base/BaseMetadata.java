@@ -1,6 +1,5 @@
 package com.jakubolejarczyk.vet_server.dto.base;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.Map;
