@@ -17,13 +17,13 @@ public class EmploymentReadResponseStep implements StepRunnerModel<EmploymentDat
     public void runStep(StepStore<EmploymentData, EmploymentMetadata> stepStore) {
         if (stepStore.getSuccess()) {
             if (stepStore.hasNotItem("employments")) throw new Error("The employments is required!");
-            if (stepStore.hasNotItem("employmentsAccountIdMetadata")) throw new Error("The employmentsAccountIdMetadata is required!");
-            if (stepStore.hasNotItem("employmentsClinicIdMetadata")) throw new Error("The employmentsClinicIdMetadata is required!");
+            if (stepStore.hasNotItem("accountIdMetadata")) throw new Error("The accountIdMetadata is required!");
+            if (stepStore.hasNotItem("clinicIdMetaData")) throw new Error("The clinicIdMetaData is required!");
             val employments = stepStore.getItemAsArray("employments", Employment.class);
-            val employmentsAccountIdMetadata = stepStore.getItem("employmentsAccountIdMetadata", BaseMetadata.class);
-            val employmentsClinicIdMetadata = stepStore.getItem("employmentsClinicIdMetadata", BaseMetadata.class);
+            val accountIdMetadata = stepStore.getItem("accountIdMetadata", BaseMetadata.class);
+            val clinicIdMetaData = stepStore.getItem("clinicIdMetaData", BaseMetadata.class);
             val data = new EmploymentData(employments);
-            val metadata = new EmploymentMetadata(employmentsAccountIdMetadata, employmentsClinicIdMetadata);
+            val metadata = new EmploymentMetadata(accountIdMetadata, clinicIdMetaData);
             stepStore.addMessage("Employments were downloaded successfully");
             stepStore.setData(data);
             stepStore.setMetadata(metadata);

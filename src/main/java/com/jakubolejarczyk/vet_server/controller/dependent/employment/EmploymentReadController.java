@@ -6,6 +6,7 @@ import com.jakubolejarczyk.vet_server.dto.request.dependent.EmploymentRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
+import com.jakubolejarczyk.vet_server.step.get.GetClinicsByEmploymentStep;
 import com.jakubolejarczyk.vet_server.step.get.GetEmploymentsByAccountIdStep;
 import com.jakubolejarczyk.vet_server.step.response.dependent.employment.EmploymentReadResponseStep;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 public class EmploymentReadController extends StepRunnerController<EmploymentData, EmploymentMetadata> {
     private final GetAccountByTokenStep<EmploymentData, EmploymentMetadata> getAccountByTokenStep;
     private final GetEmploymentsByAccountIdStep<EmploymentData, EmploymentMetadata> getEmploymentsByAccountIdStep;
+    private final GetClinicsByEmploymentStep<EmploymentData, EmploymentMetadata> getClinicsByEmploymentStep;
     private final EmploymentReadResponseStep employmentReadResponseStep;
 
     public EmploymentReadController(
@@ -34,11 +36,13 @@ public class EmploymentReadController extends StepRunnerController<EmploymentDat
         ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<EmploymentData, EmploymentMetadata> getAccountByTokenStep,
         GetEmploymentsByAccountIdStep<EmploymentData, EmploymentMetadata> getEmploymentsByAccountIdStep,
+        GetClinicsByEmploymentStep<EmploymentData, EmploymentMetadata> getClinicsByEmploymentStep,
         EmploymentReadResponseStep employmentReadResponseStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.getAccountByTokenStep = getAccountByTokenStep;
         this.getEmploymentsByAccountIdStep = getEmploymentsByAccountIdStep;
+        this.getClinicsByEmploymentStep = getClinicsByEmploymentStep;
         this.employmentReadResponseStep = employmentReadResponseStep;
     }
 
@@ -49,6 +53,7 @@ public class EmploymentReadController extends StepRunnerController<EmploymentDat
         val steps = new ArrayList<StepRunnerModel<EmploymentData, EmploymentMetadata>>();
         steps.addLast(getAccountByTokenStep);
         steps.addLast(getEmploymentsByAccountIdStep);
+        steps.addLast(getClinicsByEmploymentStep);
         initController();
         getStepStore().setItem("token", request.getToken());
         return runController(steps, employmentReadResponseStep);
