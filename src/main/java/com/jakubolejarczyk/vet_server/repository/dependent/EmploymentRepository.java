@@ -13,7 +13,5 @@ public interface EmploymentRepository extends JpaRepository<Employment, Long> {
 
     List<Employment> findAllByAccountIdAndClinicIdInAndIsOwnerTrue(Long accountId, List<Long> clinicId);
 
-    List<Employment> findAllByAccountIdAndIsOwnerTrue(Long accountId);
-
     List<Employment> findAllByAccountId(Long accountId);
 }

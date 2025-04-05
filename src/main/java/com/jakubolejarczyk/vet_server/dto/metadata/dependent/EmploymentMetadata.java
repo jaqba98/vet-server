@@ -7,10 +7,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class EmploymentMetadata {
-    private BaseMetadata id;
-
-    private BaseMetadata isOwner;
-
     private BaseMetadata accountId;
 
     private BaseMetadata clinicId;
