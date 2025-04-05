@@ -20,6 +20,4 @@ public class VetMetadata {
     private BaseMetadata yearsOfExperience;
 
     private BaseMetadata accountId;
-
-    private BaseMetadata openingHourId;
 }

@@ -36,7 +36,4 @@ public class Vet implements VetDomain {
 
     @Column(name = "account_id", nullable = false)
     private Long accountId;
-
-    @Column(name = "opening_hour_id", nullable = false)
-    private Long openingHourId;
 }

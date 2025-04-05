@@ -11,5 +11,4 @@ public interface VetDomain extends BaseDomain {
     String getSpecialization();
     Long getYearsOfExperience();
     Long getAccountId();
-    Long getOpeningHourId();
 }

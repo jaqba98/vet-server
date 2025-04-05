@@ -29,7 +29,4 @@ public class VetRequest extends TokenRequest implements VetDomain {
 
     @NotNull(message = "Account id is required!")
     private Long accountId;
-
-    @NotNull(message = "Opening hours id id is required!")
-    private Long openingHourId;
 }

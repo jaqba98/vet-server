@@ -127,9 +127,7 @@ CREATE TABLE Vet (
     specialization VARCHAR(255) NULL,
     years_of_experience BIGINT NULL,
     account_id BIGINT NOT NULL,
-    opening_hour_id BIGINT NOT NULL,
-    FOREIGN KEY (account_id) REFERENCES Account(id),
-    FOREIGN KEY (opening_hour_id) REFERENCES OpeningHour(id)
+    FOREIGN KEY (account_id) REFERENCES Account(id)
 );
 
 CREATE TABLE Medication (

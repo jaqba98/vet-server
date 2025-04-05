@@ -2,10 +2,8 @@ package com.jakubolejarczyk.vet_server.step.set;
 
 import com.jakubolejarczyk.vet_server.model.dependent.Vet;
 import com.jakubolejarczyk.vet_server.model.independent.Account;
-import com.jakubolejarczyk.vet_server.model.independent.OpeningHour;
 import com.jakubolejarczyk.vet_server.service.dependent.VetService;
 import com.jakubolejarczyk.vet_server.service.independent.AccountService;
-import com.jakubolejarczyk.vet_server.service.independent.OpeningHourService;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import lombok.AllArgsConstructor;
@@ -17,7 +15,6 @@ import org.springframework.stereotype.Service;
 public class SetAccountRoleStep<TData, TMetadata> implements StepRunnerModel<TData, TMetadata> {
     private final AccountService accountService;
     private final VetService vetService;
-    private final OpeningHourService openingHourService;
 
     @Override
     public void runStep(StepStore<TData, TMetadata> stepStore) {
@@ -34,11 +31,8 @@ public class SetAccountRoleStep<TData, TMetadata> implements StepRunnerModel<TDa
     private void createVet(Long accountId) {
         val vet = vetService.findByAccountId(accountId);
         if (vet.isPresent()) return;
-        OpeningHour openingHour = OpeningHour.builder().build();
-        OpeningHour newOpeningHour = openingHourService.save(openingHour);
         Vet newVet = Vet.builder()
             .accountId(accountId)
-            .openingHourId(newOpeningHour.getId())
             .build();
         vetService.save(newVet);
     }
