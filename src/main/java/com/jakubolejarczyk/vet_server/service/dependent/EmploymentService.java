@@ -15,6 +15,10 @@ public class EmploymentService extends BaseService<Employment, EmploymentReposit
         super(repository);
     }
 
+    public Optional<Employment> findByAccountIdAndClinicId(Long accountId, Long clinicId) {
+        return repository.findByAccountIdAndClinicId(accountId, clinicId);
+    }
+
     public Optional<Employment> findByAccountIdAndClinicIdAndIsOwner(Long accountId, Long clinicId) {
         return repository.findByAccountIdAndClinicIdAndIsOwnerTrue(accountId, clinicId);
     }

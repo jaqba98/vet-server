@@ -9,6 +9,8 @@ import java.util.Optional;
 
 @Repository
 public interface EmploymentRepository extends JpaRepository<Employment, Long> {
+    Optional<Employment> findByAccountIdAndClinicId(Long accountId, Long clinicId);
+
     Optional<Employment> findByAccountIdAndClinicIdAndIsOwnerTrue(Long accountId, Long clinicId);
 
     List<Employment> findAllByAccountIdAndClinicIdInAndIsOwnerTrue(Long accountId, List<Long> clinicId);
