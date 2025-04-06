@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.domain.dependent;
+package com.jakubolejarczyk.vet_server.domain.independent;
 
 import com.jakubolejarczyk.vet_server.domain.base.BaseDomain;
 
@@ -13,5 +13,4 @@ public interface ClinicDomain extends BaseDomain {
     String getCountry();
     String getEmail();
     String getPhoneNumber();
-    Long getOpeningHourId();
 }

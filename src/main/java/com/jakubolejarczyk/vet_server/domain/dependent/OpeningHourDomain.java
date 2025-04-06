@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.domain.independent;
+package com.jakubolejarczyk.vet_server.domain.dependent;
 
 import com.jakubolejarczyk.vet_server.domain.base.BaseDomain;
 
@@ -19,4 +19,5 @@ public interface OpeningHourDomain extends BaseDomain {
     LocalTime getSaturdayTo();
     LocalTime getSundayFrom();
     LocalTime getSundayTo();
+    Long getClinicId();
 }

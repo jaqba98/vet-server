@@ -1,8 +1,8 @@
 //package com.jakubolejarczyk.vet_server.controller.old.clinic;
 //
-//import com.jakubolejarczyk.vet_server.dto.request.dependent.ClinicRequest;
+//import com.jakubolejarczyk.vet_server.dto.request.independent.ClinicRequest;
 //import com.jakubolejarczyk.vet_server.dto.response.Response;
-//import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
+//import com.jakubolejarczyk.vet_server.model.independent.Clinic;
 //import com.jakubolejarczyk.vet_server.security.HandleValidationService;
 //import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
 //import com.jakubolejarczyk.vet_server.step.create.CreateClinicStepRunner;

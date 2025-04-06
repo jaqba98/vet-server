@@ -1,7 +1,7 @@
 //package com.jakubolejarczyk.vet_server.step.get;
 //
-//import com.jakubolejarczyk.vet_server.model.dependent.Clinic;
-//import com.jakubolejarczyk.vet_server.service.independent.OpeningHourService;
+//import com.jakubolejarczyk.vet_server.model.independent.Clinic;
+//import com.jakubolejarczyk.vet_server.service.dependent.OpeningHourService;
 //import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 //import com.jakubolejarczyk.vet_server.store.StepStore;
 //import lombok.AllArgsConstructor;

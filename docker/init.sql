@@ -4,24 +4,6 @@
 
 -- ## Create tables without foreign keys. ##
 
-CREATE TABLE OpeningHour (
-    id BIGSERIAL PRIMARY KEY,
-    monday_from TIME NULL,
-    monday_to TIME NULL,
-    tuesday_from TIME NULL,
-    tuesday_to TIME NULL,
-    wednesday_from TIME NULL,
-    wednesday_to TIME NULL,
-    thursday_from TIME NULL,
-    thursday_to TIME NULL,
-    friday_from TIME NULL,
-    friday_to TIME NULL,
-    saturday_from TIME NULL,
-    saturday_to TIME NULL,
-    sunday_from TIME NULL,
-    sunday_to TIME NULL
-);
-
 CREATE TABLE Account (
     id BIGSERIAL PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
@@ -54,8 +36,6 @@ CREATE TABLE Invoice (
     notes TEXT NOT NULL
 );
 
--- ## Create tables with foreign keys. ##
-
 CREATE TABLE Clinic (
     id BIGSERIAL PRIMARY KEY,
     full_name VARCHAR(150) NOT NULL UNIQUE,
@@ -67,9 +47,29 @@ CREATE TABLE Clinic (
     province VARCHAR(80) NOT NULL,
     country VARCHAR(56) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
-    phone_number VARCHAR(20) NOT NULL,
-    opening_hour_id BIGINT NOT NULL,
-    FOREIGN KEY (opening_hour_id) REFERENCES OpeningHour(id)
+    phone_number VARCHAR(20) NOT NULL
+);
+
+-- ## Create tables with foreign keys. ##
+
+CREATE TABLE OpeningHour (
+    id BIGSERIAL PRIMARY KEY,
+    monday_from TIME NULL,
+    monday_to TIME NULL,
+    tuesday_from TIME NULL,
+    tuesday_to TIME NULL,
+    wednesday_from TIME NULL,
+    wednesday_to TIME NULL,
+    thursday_from TIME NULL,
+    thursday_to TIME NULL,
+    friday_from TIME NULL,
+    friday_to TIME NULL,
+    saturday_from TIME NULL,
+    saturday_to TIME NULL,
+    sunday_from TIME NULL,
+    sunday_to TIME NULL,
+    clinic_id BIGINT NOT NULL,
+    FOREIGN KEY (clinic_id) REFERENCES CLinic(id)
 );
 
 CREATE TABLE Client (

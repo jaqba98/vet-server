@@ -1,7 +1,7 @@
-package com.jakubolejarczyk.vet_server.service.independent;
+package com.jakubolejarczyk.vet_server.service.dependent;
 
-import com.jakubolejarczyk.vet_server.model.independent.OpeningHour;
-import com.jakubolejarczyk.vet_server.repository.independent.OpeningHourRepository;
+import com.jakubolejarczyk.vet_server.model.dependent.OpeningHour;
+import com.jakubolejarczyk.vet_server.repository.dependent.OpeningHourRepository;
 import com.jakubolejarczyk.vet_server.service.base.BaseService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

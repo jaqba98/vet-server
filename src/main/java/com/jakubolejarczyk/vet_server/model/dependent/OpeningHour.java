@@ -1,6 +1,6 @@
-package com.jakubolejarczyk.vet_server.model.independent;
+package com.jakubolejarczyk.vet_server.model.dependent;
 
-import com.jakubolejarczyk.vet_server.domain.independent.OpeningHourDomain;
+import com.jakubolejarczyk.vet_server.domain.dependent.OpeningHourDomain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -61,4 +61,7 @@ public class OpeningHour implements OpeningHourDomain {
 
     @Column(name = "sunday_to")
     private LocalTime sundayTo;
+
+    @Column(name = "clinic_id")
+    private Long clinicId;
 }

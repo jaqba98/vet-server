@@ -1,6 +1,6 @@
-package com.jakubolejarczyk.vet_server.dto.request.dependent;
+package com.jakubolejarczyk.vet_server.dto.request.independent;
 
-import com.jakubolejarczyk.vet_server.domain.dependent.ClinicDomain;
+import com.jakubolejarczyk.vet_server.domain.independent.ClinicDomain;
 import com.jakubolejarczyk.vet_server.dto.request.base.TokenRequest;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -61,7 +61,4 @@ public class ClinicRequest extends TokenRequest implements ClinicDomain {
     @NotBlank(message = "Phone number cannot be empty!")
     @Size(max = 20, message = "Phone number cannot be longer than 20 characters!")
     private String phoneNumber;
-
-    @NotNull(message = "Opening hour id is required!")
-    private Long openingHourId;
 }

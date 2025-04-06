@@ -1,6 +1,6 @@
-package com.jakubolejarczyk.vet_server.dto.request.independent;
+package com.jakubolejarczyk.vet_server.dto.request.dependent;
 
-import com.jakubolejarczyk.vet_server.domain.independent.OpeningHourDomain;
+import com.jakubolejarczyk.vet_server.domain.dependent.OpeningHourDomain;
 import com.jakubolejarczyk.vet_server.dto.request.base.TokenRequest;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -41,4 +41,7 @@ public class OpeningHourRequest extends TokenRequest implements OpeningHourDomai
     private LocalTime sundayFrom;
 
     private LocalTime sundayTo;
+
+    @NotNull(message = "Clinic id is required!")
+    private Long clinicId;
 }

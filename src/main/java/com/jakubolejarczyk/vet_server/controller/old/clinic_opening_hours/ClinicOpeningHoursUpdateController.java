@@ -1,8 +1,8 @@
 //package com.jakubolejarczyk.vet_server.controller.old.clinic_opening_hours;
 //
-//import com.jakubolejarczyk.vet_server.dto.request.independent.OpeningHourRequest;
+//import com.jakubolejarczyk.vet_server.dto.request.dependent.OpeningHourRequest;
 //import com.jakubolejarczyk.vet_server.dto.response.Response;
-//import com.jakubolejarczyk.vet_server.model.independent.OpeningHour;
+//import com.jakubolejarczyk.vet_server.model.dependent.OpeningHour;
 //import com.jakubolejarczyk.vet_server.security.HandleValidationService;
 //import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
 //import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStepRunner;

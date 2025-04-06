@@ -1,6 +1,6 @@
-package com.jakubolejarczyk.vet_server.model.dependent;
+package com.jakubolejarczyk.vet_server.model.independent;
 
-import com.jakubolejarczyk.vet_server.domain.dependent.ClinicDomain;
+import com.jakubolejarczyk.vet_server.domain.independent.ClinicDomain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -46,7 +46,4 @@ public class Clinic implements ClinicDomain {
 
     @Column(name = "phone_number", nullable = false, length = 20)
     private String phoneNumber;
-
-    @Column(name = "opening_hour_id", nullable = false)
-    private Long openingHourId;
 }
