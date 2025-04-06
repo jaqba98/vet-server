@@ -2,28 +2,19 @@
 //
 //import com.jakubolejarczyk.vet_server.dto.data.guard.ValidTokenData;
 //import com.jakubolejarczyk.vet_server.dto.metadata.guard.ValidTokenMetadata;
-//import com.jakubolejarczyk.vet_server.dto.request.base.TokenRequest;
-//import com.jakubolejarczyk.vet_server.dto.response.Response;
 //import com.jakubolejarczyk.vet_server.security.HandleValidationService;
 //import com.jakubolejarczyk.vet_server.step.check.CheckTokenStep;
 //import com.jakubolejarczyk.vet_server.step.response.guard.ValidTokenResponseStep;
 //import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
-//import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 //import com.jakubolejarczyk.vet_server.store.StepStore;
-//import jakarta.validation.Valid;
-//import lombok.val;
 //import org.springframework.beans.factory.ObjectFactory;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RequestBody;
 //import org.springframework.web.bind.annotation.RequestMapping;
 //import org.springframework.web.bind.annotation.RestController;
-//
-//import java.util.ArrayList;
 //
 //@RestController
 //@RequestMapping("/api/v1")
 //public class ValidTokenController extends StepRunnerController<ValidTokenData, ValidTokenMetadata> {
+//    // I am here
 //    private final CheckTokenStep<ValidTokenData, ValidTokenMetadata> checkTokenStep;
 //    private final ValidTokenResponseStep validTokenResponseStep;
 //
