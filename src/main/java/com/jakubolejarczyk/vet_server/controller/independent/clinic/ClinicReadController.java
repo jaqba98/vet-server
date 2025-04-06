@@ -8,6 +8,7 @@ import com.jakubolejarczyk.vet_server.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.step.get.account.GetAccountByTokenStep;
 import com.jakubolejarczyk.vet_server.step.get.clinic.GetClinicsByEmploymentsStep;
 import com.jakubolejarczyk.vet_server.step.get.employment.GetEmploymentsByAccountStep;
+import com.jakubolejarczyk.vet_server.step.metadata.ClinicMetadataStep;
 import com.jakubolejarczyk.vet_server.step.response.independent.ClinicReadResponseStep;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
@@ -29,6 +30,7 @@ public class ClinicReadController extends StepRunnerController<ClinicData, Clini
     private final GetAccountByTokenStep<ClinicData, ClinicMetadata> getAccountByTokenStep;
     private final GetEmploymentsByAccountStep<ClinicData, ClinicMetadata> getEmploymentsByAccountStep;
     private final GetClinicsByEmploymentsStep<ClinicData, ClinicMetadata> getClinicsByEmploymentsStep;
+    private final ClinicMetadataStep clinicMetadataStep;
     private final ClinicReadResponseStep clinicReadResponseStep;
 
     public ClinicReadController(
@@ -37,12 +39,14 @@ public class ClinicReadController extends StepRunnerController<ClinicData, Clini
         GetAccountByTokenStep<ClinicData, ClinicMetadata> getAccountByTokenStep,
         GetEmploymentsByAccountStep<ClinicData, ClinicMetadata> getEmploymentsByAccountStep,
         GetClinicsByEmploymentsStep<ClinicData, ClinicMetadata> getClinicsByEmploymentsStep,
+        ClinicMetadataStep clinicMetadataStep,
         ClinicReadResponseStep clinicReadResponseStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.getAccountByTokenStep = getAccountByTokenStep;
         this.getEmploymentsByAccountStep = getEmploymentsByAccountStep;
         this.getClinicsByEmploymentsStep = getClinicsByEmploymentsStep;
+        this.clinicMetadataStep = clinicMetadataStep;
         this.clinicReadResponseStep = clinicReadResponseStep;
     }
 
@@ -54,6 +58,7 @@ public class ClinicReadController extends StepRunnerController<ClinicData, Clini
         steps.addLast(getAccountByTokenStep);
         steps.addLast(getEmploymentsByAccountStep);
         steps.addLast(getClinicsByEmploymentsStep);
+        steps.addLast(clinicMetadataStep);
         initController();
         getStepStore().setItem("token", request.getToken());
         return runController(steps, clinicReadResponseStep);

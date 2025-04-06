@@ -1,6 +1,5 @@
 package com.jakubolejarczyk.vet_server.step.create;
 
-import com.jakubolejarczyk.vet_server.dto.base.BaseMetadata;
 import com.jakubolejarczyk.vet_server.model.dependent.OpeningHour;
 import com.jakubolejarczyk.vet_server.model.independent.Clinic;
 import com.jakubolejarczyk.vet_server.service.dependent.OpeningHourService;
@@ -23,11 +22,6 @@ public class CreateOpeningHourStep<TData, TMetadata> implements StepRunnerModel<
             .clinicId(clinicData.getId())
             .build();
         val openingHourData = openingHourService.save(openingHour);
-        // Data
         stepStore.setItem("openingHourData", openingHourData);
-        // MetaData clinic id
-        val createOpeningHourClinicIdMetaData = new BaseMetadata();
-        createOpeningHourClinicIdMetaData.addValue(clinicData.getId(), clinicData.getFullName());
-        stepStore.setItem("createOpeningHourClinicIdMetaData", createOpeningHourClinicIdMetaData);
     }
 }

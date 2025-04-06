@@ -16,10 +16,12 @@ public class ClinicReadResponseStep implements StepRunnerModel<ClinicData, Clini
     public void runStep(StepStore<ClinicData, ClinicMetadata> stepStore) {
         if (stepStore.getSuccess()) {
             if (stepStore.hasNotItem("clinicsData")) throw new Error("The clinicsData is required!");
+            if (stepStore.hasNotItem("myClinicIds")) throw new Error("The myClinicIds is required!");
             val clinicsData = stepStore.getItemAsArray("clinicsData", Clinic.class);
+            val myClinicIds = stepStore.getItemAsArray("myClinicIds", Long.class);
             val data = new ClinicData(clinicsData);
-            val metadata = new ClinicMetadata();
-            stepStore.addMessage("Clinics were read correctly");
+            val metadata = new ClinicMetadata(myClinicIds);
+            stepStore.addMessage("Clinics were read correctly!");
             stepStore.setData(data);
             stepStore.setMetadata(metadata);
         }

@@ -23,12 +23,12 @@ public class CreateEmploymentStep<TData, TMetadata> implements StepRunnerModel<T
         val clinicData = stepStore.getItem("clinicData", Clinic.class);
         val accountId = accountData.getId();
         val clinicId = clinicData.getId();
-        val newEmployment = Employment.builder()
+        val employment = Employment.builder()
             .isOwner(true)
             .accountId(accountId)
             .clinicId(clinicId)
             .build();
-        val employmentData = employmentService.save(newEmployment);
+        val employmentData = employmentService.save(employment);
         stepStore.setItem("employmentData", employmentData);
     }
 }

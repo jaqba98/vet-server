@@ -13,7 +13,7 @@ public class ClinicCreateResponseStep implements StepRunnerModel<ClinicData, Cli
     @Override
     public void runStep(StepStore<ClinicData, ClinicMetadata> stepStore) {
         if (stepStore.getSuccess()) {
-            stepStore.addMessage("A new clinic was created correctly");
+            stepStore.addMessage("A new clinic was created correctly!");
         }
     }
 }

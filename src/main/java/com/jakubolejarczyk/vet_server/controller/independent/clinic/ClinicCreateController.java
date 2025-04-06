@@ -52,7 +52,7 @@ public class ClinicCreateController extends StepRunnerController<ClinicData, Cli
     }
 
     @PostMapping("clinic-create")
-    public ResponseEntity<Response<ClinicData, ClinicMetadata>> clinicRead(
+    public ResponseEntity<Response<ClinicData, ClinicMetadata>> clinicCreate(
         @Valid @RequestBody ClinicRequest request
     ) {
         val steps = new ArrayList<StepRunnerModel<ClinicData, ClinicMetadata>>();
@@ -62,7 +62,7 @@ public class ClinicCreateController extends StepRunnerController<ClinicData, Cli
         steps.addLast(createEmploymentStep);
         initController();
         getStepStore().setItem("token", request.getToken());
-        val requestClinic = Clinic.builder()
+        val clinicRequest = Clinic.builder()
             .id(request.getId())
             .fullName(request.getFullName())
             .street(request.getStreet())
@@ -75,7 +75,7 @@ public class ClinicCreateController extends StepRunnerController<ClinicData, Cli
             .email(request.getEmail())
             .phoneNumber(request.getPhoneNumber())
             .build();
-        getStepStore().setItem("requestClinic", requestClinic);
+        getStepStore().setItem("clinicRequest", clinicRequest);
         return runController(steps, clinicCreateResponseStep);
     }
 }

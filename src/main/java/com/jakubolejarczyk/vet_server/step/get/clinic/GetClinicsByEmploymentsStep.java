@@ -22,7 +22,6 @@ public class GetClinicsByEmploymentsStep<TData, TMetadata> implements StepRunner
             .distinct()
             .toList();
         val clinicsData = clinicService.findAllById(clinicIds);
-        // Data
         stepStore.setItem("clinicsData", clinicsData);
     }
 }

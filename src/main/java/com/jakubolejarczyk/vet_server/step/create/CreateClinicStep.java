@@ -15,34 +15,33 @@ public class CreateClinicStep<TData, TMetadata> implements StepRunnerModel<TData
 
     @Override
     public void runStep(StepStore<TData, TMetadata> stepStore) {
-        if (stepStore.hasNotItem("requestClinic")) throw new Error("The requestClinic is required!");
-        val requestClinic = stepStore.getItem("requestClinic", Clinic.class);
-        val clinicByFullName = clinicService.findByFullName(requestClinic.getFullName());
+        if (stepStore.hasNotItem("clinicRequest")) throw new Error("The clinicRequest is required!");
+        val clinicRequest = stepStore.getItem("clinicRequest", Clinic.class);
+        val clinicByFullName = clinicService.findByFullName(clinicRequest.getFullName());
         if (clinicByFullName.isPresent()) {
             stepStore.setSuccess(false);
-            stepStore.addMessage("The full name of the clinic is already taken");
+            stepStore.addMessage("The full name of the clinic is already taken!");
             return;
         }
-        val clinicByEmail = clinicService.findByEmail(requestClinic.getEmail());
+        val clinicByEmail = clinicService.findByEmail(clinicRequest.getEmail());
         if (clinicByEmail.isPresent()) {
             stepStore.setSuccess(false);
-            stepStore.addMessage("The email of the clinic is already taken");
+            stepStore.addMessage("The email of the clinic is already taken!");
             return;
         }
-        val clinicData = Clinic.builder()
-            .fullName(requestClinic.getFullName())
-            .street(requestClinic.getStreet())
-            .buildingNumber(requestClinic.getBuildingNumber())
-            .apartmentNumber(requestClinic.getApartmentNumber())
-            .postalCode(requestClinic.getPostalCode())
-            .city(requestClinic.getCity())
-            .province(requestClinic.getProvince())
-            .country(requestClinic.getCountry())
-            .email(requestClinic.getEmail())
-            .phoneNumber(requestClinic.getPhoneNumber())
+        val clinic = Clinic.builder()
+            .fullName(clinicRequest.getFullName())
+            .street(clinicRequest.getStreet())
+            .buildingNumber(clinicRequest.getBuildingNumber())
+            .apartmentNumber(clinicRequest.getApartmentNumber())
+            .postalCode(clinicRequest.getPostalCode())
+            .city(clinicRequest.getCity())
+            .province(clinicRequest.getProvince())
+            .country(clinicRequest.getCountry())
+            .email(clinicRequest.getEmail())
+            .phoneNumber(clinicRequest.getPhoneNumber())
             .build();
-        clinicService.save(clinicData);
-        // Data
+        val clinicData = clinicService.save(clinic);
         stepStore.setItem("clinicData", clinicData);
     }
 }

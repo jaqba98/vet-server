@@ -28,6 +28,6 @@ public class GetAccountByTokenStep<TData, TMetadata> implements StepRunnerModel<
             }
         }
         stepStore.setSuccess(false);
-        stepStore.addMessage("Failed to read account details. Account does not exist!");
+        stepStore.addMessage("Failed to read account details!");
     }
 }
