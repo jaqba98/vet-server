@@ -16,6 +16,11 @@ public class AppointmentRequest extends TokenRequest implements AppointmentDomai
     @NotNull(message = "Id is required!")
     private Long id;
 
+    @NotNull(message = "Full name is required!")
+    @NotBlank(message = "Full name cannot be empty!")
+    @Size(max = 255, message = "Full name cannot be longer than 255 characters!")
+    private String fullName;
+
     @NotNull(message = "Date and hour are required!")
     private Timestamp dateAndHour;
 

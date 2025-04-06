@@ -7,8 +7,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class AppointmentMedicationMetadata {
-    private BaseMetadata id;
-
     private BaseMetadata appointmentId;
 
     private BaseMetadata medicationId;

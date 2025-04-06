@@ -7,25 +7,9 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class AppointmentMetadata {
-    private BaseMetadata id;
-
-    private BaseMetadata dateAndHour;
-
-    private BaseMetadata type;
-
-    private BaseMetadata status;
-
-    private BaseMetadata reason;
-
-    private BaseMetadata notes;
-
     private BaseMetadata clinicId;
 
     private BaseMetadata vetId;
 
     private BaseMetadata petId;
-
-    private BaseMetadata invoiceId;
-
-    private BaseMetadata medicalRecordId;
 }

@@ -7,15 +7,5 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ClientMetadata {
-    private BaseMetadata id;
-
-    private BaseMetadata email;
-
-    private BaseMetadata phoneNumber;
-
-    private BaseMetadata firstName;
-
-    private BaseMetadata lastName;
-
     private BaseMetadata clinicId;
 }
