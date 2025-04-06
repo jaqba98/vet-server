@@ -1,6 +1,6 @@
-package com.jakubolejarczyk.vet_server.dto.request.independent;
+package com.jakubolejarczyk.vet_server.dto.request.dependent;
 
-import com.jakubolejarczyk.vet_server.domain.independent.MedicalRecordDomain;
+import com.jakubolejarczyk.vet_server.domain.dependent.MedicalRecordDomain;
 import com.jakubolejarczyk.vet_server.dto.request.base.TokenRequest;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -37,4 +37,7 @@ public class MedicalRecordRequest extends TokenRequest implements MedicalRecordD
 
     @NotNull(message = "Notes is required!")
     private String notes;
+
+    @NotNull(message = "Appointment id is required!")
+    private Long appointmentId;
 }

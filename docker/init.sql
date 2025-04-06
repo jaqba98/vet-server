@@ -14,28 +14,6 @@ CREATE TABLE Account (
     picture_url VARCHAR(255) NULL
 );
 
-CREATE TABLE MedicalRecord (
-    id BIGSERIAL PRIMARY KEY,
-    diagnosis TEXT NOT NULL,
-    treatment TEXT NOT NULL,
-    procedures TEXT NOT NULL,
-    next_appointment DATE NOT NULL,
-    status VARCHAR(255) NOT NULL,
-    notes TEXT NOT NULL
-);
-
-CREATE TABLE Invoice (
-    id BIGSERIAL PRIMARY KEY,
-    invoice_date DATE NOT NULL,
-    due_date DATE NOT NULL,
-    total_amount DECIMAL(10, 2) NOT NULL,
-    amount_paid DECIMAL(10, 2) NOT NULL,
-    outstanding_amount DECIMAL(10, 2) NOT NULL,
-    payment_status VARCHAR(9) NOT NULL,
-    payment_method VARCHAR(14) NOT NULL,
-    notes TEXT NOT NULL
-);
-
 CREATE TABLE Clinic (
     id BIGSERIAL PRIMARY KEY,
     full_name VARCHAR(150) NOT NULL UNIQUE,
@@ -51,6 +29,32 @@ CREATE TABLE Clinic (
 );
 
 -- ## Create tables with foreign keys. ##
+
+CREATE TABLE MedicalRecord (
+    id BIGSERIAL PRIMARY KEY,
+    diagnosis TEXT NOT NULL,
+    treatment TEXT NOT NULL,
+    procedures TEXT NOT NULL,
+    next_appointment DATE NOT NULL,
+    status VARCHAR(255) NOT NULL,
+    notes TEXT NOT NULL,
+    appointment_id BIGINT NOT NULL,
+    FOREIGN KEY (appointment_id) REFERENCES Appointment(id)
+);
+
+CREATE TABLE Invoice (
+    id BIGSERIAL PRIMARY KEY,
+    invoice_date DATE NOT NULL,
+    due_date DATE NOT NULL,
+    total_amount DECIMAL(10, 2) NOT NULL,
+    amount_paid DECIMAL(10, 2) NOT NULL,
+    outstanding_amount DECIMAL(10, 2) NOT NULL,
+    payment_status VARCHAR(9) NOT NULL,
+    payment_method VARCHAR(14) NOT NULL,
+    notes TEXT NOT NULL,
+    appointment_id BIGINT NOT NULL,
+    FOREIGN KEY (appointment_id) REFERENCES Appointment(id)
+);
 
 CREATE TABLE OpeningHour (
     id BIGSERIAL PRIMARY KEY,
@@ -146,6 +150,7 @@ CREATE TABLE Medication (
 
 CREATE TABLE Appointment (
     id BIGSERIAL PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL,
     date_and_hour TIMESTAMP NOT NULL,
     type VARCHAR(255) NOT NULL,
     status VARCHAR(255) NOT NULL,
@@ -154,13 +159,9 @@ CREATE TABLE Appointment (
     clinic_id BIGINT NOT NULL,
     vet_id BIGINT NOT NULL,
     pet_id BIGINT NOT NULL,
-    invoice_id BIGINT NOT NULL,
-    medical_record_id BIGINT NOT NULL,
     FOREIGN KEY (clinic_id) REFERENCES Clinic(id),
     FOREIGN KEY (vet_id) REFERENCES Vet(id),
-    FOREIGN KEY (pet_id) REFERENCES Pet(id),
-    FOREIGN KEY (invoice_id) REFERENCES Invoice(id),
-    FOREIGN KEY (medical_record_id) REFERENCES MedicalRecord(id)
+    FOREIGN KEY (pet_id) REFERENCES Pet(id)
 );
 
 -- ## Create tables with relations between them. ##

@@ -19,6 +19,9 @@ public class Appointment implements AppointmentDomain {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "full_name", nullable = false)
+    private String fullName;
+
     @Column(name = "date_and_hour", nullable = false)
     private Timestamp dateAndHour;
 
@@ -42,10 +45,4 @@ public class Appointment implements AppointmentDomain {
 
     @Column(name = "pet_id", nullable = false)
     private Long petId;
-
-    @Column(name = "invoice_id", nullable = false)
-    private Long invoiceId;
-
-    @Column(name = "medical_record_id", nullable = false)
-    private Long medicalRecordId;
 }

@@ -1,6 +1,6 @@
-package com.jakubolejarczyk.vet_server.dto.request.independent;
+package com.jakubolejarczyk.vet_server.dto.request.dependent;
 
-import com.jakubolejarczyk.vet_server.domain.independent.InvoiceDomain;
+import com.jakubolejarczyk.vet_server.domain.dependent.InvoiceDomain;
 import com.jakubolejarczyk.vet_server.dto.request.base.TokenRequest;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -44,4 +44,7 @@ public class InvoiceRequest extends TokenRequest implements InvoiceDomain {
 
     @NotNull(message = "Notes is required!")
     private String notes;
+
+    @NotNull(message = "Appointment id is required!")
+    private Long appointmentId;
 }

@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.domain.independent;
+package com.jakubolejarczyk.vet_server.domain.dependent;
 
 import com.jakubolejarczyk.vet_server.domain.base.BaseDomain;
 
@@ -14,4 +14,5 @@ public interface InvoiceDomain extends BaseDomain {
     String getPaymentStatus();
     String getPaymentMethod();
     String getNotes();
+    Long getAppointmentId();
 }

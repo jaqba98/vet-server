@@ -1,8 +1,8 @@
 //package com.jakubolejarczyk.vet_server.step.create;
 //
 //import com.jakubolejarczyk.vet_server.model.dependent.Appointment;
-//import com.jakubolejarczyk.vet_server.model.independent.Invoice;
-//import com.jakubolejarczyk.vet_server.model.independent.MedicalRecord;
+//import com.jakubolejarczyk.vet_server.model.dependent.Invoice;
+//import com.jakubolejarczyk.vet_server.model.dependent.MedicalRecord;
 //import com.jakubolejarczyk.vet_server.service.dependent.AppointmentService;
 //import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 //import com.jakubolejarczyk.vet_server.store.StepStore;

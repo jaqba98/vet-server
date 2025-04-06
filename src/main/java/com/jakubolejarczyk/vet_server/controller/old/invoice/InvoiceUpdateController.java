@@ -1,8 +1,8 @@
 //package com.jakubolejarczyk.vet_server.controller.old.invoice;
 //
-//import com.jakubolejarczyk.vet_server.dto.request.independent.InvoiceRequest;
+//import com.jakubolejarczyk.vet_server.dto.request.dependent.InvoiceRequest;
 //import com.jakubolejarczyk.vet_server.dto.response.Response;
-//import com.jakubolejarczyk.vet_server.model.independent.Invoice;
+//import com.jakubolejarczyk.vet_server.model.dependent.Invoice;
 //import com.jakubolejarczyk.vet_server.security.HandleValidationService;
 //import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
 //import com.jakubolejarczyk.vet_server.step.check.CheckAccountPermissionToClinicStepRunner;

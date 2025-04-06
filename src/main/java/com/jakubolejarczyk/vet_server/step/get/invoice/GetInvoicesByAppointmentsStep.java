@@ -1,7 +1,8 @@
 package com.jakubolejarczyk.vet_server.step.get.invoice;
 
+import com.jakubolejarczyk.vet_server.dto.base.BaseMetadata;
 import com.jakubolejarczyk.vet_server.model.dependent.Appointment;
-import com.jakubolejarczyk.vet_server.service.independent.InvoiceService;
+import com.jakubolejarczyk.vet_server.service.dependent.InvoiceService;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import lombok.AllArgsConstructor;
@@ -17,11 +18,16 @@ public class GetInvoicesByAppointmentsStep<TData, TMetadata> implements StepRunn
     public void runStep(StepStore<TData, TMetadata> stepStore) {
         if (stepStore.hasNotItem("appointmentsData")) throw new Error("The appointmentsData is required!");
         val appointmentsData = stepStore.getItemAsArray("appointmentsData", Appointment.class);
-        val invoicesIds = appointmentsData.stream()
-            .map(Appointment::getInvoiceId)
+        val appointmentsIds = appointmentsData.stream()
+            .map(Appointment::getId)
             .toList();
-        val invoicesData = invoiceService.findAllById(invoicesIds);
+        val invoicesData = invoiceService.findAllByAppointmentIdIn(appointmentsIds);
         // Data
         stepStore.setItem("invoicesData", invoicesData);
+        // MetaData appointment id
+        val invoicesAppointmentIdMetaData = new BaseMetadata();
+        appointmentsData.forEach(appointment -> {
+            invoicesAppointmentIdMetaData.addValue(appointment.getId(), appointment.getFullName());
+        });
     }
 }

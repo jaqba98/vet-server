@@ -2,8 +2,8 @@
 //
 //import com.jakubolejarczyk.vet_server.model.dependent.Appointment;
 //import com.jakubolejarczyk.vet_server.service.dependent.AppointmentService;
-//import com.jakubolejarczyk.vet_server.service.independent.InvoiceService;
-//import com.jakubolejarczyk.vet_server.service.independent.MedicalRecordService;
+//import com.jakubolejarczyk.vet_server.service.dependent.InvoiceService;
+//import com.jakubolejarczyk.vet_server.service.dependent.MedicalRecordService;
 //import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 //import com.jakubolejarczyk.vet_server.store.StepStore;
 //import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
-package com.jakubolejarczyk.vet_server.model.independent;
+package com.jakubolejarczyk.vet_server.model.dependent;
 
-import com.jakubolejarczyk.vet_server.domain.independent.InvoiceDomain;
+import com.jakubolejarczyk.vet_server.domain.dependent.InvoiceDomain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,4 +43,7 @@ public class Invoice implements InvoiceDomain {
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String notes;
+
+    @Column(name = "appointment_id", nullable = false)
+    private Long appointmentId;
 }
