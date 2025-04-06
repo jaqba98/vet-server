@@ -17,4 +17,8 @@ public class ClinicService extends BaseService<Clinic, ClinicRepository> {
     public Optional<Clinic> findByFullName(String fullName) {
         return repository.findByFullName(fullName);
     }
+
+    public Optional<Clinic> findByEmail(String email) {
+        return repository.findByEmail(email);
+    }
 }

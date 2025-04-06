@@ -23,6 +23,12 @@ public class CreateClinicStep<TData, TMetadata> implements StepRunnerModel<TData
             stepStore.addMessage("The full name of the clinic is already taken");
             return;
         }
+        val clinicByEmail = clinicService.findByEmail(requestClinic.getEmail());
+        if (clinicByEmail.isPresent()) {
+            stepStore.setSuccess(false);
+            stepStore.addMessage("The email of the clinic is already taken");
+            return;
+        }
         val clinicData = Clinic.builder()
             .fullName(requestClinic.getFullName())
             .street(requestClinic.getStreet())
