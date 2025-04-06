@@ -29,5 +29,6 @@ public class GetMedicalRecordsByAppointmentsStep<TData, TMetadata> implements St
         appointmentsData.forEach(appointment -> {
             medicalRecordsAppointmentIdMetaData.addValue(appointment.getId(), appointment.getFullName());
         });
+        stepStore.setItem("medicalRecordsAppointmentIdMetaData", medicalRecordsAppointmentIdMetaData);
     }
 }

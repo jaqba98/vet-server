@@ -29,5 +29,6 @@ public class GetInvoicesByAppointmentsStep<TData, TMetadata> implements StepRunn
         appointmentsData.forEach(appointment -> {
             invoicesAppointmentIdMetaData.addValue(appointment.getId(), appointment.getFullName());
         });
+        stepStore.setItem("invoicesAppointmentIdMetaData", invoicesAppointmentIdMetaData);
     }
 }

@@ -29,6 +29,7 @@ public class GetAppointmentsByClinicsStep<TData, TMetadata> implements StepRunne
         clinicsData.forEach(clinic -> {
             appointmentsClinicIdMetaData.addValue(clinic.getId(), clinic.getFullName());
         });
+        stepStore.setItem("appointmentsClinicIdMetaData", appointmentsClinicIdMetaData);
         // todo: MetaData vet id
         // todo: MetaData pet id
         // todo: MetaData invoice id
