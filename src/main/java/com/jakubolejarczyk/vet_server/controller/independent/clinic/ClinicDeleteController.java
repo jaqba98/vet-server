@@ -32,9 +32,9 @@ public class ClinicDeleteController extends StepRunnerController<ClinicData, Cli
     private final GetAccountByTokenStep<ClinicData, ClinicMetadata> getAccountByTokenStep;
     private final GetEmploymentsByAccountAndClinicsAndIsOwnerStep<ClinicData, ClinicMetadata> getEmploymentsByAccountAndClinicsAndIsOwnerStep;
     private final GetClinicsByEmploymentsStep<ClinicData, ClinicMetadata> getClinicsByEmploymentsStep;
-    private final DeleteClinicsStep<ClinicData, ClinicMetadata> deleteClinicsStep;
     private final DeleteOpeningHoursByClinicsStep<ClinicData, ClinicMetadata> deleteOpeningHoursByClinicsStep;
     private final DeleteEmploymentsByClinicsStep<ClinicData, ClinicMetadata> deleteEmploymentsByClinicsStep;
+    private final DeleteClinicsStep<ClinicData, ClinicMetadata> deleteClinicsStep;
     private final ClinicDeleteResponseStep clinicDeleteResponseStep;
 
     public ClinicDeleteController(
@@ -43,18 +43,18 @@ public class ClinicDeleteController extends StepRunnerController<ClinicData, Cli
         GetAccountByTokenStep<ClinicData, ClinicMetadata> getAccountByTokenStep,
         GetEmploymentsByAccountAndClinicsAndIsOwnerStep<ClinicData, ClinicMetadata> getEmploymentsByAccountAndClinicsAndIsOwnerStep,
         GetClinicsByEmploymentsStep<ClinicData, ClinicMetadata> getClinicsByEmploymentsStep,
-        DeleteClinicsStep<ClinicData, ClinicMetadata> deleteClinicsStep,
         DeleteOpeningHoursByClinicsStep<ClinicData, ClinicMetadata> deleteOpeningHoursByClinicsStep,
         DeleteEmploymentsByClinicsStep<ClinicData, ClinicMetadata> deleteEmploymentsByClinicsStep,
+        DeleteClinicsStep<ClinicData, ClinicMetadata> deleteClinicsStep,
         ClinicDeleteResponseStep clinicDeleteResponseStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.getAccountByTokenStep = getAccountByTokenStep;
         this.getEmploymentsByAccountAndClinicsAndIsOwnerStep = getEmploymentsByAccountAndClinicsAndIsOwnerStep;
         this.getClinicsByEmploymentsStep = getClinicsByEmploymentsStep;
-        this.deleteClinicsStep = deleteClinicsStep;
         this.deleteOpeningHoursByClinicsStep = deleteOpeningHoursByClinicsStep;
         this.deleteEmploymentsByClinicsStep = deleteEmploymentsByClinicsStep;
+        this.deleteClinicsStep = deleteClinicsStep;
         this.clinicDeleteResponseStep = clinicDeleteResponseStep;
     }
 
@@ -66,9 +66,9 @@ public class ClinicDeleteController extends StepRunnerController<ClinicData, Cli
         steps.addLast(getAccountByTokenStep);
         steps.addLast(getEmploymentsByAccountAndClinicsAndIsOwnerStep);
         steps.addLast(getClinicsByEmploymentsStep);
-        steps.addLast(deleteClinicsStep);
         steps.addLast(deleteOpeningHoursByClinicsStep);
         steps.addLast(deleteEmploymentsByClinicsStep);
+        steps.addLast(deleteClinicsStep);
         initController();
         getStepStore().setItem("token", request.getToken());
         getStepStore().setItem("clinicIds", request.getIds());
