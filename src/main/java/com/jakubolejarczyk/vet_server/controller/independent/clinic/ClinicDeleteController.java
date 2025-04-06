@@ -1,71 +1,77 @@
-//package com.jakubolejarczyk.vet_server.controller.old.clinic;
-//
-//import com.jakubolejarczyk.vet_server.dto.request.logic.DeleteRequest;
-//import com.jakubolejarczyk.vet_server.dto.response.Response;
-//import com.jakubolejarczyk.vet_server.security.HandleValidationService;
-//import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
-//import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStepRunner;
-//import com.jakubolejarczyk.vet_server.step.get.GetEmploymentsByAccountIdAndClinicIdsAndIsOwnerStepRunner;
-//import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
-//import com.jakubolejarczyk.vet_server.step.success.SuccessDeleteClinicStepRunner;
-//import com.jakubolejarczyk.vet_server.step.update.UpdateClinicsIsArchivedStepRunner;
-//import com.jakubolejarczyk.vet_server.step.update.UpdateEmploymentsIsArchivedStepRunner;
-//import com.jakubolejarczyk.vet_server.step.update.UpdateOpeningHoursIsArchivedStepRunner;
-//import com.jakubolejarczyk.vet_server.store.StepStore;
-//import jakarta.validation.Valid;
-//import lombok.val;
-//import org.springframework.beans.factory.ObjectFactory;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RequestBody;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RestController;
-//
-//import java.util.ArrayList;
-//
-//@RestController
-//@RequestMapping("/api/v1")
-//public class ClinicDeleteController extends StepRunnerController {
-//    private final GetAccountByTokenStepRunner getAccountByTokenStep;
-//    private final GetEmploymentsByAccountIdAndClinicIdsAndIsOwnerStepRunner getEmploymentsByAccountIdAndClinicIdsAndIsOwnerStep;
-//    private final UpdateEmploymentsIsArchivedStepRunner updateEmploymentsIsArchivedStep;
-//    private final UpdateClinicsIsArchivedStepRunner updateClinicsIsArchivedStep;
-//    private final UpdateOpeningHoursIsArchivedStepRunner updateOpeningHoursIsArchivedStep;
-//    private final SuccessDeleteClinicStepRunner successDeleteClinicStep;
-//
-//    public ClinicDeleteController(
-//            ObjectFactory<StepStore> stepStoreObjectFactory,
-//            ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
-//            GetAccountByTokenStepRunner getAccountByTokenStep,
-//            GetEmploymentsByAccountIdAndClinicIdsAndIsOwnerStepRunner getEmploymentsByAccountIdAndClinicIdsAndIsOwnerStep,
-//            UpdateEmploymentsIsArchivedStepRunner updateEmploymentsIsArchivedStep,
-//            UpdateClinicsIsArchivedStepRunner updateClinicsIsArchivedStep,
-//            UpdateOpeningHoursIsArchivedStepRunner updateOpeningHoursIsArchivedStep,
-//            SuccessDeleteClinicStepRunner successDeleteClinicStep
-//    ) {
-//        super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
-//        this.getAccountByTokenStep = getAccountByTokenStep;
-//        this.getEmploymentsByAccountIdAndClinicIdsAndIsOwnerStep = getEmploymentsByAccountIdAndClinicIdsAndIsOwnerStep;
-//        this.updateEmploymentsIsArchivedStep = updateEmploymentsIsArchivedStep;
-//        this.updateClinicsIsArchivedStep = updateClinicsIsArchivedStep;
-//        this.updateOpeningHoursIsArchivedStep = updateOpeningHoursIsArchivedStep;
-//        this.successDeleteClinicStep = successDeleteClinicStep;
-//    }
-//
-//    @PostMapping("clinic-delete")
-//    public ResponseEntity<Response<?, ?>> clinicDelete(@Valid @RequestBody DeleteRequest request) {
-//        val steps = new ArrayList<StepRunnerModel>();
-//        steps.addLast(getAccountByTokenStep);
-//        steps.addLast(getEmploymentsByAccountIdAndClinicIdsAndIsOwnerStep);
-//        steps.addLast(updateEmploymentsIsArchivedStep);
-//        steps.addLast(updateClinicsIsArchivedStep);
-//        steps.addLast(updateOpeningHoursIsArchivedStep);
-//        steps.addLast(successDeleteClinicStep);
-//        String[] dataKeys = {};
-//        String[] metadataKeys = {};
-//        initController(dataKeys, metadataKeys);
-//        getStepStore().setItem("token", request.getToken());
-//        getStepStore().setItem("clinicIds", request.getIds());
-//        return runController(steps);
-//    }
-//}
+package com.jakubolejarczyk.vet_server.controller.independent.clinic;
+
+import com.jakubolejarczyk.vet_server.dto.data.dependent.ClinicData;
+import com.jakubolejarczyk.vet_server.dto.metadata.dependent.ClinicMetadata;
+import com.jakubolejarczyk.vet_server.dto.request.logic.DeleteRequest;
+import com.jakubolejarczyk.vet_server.dto.response.Response;
+import com.jakubolejarczyk.vet_server.security.HandleValidationService;
+import com.jakubolejarczyk.vet_server.step.delete.DeleteClinicsStep;
+import com.jakubolejarczyk.vet_server.step.delete.DeleteEmploymentsByClinicsStep;
+import com.jakubolejarczyk.vet_server.step.delete.DeleteOpeningHoursByClinicsStep;
+import com.jakubolejarczyk.vet_server.step.get.account.GetAccountByTokenStep;
+import com.jakubolejarczyk.vet_server.step.get.clinic.GetClinicsByEmploymentsStep;
+import com.jakubolejarczyk.vet_server.step.get.employment.GetEmploymentsByAccountAndClinicsAndIsOwnerStep;
+import com.jakubolejarczyk.vet_server.step.response.independent.ClinicDeleteResponseStep;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
+import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
+import com.jakubolejarczyk.vet_server.store.StepStore;
+import jakarta.validation.Valid;
+import lombok.val;
+import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+
+@RestController
+@RequestMapping("/api/v1")
+public class ClinicDeleteController extends StepRunnerController<ClinicData, ClinicMetadata> {
+    private final GetAccountByTokenStep<ClinicData, ClinicMetadata> getAccountByTokenStep;
+    private final GetEmploymentsByAccountAndClinicsAndIsOwnerStep<ClinicData, ClinicMetadata> getEmploymentsByAccountAndClinicsAndIsOwnerStep;
+    private final GetClinicsByEmploymentsStep<ClinicData, ClinicMetadata> getClinicsByEmploymentsStep;
+    private final DeleteClinicsStep<ClinicData, ClinicMetadata> deleteClinicsStep;
+    private final DeleteOpeningHoursByClinicsStep<ClinicData, ClinicMetadata> deleteOpeningHoursByClinicsStep;
+    private final DeleteEmploymentsByClinicsStep<ClinicData, ClinicMetadata> deleteEmploymentsByClinicsStep;
+    private final ClinicDeleteResponseStep clinicDeleteResponseStep;
+
+    public ClinicDeleteController(
+        ObjectFactory<StepStore<ClinicData, ClinicMetadata>> stepStoreObjectFactory,
+        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        GetAccountByTokenStep<ClinicData, ClinicMetadata> getAccountByTokenStep,
+        GetEmploymentsByAccountAndClinicsAndIsOwnerStep<ClinicData, ClinicMetadata> getEmploymentsByAccountAndClinicsAndIsOwnerStep,
+        GetClinicsByEmploymentsStep<ClinicData, ClinicMetadata> getClinicsByEmploymentsStep,
+        DeleteClinicsStep<ClinicData, ClinicMetadata> deleteClinicsStep,
+        DeleteOpeningHoursByClinicsStep<ClinicData, ClinicMetadata> deleteOpeningHoursByClinicsStep,
+        DeleteEmploymentsByClinicsStep<ClinicData, ClinicMetadata> deleteEmploymentsByClinicsStep,
+        ClinicDeleteResponseStep clinicDeleteResponseStep
+    ) {
+        super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
+        this.getAccountByTokenStep = getAccountByTokenStep;
+        this.getEmploymentsByAccountAndClinicsAndIsOwnerStep = getEmploymentsByAccountAndClinicsAndIsOwnerStep;
+        this.getClinicsByEmploymentsStep = getClinicsByEmploymentsStep;
+        this.deleteClinicsStep = deleteClinicsStep;
+        this.deleteOpeningHoursByClinicsStep = deleteOpeningHoursByClinicsStep;
+        this.deleteEmploymentsByClinicsStep = deleteEmploymentsByClinicsStep;
+        this.clinicDeleteResponseStep = clinicDeleteResponseStep;
+    }
+
+    @PostMapping("clinic-delete")
+    public ResponseEntity<Response<ClinicData, ClinicMetadata>> clinicDelete(
+        @Valid @RequestBody DeleteRequest request
+    ) {
+        val steps = new ArrayList<StepRunnerModel<ClinicData, ClinicMetadata>>();
+        steps.addLast(getAccountByTokenStep);
+        steps.addLast(getEmploymentsByAccountAndClinicsAndIsOwnerStep);
+        steps.addLast(getClinicsByEmploymentsStep);
+        steps.addLast(deleteClinicsStep);
+        steps.addLast(deleteOpeningHoursByClinicsStep);
+        steps.addLast(deleteEmploymentsByClinicsStep);
+        initController();
+        getStepStore().setItem("token", request.getToken());
+        getStepStore().setItem("clinicIds", request.getIds());
+        return runController(steps, clinicDeleteResponseStep);
+    }
+}

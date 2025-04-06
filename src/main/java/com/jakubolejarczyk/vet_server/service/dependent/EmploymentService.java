@@ -23,7 +23,11 @@ public class EmploymentService extends BaseService<Employment, EmploymentReposit
         return repository.findByAccountIdAndClinicIdAndIsOwnerTrue(accountId, clinicId);
     }
 
-    public List<Employment> findAllByAccountIdAndClinicIdInAndIsOwner(Long accountId, List<Long> clinicId) {
+    public List<Employment> findAllByClinicIdIn(List<Long> clinicId) {
+        return repository.findAllByClinicIdIn(clinicId);
+    }
+
+    public List<Employment> findAllByAccountIdAndClinicIdInAndIsOwnerTrue(Long accountId, List<Long> clinicId) {
         return repository.findAllByAccountIdAndClinicIdInAndIsOwnerTrue(accountId, clinicId);
     }
 
