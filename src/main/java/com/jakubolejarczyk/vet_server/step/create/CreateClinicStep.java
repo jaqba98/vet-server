@@ -17,6 +17,12 @@ public class CreateClinicStep<TData, TMetadata> implements StepRunnerModel<TData
     public void runStep(StepStore<TData, TMetadata> stepStore) {
         if (stepStore.hasNotItem("requestClinic")) throw new Error("The requestClinic is required!");
         val requestClinic = stepStore.getItem("requestClinic", Clinic.class);
+        val clinicByFullName = clinicService.findByFullName(requestClinic.getFullName());
+        if (clinicByFullName.isPresent()) {
+            stepStore.setSuccess(false);
+            stepStore.addMessage("The full name of the clinic is already taken");
+            return;
+        }
         val clinicData = Clinic.builder()
             .fullName(requestClinic.getFullName())
             .street(requestClinic.getStreet())
