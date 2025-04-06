@@ -34,8 +34,4 @@ public class Account implements AccountDomain {
 
     @Column(name ="picture_url")
     private String pictureUrl;
-
-    public String getFullName() {
-        return firstName + " " + lastName;
-    }
 }
