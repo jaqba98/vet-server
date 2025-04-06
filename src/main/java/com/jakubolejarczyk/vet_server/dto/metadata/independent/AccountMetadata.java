@@ -1,23 +1,11 @@
 package com.jakubolejarczyk.vet_server.dto.metadata.independent;
 
-import com.jakubolejarczyk.vet_server.dto.base.BaseMetadata;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class AccountMetadata {
-    private BaseMetadata id;
-
-    private BaseMetadata email;
-
-    private BaseMetadata password;
-
-    private BaseMetadata firstName;
-
-    private BaseMetadata lastName;
-
-    private BaseMetadata role;
-
-    private BaseMetadata pictureUrl;
 }

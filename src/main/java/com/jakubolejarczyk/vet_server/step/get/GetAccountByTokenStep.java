@@ -1,7 +1,7 @@
+// done
 package com.jakubolejarczyk.vet_server.step.get;
 
 import com.jakubolejarczyk.vet_server.dto.base.BaseMetadata;
-import com.jakubolejarczyk.vet_server.model.dependent.Employment;
 import com.jakubolejarczyk.vet_server.security.TokenService;
 import com.jakubolejarczyk.vet_server.service.independent.AccountService;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
@@ -19,17 +19,17 @@ public class GetAccountByTokenStep<TData, TMetadata> implements StepRunnerModel<
     @Override
     public void runStep(StepStore<TData, TMetadata> stepStore) {
         if (stepStore.hasNotItem("token")) throw new Error("The token is required!");
-        // Data
         val token = stepStore.getItem("token", String.class);
         if (token != null) {
             val email = tokenService.decode(token);
             val account = accountService.findByEmail(email);
             if (account.isPresent()) {
-                stepStore.setItem("account", account.get());
+                // Data
+                stepStore.setItem("accountData", account.get());
                 // MetaData
-                val accountIdMetadata = new BaseMetadata();
-                accountIdMetadata.addValue(account.get().getId(), account.get().getFullName());
-                stepStore.setItem("accountIdMetadata", accountIdMetadata);
+                val accountMetaData = new BaseMetadata();
+                accountMetaData.addValue(account.get().getId(), account.get().getFullName());
+                stepStore.setItem("accountMetaData", accountMetaData);
                 return;
             }
         }
