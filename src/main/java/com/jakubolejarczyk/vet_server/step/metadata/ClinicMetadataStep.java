@@ -18,7 +18,7 @@ public class ClinicMetadataStep implements StepRunnerModel<ClinicData, ClinicMet
         val employmentsData = stepStore.getItemAsArray("employmentsData", Employment.class);
         val myClinicIds = employmentsData.stream()
             .filter(Employment::getIsOwner)
-            .map(Employment::getId)
+            .map(Employment::getClinicId)
             .toList();
         stepStore.setItem("myClinicIds", myClinicIds);
     }
