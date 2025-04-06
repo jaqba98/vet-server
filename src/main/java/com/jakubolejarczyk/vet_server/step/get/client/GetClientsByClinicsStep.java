@@ -29,5 +29,6 @@ public class GetClientsByClinicsStep<TData, TMetadata> implements StepRunnerMode
         clinicsData.forEach(clinic -> {
             clientsClinicIdMetaData.addValue(clinic.getId(), clinic.getFullName());
         });
+        stepStore.setItem("clientsClinicIdMetaData", clientsClinicIdMetaData);
     }
 }

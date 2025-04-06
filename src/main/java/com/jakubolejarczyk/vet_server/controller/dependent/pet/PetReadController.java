@@ -8,7 +8,7 @@ import com.jakubolejarczyk.vet_server.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.step.get.account.GetAccountByTokenStep;
 import com.jakubolejarczyk.vet_server.step.get.client.GetClientsByClinicsStep;
 import com.jakubolejarczyk.vet_server.step.get.employment.GetEmploymentsByAccountStep;
-import com.jakubolejarczyk.vet_server.step.get.GetPetsByClientsStep;
+import com.jakubolejarczyk.vet_server.step.get.pet.GetPetsByClientsStep;
 import com.jakubolejarczyk.vet_server.step.response.dependent.pet.PetReadResponseStep;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;

@@ -35,6 +35,7 @@ public class GetEmploymentsByAccountStep<TData, TMetadata> implements StepRunner
         accountService.findAllById(accountIds).forEach(account -> {
             employmentsAccountIdMetaData.addValue(account.getId(), account.getFullName());
         });
+        stepStore.setItem("employmentsAccountIdMetaData", employmentsAccountIdMetaData);
         // MetaData clinic id
         val employmentsClinicIdMetaData = new BaseMetadata();
         val clinicIds = employmentsData.stream()
@@ -43,5 +44,6 @@ public class GetEmploymentsByAccountStep<TData, TMetadata> implements StepRunner
         clinicService.findAllById(clinicIds).forEach(clinic -> {
             employmentsClinicIdMetaData.addValue(clinic.getId(), clinic.getFullName());
         });
+        stepStore.setItem("employmentsClinicIdMetaData", employmentsClinicIdMetaData);
     }
 }

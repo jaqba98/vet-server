@@ -29,5 +29,6 @@ public class GetMedicationsByClinicsStep<TData, TMetadata> implements StepRunner
         clinicsData.forEach(clinic -> {
             medicationsClinicIdMetaData.addValue(clinic.getId(), clinic.getFullName());
         });
+        stepStore.setItem("medicationsClinicIdMetaData", medicationsClinicIdMetaData);
     }
 }
