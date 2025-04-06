@@ -6,7 +6,7 @@ import com.jakubolejarczyk.vet_server.dto.request.base.TokenRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.step.get.account.GetAccountByTokenStep;
-import com.jakubolejarczyk.vet_server.step.get.GetClientsByEmploymentStep;
+import com.jakubolejarczyk.vet_server.step.get.client.GetClientsByClinicsStep;
 import com.jakubolejarczyk.vet_server.step.get.employment.GetEmploymentsByAccountStep;
 import com.jakubolejarczyk.vet_server.step.get.GetPetsByClientsStep;
 import com.jakubolejarczyk.vet_server.step.response.dependent.pet.PetReadResponseStep;
@@ -29,7 +29,7 @@ import java.util.ArrayList;
 public class PetReadController extends StepRunnerController<PetData, PetMetadata> {
     private final GetAccountByTokenStep<PetData, PetMetadata> getAccountByTokenStep;
     private final GetEmploymentsByAccountStep<PetData, PetMetadata> getEmploymentsByAccountIdStep;
-    private final GetClientsByEmploymentStep<PetData, PetMetadata> getClientsByEmploymentStep;
+    private final GetClientsByClinicsStep<PetData, PetMetadata> getClientsByEmploymentStep;
     private final GetPetsByClientsStep<PetData, PetMetadata> getPetsByClientsStep;
     private final PetReadResponseStep petReadResponseStep;
 
@@ -38,7 +38,7 @@ public class PetReadController extends StepRunnerController<PetData, PetMetadata
         ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<PetData, PetMetadata> getAccountByTokenStep,
         GetEmploymentsByAccountStep<PetData, PetMetadata> getEmploymentsByAccountIdStep,
-        GetClientsByEmploymentStep<PetData, PetMetadata> getClientsByEmploymentStep,
+        GetClientsByClinicsStep<PetData, PetMetadata> getClientsByEmploymentStep,
         GetPetsByClientsStep<PetData, PetMetadata> getPetsByClientsStep,
         PetReadResponseStep petReadResponseStep
     ) {
