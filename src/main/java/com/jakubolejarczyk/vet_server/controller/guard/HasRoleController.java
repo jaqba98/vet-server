@@ -6,7 +6,7 @@ import com.jakubolejarczyk.vet_server.dto.request.base.TokenRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.step.check.CheckAccountHasRoleStep;
-import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
+import com.jakubolejarczyk.vet_server.step.get.account.GetAccountByTokenStep;
 import com.jakubolejarczyk.vet_server.step.response.guard.HasRoleResponseStep;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;

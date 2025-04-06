@@ -1,7 +1,5 @@
-// done
-package com.jakubolejarczyk.vet_server.step.get;
+package com.jakubolejarczyk.vet_server.step.get.account;
 
-import com.jakubolejarczyk.vet_server.dto.base.BaseMetadata;
 import com.jakubolejarczyk.vet_server.security.TokenService;
 import com.jakubolejarczyk.vet_server.service.independent.AccountService;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
@@ -26,10 +24,6 @@ public class GetAccountByTokenStep<TData, TMetadata> implements StepRunnerModel<
             if (account.isPresent()) {
                 // Data
                 stepStore.setItem("accountData", account.get());
-                // MetaData
-                val accountMetaData = new BaseMetadata();
-                accountMetaData.addValue(account.get().getId(), account.get().getFullName());
-                stepStore.setItem("accountMetaData", accountMetaData);
                 return;
             }
         }

@@ -5,9 +5,9 @@ import com.jakubolejarczyk.vet_server.dto.metadata.dependent.EmploymentMetadata;
 import com.jakubolejarczyk.vet_server.dto.request.dependent.EmploymentRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
+import com.jakubolejarczyk.vet_server.step.get.account.GetAccountByTokenStep;
 import com.jakubolejarczyk.vet_server.step.get.GetClinicsByEmploymentStep;
-import com.jakubolejarczyk.vet_server.step.get.GetEmploymentsByAccountIdStep;
+import com.jakubolejarczyk.vet_server.step.get.employment.GetEmploymentsByAccountStep;
 import com.jakubolejarczyk.vet_server.step.response.dependent.employment.EmploymentReadResponseStep;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
@@ -27,7 +27,7 @@ import java.util.ArrayList;
 @RequestMapping("/api/v1")
 public class EmploymentReadController extends StepRunnerController<EmploymentData, EmploymentMetadata> {
     private final GetAccountByTokenStep<EmploymentData, EmploymentMetadata> getAccountByTokenStep;
-    private final GetEmploymentsByAccountIdStep<EmploymentData, EmploymentMetadata> getEmploymentsByAccountIdStep;
+    private final GetEmploymentsByAccountStep<EmploymentData, EmploymentMetadata> getEmploymentsByAccountIdStep;
     private final GetClinicsByEmploymentStep<EmploymentData, EmploymentMetadata> getClinicsByEmploymentStep;
     private final EmploymentReadResponseStep employmentReadResponseStep;
 
@@ -35,7 +35,7 @@ public class EmploymentReadController extends StepRunnerController<EmploymentDat
         ObjectFactory<StepStore<EmploymentData, EmploymentMetadata>> stepStoreObjectFactory,
         ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<EmploymentData, EmploymentMetadata> getAccountByTokenStep,
-        GetEmploymentsByAccountIdStep<EmploymentData, EmploymentMetadata> getEmploymentsByAccountIdStep,
+        GetEmploymentsByAccountStep<EmploymentData, EmploymentMetadata> getEmploymentsByAccountIdStep,
         GetClinicsByEmploymentStep<EmploymentData, EmploymentMetadata> getClinicsByEmploymentStep,
         EmploymentReadResponseStep employmentReadResponseStep
     ) {

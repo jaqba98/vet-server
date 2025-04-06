@@ -7,7 +7,7 @@ import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
 import com.jakubolejarczyk.vet_server.step.check.CheckAccountPermissionToClientStep;
 import com.jakubolejarczyk.vet_server.step.delete.DeletePetStep;
-import com.jakubolejarczyk.vet_server.step.get.GetAccountByTokenStep;
+import com.jakubolejarczyk.vet_server.step.get.account.GetAccountByTokenStep;
 import com.jakubolejarczyk.vet_server.step.get.GetClientByIdStep;
 import com.jakubolejarczyk.vet_server.step.response.dependent.pet.PetDeleteResponseStep;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
