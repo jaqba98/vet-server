@@ -6,6 +6,7 @@ import com.jakubolejarczyk.vet_server.service.base.BaseService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,5 +21,9 @@ public class AccountService extends BaseService<Account, AccountRepository> {
 
     public void updateRoleByEmail(String email, String role) {
         repository.updateRoleByEmail(email, role);
+    }
+
+    public List<Account> findAll() {
+        return repository.findAll();
     }
 }

@@ -4,10 +4,14 @@ import com.jakubolejarczyk.vet_server.dto.base.BaseMetadata;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 public class EmploymentMetadata {
     private BaseMetadata accountId;
 
     private BaseMetadata clinicId;
+
+    private List<Long> myClinicIds;
 }
