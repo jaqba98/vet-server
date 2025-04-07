@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClientService extends BaseService<Client, ClientRepository> {
@@ -16,5 +17,9 @@ public class ClientService extends BaseService<Client, ClientRepository> {
 
     public List<Client> findAllByClinicIdIn(List<Long> clinicId) {
         return repository.findAllByClinicIdIn(clinicId);
+    }
+
+    public Optional<Client> findByEmail(String email) {
+        return repository.findByEmail(email);
     }
 }
