@@ -20,7 +20,12 @@ public class MedicationUpdateResponseStep implements StepRunnerModel<MedicationD
             if (stepStore.hasNotItem("medicationData")) throw new Error("The medicationData is required!");
             val medicationData = stepStore.getItem("medicationData", Medication.class);
             val data = new MedicationData(Collections.singletonList(medicationData));
-            stepStore.addMessage("Medications were updated correctly!");
+            stepStore.addMessage("Medication was updated correctly!");
+            stepStore.setData(data);
+        } else {
+            if (stepStore.hasNotItem("medicationRequest")) throw new Error("The medicationRequest is required!");
+            val medicationRequest = stepStore.getItem("medicationRequest", Medication.class);
+            val data = new MedicationData(Collections.singletonList(medicationRequest));
             stepStore.setData(data);
         }
     }

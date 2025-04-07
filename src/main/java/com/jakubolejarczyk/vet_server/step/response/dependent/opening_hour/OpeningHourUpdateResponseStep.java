@@ -22,6 +22,11 @@ public class OpeningHourUpdateResponseStep implements StepRunnerModel<OpeningHou
             val data = new OpeningHourData(Collections.singletonList(openingHourData));
             stepStore.addMessage("Opening hours were updated correctly!");
             stepStore.setData(data);
+        } else {
+            if (stepStore.hasNotItem("openingHourRequest")) throw new Error("The openingHourRequest is required!");
+            val openingHourRequest = stepStore.getItem("openingHourRequest", OpeningHour.class);
+            val data = new OpeningHourData(Collections.singletonList(openingHourRequest));
+            stepStore.setData(data);
         }
     }
 }

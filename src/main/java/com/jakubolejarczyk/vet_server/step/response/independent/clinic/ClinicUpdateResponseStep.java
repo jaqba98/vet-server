@@ -22,6 +22,11 @@ public class ClinicUpdateResponseStep implements StepRunnerModel<ClinicData, Cli
             val data = new ClinicData(Collections.singletonList(clinicData));
             stepStore.addMessage("Clinic were updated correctly!");
             stepStore.setData(data);
+        } else {
+            if (stepStore.hasNotItem("clinicRequest")) throw new Error("The clinicRequest is required!");
+            val clinicRequest = stepStore.getItem("clinicRequest", Clinic.class);
+            val data = new ClinicData(Collections.singletonList(clinicRequest));
+            stepStore.setData(data);
         }
     }
 }

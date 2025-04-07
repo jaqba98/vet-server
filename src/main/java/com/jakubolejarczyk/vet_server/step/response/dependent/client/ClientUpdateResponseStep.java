@@ -22,6 +22,11 @@ public class ClientUpdateResponseStep implements StepRunnerModel<ClientData, Cli
             val data = new ClientData(Collections.singletonList(clientData));
             stepStore.addMessage("Client were updated correctly!");
             stepStore.setData(data);
+        } else {
+            if (stepStore.hasNotItem("clientRequest")) throw new Error("The clientRequest is required!");
+            val clientRequest = stepStore.getItem("clientRequest", Client.class);
+            val data = new ClientData(Collections.singletonList(clientRequest));
+            stepStore.setData(data);
         }
     }
 }
