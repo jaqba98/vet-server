@@ -76,7 +76,7 @@ public class PetCreateController extends StepRunnerController<PetData, PetMetada
             .medicalNotes(request.getMedicalNotes())
             .clientId(request.getClientId())
             .build();
-        getStepStore().setItem("requestPet", petRequest);
+        getStepStore().setItem("petRequest", petRequest);
         return runController(steps, petReadResponseStep);
     }
 }
