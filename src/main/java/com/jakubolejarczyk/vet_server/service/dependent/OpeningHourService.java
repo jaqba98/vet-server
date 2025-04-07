@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OpeningHourService extends BaseService<OpeningHour, OpeningHourRepository> {
@@ -16,5 +17,9 @@ public class OpeningHourService extends BaseService<OpeningHour, OpeningHourRepo
 
     public List<OpeningHour> findAllByClinicIdIn(List<Long> clinicId) {
         return repository.findAllByClinicIdIn(clinicId);
+    }
+
+    public Optional<OpeningHour> findByClinicId(Long clinicId) {
+        return repository.findByClinicId(clinicId);
     }
 }
