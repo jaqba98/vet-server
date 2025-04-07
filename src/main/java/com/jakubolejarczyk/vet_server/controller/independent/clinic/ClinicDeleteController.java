@@ -11,7 +11,7 @@ import com.jakubolejarczyk.vet_server.step.delete.DeleteOpeningHoursByClinicsSte
 import com.jakubolejarczyk.vet_server.step.get.account.GetAccountByTokenStep;
 import com.jakubolejarczyk.vet_server.step.get.clinic.GetClinicsByEmploymentsStep;
 import com.jakubolejarczyk.vet_server.step.get.employment.GetEmploymentsByAccountAndClinicsAndIsOwnerStep;
-import com.jakubolejarczyk.vet_server.step.response.independent.ClinicDeleteResponseStep;
+import com.jakubolejarczyk.vet_server.step.response.independent.clinic.ClinicDeleteResponseStep;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;

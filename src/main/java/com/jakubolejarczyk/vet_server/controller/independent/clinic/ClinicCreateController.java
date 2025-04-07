@@ -10,7 +10,7 @@ import com.jakubolejarczyk.vet_server.step.create.CreateClinicStep;
 import com.jakubolejarczyk.vet_server.step.create.CreateEmploymentStep;
 import com.jakubolejarczyk.vet_server.step.create.CreateOpeningHourStep;
 import com.jakubolejarczyk.vet_server.step.get.account.GetAccountByTokenStep;
-import com.jakubolejarczyk.vet_server.step.response.independent.ClinicCreateResponseStep;
+import com.jakubolejarczyk.vet_server.step.response.independent.clinic.ClinicCreateResponseStep;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;

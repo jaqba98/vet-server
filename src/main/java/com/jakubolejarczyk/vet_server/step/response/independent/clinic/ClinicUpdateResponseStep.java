@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.step.response.independent;
+package com.jakubolejarczyk.vet_server.step.response.independent.clinic;
 
 import com.jakubolejarczyk.vet_server.dto.data.dependent.ClinicData;
 import com.jakubolejarczyk.vet_server.dto.metadata.dependent.ClinicMetadata;

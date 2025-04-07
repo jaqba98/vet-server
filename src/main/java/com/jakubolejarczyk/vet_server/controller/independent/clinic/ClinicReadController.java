@@ -9,7 +9,7 @@ import com.jakubolejarczyk.vet_server.step.get.account.GetAccountByTokenStep;
 import com.jakubolejarczyk.vet_server.step.get.clinic.GetClinicsByEmploymentsStep;
 import com.jakubolejarczyk.vet_server.step.get.employment.GetEmploymentsByAccountStep;
 import com.jakubolejarczyk.vet_server.step.metadata.ClinicMetadataStep;
-import com.jakubolejarczyk.vet_server.step.response.independent.ClinicReadResponseStep;
+import com.jakubolejarczyk.vet_server.step.response.independent.clinic.ClinicReadResponseStep;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
