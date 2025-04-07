@@ -29,8 +29,8 @@ public class UpdateOpeningHourByEmploymentStep<TData, TMetadata> implements Step
         }
         currentOpeningHour.get().setMondayFrom(openingHourRequest.getMondayFrom());
         currentOpeningHour.get().setMondayTo(openingHourRequest.getMondayTo());
-        currentOpeningHour.get().setThursdayFrom(openingHourRequest.getThursdayFrom());
-        currentOpeningHour.get().setThursdayTo(openingHourRequest.getThursdayTo());
+        currentOpeningHour.get().setTuesdayFrom(openingHourRequest.getTuesdayFrom());
+        currentOpeningHour.get().setTuesdayTo(openingHourRequest.getTuesdayTo());
         currentOpeningHour.get().setWednesdayFrom(openingHourRequest.getWednesdayFrom());
         currentOpeningHour.get().setWednesdayTo(openingHourRequest.getWednesdayTo());
         currentOpeningHour.get().setThursdayFrom(openingHourRequest.getThursdayFrom());

@@ -66,7 +66,7 @@ public class OpeningHourUpdateController extends StepRunnerController<OpeningHou
             .wednesdayFrom(request.getWednesdayFrom())
             .wednesdayTo(request.getWednesdayTo())
             .thursdayFrom(request.getThursdayFrom())
-            .thursdayTo(request.getTuesdayTo())
+            .thursdayTo(request.getThursdayTo())
             .fridayFrom(request.getFridayFrom())
             .fridayTo(request.getFridayTo())
             .saturdayFrom(request.getSaturdayFrom())
@@ -76,6 +76,7 @@ public class OpeningHourUpdateController extends StepRunnerController<OpeningHou
             .clinicId(request.getClinicId())
             .build();
         getStepStore().setItem("openingHourRequest", openingHourRequest);
+        getStepStore().setItem("clinicId", request.getClinicId());
         return runController(steps, openingHourUpdateResponseStep);
     }
 }
