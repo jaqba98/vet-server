@@ -54,8 +54,8 @@ public class OpeningHourReadController extends StepRunnerController<OpeningHourD
         this.openingHourReadResponseStep = openingHourReadResponseStep;
     }
 
-    @PostMapping("opening-hours-read")
-    public ResponseEntity<Response<OpeningHourData, OpeningHourMetadata>> openingHoursRead(
+    @PostMapping("opening-hour-read")
+    public ResponseEntity<Response<OpeningHourData, OpeningHourMetadata>> openingHourRead(
         @Valid @RequestBody TokenRequest request
     ) {
         val steps = new ArrayList<StepRunnerModel<OpeningHourData, OpeningHourMetadata>>();
