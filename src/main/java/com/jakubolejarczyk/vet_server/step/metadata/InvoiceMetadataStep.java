@@ -17,9 +17,7 @@ public class InvoiceMetadataStep implements StepRunnerModel<InvoiceData, Invoice
     public void runStep(StepStore<InvoiceData, InvoiceMetadata> stepStore) {
         if (stepStore.hasNotItem("appointmentsData")) throw new Error("The appointmentsData is required!");
         val appointmentId = new BaseMetadata();
-        stepStore.getItemAsArray("appointmentsData", Appointment.class).forEach(appointment -> {
-            appointmentId.addValue(appointment.getId(), appointment.getFullName());
-        });
+        stepStore.getItemAsArray("appointmentsData", Appointment.class).forEach(appointment -> appointmentId.addValue(appointment.getId(), appointment.getFullName()));
         stepStore.setItem("appointmentId", appointmentId);
     }
 }

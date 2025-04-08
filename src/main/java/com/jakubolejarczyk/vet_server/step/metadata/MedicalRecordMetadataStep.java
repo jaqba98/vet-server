@@ -17,9 +17,7 @@ public class MedicalRecordMetadataStep implements StepRunnerModel<MedicalRecordD
     public void runStep(StepStore<MedicalRecordData, MedicalRecordMetadata> stepStore) {
         if (stepStore.hasNotItem("appointmentsData")) throw new Error("The appointmentsData is required!");
         val appointmentId = new BaseMetadata();
-        stepStore.getItemAsArray("appointmentsData", Appointment.class).forEach(appointment -> {
-            appointmentId.addValue(appointment.getId(), appointment.getFullName());
-        });
+        stepStore.getItemAsArray("appointmentsData", Appointment.class).forEach(appointment -> appointmentId.addValue(appointment.getId(), appointment.getFullName()));
         stepStore.setItem("appointmentId", appointmentId);
     }
 }

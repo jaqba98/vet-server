@@ -33,9 +33,7 @@ public class EmploymentMetadataStep implements StepRunnerModel<EmploymentData, E
             .distinct()
             .toList();
         val clinicId = new BaseMetadata();
-        clinicService.findAllById(clinicIds).forEach(((clinic) -> {
-            clinicId.addValue(clinic.getId(), clinic.getFullName());
-        }));
+        clinicService.findAllById(clinicIds).forEach(((clinic) -> clinicId.addValue(clinic.getId(), clinic.getFullName())));
         stepStore.setItem("clinicId", clinicId);
         val accountId = new BaseMetadata();
         accountService.findAll().forEach((account) -> {

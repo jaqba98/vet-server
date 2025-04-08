@@ -25,14 +25,10 @@ public class AppointmentMetadataStep implements StepRunnerModel<AppointmentData,
         if (stepStore.hasNotItem("clinicsData")) throw new Error("The clinicsData is required!");
         if (stepStore.hasNotItem("petsData")) throw new Error("The petsData is required!");
         val clinicId = new BaseMetadata();
-        stepStore.getItemAsArray("clinicsData", Clinic.class).forEach(clinic -> {
-            clinicId.addValue(clinic.getId(), clinic.getFullName());
-        });
+        stepStore.getItemAsArray("clinicsData", Clinic.class).forEach(clinic -> clinicId.addValue(clinic.getId(), clinic.getFullName()));
         stepStore.setItem("clinicId", clinicId);
         val petId = new BaseMetadata();
-        stepStore.getItemAsArray("petsData", Pet.class).forEach(pet -> {
-            petId.addValue(pet.getId(), pet.getFullName());
-        });
+        stepStore.getItemAsArray("petsData", Pet.class).forEach(pet -> petId.addValue(pet.getId(), pet.getFullName()));
         stepStore.setItem("petId", petId);
         val vetId = new BaseMetadata();
         val accountIds = vetService.findAll().stream()

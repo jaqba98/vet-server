@@ -2,16 +2,11 @@ package com.jakubolejarczyk.vet_server.controller.dependent.pet;
 
 import com.jakubolejarczyk.vet_server.dto.data.dependent.PetData;
 import com.jakubolejarczyk.vet_server.dto.metadata.dependent.PetMetadata;
-import com.jakubolejarczyk.vet_server.dto.request.dependent.PetRequest;
 import com.jakubolejarczyk.vet_server.dto.request.logic.DeleteRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
-import com.jakubolejarczyk.vet_server.model.dependent.Pet;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;
-import com.jakubolejarczyk.vet_server.step.check.CheckAccountPermissionToClientStep;
-import com.jakubolejarczyk.vet_server.step.create.CreatePetStep;
 import com.jakubolejarczyk.vet_server.step.delete.DeletePetStep;
 import com.jakubolejarczyk.vet_server.step.get.account.GetAccountByTokenStep;
-import com.jakubolejarczyk.vet_server.step.get.client.GetClientByPetRequestStep;
 import com.jakubolejarczyk.vet_server.step.response.dependent.pet.PetCreateResponseStep;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;

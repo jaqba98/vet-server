@@ -32,9 +32,7 @@ public class OpeningHourMetadataStep implements StepRunnerModel<OpeningHourData,
             .distinct()
             .toList();
         val clinicId = new BaseMetadata();
-        stepStore.getItemAsArray("clinicsData", Clinic.class).forEach((clinic) -> {
-            clinicId.addValue(clinic.getId(), clinic.getFullName());
-        });
+        stepStore.getItemAsArray("clinicsData", Clinic.class).forEach((clinic) -> clinicId.addValue(clinic.getId(), clinic.getFullName()));
         stepStore.setItem("myOpeningHourIds", myOpeningHourIds);
         stepStore.setItem("clinicId", clinicId);
     }

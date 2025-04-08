@@ -1,6 +1,5 @@
 package com.jakubolejarczyk.vet_server.step.get.appointment;
 
-import com.jakubolejarczyk.vet_server.dto.base.BaseMetadata;
 import com.jakubolejarczyk.vet_server.model.independent.Clinic;
 import com.jakubolejarczyk.vet_server.service.dependent.AppointmentService;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;

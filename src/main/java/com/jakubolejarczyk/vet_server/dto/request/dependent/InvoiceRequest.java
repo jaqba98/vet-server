@@ -2,7 +2,6 @@ package com.jakubolejarczyk.vet_server.dto.request.dependent;
 
 import com.jakubolejarczyk.vet_server.domain.dependent.InvoiceDomain;
 import com.jakubolejarczyk.vet_server.dto.request.base.TokenRequest;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;

@@ -18,9 +18,7 @@ public class ClientMetadataStep implements StepRunnerModel<ClientData, ClientMet
         if (stepStore.hasNotItem("clinicsData")) throw new Error("The clinicsData is required!");
         val clinicsData = stepStore.getItemAsArray("clinicsData", Clinic.class);
         val clinicId = new BaseMetadata();
-        clinicsData.forEach((clinic) -> {
-            clinicId.addValue(clinic.getId(), clinic.getFullName());
-        });
+        clinicsData.forEach((clinic) -> clinicId.addValue(clinic.getId(), clinic.getFullName()));
         stepStore.setItem("clinicId", clinicId);
     }
 }

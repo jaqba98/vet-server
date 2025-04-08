@@ -1,8 +1,6 @@
 package com.jakubolejarczyk.vet_server.step.response.dependent.service_clinic;
 
-import com.jakubolejarczyk.vet_server.dto.data.dependent.MedicationData;
 import com.jakubolejarczyk.vet_server.dto.data.dependent.ServiceClinicData;
-import com.jakubolejarczyk.vet_server.dto.metadata.dependent.MedicationMetadata;
 import com.jakubolejarczyk.vet_server.dto.metadata.dependent.ServiceClinicMetadata;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;

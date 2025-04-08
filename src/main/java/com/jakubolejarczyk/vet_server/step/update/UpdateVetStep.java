@@ -1,6 +1,5 @@
 package com.jakubolejarczyk.vet_server.step.update;
 
-import com.jakubolejarczyk.vet_server.model.dependent.Pet;
 import com.jakubolejarczyk.vet_server.model.dependent.Vet;
 import com.jakubolejarczyk.vet_server.service.dependent.VetService;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
