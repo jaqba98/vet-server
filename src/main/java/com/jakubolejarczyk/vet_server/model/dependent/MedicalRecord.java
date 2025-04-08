@@ -20,22 +20,22 @@ public class MedicalRecord implements MedicalRecordDomain {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")
     private String diagnosis;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")
     private String treatment;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")
     private String procedures;
 
-    @Column(name = "next_appointment", nullable = false)
+    @Column(name = "next_appointment")
     private LocalDate nextAppointment;
 
-    @Column(nullable = false)
+    @Column()
     private String status;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")
     private String notes;
 
     @Column(name = "appointment_id", nullable = false)

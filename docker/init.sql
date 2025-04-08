@@ -140,27 +140,27 @@ CREATE TABLE Appointment (
 
 CREATE TABLE MedicalRecord (
     id BIGSERIAL PRIMARY KEY,
-    diagnosis TEXT NOT NULL,
-    treatment TEXT NOT NULL,
-    procedures TEXT NOT NULL,
-    next_appointment DATE NOT NULL,
-    status VARCHAR(255) NOT NULL,
-    notes TEXT NOT NULL,
-    appointment_id BIGINT NOT NULL,
+    diagnosis TEXT NULL,
+    treatment TEXT NULL,
+    procedures TEXT NULL,
+    next_appointment DATE NULL,
+    status VARCHAR(255) NULL,
+    notes TEXT NULL,
+    appointment_id BIGINT NULL,
     FOREIGN KEY (appointment_id) REFERENCES Appointment(id)
 );
 
 CREATE TABLE Invoice (
     id BIGSERIAL PRIMARY KEY,
-    invoice_date DATE NOT NULL,
-    due_date DATE NOT NULL,
-    total_amount DECIMAL(10, 2) NOT NULL,
-    amount_paid DECIMAL(10, 2) NOT NULL,
-    outstanding_amount DECIMAL(10, 2) NOT NULL,
-    payment_status VARCHAR(9) NOT NULL,
-    payment_method VARCHAR(14) NOT NULL,
-    notes TEXT NOT NULL,
-    appointment_id BIGINT NOT NULL,
+    invoice_date DATE NULL,
+    due_date DATE NULL,
+    total_amount DECIMAL(10, 2) NULL,
+    amount_paid DECIMAL(10, 2) NULL,
+    outstanding_amount DECIMAL(10, 2) NULL,
+    payment_status VARCHAR(9) NULL,
+    payment_method VARCHAR(14) NULL,
+    notes TEXT NULL,
+    appointment_id BIGINT NULL,
     FOREIGN KEY (appointment_id) REFERENCES Appointment(id)
 );
 

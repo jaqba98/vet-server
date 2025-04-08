@@ -16,26 +16,17 @@ public class MedicalRecordRequest extends TokenRequest implements MedicalRecordD
     @NotNull(message = "Id is required!")
     private Long id;
 
-    private Boolean isArchived;
-
-    @NotNull(message = "Diagnosis is required!")
     private String diagnosis;
 
-    @NotNull(message = "Treatment is required!")
     private String treatment;
 
-    @NotNull(message = "Procedures is required!")
     private String procedures;
 
-    @NotNull(message = "Next Appointment is required!")
     private LocalDate nextAppointment;
 
-    @NotNull(message = "Status is required!")
-    @NotBlank(message = "Status cannot be empty!")
     @Size(max = 255, message = "Status cannot be longer than 255 characters!")
     private String status;
 
-    @NotNull(message = "Notes is required!")
     private String notes;
 
     @NotNull(message = "Appointment id is required!")
