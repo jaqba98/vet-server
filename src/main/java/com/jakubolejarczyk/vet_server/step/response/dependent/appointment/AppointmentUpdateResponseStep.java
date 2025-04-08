@@ -22,6 +22,11 @@ public class AppointmentUpdateResponseStep implements StepRunnerModel<Appointmen
             val data = new AppointmentData(Collections.singletonList(appointmentData));
             stepStore.addMessage("Appointments were updated correctly!");
             stepStore.setData(data);
+        } else {
+            if (stepStore.hasNotItem("appointmentRequest")) throw new Error("The appointmentRequest is required!");
+            val appointmentRequest = stepStore.getItem("appointmentRequest", Appointment.class);
+            val data = new AppointmentData(Collections.singletonList(appointmentRequest));
+            stepStore.setData(data);
         }
     }
 }
