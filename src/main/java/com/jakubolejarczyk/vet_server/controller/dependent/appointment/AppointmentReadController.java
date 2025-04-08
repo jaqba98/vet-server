@@ -41,7 +41,7 @@ public class AppointmentReadController extends StepRunnerController<AppointmentD
 
     public AppointmentReadController(
         ObjectFactory<StepStore<AppointmentData, AppointmentMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<AppointmentData, AppointmentMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<AppointmentData, AppointmentMetadata> getAccountByTokenStep,
         GetEmploymentsByAccountStep<AppointmentData, AppointmentMetadata> getEmploymentsByAccountStep,
         GetClinicsByEmploymentsStep<AppointmentData, AppointmentMetadata> getClinicsByEmploymentsStep,

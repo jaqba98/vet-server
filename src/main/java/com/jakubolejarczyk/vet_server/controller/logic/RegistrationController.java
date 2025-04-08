@@ -33,7 +33,7 @@ public class RegistrationController extends StepRunnerController<RegistrationDat
 
     public RegistrationController(
         ObjectFactory<StepStore<RegistrationData, RegistrationMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<RegistrationData, RegistrationMetadata>> handleValidationServiceObjectFactory,
         CheckAccountNotExistByEmailStep<RegistrationData, RegistrationMetadata> checkAccountNotExistByEmailStep,
         CheckPasswordsMatchStep<RegistrationData, RegistrationMetadata> checkPasswordsMatchStep,
         CreateAccountStep<RegistrationData, RegistrationMetadata> createAccountStep,

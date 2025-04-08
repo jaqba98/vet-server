@@ -34,7 +34,7 @@ public class ServiceClinicCreateController extends StepRunnerController<ServiceC
 
     public ServiceClinicCreateController(
         ObjectFactory<StepStore<ServiceClinicData, ServiceClinicMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<ServiceClinicData, ServiceClinicMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<ServiceClinicData, ServiceClinicMetadata> getAccountByTokenStep,
         CheckAccountPermissionToClinicStep<ServiceClinicData, ServiceClinicMetadata> checkAccountPermissionToClinicStep,
         CreateServiceClinicStep<ServiceClinicData, ServiceClinicMetadata> createServiceClinicStep,

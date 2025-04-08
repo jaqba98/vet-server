@@ -31,7 +31,7 @@ public class ChooseRoleController extends StepRunnerController<ChooseRoleData, C
 
     public ChooseRoleController(
         ObjectFactory<StepStore<ChooseRoleData, ChooseRoleMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<ChooseRoleData, ChooseRoleMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<ChooseRoleData, ChooseRoleMetadata> getAccountByTokenStep,
         SetAccountRoleStep<ChooseRoleData, ChooseRoleMetadata> setAccountRoleStep,
         ChooseRoleResponseStep chooseRoleResponseStep

@@ -31,7 +31,7 @@ public class HasRoleController extends StepRunnerController<HasRoleData, HasRole
 
     public HasRoleController(
         ObjectFactory<StepStore<HasRoleData, HasRoleMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<HasRoleData, HasRoleMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<HasRoleData, HasRoleMetadata> getAccountByTokenStep,
         CheckAccountHasRoleStep<HasRoleData, HasRoleMetadata> checkAccountHasRoleStep,
         HasRoleResponseStep hasRoleResponseStep

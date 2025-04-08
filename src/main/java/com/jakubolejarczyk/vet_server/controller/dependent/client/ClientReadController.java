@@ -37,7 +37,7 @@ public class ClientReadController extends StepRunnerController<ClientData, Clien
 
     public ClientReadController(
         ObjectFactory<StepStore<ClientData, ClientMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<ClientData, ClientMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<ClientData, ClientMetadata> getAccountByTokenStep,
         GetEmploymentsByAccountStep<ClientData, ClientMetadata> getEmploymentsByAccountStep,
         GetClinicsByEmploymentsStep<ClientData, ClientMetadata> getClinicsByEmploymentsStep,

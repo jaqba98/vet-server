@@ -31,7 +31,7 @@ public class ClientDeleteController extends StepRunnerController<ClientData, Cli
 
     public ClientDeleteController(
         ObjectFactory<StepStore<ClientData, ClientMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<ClientData, ClientMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<ClientData, ClientMetadata> getAccountByTokenStep,
         DeleteClientsStep<ClientData, ClientMetadata> deleteClientsStep,
         ClientDeleteResponseStep clientDeleteResponseStep

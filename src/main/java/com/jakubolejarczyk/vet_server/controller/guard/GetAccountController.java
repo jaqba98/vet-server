@@ -29,7 +29,7 @@ public class GetAccountController extends StepRunnerController<GetAccountData, G
 
     public GetAccountController(
         ObjectFactory<StepStore<GetAccountData, GetAccountMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<GetAccountData, GetAccountMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<GetAccountData, GetAccountMetadata> getAccountByTokenStep,
         GetAccountResponseStep getAccountResponseStep
     ) {

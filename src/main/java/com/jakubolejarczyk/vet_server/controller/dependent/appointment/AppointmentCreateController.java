@@ -38,7 +38,7 @@ public class AppointmentCreateController extends StepRunnerController<Appointmen
 
     public AppointmentCreateController(
         ObjectFactory<StepStore<AppointmentData, AppointmentMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<AppointmentData, AppointmentMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<AppointmentData, AppointmentMetadata> getAccountByTokenStep,
         CheckAccountPermissionToClinicStep<AppointmentData, AppointmentMetadata> checkAccountPermissionToClinicStep,
         CreateAppointmentStep<AppointmentData, AppointmentMetadata> createAppointmentStep,

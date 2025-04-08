@@ -31,7 +31,7 @@ public class ServiceClinicDeleteController extends StepRunnerController<ServiceC
 
     public ServiceClinicDeleteController(
         ObjectFactory<StepStore<ServiceClinicData, ServiceClinicMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<ServiceClinicData, ServiceClinicMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<ServiceClinicData, ServiceClinicMetadata> getAccountByTokenStep,
         DeleteServiceClinicStep<ServiceClinicData, ServiceClinicMetadata> deleteServiceClinicStep,
         ServiceClinicDeleteResponseStep serviceClinicDeleteResponseStep

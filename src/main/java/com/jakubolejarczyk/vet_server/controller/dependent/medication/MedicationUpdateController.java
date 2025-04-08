@@ -36,7 +36,7 @@ public class MedicationUpdateController extends StepRunnerController<MedicationD
 
     public MedicationUpdateController(
         ObjectFactory<StepStore<MedicationData, MedicationMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<MedicationData, MedicationMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<MedicationData, MedicationMetadata> getAccountByTokenStep,
         CheckAccountPermissionToClinicStep<MedicationData, MedicationMetadata> checkAccountPermissionToClinicStep,
         UpdateMedicationStep<MedicationData, MedicationMetadata> updateMedicationStep,

@@ -12,8 +12,10 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 
 @Service
 @AllArgsConstructor
-public class HandleValidationService {
-    public ResponseEntity<Response<Null, Null>> handle(StepStore stepStore, MethodArgumentNotValidException ex) {
+public class HandleValidationService<TData, TMetadata> {
+    public ResponseEntity<Response<TData, TMetadata>> handle(
+        StepStore<TData, TMetadata> stepStore, MethodArgumentNotValidException ex
+    ) {
         stepStore.reset();
         stepStore.setSuccess(false);
         ex.getBindingResult().getAllErrors().forEach((error) -> {
@@ -22,7 +24,7 @@ public class HandleValidationService {
         });
         val success = stepStore.getSuccess();
         val messages = stepStore.getMessages();
-        val response = new Response<Null, Null>(success, messages, null, null);
+        val response = new Response<TData, TMetadata>(success, messages, null, null);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

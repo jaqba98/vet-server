@@ -39,7 +39,7 @@ public class PetReadController extends StepRunnerController<PetData, PetMetadata
 
     public PetReadController(
         ObjectFactory<StepStore<PetData, PetMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<PetData, PetMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<PetData, PetMetadata> getAccountByTokenStep,
         GetEmploymentsByAccountStep<PetData, PetMetadata> getEmploymentsByAccountStep,
         GetClinicsByEmploymentsStep<PetData, PetMetadata> getClinicsByEmploymentsStep,

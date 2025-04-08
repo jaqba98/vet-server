@@ -32,7 +32,7 @@ public class MedicalRecordUpdateController extends StepRunnerController<MedicalR
 
     public MedicalRecordUpdateController(
         ObjectFactory<StepStore<MedicalRecordData, MedicalRecordMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<MedicalRecordData, MedicalRecordMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<MedicalRecordData, MedicalRecordMetadata> getAccountByTokenStep,
         UpdateMedicalRecordStep<MedicalRecordData, MedicalRecordMetadata> updateMedicalRecordStep,
         MedicalRecordUpdateResponseStep medicalRecordUpdateResponseStep

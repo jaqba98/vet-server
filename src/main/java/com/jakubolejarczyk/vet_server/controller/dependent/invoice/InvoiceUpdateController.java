@@ -32,7 +32,7 @@ public class InvoiceUpdateController extends StepRunnerController<InvoiceData, I
 
     public InvoiceUpdateController(
         ObjectFactory<StepStore<InvoiceData, InvoiceMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<InvoiceData, InvoiceMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<InvoiceData, InvoiceMetadata> getAccountByTokenStep,
         UpdateInvoiceStep<InvoiceData, InvoiceMetadata> updateInvoiceStep,
         InvoiceUpdateResponseStep invoiceUpdateResponseStep

@@ -39,7 +39,7 @@ public class InvoiceReadController extends StepRunnerController<InvoiceData, Inv
 
     public InvoiceReadController(
         ObjectFactory<StepStore<InvoiceData, InvoiceMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<InvoiceData, InvoiceMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<InvoiceData, InvoiceMetadata> getAccountByTokenStep,
         GetEmploymentsByAccountStep<InvoiceData, InvoiceMetadata> getEmploymentsByAccountStep,
         GetClinicsByEmploymentsStep<InvoiceData, InvoiceMetadata> getClinicsByEmploymentsStep,

@@ -32,7 +32,7 @@ public class VetUpdateController extends StepRunnerController<VetData, VetMetada
 
     public VetUpdateController(
         ObjectFactory<StepStore<VetData, VetMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<VetData, VetMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<VetData, VetMetadata> getAccountByTokenStep,
         UpdateVetStep<VetData, VetMetadata> updateVetStep,
         VetUpdateResponseStep vetUpdateResponseStep

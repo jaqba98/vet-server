@@ -19,7 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 public class StepRunnerController<TData, TMetadata> {
     private final ObjectFactory<StepStore<TData, TMetadata>> stepStoreObjectFactory;
-    private final ObjectFactory<HandleValidationService> handleValidationService;
+    private final ObjectFactory<HandleValidationService<TData, TMetadata>> handleValidationService;
 
     public void initController() {
         val stepStore = stepStoreObjectFactory.getObject();
@@ -49,7 +49,7 @@ public class StepRunnerController<TData, TMetadata> {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Response<Null, Null>> handleValidation(MethodArgumentNotValidException ex) {
+    public ResponseEntity<Response<TData, TMetadata>> handleValidation(MethodArgumentNotValidException ex) {
         val stepStore = stepStoreObjectFactory.getObject();
         return handleValidationService.getObject().handle(stepStore, ex);
     }

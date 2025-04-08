@@ -24,7 +24,7 @@ public class LogoutController extends StepRunnerController<LogoutData, LogoutMet
 
     public LogoutController(
         ObjectFactory<StepStore<LogoutData, LogoutMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<LogoutData, LogoutMetadata>> handleValidationServiceObjectFactory,
         LogoutResponseStep logoutResponseStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);

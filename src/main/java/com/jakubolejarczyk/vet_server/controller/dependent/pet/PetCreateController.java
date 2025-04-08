@@ -36,7 +36,7 @@ public class PetCreateController extends StepRunnerController<PetData, PetMetada
 
     public PetCreateController(
         ObjectFactory<StepStore<PetData, PetMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<PetData, PetMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<PetData, PetMetadata> getAccountByTokenStep,
         GetClientByPetRequestStep<PetData, PetMetadata> getClientByPetRequestStep,
         CheckAccountPermissionToClientStep<PetData, PetMetadata> checkAccountPermissionToClientStep,

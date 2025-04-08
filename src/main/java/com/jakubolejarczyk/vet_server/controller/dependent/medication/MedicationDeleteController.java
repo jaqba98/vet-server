@@ -31,7 +31,7 @@ public class MedicationDeleteController extends StepRunnerController<MedicationD
 
     public MedicationDeleteController(
         ObjectFactory<StepStore<MedicationData, MedicationMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<MedicationData, MedicationMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<MedicationData, MedicationMetadata> getAccountByTokenStep,
         DeleteMedicationsStep<MedicationData, MedicationMetadata> deleteMedicationsStep,
         MedicationDeleteResponseStep medicationDeleteResponseStep

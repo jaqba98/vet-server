@@ -39,7 +39,7 @@ public class ClinicDeleteController extends StepRunnerController<ClinicData, Cli
 
     public ClinicDeleteController(
         ObjectFactory<StepStore<ClinicData, ClinicMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<ClinicData, ClinicMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<ClinicData, ClinicMetadata> getAccountByTokenStep,
         GetEmploymentsByAccountAndClinicsAndIsOwnerStep<ClinicData, ClinicMetadata> getEmploymentsByAccountAndClinicsAndIsOwnerStep,
         GetClinicsByEmploymentsStep<ClinicData, ClinicMetadata> getClinicsByEmploymentsStep,

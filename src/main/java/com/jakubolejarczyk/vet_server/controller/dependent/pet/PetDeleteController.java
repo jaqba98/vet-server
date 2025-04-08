@@ -37,7 +37,7 @@ public class PetDeleteController extends StepRunnerController<PetData, PetMetada
 
     public PetDeleteController(
         ObjectFactory<StepStore<PetData, PetMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<PetData, PetMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<PetData, PetMetadata> getAccountByTokenStep,
         DeletePetStep<PetData, PetMetadata> deletePetStep,
         PetCreateResponseStep petReadResponseStep

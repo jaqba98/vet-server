@@ -33,7 +33,7 @@ public class EmploymentReadController extends StepRunnerController<EmploymentDat
 
     public EmploymentReadController(
         ObjectFactory<StepStore<EmploymentData, EmploymentMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<EmploymentData, EmploymentMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<EmploymentData, EmploymentMetadata> getAccountByTokenStep,
         GetEmploymentsByAccountStep<EmploymentData, EmploymentMetadata> getEmploymentsByAccountStep,
         EmploymentMetadataStep employmentMetadataStep,

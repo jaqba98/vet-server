@@ -29,7 +29,7 @@ public class LoginController extends StepRunnerController<LoginData, LoginMetada
 
     public LoginController(
         ObjectFactory<StepStore<LoginData, LoginMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<LoginData, LoginMetadata>> handleValidationServiceObjectFactory,
         GetTokenByAccountEmailAndPasswordStep<LoginData, LoginMetadata> getTokenByAccountEmailAndPasswordStep,
         LoginResponseStep loginResponseStep
     ) {

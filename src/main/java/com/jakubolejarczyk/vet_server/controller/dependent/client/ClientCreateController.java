@@ -34,7 +34,7 @@ public class ClientCreateController extends StepRunnerController<ClientData, Cli
 
     public ClientCreateController(
         ObjectFactory<StepStore<ClientData, ClientMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<ClientData, ClientMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<ClientData, ClientMetadata> getAccountByTokenStep,
         CheckAccountPermissionToClinicStep<ClientData, ClientMetadata> checkAccountPermissionToClinicStep,
         CreateClientStep<ClientData, ClientMetadata> createClientStep,

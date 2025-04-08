@@ -31,7 +31,7 @@ public class AppointmentDeleteController extends StepRunnerController<Appointmen
 
     public AppointmentDeleteController(
         ObjectFactory<StepStore<AppointmentData, AppointmentMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<AppointmentData, AppointmentMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<AppointmentData, AppointmentMetadata> getAccountByTokenStep,
         DeleteAppointmentStep<AppointmentData, AppointmentMetadata> deleteAppointmentStep,
         AppointmentDeleteResponseStep appointmentDeleteResponseStep

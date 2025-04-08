@@ -36,7 +36,7 @@ public class ClinicCreateController extends StepRunnerController<ClinicData, Cli
 
     public ClinicCreateController(
         ObjectFactory<StepStore<ClinicData, ClinicMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<ClinicData, ClinicMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<ClinicData, ClinicMetadata> getAccountByTokenStep,
         CreateClinicStep<ClinicData, ClinicMetadata> createClinicStep,
         CreateOpeningHourStep<ClinicData, ClinicMetadata> createOpeningHourStep,

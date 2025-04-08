@@ -34,7 +34,7 @@ public class MedicationCreateController extends StepRunnerController<MedicationD
 
     public MedicationCreateController(
         ObjectFactory<StepStore<MedicationData, MedicationMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<MedicationData, MedicationMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<MedicationData, MedicationMetadata> getAccountByTokenStep,
         CheckAccountPermissionToClinicStep<MedicationData, MedicationMetadata> checkAccountPermissionToClinicStep,
         CreateMedicationStep<MedicationData, MedicationMetadata> createMedicationStep,

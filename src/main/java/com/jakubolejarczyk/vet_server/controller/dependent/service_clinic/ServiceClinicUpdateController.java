@@ -34,7 +34,7 @@ public class ServiceClinicUpdateController extends StepRunnerController<ServiceC
 
     public ServiceClinicUpdateController(
         ObjectFactory<StepStore<ServiceClinicData, ServiceClinicMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<ServiceClinicData, ServiceClinicMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<ServiceClinicData, ServiceClinicMetadata> getAccountByTokenStep,
         CheckAccountPermissionToClinicStep<ServiceClinicData, ServiceClinicMetadata> checkAccountPermissionToClinicStep,
         UpdateServiceClinicStep<ServiceClinicData, ServiceClinicMetadata> updateServiceClinicStep,

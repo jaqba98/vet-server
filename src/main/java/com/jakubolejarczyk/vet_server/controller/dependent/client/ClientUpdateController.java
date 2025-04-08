@@ -34,7 +34,7 @@ public class ClientUpdateController extends StepRunnerController<ClientData, Cli
 
     public ClientUpdateController(
         ObjectFactory<StepStore<ClientData, ClientMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<ClientData, ClientMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<ClientData, ClientMetadata> getAccountByTokenStep,
         CheckAccountPermissionToClinicStep<ClientData, ClientMetadata> checkAccountPermissionToClinicStep,
         UpdateClientStep<ClientData, ClientMetadata> updateClientStep,

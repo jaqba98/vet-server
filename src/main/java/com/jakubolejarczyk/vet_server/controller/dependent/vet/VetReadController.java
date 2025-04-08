@@ -33,7 +33,7 @@ public class VetReadController extends StepRunnerController<VetData, VetMetadata
 
     public VetReadController(
         ObjectFactory<StepStore<VetData, VetMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<VetData, VetMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<VetData, VetMetadata> getAccountByTokenStep,
         GetVetByAccountStep<VetData, VetMetadata> getVetByAccountStep,
         VetMetadataStep vetMetadataStep,

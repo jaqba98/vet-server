@@ -34,7 +34,7 @@ public class ClinicUpdateController extends StepRunnerController<ClinicData, Cli
 
     public ClinicUpdateController(
         ObjectFactory<StepStore<ClinicData, ClinicMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<ClinicData, ClinicMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<ClinicData, ClinicMetadata> getAccountByTokenStep,
         GetEmploymentByAccountAndClinicIdAndIsOwnerStep<ClinicData, ClinicMetadata> getEmploymentByAccountAndClinicIdAndIsOwnerStep,
         UpdateClinicByEmploymentStep<ClinicData, ClinicMetadata> updateClinicByEmploymentStep,

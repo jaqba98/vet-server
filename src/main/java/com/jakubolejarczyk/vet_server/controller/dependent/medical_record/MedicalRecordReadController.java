@@ -39,7 +39,7 @@ public class MedicalRecordReadController extends StepRunnerController<MedicalRec
 
     public MedicalRecordReadController(
         ObjectFactory<StepStore<MedicalRecordData, MedicalRecordMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<MedicalRecordData, MedicalRecordMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<MedicalRecordData, MedicalRecordMetadata> getAccountByTokenStep,
         GetEmploymentsByAccountStep<MedicalRecordData, MedicalRecordMetadata> getEmploymentsByAccountStep,
         GetClinicsByEmploymentsStep<MedicalRecordData, MedicalRecordMetadata> getClinicsByEmploymentsStep,

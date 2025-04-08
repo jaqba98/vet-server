@@ -35,7 +35,7 @@ public class ClinicReadController extends StepRunnerController<ClinicData, Clini
 
     public ClinicReadController(
         ObjectFactory<StepStore<ClinicData, ClinicMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<ClinicData, ClinicMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<ClinicData, ClinicMetadata> getAccountByTokenStep,
         GetEmploymentsByAccountStep<ClinicData, ClinicMetadata> getEmploymentsByAccountStep,
         GetClinicsByEmploymentsStep<ClinicData, ClinicMetadata> getClinicsByEmploymentsStep,

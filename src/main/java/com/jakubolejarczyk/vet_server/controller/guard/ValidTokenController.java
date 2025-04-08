@@ -29,7 +29,7 @@ public class ValidTokenController extends StepRunnerController<ValidTokenData, V
 
     public ValidTokenController(
         ObjectFactory<StepStore<ValidTokenData, ValidTokenMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<ValidTokenData, ValidTokenMetadata>> handleValidationServiceObjectFactory,
         CheckTokenStep<ValidTokenData, ValidTokenMetadata> checkTokenStep,
         ValidTokenResponseStep validTokenResponseStep
     ) {

@@ -34,7 +34,7 @@ public class OpeningHourUpdateController extends StepRunnerController<OpeningHou
 
     public OpeningHourUpdateController(
         ObjectFactory<StepStore<OpeningHourData, OpeningHourMetadata>> stepStoreObjectFactory,
-        ObjectFactory<HandleValidationService> handleValidationServiceObjectFactory,
+        ObjectFactory<HandleValidationService<OpeningHourData, OpeningHourMetadata>> handleValidationServiceObjectFactory,
         GetAccountByTokenStep<OpeningHourData, OpeningHourMetadata> getAccountByTokenStep,
         GetEmploymentByAccountAndClinicIdAndIsOwnerStep<OpeningHourData, OpeningHourMetadata> getEmploymentByAccountAndClinicIdAndIsOwnerStep,
         UpdateOpeningHourByEmploymentStep<OpeningHourData, OpeningHourMetadata> updateOpeningHourByEmploymentStep,
