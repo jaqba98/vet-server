@@ -9,7 +9,7 @@ import lombok.Data;
 public class AppointmentMetadata {
     private BaseMetadata clinicId;
 
-    private BaseMetadata vetId;
-
     private BaseMetadata petId;
+
+    private BaseMetadata vetId;
 }

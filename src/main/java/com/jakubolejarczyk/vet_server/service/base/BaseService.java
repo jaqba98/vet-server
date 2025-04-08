@@ -14,6 +14,10 @@ public class BaseService<TModel, TRepository extends JpaRepository<TModel, Long>
         return repository.save(model);
     }
 
+    public List<TModel> findAll() {
+        return repository.findAll();
+    }
+
     public Optional<TModel> findById(Long id) {
         return repository.findById(id);
     }
