@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class InvoiceResponseStep implements StepRunnerModel<InvoiceData, InvoiceMetadata> {
+public class InvoiceReadResponseStep implements StepRunnerModel<InvoiceData, InvoiceMetadata> {
     @Override
     public void runStep(StepStore<InvoiceData, InvoiceMetadata> stepStore) {
         if (stepStore.getSuccess()) {

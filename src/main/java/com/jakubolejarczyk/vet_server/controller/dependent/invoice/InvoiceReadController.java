@@ -11,7 +11,7 @@ import com.jakubolejarczyk.vet_server.step.get.clinic.GetClinicsByEmploymentsSte
 import com.jakubolejarczyk.vet_server.step.get.employment.GetEmploymentsByAccountStep;
 import com.jakubolejarczyk.vet_server.step.get.invoice.GetInvoicesByAppointmentsStep;
 import com.jakubolejarczyk.vet_server.step.metadata.InvoiceMetadataStep;
-import com.jakubolejarczyk.vet_server.step.response.dependent.invoice.InvoiceResponseStep;
+import com.jakubolejarczyk.vet_server.step.response.dependent.invoice.InvoiceReadResponseStep;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerController;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
@@ -35,7 +35,7 @@ public class InvoiceReadController extends StepRunnerController<InvoiceData, Inv
     private final GetAppointmentsByClinicsStep<InvoiceData, InvoiceMetadata> getAppointmentsByClinicsStep;
     private final GetInvoicesByAppointmentsStep<InvoiceData, InvoiceMetadata> getInvoicesByAppointmentsStep;
     private final InvoiceMetadataStep invoiceMetadataStep;
-    private final InvoiceResponseStep invoiceResponseStep;
+    private final InvoiceReadResponseStep invoiceReadResponseStep;
 
     public InvoiceReadController(
         ObjectFactory<StepStore<InvoiceData, InvoiceMetadata>> stepStoreObjectFactory,
@@ -46,7 +46,7 @@ public class InvoiceReadController extends StepRunnerController<InvoiceData, Inv
         GetAppointmentsByClinicsStep<InvoiceData, InvoiceMetadata> getAppointmentsByClinicsStep,
         GetInvoicesByAppointmentsStep<InvoiceData, InvoiceMetadata> getInvoicesByAppointmentsStep,
         InvoiceMetadataStep invoiceMetadataStep,
-        InvoiceResponseStep invoiceResponseStep
+        InvoiceReadResponseStep invoiceReadResponseStep
     ) {
         super(stepStoreObjectFactory, handleValidationServiceObjectFactory);
         this.getAccountByTokenStep = getAccountByTokenStep;
@@ -55,7 +55,7 @@ public class InvoiceReadController extends StepRunnerController<InvoiceData, Inv
         this.getAppointmentsByClinicsStep = getAppointmentsByClinicsStep;
         this.getInvoicesByAppointmentsStep = getInvoicesByAppointmentsStep;
         this.invoiceMetadataStep = invoiceMetadataStep;
-        this.invoiceResponseStep = invoiceResponseStep;
+        this.invoiceReadResponseStep = invoiceReadResponseStep;
     }
 
     @PostMapping("invoice-read")
@@ -71,6 +71,6 @@ public class InvoiceReadController extends StepRunnerController<InvoiceData, Inv
         steps.addLast(invoiceMetadataStep);
         initController();
         getStepStore().setItem("token", request.getToken());
-        return runController(steps, invoiceResponseStep);
+        return runController(steps, invoiceReadResponseStep);
     }
 }
