@@ -37,4 +37,4 @@ build/
 *.vpp.bak_*
 
 ### Docker ###
-./docker/volumes/
+db/volumes/
