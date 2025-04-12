@@ -1,8 +1,8 @@
 package com.jakubolejarczyk.vet_server.step.response.dependent.medical_record;
 
-import com.jakubolejarczyk.vet_server.dto.base.BaseMetadata;
-import com.jakubolejarczyk.vet_server.dto.data.independent.MedicalRecordData;
-import com.jakubolejarczyk.vet_server.dto.metadata.independent.MedicalRecordMetadata;
+import com.jakubolejarczyk.vet_server.dto.metadata.base.BaseMetadata;
+import com.jakubolejarczyk.vet_server.dto.data.dependent.MedicalRecordData;
+import com.jakubolejarczyk.vet_server.dto.metadata.dependent.MedicalRecordMetadata;
 import com.jakubolejarczyk.vet_server.model.dependent.MedicalRecord;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;

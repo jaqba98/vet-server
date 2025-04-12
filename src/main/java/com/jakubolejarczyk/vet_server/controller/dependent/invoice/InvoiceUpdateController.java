@@ -1,7 +1,7 @@
 package com.jakubolejarczyk.vet_server.controller.dependent.invoice;
 
-import com.jakubolejarczyk.vet_server.dto.data.independent.InvoiceData;
-import com.jakubolejarczyk.vet_server.dto.metadata.independent.InvoiceMetadata;
+import com.jakubolejarczyk.vet_server.dto.data.dependent.InvoiceData;
+import com.jakubolejarczyk.vet_server.dto.metadata.dependent.InvoiceMetadata;
 import com.jakubolejarczyk.vet_server.dto.request.dependent.InvoiceRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.model.dependent.Invoice;

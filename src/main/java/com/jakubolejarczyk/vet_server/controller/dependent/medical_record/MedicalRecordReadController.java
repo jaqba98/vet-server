@@ -1,7 +1,7 @@
 package com.jakubolejarczyk.vet_server.controller.dependent.medical_record;
 
-import com.jakubolejarczyk.vet_server.dto.data.independent.MedicalRecordData;
-import com.jakubolejarczyk.vet_server.dto.metadata.independent.MedicalRecordMetadata;
+import com.jakubolejarczyk.vet_server.dto.data.dependent.MedicalRecordData;
+import com.jakubolejarczyk.vet_server.dto.metadata.dependent.MedicalRecordMetadata;
 import com.jakubolejarczyk.vet_server.dto.request.base.TokenRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.security.HandleValidationService;

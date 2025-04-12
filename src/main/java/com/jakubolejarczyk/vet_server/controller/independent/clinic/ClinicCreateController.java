@@ -1,7 +1,7 @@
 package com.jakubolejarczyk.vet_server.controller.independent.clinic;
 
-import com.jakubolejarczyk.vet_server.dto.data.dependent.ClinicData;
-import com.jakubolejarczyk.vet_server.dto.metadata.dependent.ClinicMetadata;
+import com.jakubolejarczyk.vet_server.dto.data.independent.ClinicData;
+import com.jakubolejarczyk.vet_server.dto.metadata.independent.ClinicMetadata;
 import com.jakubolejarczyk.vet_server.dto.request.independent.ClinicRequest;
 import com.jakubolejarczyk.vet_server.dto.response.Response;
 import com.jakubolejarczyk.vet_server.model.independent.Clinic;

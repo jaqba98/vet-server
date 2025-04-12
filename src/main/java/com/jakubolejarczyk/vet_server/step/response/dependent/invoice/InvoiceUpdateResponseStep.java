@@ -1,7 +1,7 @@
 package com.jakubolejarczyk.vet_server.step.response.dependent.invoice;
 
-import com.jakubolejarczyk.vet_server.dto.data.independent.InvoiceData;
-import com.jakubolejarczyk.vet_server.dto.metadata.independent.InvoiceMetadata;
+import com.jakubolejarczyk.vet_server.dto.data.dependent.InvoiceData;
+import com.jakubolejarczyk.vet_server.dto.metadata.dependent.InvoiceMetadata;
 import com.jakubolejarczyk.vet_server.model.dependent.Invoice;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;

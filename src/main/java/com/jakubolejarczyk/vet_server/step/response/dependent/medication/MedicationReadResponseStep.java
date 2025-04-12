@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.step.response.dependent.medication;
 
-import com.jakubolejarczyk.vet_server.dto.base.BaseMetadata;
+import com.jakubolejarczyk.vet_server.dto.metadata.base.BaseMetadata;
 import com.jakubolejarczyk.vet_server.dto.data.dependent.MedicationData;
 import com.jakubolejarczyk.vet_server.dto.metadata.dependent.MedicationMetadata;
 import com.jakubolejarczyk.vet_server.model.dependent.Medication;

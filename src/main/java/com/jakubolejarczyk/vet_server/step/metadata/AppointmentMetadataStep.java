@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.step.metadata;
 
-import com.jakubolejarczyk.vet_server.dto.base.BaseMetadata;
+import com.jakubolejarczyk.vet_server.dto.metadata.base.BaseMetadata;
 import com.jakubolejarczyk.vet_server.dto.data.dependent.AppointmentData;
 import com.jakubolejarczyk.vet_server.dto.metadata.dependent.AppointmentMetadata;
 import com.jakubolejarczyk.vet_server.model.dependent.Pet;

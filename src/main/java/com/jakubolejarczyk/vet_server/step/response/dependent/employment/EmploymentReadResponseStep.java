@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.step.response.dependent.employment;
 
-import com.jakubolejarczyk.vet_server.dto.base.BaseMetadata;
+import com.jakubolejarczyk.vet_server.dto.metadata.base.BaseMetadata;
 import com.jakubolejarczyk.vet_server.dto.data.dependent.EmploymentData;
 import com.jakubolejarczyk.vet_server.dto.metadata.dependent.EmploymentMetadata;
 import com.jakubolejarczyk.vet_server.model.dependent.Employment;

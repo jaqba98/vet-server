@@ -1,7 +1,7 @@
 package com.jakubolejarczyk.vet_server.step.response.dependent.opening_hour;
 
-import com.jakubolejarczyk.vet_server.dto.data.independent.OpeningHourData;
-import com.jakubolejarczyk.vet_server.dto.metadata.independent.OpeningHourMetadata;
+import com.jakubolejarczyk.vet_server.dto.data.dependent.OpeningHourData;
+import com.jakubolejarczyk.vet_server.dto.metadata.dependent.OpeningHourMetadata;
 import com.jakubolejarczyk.vet_server.model.dependent.OpeningHour;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;

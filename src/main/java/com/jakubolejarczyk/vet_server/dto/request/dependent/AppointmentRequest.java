@@ -48,10 +48,4 @@ public class AppointmentRequest extends TokenRequest implements AppointmentDomai
 
     @NotNull(message = "Pet id is required!")
     private Long petId;
-
-    @NotNull(message = "Invoice id is required!")
-    private Long invoiceId;
-
-    @NotNull(message = "Medical record id is required!")
-    private Long medicalRecordId;
 }

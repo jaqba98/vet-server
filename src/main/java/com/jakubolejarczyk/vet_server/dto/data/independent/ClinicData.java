@@ -1,6 +1,6 @@
 package com.jakubolejarczyk.vet_server.dto.data.independent;
 
-import com.jakubolejarczyk.vet_server.model.dependent.Invoice;
+import com.jakubolejarczyk.vet_server.model.independent.Clinic;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -8,6 +8,6 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class InvoiceData {
-    private List<Invoice> invoices;
+public class ClinicData {
+    private List<Clinic> clinics;
 }

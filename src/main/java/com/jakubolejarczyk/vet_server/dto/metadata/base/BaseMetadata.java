@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.dto.base;
+package com.jakubolejarczyk.vet_server.dto.metadata.base;
 
 import lombok.Data;
 

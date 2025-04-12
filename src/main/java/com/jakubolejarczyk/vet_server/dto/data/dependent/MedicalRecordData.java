@@ -1,4 +1,4 @@
-package com.jakubolejarczyk.vet_server.dto.data.independent;
+package com.jakubolejarczyk.vet_server.dto.data.dependent;
 
 import com.jakubolejarczyk.vet_server.model.dependent.MedicalRecord;
 import lombok.AllArgsConstructor;

@@ -8,10 +8,8 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class EmploymentMetadata {
-    private BaseMetadata accountId;
+public class OpeningHourMetadata {
+    private List<Long> myOpeningHourIds;
 
     private BaseMetadata clinicId;
-
-    private List<Long> myClinicIds;
 }

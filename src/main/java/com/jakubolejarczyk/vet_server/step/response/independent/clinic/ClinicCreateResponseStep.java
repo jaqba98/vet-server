@@ -1,7 +1,7 @@
 package com.jakubolejarczyk.vet_server.step.response.independent.clinic;
 
-import com.jakubolejarczyk.vet_server.dto.data.dependent.ClinicData;
-import com.jakubolejarczyk.vet_server.dto.metadata.dependent.ClinicMetadata;
+import com.jakubolejarczyk.vet_server.dto.data.independent.ClinicData;
+import com.jakubolejarczyk.vet_server.dto.metadata.independent.ClinicMetadata;
 import com.jakubolejarczyk.vet_server.step_runner.StepRunnerModel;
 import com.jakubolejarczyk.vet_server.store.StepStore;
 import lombok.AllArgsConstructor;
