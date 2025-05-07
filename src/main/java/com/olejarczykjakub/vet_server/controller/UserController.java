@@ -1,9 +1,8 @@
 package com.olejarczykjakub.vet_server.controller;
 
 import com.olejarczykjakub.vet_server.model.Users;
-import com.olejarczykjakub.vet_server.repository.UsersRepository;
+import com.olejarczykjakub.vet_server.service.UserService;
 import lombok.RequiredArgsConstructor;
-import lombok.val;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,16 +14,14 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
 public class UserController {
-	private final UsersRepository usersRepository;
+	private final UserService userService;
 
 	@PostMapping("/api/v1/create-user")
 	public Map<String, String> createUser(@RequestBody Users users) {
-		val homeAccountId = users.getHomeAccountId();
-		val userByHomeAccountId = usersRepository.findByHomeAccountId(homeAccountId);
-		if (userByHomeAccountId.isEmpty()) {
-			usersRepository.save(users);
-			return Map.of("message", "You are a new user!");
+		if (userService.existUser(users)) {
+			return Map.of("message", "Welcome back!");
 		}
-		return Map.of("message", "Welcome back!");
+		userService.createUser(users);
+		return Map.of("message", "You are a new user!");
 	}
 }
