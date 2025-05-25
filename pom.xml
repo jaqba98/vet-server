@@ -64,6 +64,11 @@
 			<artifactId>client-sdk</artifactId>
 			<version>1.34.0</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
