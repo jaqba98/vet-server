@@ -12,8 +12,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/recordings")
-@RequiredArgsConstructor
+@RequestMapping("/api/recordings")
 @CrossOrigin(origins = "http://localhost:4200")
 public class RecordingController {
 
