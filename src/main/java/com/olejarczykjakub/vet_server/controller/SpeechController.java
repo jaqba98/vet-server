@@ -15,7 +15,7 @@ import java.nio.file.Files;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class SpeechController {
 
     @Value("${azure.speech.key}")
